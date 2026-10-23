@@ -73,4 +73,86 @@
 <data name="SuppliedVideoNote" xml:space="preserve"><value>فيديو مقدّم لمراجعة التفاعل. الرسم المرافق دراسة تصوّرية وليس توثيقاً لمشروع عميل منجز.</value></data>
 <data name="NoVideo" xml:space="preserve"><value>لم يُقدّم فيديو لهذه الدراسة. يُعرض الرسم لمراجعة التصميم.</value></data>
 <data name="WatchVideo" xml:space="preserve"><value>شاهد الفيديو</value></data>
+<data name="AdminTitle" xml:space="preserve">
+    <value>الإدارة</value>
+  </data>
+<data name="AdminLogin" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+<data name="AdminEmail" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+<data name="AdminPassword" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+<data name="AdminLogout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+<data name="AdminDashboard" xml:space="preserve">
+    <value>نظرة عامة</value>
+  </data>
+<data name="AdminEditor" xml:space="preserve">
+    <value>مساحة المحتوى</value>
+  </data>
+<data name="AdminSettings" xml:space="preserve">
+    <value>إعدادات الإدارة</value>
+  </data>
+<data name="AdminBack" xml:space="preserve">
+    <value>عرض الموقع</value>
+  </data>
+<data name="AdminIntro" xml:space="preserve">
+    <value>محتواك الهندسي تحت السيطرة.</value>
+  </data>
+<data name="AdminHint" xml:space="preserve">
+    <value>راجع المحتوى الحالي وصلاحيات حسابك.</value>
+  </data>
+<data name="AdminContent" xml:space="preserve">
+    <value>عناصر المحتوى</value>
+  </data>
+<data name="AdminDrafts" xml:space="preserve">
+    <value>المسودات</value>
+  </data>
+<data name="AdminPublished" xml:space="preserve">
+    <value>المنشور</value>
+  </data>
+<data name="AdminMedia" xml:space="preserve">
+    <value>ملفات الوسائط</value>
+  </data>
+<data name="AdminUsers" xml:space="preserve">
+    <value>الحسابات</value>
+  </data>
+<data name="AdminPhase" xml:space="preserve">
+    <value>المرحلة 6 · أساس الإدارة الآمنة</value>
+  </data>
+<data name="AdminPending" xml:space="preserve">
+    <value>سيتم توفير تحرير المحتوى في المرحلة 7. البيانات الحالية مسودات.</value>
+  </data>
+<data name="AdminDenied" xml:space="preserve">
+    <value>الوصول مرفوض</value>
+  </data>
+<data name="AdminDeniedBody" xml:space="preserve">
+    <value>حسابك لا يملك صلاحية فتح مساحة العمل هذه.</value>
+  </data>
+<data name="AdminLoginHint" xml:space="preserve">
+    <value>استخدم الحساب المقدم من المسؤول. تواصل مع المسؤول للحصول على صلاحية الدخول.</value>
+  </data>
+<data name="AdminPermissions" xml:space="preserve">
+    <value>صلاحياتك</value>
+  </data>
+<data name="AdminRead" xml:space="preserve">
+    <value>قراءة لوحة المعلومات</value>
+  </data>
+<data name="AdminEdit" xml:space="preserve">
+    <value>صلاحية تحرير المحتوى</value>
+  </data>
+<data name="AdminManage" xml:space="preserve">
+    <value>صلاحية إدارة الحسابات والإعدادات</value>
+  </data>
+<data name="AdminNext" xml:space="preserve">
+    <value>مساحة عمل مخصصة لمرحلة لاحقة</value>
+  </data>
+<data name="AdminNextBody" xml:space="preserve">
+    <value>يسمح دورك بالدخول هنا. ستتم إضافة أدوات التحرير والإدارة في مراحل نظام المحتوى المعتمدة.</value>
+  </data>
+<data name="AdminLoginError" xml:space="preserve"><value>تعذر تسجيل الدخول. تحقق من البيانات أو حاول لاحقاً.</value></data>
 </root>

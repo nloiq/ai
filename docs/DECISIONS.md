@@ -83,3 +83,7 @@ Concept A selected. Business areas confirmed by user: low-current engineering, s
 - Use longtext for bodies with bounded application length; explicitly annotate MySQL root identity generation and rebuild dependent foreign keys in its correction migration.
 - Use rollback-only real-MySQL verification and a development-only read-only CLI inventory; no public schema endpoint.
 
+
+## 2026-10-23 ? Phase 6 authentication
+
+Phase 5 approved. Use existing Identity schema and roles; server policies restrict admin workspaces. Explicit CLI creates administrators; no automatic startup password/account. Local review uses a generated, ignored credential file. Shared Tailwind tokens support bilingual RTL and themes. Phase 7 editing remains approval-gated.

@@ -1,0 +1,10 @@
+@model LoginModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> L
+@{ Layout = "_AdminLayout"; ViewData["Title"] = L["AdminLogin"]; var ar = Context.Request.RouteValues["culture"]?.ToString() == "ar"; }
+<section class="mx-auto my-6 max-w-lg border border-line bg-panel p-6 md:my-16 md:p-10"><p class="text-xs uppercase tracking-widest text-signal">NLO IQ / CMS</p><h1 class="mt-4 text-3xl font-semibold">@L["AdminLogin"]</h1><p class="mt-4 text-sm leading-7 text-muted">@L["AdminLoginHint"]</p>
+<form method="post" class="mt-6 space-y-5" asp-antiforgery="true">
+<input type="hidden" asp-for="ReturnUrl"><div asp-validation-summary="All" role="alert" class="text-sm text-accent"></div>
+<div><label for="Email" class="mb-2 block text-sm">@L["AdminEmail"]</label><input id="Email" name="Email" value="@Model.Email" type="email" autocomplete="username" required maxlength="256" dir="ltr" class="min-h-12 w-full border border-line bg-paper px-3"></div>
+<div><label for="Password" class="mb-2 block text-sm">@L["AdminPassword"]</label><input id="Password" name="Password" type="password" autocomplete="current-password" required maxlength="256" class="min-h-12 w-full border border-line bg-paper px-3"></div>
+<button type="submit" class="min-h-12 w-full bg-accent px-4 py-3 font-semibold text-on-accent">@L["AdminLogin"]</button></form>
+<a href="/@(ar ? "ar" : "en")/" class="mt-6 inline-flex min-h-11 items-center text-sm underline underline-offset-4">@L["AdminBack"]</a></section>

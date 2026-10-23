@@ -15,6 +15,8 @@ if (string.IsNullOrEmpty(connection))
 var settings = new MySqlConnectionStringBuilder(connection);
 if (!settings.Database.Equals("WebSiteNLOIQDb", StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException("Database checks only permit the dedicated WebSiteNLOIQDb development schema.");
 var options = new DbContextOptionsBuilder<NloDbContext>().UseMySQL(connection!).Options;
+int baselineUsers;
+await using (var initial = new NloDbContext(options)) baselineUsers = await initial.Users.CountAsync();
 static void Check(bool condition, string message) { if (!condition) throw new Exception(message); }
 async Task Scenario(string name, Func<NloDbContext, Task> action)
 {
@@ -55,7 +57,7 @@ await Scenario("seed is draft-only and public reader exposes no sample content",
     Check(await db.ContentItems.CountAsync() == 22, "Expected 22 initial draft items.");
     Check(await db.ContentTranslations.CountAsync() == 44, "Expected 44 revision translations.");
     Check(await db.ContentItems.AllAsync(x => x.IsDemo && x.State == PublicationState.Draft && x.PublishedRevisionId == null && x.DraftRevisionId != null), "Seed publication state invalid.");
-    Check(await db.Users.CountAsync() == 0 && await db.Roles.CountAsync() == 3, "Roles only; no user account should be seeded.");
+    Check(await db.Users.CountAsync() == baselineUsers && await db.Roles.CountAsync() == 3, "Role definitions and existing administrator accounts must be preserved.");
     Check(await new PublishedContentReader(db).FindAsync(ContentKind.Page, "home", "en") is null, "Draft leaked.");
     var arabic = await db.ContentTranslations.Where(x => x.Culture == "ar").Select(x => x.Title).ToListAsync();
     Check(arabic.Any(x => x.Contains("هندسة")) && arabic.All(x => !x.Contains("??")), "Arabic encoding damaged.");
@@ -165,6 +167,7 @@ await Scenario("snapshot types must match their stable content kind", async db =
 
 await using(var verify=new NloDbContext(options))
 {
+    Check(await verify.Users.CountAsync()==baselineUsers,"Existing accounts changed.");
     Check(await verify.ContentItems.CountAsync()==22,"Test data was not rolled back.");
     Check(await verify.ServicePreviews.CountAsync()==4,"Preview data changed.");
     Check(await verify.ContentRevisions.CountAsync()==22,"Revision fixture count changed.");

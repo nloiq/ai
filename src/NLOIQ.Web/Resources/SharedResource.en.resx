@@ -73,4 +73,86 @@
 <data name="SuppliedVideoNote" xml:space="preserve"><value>Video supplied for interaction review. The accompanying illustration is a concept study, not evidence of a completed client project.</value></data>
 <data name="NoVideo" xml:space="preserve"><value>No video supplied for this study. The illustration is shown for design review.</value></data>
 <data name="WatchVideo" xml:space="preserve"><value>Watch video</value></data>
+<data name="AdminTitle" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+<data name="AdminLogin" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+<data name="AdminEmail" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+<data name="AdminPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+<data name="AdminLogout" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+<data name="AdminDashboard" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+<data name="AdminEditor" xml:space="preserve">
+    <value>Content workspace</value>
+  </data>
+<data name="AdminSettings" xml:space="preserve">
+    <value>Administration settings</value>
+  </data>
+<data name="AdminBack" xml:space="preserve">
+    <value>View website</value>
+  </data>
+<data name="AdminIntro" xml:space="preserve">
+    <value>Your engineering content, under control.</value>
+  </data>
+<data name="AdminHint" xml:space="preserve">
+    <value>Review the current content inventory and your account permissions.</value>
+  </data>
+<data name="AdminContent" xml:space="preserve">
+    <value>Content items</value>
+  </data>
+<data name="AdminDrafts" xml:space="preserve">
+    <value>Drafts</value>
+  </data>
+<data name="AdminPublished" xml:space="preserve">
+    <value>Published</value>
+  </data>
+<data name="AdminMedia" xml:space="preserve">
+    <value>Media assets</value>
+  </data>
+<data name="AdminUsers" xml:space="preserve">
+    <value>Accounts</value>
+  </data>
+<data name="AdminPhase" xml:space="preserve">
+    <value>Phase 6 · Secure admin foundation</value>
+  </data>
+<data name="AdminPending" xml:space="preserve">
+    <value>Content editing arrives in Phase 7. The current fixtures remain drafts.</value>
+  </data>
+<data name="AdminDenied" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+<data name="AdminDeniedBody" xml:space="preserve">
+    <value>Your account does not have permission to open this workspace.</value>
+  </data>
+<data name="AdminLoginHint" xml:space="preserve">
+    <value>Use your administrator-provided account. Contact your administrator if you need account access.</value>
+  </data>
+<data name="AdminPermissions" xml:space="preserve">
+    <value>Your permissions</value>
+  </data>
+<data name="AdminRead" xml:space="preserve">
+    <value>Read the dashboard</value>
+  </data>
+<data name="AdminEdit" xml:space="preserve">
+    <value>Content editing permission</value>
+  </data>
+<data name="AdminManage" xml:space="preserve">
+    <value>Account and settings permission</value>
+  </data>
+<data name="AdminNext" xml:space="preserve">
+    <value>Workspace reserved for a later phase</value>
+  </data>
+<data name="AdminNextBody" xml:space="preserve">
+    <value>Your role permits access here. Editing and management controls will be added in the approved CMS phases.</value>
+  </data>
+<data name="AdminLoginError" xml:space="preserve"><value>Unable to sign in. Check your details or try again later.</value></data>
 </root>

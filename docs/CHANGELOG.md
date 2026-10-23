@@ -96,3 +96,7 @@
 - Added schema documentation, ER diagram, inventory and read-only inspection command.
 - Phase 5 awaits approval; Phase 6 has not started.
 
+
+## 2026-10-23 ? Phase 6 ready for review
+
+Added Identity login/logout, lockout/rate limiting, anti-forgery, immediate account/session validation, role policies, bilingual responsive admin shell and live dashboard counts. Added safe administrator CLI and real-database browser authentication checks with temporary-account cleanup. Phase 5 content fixtures preserved. Phase 6 approval pending.

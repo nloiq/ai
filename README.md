@@ -29,3 +29,7 @@ See [Phase 5 review](docs/PHASE_5_DATABASE.md), [local setup](docs/LOCAL_SETUP.m
 Interaction checks: npm.cmd run test:interactions and dotnet run --project tests/NLOIQ.Checks. With the app running and Microsoft Edge installed, npm.cmd run test:browser runs the real browser checks. Screenshots are in docs/previews/phase4/. Actual external YouTube playback still needs user review.
 
 Database review: dotnet run --project src/NLOIQ.Web -- --inspect-content. Integrity checks: dotnet run --project tests/NLOIQ.DatabaseChecks (dedicated development database, rollback-only scenarios). Full schema map: docs/DATABASE_ARCHITECTURE.md.
+
+## Phase 6 admin preview
+
+Phase 5 approved; Phase 6 is ready for review. Open http://127.0.0.1:5080/en/account/login or /ar/account/login. Local review credentials are in ignored artifacts/PHASE_6_LOGIN.txt. See [Phase 6 review](docs/PHASE_6_ADMIN.md) for role permissions, administrator setup and verification. Phase 7 has not started.
