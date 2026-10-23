@@ -104,3 +104,7 @@ Added Identity login/logout, lockout/rate limiting, anti-forgery, immediate acco
 ## 2026-10-23 - Phase 7 ready for functional review
 
 Phase 6 approved. Added bilingual revision-based core CMS modules, explicit publication controls, public CMS composition/routes, safe text formatting, existing-image selection, structured navigation/contact/footer fields and actual browser publication proof. Fixed MySQL business-hours conversion with an applied time(6) migration. Phase 7 approval pending.
+
+## 2026-10-23 - Phase 8 ready for review
+
+Phase 7 approved. Added private optimized image upload/library, bilingual alt suggestions, revision-aware media delivery, SEO manager/metadata, site defaults/logo/favicon/social settings, contrast-checked appearance publication and read-only audit history. Added media and persistence/browser security checks. Default branding/colors restored after proof; one technical illustration retained on the review page. Phase 8 approval pending.

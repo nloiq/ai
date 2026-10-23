@@ -104,3 +104,7 @@ Initial seed creation is transactional. Rerunning preserves existing content and
 ## Phase 7 clock mapping correction
 
 Applied BusinessHoursClockConversion (20261023134044): nullable business-hour times use a TimeOnly/TimeSpan value converter and MySQL time(6). Existing records preserved, no additional tables. CMS services now implement transactional revision creation, publication pointers/routes, concurrency checks and actor/revision audit entries.
+
+## Phase 8 integration
+
+No additional table or migration is required. Existing SiteSettings/ThemeSettings, SeoMetadata, media/hint/revision usage and AuditLog tables now back their editors. Media variant paths derive from generated immutable storage keys; original filenames never form storage paths. Private delivery checks current publication or pinned page/section references. Alt-hint edits serialize on the asset row and compare the submitted current-value version.

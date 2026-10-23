@@ -238,6 +238,29 @@ await Scenario("CMS approved image selection reaches published public media with
     var editor=new ContentEditor(db);var page=Draft(ContentKind.Page);page.Media=[new(){AssetId=asset.Id,UsageKey="cover",AltEn="Approved illustration",AltAr="??? ?????"}];var id=await editor.SaveAsync(page,actorId,"Rollback-only CMS checks");await Publish(editor,id);
     var reader=new PublicSiteReader(db,new PublishedContentReader(db));Check((await reader.ReadAsync("ar",page.Arabic.Slug!))!.Page.Images.Single().Alt=="??? ?????","Localized media missing.");
 });
+await Scenario("SEO draft metadata is isolated and published metadata persists in both languages",async db=>{
+    var editor=new ContentEditor(db);var form=Draft(ContentKind.Page);form.SeoEnglish=new(){Title="Search title",Description="Search description",CanonicalPath="/en/pages/review",NoIndex=false};form.SeoArabic=new(){Title="عنوان البحث",Description="وصف البحث"};
+    var id=await editor.SaveAsync(form,actorId,"Rollback-only SEO check");await Publish(editor,id);var reader=new PublicSiteReader(db,new PublishedContentReader(db));
+    Check((await reader.ReadAsync("en",form.English.Slug!))!.Page.Seo!.Title=="Search title","Published SEO missing.");
+    var update=(await editor.GetAsync(id))!;update.SeoEnglish.Title="Private SEO draft";await editor.SaveAsync(update,actorId,"Rollback-only SEO check");Check((await reader.ReadAsync("en",form.English.Slug!))!.Page.Seo!.Title=="Search title","Draft SEO leaked.");await Publish(editor,id);Check((await reader.ReadAsync("en",form.English.Slug!))!.Page.Seo!.Title=="Private SEO draft","SEO publish failed.");Check((await reader.ReadAsync("ar",form.Arabic.Slug!))!.Page.Seo!.Title=="عنوان البحث","Arabic SEO lost.");
+});
+await Scenario("site settings and palette drafts apply only after publication",async db=>{
+    var editor=new ContentEditor(db);var brand=new BrandReader(db);var before=await brand.ReadAsync("en");
+    var root=await db.ContentItems.SingleAsync(x=>x.Kind==ContentKind.SiteSettings&&x.Key=="site");var form=(await editor.GetAsync(root.Id))!;form.Site.SiteName="NLO IQ review";form.Site.DefaultCulture="ar";form.Site.DefaultTheme="dark";form.Social=[new(){Platform="linkedin",Url="https://example.invalid/profile"}];await editor.SaveAsync(form,actorId,"Rollback-only settings check");Check((await brand.ReadAsync("en")).SiteName==before.SiteName,"Site draft leaked.");await Publish(editor,root.Id);var saved=await brand.ReadAsync("ar");Check(saved.SiteName=="NLO IQ review"&&saved.DefaultCulture=="ar"&&saved.DefaultTheme=="dark"&&saved.Social.Count==1,"Site defaults lost.");
+    root=await db.ContentItems.SingleAsync(x=>x.Kind==ContentKind.ThemeSettings&&x.Key=="brand");form=(await editor.GetAsync(root.Id))!;form.Theme.Copper="#A05A40";await editor.SaveAsync(form,actorId,"Rollback-only palette check");var revision=(await db.ContentItems.SingleAsync(x=>x.Id==root.Id)).DraftRevisionId!.Value;Check(await brand.ThemeCssAsync(revision) is null,"Draft CSS leaked.");await Publish(editor,root.Id);Check((await brand.ThemeCssAsync(revision))!.Contains("--copper:#A05A40"),"Published palette missing.");
+});
+await Scenario("invalid canonical paths and low-contrast palettes are rejected",async db=>{
+    var editor=new ContentEditor(db);var form=Draft(ContentKind.Page);form.SeoEnglish.CanonicalPath="//evil.example/path";await Rejected(()=>editor.SaveAsync(form,actorId,"Rollback-only SEO check"),"Canonical");
+});
+await Scenario("theme contrast guard rejects unreadable custom tokens",async db=>{
+    var editor=new ContentEditor(db);var root=await db.ContentItems.SingleAsync(x=>x.Kind==ContentKind.ThemeSettings);var form=(await editor.GetAsync(root.Id))!;form.Theme.Ivory=form.Theme.Evergreen;await Rejected(()=>editor.SaveAsync(form,actorId,"Rollback-only palette check"),"contrast");
+});
+await Scenario("draft image selections do not make new assets publicly readable",async db=>{
+    var editor=new ContentEditor(db);var page=Draft(ContentKind.Page);var id=await editor.SaveAsync(page,actorId,"Rollback-only media access check");await Publish(editor,id);
+    var asset=new MediaAsset{StorageProvider="Local",StorageKey=Guid.NewGuid().ToString("N")+"/main.webp",OriginalFileName="private.webp",ContentType="image/webp",ByteSize=10,Width=10,Height=10,Sha256=new string('a',64)};db.Add(asset);await db.SaveChangesAsync();
+    var update=(await editor.GetAsync(id))!;update.Media=[new(){AssetId=asset.Id,UsageKey="cover",AltEn="Private draft image",AltAr="صورة مسودة خاصة"}];await editor.SaveAsync(update,actorId,"Rollback-only media access check");Check(!await NLOIQ.Infrastructure.Media.MediaAccess.IsPublicAsync(db,asset.Id),"Draft image leaked.");await Publish(editor,id);Check(await NLOIQ.Infrastructure.Media.MediaAccess.IsPublicAsync(db,asset.Id),"Published image blocked.");
+    update=(await editor.GetAsync(id))!;await editor.TransitionAsync(id,update.Version,"unpublish",false,actorId,"Rollback-only media access check");Check(!await NLOIQ.Infrastructure.Media.MediaAccess.IsPublicAsync(db,asset.Id),"Unpublished image remained public.");
+});
 var markup=ContentMarkup.Render("**bold** *italic* [safe](https://example.com) [bad](javascript:alert) <script>alert(1)</script>\n- Item");
 Check(markup.Contains("<strong>bold</strong>")&&markup.Contains("<em>italic</em>")&&markup.Contains("<ul>")&&!markup.Contains("<script>")&&!markup.Contains("href=\"javascript:"),"Unsafe formatted text.");Console.WriteLine("PASS: formatted text is encoded and only safe links render");
 

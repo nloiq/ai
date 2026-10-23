@@ -20,5 +20,5 @@ public sealed class AdminController(NloDbContext database) : Controller
     [Authorize(Policy = "ContentEdit"), HttpGet("editor")]
     public IActionResult Editor(string culture) => Redirect($"/{culture}/admin/content");
     [Authorize(Policy = "Administration"), HttpGet("settings")]
-    public IActionResult Settings() => View("Upcoming");
+    public IActionResult Settings(string culture) => Redirect($"/{culture}/admin/settings/site");
 }

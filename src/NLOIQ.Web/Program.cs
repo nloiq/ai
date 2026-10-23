@@ -18,6 +18,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 if (string.IsNullOrWhiteSpace(connectionString))
     throw new InvalidOperationException("Configure ConnectionStrings:DefaultConnection using local configuration or environment variables.");
 builder.Services.AddInfrastructure(connectionString);
+builder.Services.AddSingleton(new NLOIQ.Infrastructure.Media.MediaFileStore(Path.Combine(builder.Environment.ContentRootPath,"App_Data","media")));
 builder.Services.AddOptions<NLOIQ.Web.Configuration.PreviewOptions>()
     .Bind(builder.Configuration.GetSection("Preview"))
     .Validate(options => options.IsValid(), "Preview video settings require known project keys and valid 11-character YouTube IDs.")
@@ -65,6 +66,7 @@ builder.Services.AddAuthorization(options => {
 });
 builder.Services.AddRateLimiter(options => {
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.AddPolicy("upload", context => RateLimitPartition.GetFixedWindowLimiter(context.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? context.Connection.RemoteIpAddress?.ToString() ?? "unknown", _ => new FixedWindowRateLimiterOptions { PermitLimit=10, Window=TimeSpan.FromMinutes(1), QueueLimit=0 }));
     options.AddPolicy("login", context => RateLimitPartition.GetFixedWindowLimiter(
         context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
         _ => new FixedWindowRateLimiterOptions { PermitLimit = 20, Window = TimeSpan.FromMinutes(1), QueueLimit = 0 }));
@@ -123,11 +125,11 @@ app.UseRequestLocalization(new RequestLocalizationOptions {
     DefaultRequestCulture = new RequestCulture("en"), SupportedCultures = supportedCultures, SupportedUICultures = supportedCultures,
     RequestCultureProviders = [new Microsoft.AspNetCore.Localization.Routing.RouteDataRequestCultureProvider { RouteDataStringKey = "culture", UIRouteDataStringKey = "culture", Options = new RequestLocalizationOptions { SupportedCultures = supportedCultures, SupportedUICultures = supportedCultures } }]
 });
-app.UseRateLimiter();
 app.UseAuthentication();
+app.UseRateLimiter();
 app.UseAuthorization();
 app.UseStaticFiles();
-app.MapGet("/", () => Results.Redirect("/en/"));
+app.MapGet("/", async (NLOIQ.Application.Content.IBrandReader brand) => Results.Redirect($"/{(await brand.ReadAsync("en")).DefaultCulture}/"));
 app.MapGet("/error", () => Results.Problem("The request could not be completed."));
 app.MapControllerRoute("localized", "{culture:regex(^(en|ar)$)}/{controller=Home}/{action=Index}/{id?}");
 app.Run();

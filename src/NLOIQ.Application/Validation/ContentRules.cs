@@ -59,12 +59,17 @@ public static partial class ContentRules
                     ContactKind.Map => Uri.TryCreate(detail.Value, UriKind.Absolute, out var map) && map.Scheme == Uri.UriSchemeHttps && IsSafeTarget(detail.Value),
                     _ => !detail.Value.Any(char.IsControl)
                 }, "Invalid contact value."); break;
+            case SeoMetadata seo:
+                Require(seo.Title.Length<=200&&seo.Description.Length<=320&&(seo.OpenGraphTitle?.Length??0)<=200&&(seo.OpenGraphDescription?.Length??0)<=320,"SEO field limits exceeded.");
+                Require(seo.CanonicalPath is null || (seo.CanonicalPath.StartsWith('/') && !seo.CanonicalPath.StartsWith("//",StringComparison.Ordinal) && IsSafeTarget(seo.CanonicalPath) && !seo.CanonicalPath.Contains('#') && !seo.CanonicalPath.Contains('?') && !seo.CanonicalPath.Contains("..",StringComparison.Ordinal)),"Canonical must be a local path without query/fragment.");break;
             case SiteSettings settings:
+                Require(!string.IsNullOrWhiteSpace(settings.SiteName)&&settings.SiteName.Length<=160,"Site name is required.");
                 Require(IsCulture(settings.DefaultCulture) && settings.DefaultTheme is "light" or "dark" or "system", "Invalid site defaults.");
-                Require(settings.PublicBaseUrl is null || (Uri.TryCreate(settings.PublicBaseUrl, UriKind.Absolute, out var siteUri) && siteUri.Scheme == Uri.UriSchemeHttps && IsSafeTarget(settings.PublicBaseUrl)), "Invalid public base URL."); break;
+                Require(settings.PublicBaseUrl is null || (Uri.TryCreate(settings.PublicBaseUrl, UriKind.Absolute, out var siteUri) && siteUri.Scheme == Uri.UriSchemeHttps && siteUri.AbsolutePath == "/" && siteUri.Query == "" && siteUri.Fragment == "" && IsSafeTarget(settings.PublicBaseUrl)), "Invalid public base URL."); break;
             case ThemeSettings theme:
                 foreach (var property in typeof(ThemeSettings).GetProperties().Where(x => x.PropertyType == typeof(string)))
                     Require(HexColor().IsMatch((string)property.GetValue(theme)!), "Theme colors require six-digit hex values.");
+                Require(Contrast(theme.Forest,theme.Ivory)>=4.5&&Contrast(theme.Ivory,theme.Charcoal)>=4.5&&Contrast(theme.SignalDark,theme.Evergreen)>=4.5&&Contrast(theme.Gold,theme.Charcoal)>=4.5,"Theme text colors fail shared surface contrast checks.");
                 Require(Contrast(theme.Evergreen, theme.Ivory) >= 4.5 && Contrast(theme.LightAction, theme.Ivory) >= 4.5 && Contrast(theme.SignalLight, theme.Ivory) >= 4.5 && Contrast(theme.SignalDark, theme.Charcoal) >= 4.5 && Contrast(theme.Gold, theme.Evergreen) >= 4.5, "Theme customization fails approved text contrast pairs."); break;
             case AuditLog audit when audit.DetailsJson is not null:
                 using (JsonDocument.Parse(audit.DetailsJson)) { } break;

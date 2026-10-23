@@ -1,0 +1,3 @@
+@model NLOIQ.Application.Content.PublicBrand
+@if(Model.ThemeRevision is long revision){<link rel="stylesheet" href="/brand/@(revision).css">}
+@if(Model.FaviconUrl is not null){<link rel="icon" href="@Model.FaviconUrl" type="image/png">}

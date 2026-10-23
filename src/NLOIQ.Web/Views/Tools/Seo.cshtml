@@ -1,0 +1,4 @@
+@model IReadOnlyList<NLOIQ.Application.Content.ContentListRow>
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> L
+@{Layout="_AdminLayout";ViewData["Title"]=L["SeoTitle"];var culture=Context.Request.RouteValues["culture"]?.ToString();}
+<h1 class="text-3xl">@L["SeoTitle"]</h1><p class="mt-4 max-w-3xl text-sm leading-7 text-muted">@L["SeoHelp"]</p><div class="mt-8 grid gap-4 xl:grid-cols-2">@foreach(var item in Model){<article class="border border-line bg-panel p-5"><p class="text-xs text-signal">@L["CmsKind"+item.Kind] / @item.Key</p><h2 class="mt-3 text-xl">@item.Title</h2><p class="mt-3 text-sm text-muted">@L["Cms"+item.State]</p><a href="/@culture/admin/content/@item.Id#seo-@(culture=="ar"?"Arabic":"English")" class="mt-3 inline-flex min-h-11 items-center underline">@L["CmsEdit"]</a></article>}</div>

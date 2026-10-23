@@ -254,4 +254,66 @@
 <data name="CmsSectionFooter" xml:space="preserve"><value>التذييل</value></data>
 <data name="CmsDetails" xml:space="preserve"><value>قراءة المشروع</value></data>
 <data name="CmsViewPublished" xml:space="preserve"><value>عرض الصفحة المنشورة</value></data>
+<data name="MediaTitle" xml:space="preserve"><value>مكتبة الوسائط</value></data>
+<data name="MediaUpload" xml:space="preserve"><value>رفع صورة</value></data>
+<data name="MediaHelp" xml:space="preserve"><value>PNG أو JPEG أو WebP · حتى 8 ميبيبايت و16 ميغابكسل. يعاد ترميز الصور وتحجيمها وتبقى خاصة حتى النشر.</value></data>
+<data name="MediaFile" xml:space="preserve"><value>ملف الصورة</value></data>
+<data name="MediaUploaded" xml:space="preserve"><value>تم رفع الصورة وتحسينها. اخترها في مسودة محتوى لنشرها.</value></data>
+<data name="MediaInvalid" xml:space="preserve"><value>تم رفض الرفع أو التعديل. استخدم صورة سليمة ضمن الأنواع والأحجام المحددة وقدم النص البديل باللغتين.</value></data>
+<data name="MediaAltSaved" xml:space="preserve"><value>تم حفظ اقتراحات النص البديل. تم الحفاظ على مراجعات المحتوى الحالية.</value></data>
+<data name="MediaDeleted" xml:space="preserve"><value>تم حذف الصورة غير المستخدمة.</value></data>
+<data name="MediaInUse" xml:space="preserve"><value>الصورة مرتبطة بمراجعة ولا يمكن حذفها.</value></data>
+<data name="MediaAltHelp" xml:space="preserve"><value>نص المكتبة اقتراح للاختيارات الجديدة. عدل النص البديل في مسودة المحتوى لتغيير الصفحة المنشورة.</value></data>
+<data name="MediaDelete" xml:space="preserve"><value>حذف الصورة غير المستخدمة</value></data>
+<data name="MediaUsed" xml:space="preserve"><value>مرتبطة بسجل المحتوى</value></data>
+<data name="MediaUnused" xml:space="preserve"><value>غير مرتبطة</value></data>
+<data name="MediaEmpty" xml:space="preserve"><value>لا توجد صور مطابقة.</value></data>
+<data name="MediaSaveAlt" xml:space="preserve"><value>حفظ النص البديل</value></data>
+<data name="MediaNext" xml:space="preserve"><value>الصفحة التالية</value></data>
+<data name="MediaPrevious" xml:space="preserve"><value>الصفحة السابقة</value></data>
+<data name="SeoTitle" xml:space="preserve"><value>إدارة SEO</value></data>
+<data name="SeoHelp" xml:space="preserve"><value>حرر عناوين البحث والوصف والروابط الأساسية وبيانات المشاركة للصفحات والمشاريع. احفظ المسودة ثم انشر لتطبيقها.</value></data>
+<data name="SeoMetaTitle" xml:space="preserve"><value>عنوان البحث (تجاوز اختياري)</value></data>
+<data name="SeoDescription" xml:space="preserve"><value>وصف البحث (حتى 320 حرفاً)</value></data>
+<data name="SeoOgTitle" xml:space="preserve"><value>عنوان المشاركة</value></data>
+<data name="SeoOgDescription" xml:space="preserve"><value>وصف المشاركة</value></data>
+<data name="SeoImage" xml:space="preserve"><value>دور صورة المشاركة</value></data>
+<data name="SeoCanonical" xml:space="preserve"><value>المسار الأساسي المحلي (اختياري)</value></data>
+<data name="SeoNoIndex" xml:space="preserve"><value>طلب عدم الفهرسة من محركات البحث</value></data>
+<data name="SeoHint" xml:space="preserve"><value>تستخدم الحقول الفارغة نص المحتوى. اختر دور صورة من هذه المراجعة مثل cover. حدد أصل HTTPS معتمداً في إعدادات الموقع لروابط المشاركة المطلقة. تبقى بيئة التطوير بلا فهرسة.</value></data>
+<data name="SiteTitle" xml:space="preserve"><value>إعدادات الموقع</value></data>
+<data name="SiteName" xml:space="preserve"><value>اسم الموقع</value></data>
+<data name="SiteCulture" xml:space="preserve"><value>اللغة الافتراضية</value></data>
+<data name="SiteTheme" xml:space="preserve"><value>الثيم الافتراضي للزوار الجدد</value></data>
+<data name="SiteBaseUrl" xml:space="preserve"><value>أصل HTTPS العام (اختياري)</value></data>
+<data name="SiteLogo" xml:space="preserve"><value>صورة الشعار</value></data>
+<data name="SiteFavicon" xml:space="preserve"><value>صورة أيقونة المتصفح</value></data>
+<data name="SiteLogoHint" xml:space="preserve"><value>اختر صورة مرفوعة. حافظ على الخلفية الشفافة للشعار. يتم توليد أيقونة PNG بحجم 64 × 64 تلقائياً.</value></data>
+<data name="ThemeTitle" xml:space="preserve"><value>المظهر</value></data>
+<data name="ThemeHelp" xml:space="preserve"><value>خصص ألوان الهوية المعتمدة. يتم التحقق من تباين النص قبل الحفظ. تعرض المسودة هنا ويطبق النشر الألوان على الموقع والإدارة.</value></data>
+<data name="ThemeLightPreview" xml:space="preserve"><value>معاينة الوضع الفاتح</value></data>
+<data name="ThemeDarkPreview" xml:space="preserve"><value>معاينة الوضع الداكن</value></data>
+<data name="ThemePreviewText" xml:space="preserve"><value>هندسة الأنظمة المترابطة.</value></data>
+<data name="ThemePreviewAction" xml:space="preserve"><value>الإجراء الرئيسي</value></data>
+<data name="AuditTitle" xml:space="preserve"><value>سجل العمليات</value></data>
+<data name="AuditHelp" xml:space="preserve"><value>سجل ثابت لتغييرات المحتوى والنشر والوسائط. الأوقات بتوقيت UTC.</value></data>
+<data name="AuditActor" xml:space="preserve"><value>المستخدم</value></data>
+<data name="AuditAction" xml:space="preserve"><value>العملية</value></data>
+<data name="AuditTime" xml:space="preserve"><value>الوقت · UTC</value></data>
+<data name="AuditContent" xml:space="preserve"><value>معرف المحتوى</value></data>
+<data name="AuditDetails" xml:space="preserve"><value>التفاصيل</value></data>
+<data name="AuditEmpty" xml:space="preserve"><value>لا توجد عمليات مسجلة.</value></data>
+<data name="CmsKindSiteSettings" xml:space="preserve"><value>إعدادات الموقع</value></data>
+<data name="CmsKindThemeSettings" xml:space="preserve"><value>المظهر</value></data>
+<data name="ThemeEvergreen" xml:space="preserve"><value>أخضر دائم</value></data>
+<data name="ThemeForest" xml:space="preserve"><value>أخضر الغابة</value></data>
+<data name="ThemeMoss" xml:space="preserve"><value>أخضر طحلبي</value></data>
+<data name="ThemeBurntOrange" xml:space="preserve"><value>برتقالي محروق</value></data>
+<data name="ThemeCopper" xml:space="preserve"><value>نحاسي</value></data>
+<data name="ThemeGold" xml:space="preserve"><value>ذهبي</value></data>
+<data name="ThemeIvory" xml:space="preserve"><value>عاجي</value></data>
+<data name="ThemeCharcoal" xml:space="preserve"><value>فحمي</value></data>
+<data name="ThemeLightAction" xml:space="preserve"><value>إجراء الوضع الفاتح</value></data>
+<data name="ThemeSignalLight" xml:space="preserve"><value>إشارة الوضع الفاتح</value></data>
+<data name="ThemeSignalDark" xml:space="preserve"><value>إشارة الوضع الداكن</value></data>
 </root>

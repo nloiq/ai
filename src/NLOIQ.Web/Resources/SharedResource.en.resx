@@ -254,4 +254,66 @@
 <data name="CmsSectionFooter" xml:space="preserve"><value>Footer</value></data>
 <data name="CmsDetails" xml:space="preserve"><value>Read project</value></data>
 <data name="CmsViewPublished" xml:space="preserve"><value>View published page</value></data>
+<data name="MediaTitle" xml:space="preserve"><value>Media library</value></data>
+<data name="MediaUpload" xml:space="preserve"><value>Upload image</value></data>
+<data name="MediaHelp" xml:space="preserve"><value>PNG, JPEG or WebP · up to 8 MiB / 16 megapixels. Images are re-encoded, resized and stored privately until published.</value></data>
+<data name="MediaFile" xml:space="preserve"><value>Image file</value></data>
+<data name="MediaUploaded" xml:space="preserve"><value>Image uploaded and optimized. Select it in a content draft to publish it.</value></data>
+<data name="MediaInvalid" xml:space="preserve"><value>Upload or edit rejected. Use a valid supported image within the size limits and provide both alternative texts.</value></data>
+<data name="MediaAltSaved" xml:space="preserve"><value>Library alt suggestions saved. Existing content revisions were preserved.</value></data>
+<data name="MediaDeleted" xml:space="preserve"><value>Unused image deleted.</value></data>
+<data name="MediaInUse" xml:space="preserve"><value>This image is referenced by a revision and cannot be deleted.</value></data>
+<data name="MediaAltHelp" xml:space="preserve"><value>Library alt text is a suggestion for new selections. Edit content alt text in its draft to change a published page.</value></data>
+<data name="MediaDelete" xml:space="preserve"><value>Delete unused image</value></data>
+<data name="MediaUsed" xml:space="preserve"><value>Referenced by content history</value></data>
+<data name="MediaUnused" xml:space="preserve"><value>Not referenced</value></data>
+<data name="MediaEmpty" xml:space="preserve"><value>No matching images.</value></data>
+<data name="MediaSaveAlt" xml:space="preserve"><value>Save alt suggestions</value></data>
+<data name="MediaNext" xml:space="preserve"><value>Next page</value></data>
+<data name="MediaPrevious" xml:space="preserve"><value>Previous page</value></data>
+<data name="SeoTitle" xml:space="preserve"><value>SEO manager</value></data>
+<data name="SeoHelp" xml:space="preserve"><value>Edit page and project search titles, descriptions, canonical paths and sharing metadata. Save a draft, then publish to apply it.</value></data>
+<data name="SeoMetaTitle" xml:space="preserve"><value>Search title (optional override)</value></data>
+<data name="SeoDescription" xml:space="preserve"><value>Search description (up to 320 characters)</value></data>
+<data name="SeoOgTitle" xml:space="preserve"><value>Sharing title</value></data>
+<data name="SeoOgDescription" xml:space="preserve"><value>Sharing description</value></data>
+<data name="SeoImage" xml:space="preserve"><value>Sharing image role</value></data>
+<data name="SeoCanonical" xml:space="preserve"><value>Canonical local path (optional)</value></data>
+<data name="SeoNoIndex" xml:space="preserve"><value>Ask search engines not to index</value></data>
+<data name="SeoHint" xml:space="preserve"><value>Blank titles/descriptions use the content text. Select a role from this revision’s images, such as cover. Set a verified HTTPS origin in Site settings for absolute sharing URLs. Development remains noindex.</value></data>
+<data name="SiteTitle" xml:space="preserve"><value>Site settings</value></data>
+<data name="SiteName" xml:space="preserve"><value>Site name</value></data>
+<data name="SiteCulture" xml:space="preserve"><value>Default language</value></data>
+<data name="SiteTheme" xml:space="preserve"><value>Default theme for new visitors</value></data>
+<data name="SiteBaseUrl" xml:space="preserve"><value>Public HTTPS origin (optional)</value></data>
+<data name="SiteLogo" xml:space="preserve"><value>Logo image</value></data>
+<data name="SiteFavicon" xml:space="preserve"><value>Browser icon image</value></data>
+<data name="SiteLogoHint" xml:space="preserve"><value>Choose an uploaded image. Preserve transparent backgrounds when supplying a logo. A 64 × 64 PNG browser icon is generated automatically.</value></data>
+<data name="ThemeTitle" xml:space="preserve"><value>Appearance</value></data>
+<data name="ThemeHelp" xml:space="preserve"><value>Customize the approved brand tokens. Text contrast is checked before saving. Draft colors are previewed here; publishing applies them to the website and admin.</value></data>
+<data name="ThemeLightPreview" xml:space="preserve"><value>Light preview</value></data>
+<data name="ThemeDarkPreview" xml:space="preserve"><value>Dark preview</value></data>
+<data name="ThemePreviewText" xml:space="preserve"><value>Engineering connected systems.</value></data>
+<data name="ThemePreviewAction" xml:space="preserve"><value>Primary action</value></data>
+<data name="AuditTitle" xml:space="preserve"><value>Audit history</value></data>
+<data name="AuditHelp" xml:space="preserve"><value>Append-only records of content, publication and media changes. Times are UTC.</value></data>
+<data name="AuditActor" xml:space="preserve"><value>Actor</value></data>
+<data name="AuditAction" xml:space="preserve"><value>Action</value></data>
+<data name="AuditTime" xml:space="preserve"><value>Time · UTC</value></data>
+<data name="AuditContent" xml:space="preserve"><value>Content ID</value></data>
+<data name="AuditDetails" xml:space="preserve"><value>Details</value></data>
+<data name="AuditEmpty" xml:space="preserve"><value>No audit entries.</value></data>
+<data name="CmsKindSiteSettings" xml:space="preserve"><value>Site settings</value></data>
+<data name="CmsKindThemeSettings" xml:space="preserve"><value>Appearance</value></data>
+<data name="ThemeEvergreen" xml:space="preserve"><value>Evergreen</value></data>
+<data name="ThemeForest" xml:space="preserve"><value>Forest</value></data>
+<data name="ThemeMoss" xml:space="preserve"><value>Moss</value></data>
+<data name="ThemeBurntOrange" xml:space="preserve"><value>Burnt orange</value></data>
+<data name="ThemeCopper" xml:space="preserve"><value>Copper</value></data>
+<data name="ThemeGold" xml:space="preserve"><value>Gold</value></data>
+<data name="ThemeIvory" xml:space="preserve"><value>Ivory</value></data>
+<data name="ThemeCharcoal" xml:space="preserve"><value>Charcoal</value></data>
+<data name="ThemeLightAction" xml:space="preserve"><value>Light action</value></data>
+<data name="ThemeSignalLight" xml:space="preserve"><value>Light signal</value></data>
+<data name="ThemeSignalDark" xml:space="preserve"><value>Dark signal</value></data>
 </root>

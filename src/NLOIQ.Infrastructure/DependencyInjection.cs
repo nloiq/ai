@@ -14,6 +14,9 @@ public static class DependencyInjection
         services.AddScoped<IPublishedContentReader, PublishedContentReader>();
         services.AddScoped<NLOIQ.Application.Content.IContentEditor, ContentEditor>();
         services.AddScoped<NLOIQ.Application.Content.IPublicSiteReader, PublicSiteReader>();
+        services.AddSingleton<NLOIQ.Application.Content.IImageOptimizer, NLOIQ.Infrastructure.Media.ImageOptimizer>();
+        services.AddScoped<NLOIQ.Application.Content.IMediaLibrary, NLOIQ.Infrastructure.Media.MediaLibrary>();
+        services.AddScoped<NLOIQ.Application.Content.IBrandReader, BrandReader>();
         return services;
     }
 }

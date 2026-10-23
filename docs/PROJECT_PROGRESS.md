@@ -1,46 +1,52 @@
 # NLO IQ project progress
 
 Updated: 2026-10-23 (Asia/Baghdad).
-Current phase: **7 - Core CMS Content Management**.
-Status: **Delivered for functional review; awaiting explicit Phase 7 approval**.
-Approved phases: **0, 1, 2, 3, 4, 5 and 6**.
-Last approved checkpoint: a0f88cf (Phase 6 authentication and admin shell).
+Current phase: **8 - Media, SEO and Appearance**.
+Status: **Delivered for review; awaiting explicit Phase 8 approval**.
+Approved phases: **0, 1, 2, 3, 4, 5, 6 and 7**.
+Last approved checkpoint: 7235c4d (Phase 7 core CMS).
 Selected design: revised Concept A, engineering folio.
 
 ## Completed
 
-- Hero/About section editors, Pages/Sections, Projects/categories, Services, Contact, Navigation and Footer modules.
-- Bilingual translation tabs, safe formatting toolbar, existing-image selection and per-revision bilingual alt/captions.
-- Ordering controls with keyboard-friendly move buttons and drag handles, visibility and project featured/video settings.
-- Structured page composition, navigation hierarchy, contact details, business hours and social links.
-- Create/read/update and reversible archive; immutable revisions, audit entries, stale-form conflict protection.
-- Explicit basic publish/unpublish/archive by SuperAdmin; Editor saves drafts; Viewer retains dashboard-only access.
-- Atomic route/pointer/publication updates, dependency validation and demo-media publication safeguards.
-- Published-only CMS public renderer, localized page/project routes and language switching.
-- Original home prototype retained in Development until the real home page is explicitly published. An already verified home does not fall back to the prototype when unpublished.
-- A factual bilingual CMS review page created and updated through the real browser form; original 22 seed roots remain draft/demo.
-- Clock conversion migration applied: BusinessHours time columns widened to time(6) with TimeOnly/TimeSpan conversion; backup saved locally before this correction.
-- Build clean; no pending model changes; 26 rollback-only database/CMS scenarios plus formatted-text checks, actual CMS browser flow, Identity/role checks and five public browser regressions passed.
+- Authenticated media library, upload, private previews, search/paging and bilingual alt suggestions.
+- PNG/JPEG/WebP validation, 8 MiB/16 MP bounds, static-image decoding, orientation correction and metadata-free re-encoding.
+- Optimized WebP master/thumbnail/640/1280 variants and generated 64 × 64 PNG icons.
+- Private runtime storage outside wwwroot; public delivery checks published revision references, including pinned sections.
+- Immutable media replacement; referenced/history assets cannot be deleted; unused uploads can be removed by SuperAdmin.
+- Bilingual SEO editor and manager: search/sharing titles/descriptions, canonical paths, sharing images and noindex.
+- Published site defaults, logo/favicon selection and social links; existing visitor theme preferences retain precedence.
+- Approved palette-token editor with local light/dark previews, contrast validation and published CSS shared by public/admin pages.
+- Append-only audit history with content filtering/paging; uploads, hint edits, deletions, content saves and publishing are recorded.
+- Real browser proof of persisted media, SEO, branding and palette changes; default name/colors restored after tests.
+- One technical review image retained on the bilingual cms-review page. No new company achievements, real logo or social/contact data invented.
+- Current checkpoint: 23 roots, 50 revisions/100 translations, 4 media assets, 3 published roots, 1 local review account. Detailed checkpoint: PHASE_8_INVENTORY.json.
+- Eight projects build clean; locked restore and dependency audit pass; no new migration or pending model changes.
+- 31 rollback-only database/CMS/settings scenarios, formatted-text checks, media security/optimization checks, role/CSRF checks, Phase 8 browser flow and five public browser regressions passed.
 
-## Review
+## Review links
 
-CMS: http://127.0.0.1:5080/en/admin/content (Arabic: /ar/admin/content).
-Published demonstration: http://127.0.0.1:5080/en/pages/cms-review (Arabic: /ar/pages/cms-review).
-Use the same local login from ignored artifacts/PHASE_6_LOGIN.txt.
-Review instructions: PHASE_7_CMS.md.
-Inventory checkpoint: PHASE_7_INVENTORY.json.
-Restart: dotnet run --project src/NLOIQ.Web --no-build.
+Media: http://127.0.0.1:5080/en/admin/media
+SEO: http://127.0.0.1:5080/en/admin/seo
+Site: http://127.0.0.1:5080/en/admin/settings/site
+Appearance: http://127.0.0.1:5080/en/admin/settings/appearance
+Audit: http://127.0.0.1:5080/en/admin/audit
+Arabic uses /ar/ in the same paths. Use the existing local login in ignored artifacts/PHASE_6_LOGIN.txt.
+Published demonstration: /en/pages/cms-review and /ar/pages/cms-review.
+Instructions: PHASE_8_MEDIA_SEO_APPEARANCE.md. Screenshots: docs/previews/phase8/.
 
-## Limits and next phases
+## Limits and remaining phases
 
-- Existing sample illustrations can be selected in drafts; demo media remains blocked from publication. Approved upload/media-library management is Phase 8.
-- Public home remains the approved prototype until its actual content/dependencies are reviewed and published. Publishing a section requires resaving/republishing pages that should use its new revision.
-- Formatting supports bold, italic, links and lists; raw HTML is encoded rather than accepted as trusted markup.
-- Basic publishing is implemented for functional CMS proof. Scheduling, preview links, revision browsing/restoration and complete editorial workflow remain Phase 10.
-- SEO/appearance editors, full localization QA, media optimization and deployment remain their planned phases.
-- Production TLS/proxy/shared Data Protection, account recovery/MFA and release QA remain outstanding.
+- Uploads support static PNG/JPEG/WebP, not SVG/GIF/ICO or arbitrary files. Bundled SVG illustrations remain trusted demo assets.
+- Published revision media/alt metadata remain immutable; replacement uploads use new asset IDs. Old referenced files are preserved with history.
+- Uploaded bytes live in ignored src/NLOIQ.Web/App_Data/media and are not distributed by Git or application publish. Deployment must preserve/back up this runtime directory with its database.
+- Windows image/runtime behavior is tested; Linux native assets are included but target-host verification remains release QA/deployment work.
+- Real logo/favicon, approved company projects/copy, contact/social destinations and public HTTPS origin still need user-provided values.
+- Development stays noindex even when a content SEO flag permits indexing.
+- Original home prototype remains until its CMS home/dependencies are reviewed/published; this phase verifies a separate CMS review page.
+- Full localization, scheduler/preview/revision restoration, release QA and deployment remain future phases.
 
-8 Media/SEO/appearance; 9 Complete localization; 10 Publishing/preview/revisions; 11 QA; 12 Deployment/handover. Each requires explicit approval. **Do not start Phase 8 yet.**
+9 Complete localization; 10 Publishing/preview/revisions; 11 QA; 12 Deployment/handover. Each requires explicit approval. **Do not start Phase 9 yet.**
 
 ## Commands
 

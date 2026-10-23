@@ -19,6 +19,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="App_Data/**" />
+    <None Remove="App_Data/**" />
     <Content Update="appsettings.Local.json" CopyToOutputDirectory="Never" CopyToPublishDirectory="Never" />
   </ItemGroup>
 </Project>

@@ -55,3 +55,7 @@ Run dotnet run --project src/NLOIQ.Web -- --inspect-content to read the new inve
 ## Phase 7 CMS review
 
 Core CMS is at /en/admin/content and /ar/admin/content. Use the Phase 6 local review login. The retained bilingual published example is /en/pages/cms-review and /ar/pages/cms-review. Apply all four checked-in migrations, including BusinessHoursClockConversion, when preparing a fresh database. Existing-file selection is available; uploads/SEO/appearance remain Phase 8. See PHASE_7_CMS.md for safe functional checks.
+
+## Phase 8 runtime media
+
+Media library: /en/admin/media; SEO: /en/admin/seo; Site: /en/admin/settings/site; Appearance: /en/admin/settings/appearance; Audit: /en/admin/audit. Arabic mirrors /ar/. Upload storage is src/NLOIQ.Web/App_Data/media, ignored by Git and excluded from publish. Preserve this directory with the database when moving/restoring the app. See PHASE_8_MEDIA_SEO_APPEARANCE.md for limits, permissions, review checks and deployment notes.

@@ -3,6 +3,7 @@ using NLOIQ.Application.Content;
 using NLOIQ.Application.Interfaces;
 using NLOIQ.Application.Validation;
 using NLOIQ.Domain.Content;
+using NLOIQ.Infrastructure.Media;
 namespace NLOIQ.Infrastructure.Data;
 public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader published):IPublicSiteReader
 {
@@ -22,11 +23,14 @@ public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader pub
         var service=(await Children<ContentService>(revision,ct)).SingleOrDefault();if(service is not null){node.Icon=service.IconKey;node.Visible=service.IsVisible;node.Order=service.DisplayOrder;}
         var footer=(await Children<FooterSettings>(revision,ct)).SingleOrDefault();if(footer is not null)node.ShowCopyright=footer.ShowCopyright;
         var mediaText=await Children<RevisionMediaTranslation>(revision,ct);
+        var imageUsages=new Dictionary<long,PublicImage>();
         foreach(var usage in (await Children<RevisionMedia>(revision,ct)).OrderBy(x=>x.UsageKey=="cover"?0:1).ThenBy(x=>x.DisplayOrder)) {
             var asset=await db.MediaAssets.AsNoTracking().SingleOrDefaultAsync(x=>x.Id==usage.MediaAssetId&&!x.IsDemo,ct);var alt=mediaText.SingleOrDefault(x=>x.RevisionMediaId==usage.Id&&x.Culture==culture);
-            if(asset is null||alt is null||string.IsNullOrWhiteSpace(alt.AltText)||asset.StorageKey.Contains("..",StringComparison.Ordinal)||asset.StorageKey.Contains('\\')||!asset.StorageKey.StartsWith("images/",StringComparison.Ordinal)||asset.StorageProvider!="Bundled")continue;
-            node.Images.Add(new("/"+asset.StorageKey,alt.AltText,alt.Caption,asset.Width??840,asset.Height??600));
+            if(asset is null||alt is null||string.IsNullOrWhiteSpace(alt.AltText))continue;
+            var image=MediaAccess.Image(asset,alt.AltText,alt.Caption);if(image is null)continue;node.Images.Add(image);imageUsages[usage.Id]=image;
         }
+        var seo=await db.Set<SeoMetadata>().AsNoTracking().SingleOrDefaultAsync(x=>x.RevisionId==revision&&x.Culture==culture,ct);
+        if(seo is not null)node.Seo=new(seo.Title,seo.Description,seo.OpenGraphTitle,seo.OpenGraphDescription,seo.OpenGraphMediaUsageId is long imageId?imageUsages.GetValueOrDefault(imageId):null,seo.CanonicalPath,seo.NoIndex);
         var nav=(await Children<NavigationItem>(revision,ct)).OrderBy(x=>x.DisplayOrder).ToList();var navText=await Children<NavigationTranslation>(revision,ct);
         foreach(var link in nav.Where(x=>x.IsVisible)) {
             var label=navText.SingleOrDefault(x=>x.NavigationItemId==link.Id&&x.Culture==culture)?.Label;

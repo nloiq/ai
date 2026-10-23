@@ -7,7 +7,7 @@ using NLOIQ.Domain.Content;
 namespace NLOIQ.Infrastructure.Data;
 public sealed class ContentEditor(NloDbContext db) : IContentEditor
 {
-    private static readonly ContentKind[] Supported = [ContentKind.Page,ContentKind.Section,ContentKind.Project,ContentKind.ProjectCategory,ContentKind.Service,ContentKind.Navigation,ContentKind.Contact,ContentKind.Footer];
+    private static readonly ContentKind[] Supported = [ContentKind.Page,ContentKind.Section,ContentKind.Project,ContentKind.ProjectCategory,ContentKind.Service,ContentKind.Navigation,ContentKind.Contact,ContentKind.Footer,ContentKind.SiteSettings,ContentKind.ThemeSettings];
     public async Task<IReadOnlyList<ContentListRow>> ListAsync(ContentKind? kind,string? search,CancellationToken ct=default)
     {
         var query=db.ContentItems.AsNoTracking().Where(x=>Supported.Contains(x.Kind));
@@ -21,7 +21,7 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
     public async Task<EditorChoices> ChoicesAsync(CancellationToken ct=default) => new(
         await db.ContentItems.AsNoTracking().Where(x=>x.Kind==ContentKind.Section && x.State!=PublicationState.Archived).OrderBy(x=>x.Key).Select(x=>new ContentChoice(x.Id,x.Key)).ToListAsync(ct),
         await db.ContentItems.AsNoTracking().Where(x=>x.Kind==ContentKind.ProjectCategory && x.State!=PublicationState.Archived).OrderBy(x=>x.Key).Select(x=>new ContentChoice(x.Id,x.Key)).ToListAsync(ct),
-        await db.MediaAssets.AsNoTracking().OrderBy(x=>x.Id).Select(x=>new MediaChoice(x.Id,x.OriginalFileName,x.IsDemo)).ToListAsync(ct));
+        await db.MediaAssets.AsNoTracking().OrderBy(x=>x.Id).Select(x=>new MediaChoice(x.Id,x.OriginalFileName,x.IsDemo,db.Set<MediaAssetTranslation>().Where(t=>t.MediaAssetId==x.Id&&t.Culture=="en").Select(t=>t.AltText).FirstOrDefault()??"",db.Set<MediaAssetTranslation>().Where(t=>t.MediaAssetId==x.Id&&t.Culture=="ar").Select(t=>t.AltText).FirstOrDefault()??"")).ToListAsync(ct));
     public async Task<ContentEdit?> GetAsync(long id,CancellationToken ct=default)
     {
         var item=await db.ContentItems.AsNoTracking().SingleOrDefaultAsync(x=>x.Id==id,ct);
@@ -41,11 +41,21 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
         var footer=(await Children<FooterSettings>(revision,ct)).SingleOrDefault();if(footer is not null)model.ShowCopyright=footer.ShowCopyright;
         model.Sections=await db.Set<PageSection>().AsNoTracking().Where(x=>x.RevisionId==revision).OrderBy(x=>x.DisplayOrder).Select(x=>new SectionEdit{ContentItemId=x.Section.Revision.ContentItemId,DisplayOrder=x.DisplayOrder}).ToListAsync(ct);
         model.Categories=await db.Set<ProjectCategoryAssignment>().AsNoTracking().Where(x=>x.RevisionId==revision).Select(x=>x.Category.Revision.ContentItemId).ToListAsync(ct);
+        var site=(await Children<SiteSettings>(revision,ct)).SingleOrDefault();
+        if(site is not null)model.Site=new(){SiteName=site.SiteName,DefaultCulture=site.DefaultCulture,DefaultTheme=site.DefaultTheme,PublicBaseUrl=site.PublicBaseUrl};
+        var theme=(await Children<ThemeSettings>(revision,ct)).SingleOrDefault();
+        if(theme is not null)foreach(var property in typeof(ThemeEdit).GetProperties())property.SetValue(model.Theme,typeof(ThemeSettings).GetProperty(property.Name)!.GetValue(theme));
+        var seoUsages=(await Children<RevisionMedia>(revision,ct)).ToDictionary(x=>x.Id,x=>x.UsageKey);
+        foreach(var seo in await Children<SeoMetadata>(revision,ct)){
+            var edit=new SeoEdit{Title=seo.Title,Description=seo.Description,OpenGraphTitle=seo.OpenGraphTitle,OpenGraphDescription=seo.OpenGraphDescription,CanonicalPath=seo.CanonicalPath,NoIndex=seo.NoIndex,OpenGraphUsageKey=seo.OpenGraphMediaUsageId is long usage?seoUsages.GetValueOrDefault(usage):null};
+            if(seo.Culture=="en")model.SeoEnglish=edit;else model.SeoArabic=edit;
+        }
         var mediaText=await Children<RevisionMediaTranslation>(revision,ct);
         foreach(var media in (await Children<RevisionMedia>(revision,ct)).OrderBy(x=>x.DisplayOrder)) {
             var en=mediaText.SingleOrDefault(x=>x.RevisionMediaId==media.Id&&x.Culture=="en");var ar=mediaText.SingleOrDefault(x=>x.RevisionMediaId==media.Id&&x.Culture=="ar");
             model.Media.Add(new(){AssetId=media.MediaAssetId,UsageKey=media.UsageKey,AltEn=en?.AltText??"",AltAr=ar?.AltText??"",CaptionEn=en?.Caption,CaptionAr=ar?.Caption});
         }
+        if(site is not null){var logo=model.Media.SingleOrDefault(x=>x.UsageKey=="logo");var icon=model.Media.SingleOrDefault(x=>x.UsageKey=="favicon");model.Site.LogoAssetId=logo?.AssetId;model.Site.LogoAltEn=logo?.AltEn??"";model.Site.LogoAltAr=logo?.AltAr??"";model.Site.FaviconAssetId=icon?.AssetId;}
         var links=(await Children<NavigationItem>(revision,ct)).OrderBy(x=>x.DisplayOrder).ToList();var labels=await Children<NavigationTranslation>(revision,ct);
         foreach(var link in links)model.Links.Add(new(){Href=link.Href??"",IsVisible=link.IsVisible,ParentIndex=link.ParentItemId is long parent?links.FindIndex(x=>x.Id==parent):null,
             LabelEn=labels.SingleOrDefault(x=>x.NavigationItemId==link.Id&&x.Culture=="en")?.Label??"",LabelAr=labels.SingleOrDefault(x=>x.NavigationItemId==link.Id&&x.Culture=="ar")?.Label??""});
@@ -62,7 +72,7 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
     {
         Require(Supported.Contains(m.Kind),"Unsupported content module.");
         Validator.ValidateObject(m,new ValidationContext(m),true);
-        foreach(var value in new object[]{m.English,m.Arabic}.Concat(m.Media).Concat(m.Links).Concat(m.Contacts).Concat(m.Social).Concat(m.Hours))Validator.ValidateObject(value,new ValidationContext(value),true);
+        foreach(var value in new object[]{m.English,m.Arabic,m.SeoEnglish,m.SeoArabic,m.Site,m.Theme}.Concat(m.Media).Concat(m.Links).Concat(m.Contacts).Concat(m.Social).Concat(m.Hours))Validator.ValidateObject(value,new ValidationContext(value),true);
         Require(m.Sections.Count<=50&&m.Categories.Count<=50&&m.Media.Count<=30&&m.Links.Count<=50&&m.Contacts.Count<=30&&m.Social.Count<=5&&m.Hours.Count<=7,"Too many collection rows.");
         Require(m.Sections.Select(x=>x.ContentItemId).Distinct().Count()==m.Sections.Count,"A section may only appear once on a page.");
         Require(m.Categories.Distinct().Count()==m.Categories.Count,"Duplicate project categories.");
@@ -76,6 +86,8 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
         }
         if(m.Kind==ContentKind.Navigation)Require(m.Key is "main" or "footer","Navigation key must be main or footer.");
         if(m.Kind==ContentKind.Contact)Require(m.Key=="primary","Contact key must be primary.");
+        if(m.Kind==ContentKind.SiteSettings)Require(m.Key=="site","Site settings key must be site.");
+        if(m.Kind==ContentKind.ThemeSettings)Require(m.Key=="brand","Theme settings key must be brand.");
         if(m.Kind==ContentKind.Footer)Require(m.Key=="main","Footer key must be main.");
     }
     private async Task<long> Dependency(long id,ContentKind kind,CancellationToken ct)
@@ -86,6 +98,11 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
     public async Task<long> SaveAsync(ContentEdit m,Guid actorId,string actorLabel,CancellationToken ct=default)
     {
         actorLabel=actorLabel[..Math.Min(actorLabel.Length,160)];
+        if(m.Kind==ContentKind.SiteSettings){
+            m.Media=[];
+            if(m.Site.LogoAssetId is long logo)m.Media.Add(new(){AssetId=logo,UsageKey="logo",AltEn=m.Site.LogoAltEn,AltAr=m.Site.LogoAltAr});
+            if(m.Site.FaviconAssetId is long icon)m.Media.Add(new(){AssetId=icon,UsageKey="favicon",AltEn=m.Site.SiteName,AltAr=m.Site.SiteName});
+        }
         ValidateModel(m);
         await using var tx=db.Database.CurrentTransaction is null?await db.Database.BeginTransactionAsync(ct):null;
         try {
@@ -104,13 +121,8 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
                 db.Add(new RevisionMediaTranslation{Revision=revision,RevisionMedia=usage,Culture="en",AltText=media.AltEn??"",Caption=media.CaptionEn});
                 db.Add(new RevisionMediaTranslation{Revision=revision,RevisionMedia=usage,Culture="ar",AltText=media.AltAr??"",Caption=media.CaptionAr});
             }
-            // SEO is preserved until its dedicated editor phase; removed images cannot leave dangling references.
-            if(previous is long old) {
-                var oldUsages=(await Children<RevisionMedia>(old,ct)).ToDictionary(x=>x.Id,x=>x.UsageKey);
-                foreach(var seo in await Children<SeoMetadata>(old,ct)) {
-                    RevisionMedia? image=null;if(seo.OpenGraphMediaUsageId is long usageId&&oldUsages.TryGetValue(usageId,out var key))usages.TryGetValue(key,out image);
-                    db.Add(new SeoMetadata{Revision=revision,Culture=seo.Culture,Title=seo.Title,Description=seo.Description,OpenGraphTitle=seo.OpenGraphTitle,OpenGraphDescription=seo.OpenGraphDescription,CanonicalPath=seo.CanonicalPath,NoIndex=seo.NoIndex,OpenGraphMediaUsage=image});
-                }
+            if(m.Kind is ContentKind.Page or ContentKind.Project)foreach(var (culture,seo) in new[]{("en",m.SeoEnglish),("ar",m.SeoArabic)}){
+                db.Add(new SeoMetadata{Revision=revision,Culture=culture,Title=seo.Title??"",Description=seo.Description??"",OpenGraphTitle=seo.OpenGraphTitle,OpenGraphDescription=seo.OpenGraphDescription,CanonicalPath=string.IsNullOrWhiteSpace(seo.CanonicalPath)?null:seo.CanonicalPath,NoIndex=seo.NoIndex,OpenGraphMediaUsage=seo.OpenGraphUsageKey is string key?usages.GetValueOrDefault(key):null});
             }
             switch(m.Kind) {
                 case ContentKind.Page:
@@ -136,9 +148,12 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
                         db.Add(new ContactTranslation{Revision=revision,ContactDetail=detail,Culture="en",Label=contact.LabelEn??"",LocalizedValue=contact.ValueEn});db.Add(new ContactTranslation{Revision=revision,ContactDetail=detail,Culture="ar",Label=contact.LabelAr??"",LocalizedValue=contact.ValueAr});
                     }
                     foreach(var hours in m.Hours)db.Add(new BusinessHours{Revision=revision,DayOfWeek=hours.DayOfWeek,IsClosed=hours.IsClosed,OpensAt=hours.IsClosed?null:hours.OpensAt,ClosesAt=hours.IsClosed?null:hours.ClosesAt});break;
+                case ContentKind.SiteSettings:db.Add(new SiteSettings{Revision=revision,SiteName=m.Site.SiteName,DefaultCulture=m.Site.DefaultCulture,DefaultTheme=m.Site.DefaultTheme,PublicBaseUrl=string.IsNullOrWhiteSpace(m.Site.PublicBaseUrl)?null:m.Site.PublicBaseUrl.TrimEnd('/'),LogoMediaUsage=usages.GetValueOrDefault("logo"),FaviconMediaUsage=usages.GetValueOrDefault("favicon")});break;
+                case ContentKind.ThemeSettings:
+                    var theme=new ThemeSettings{Revision=revision};foreach(var property in typeof(ThemeEdit).GetProperties())typeof(ThemeSettings).GetProperty(property.Name)!.SetValue(theme,property.GetValue(m.Theme));db.Add(theme);break;
                 case ContentKind.Footer:db.Add(new FooterSettings{Revision=revision,ShowCopyright=m.ShowCopyright});break;
             }
-            if(m.Kind is ContentKind.Contact or ContentKind.Footer)foreach(var (social,index) in m.Social.Select((x,i)=>(x,i)))db.Add(new SocialLink{Revision=revision,Platform=social.Platform,Url=social.Url,DisplayOrder=index});
+            if(m.Kind is ContentKind.Contact or ContentKind.Footer or ContentKind.SiteSettings)foreach(var (social,index) in m.Social.Select((x,i)=>(x,i)))db.Add(new SocialLink{Revision=revision,Platform=social.Platform,Url=social.Url,DisplayOrder=index});
             await db.SaveChangesAsync(ct);
             item.DraftRevisionId=revision.Id;
             if(item.State==PublicationState.Archived)item.State=PublicationState.Draft;

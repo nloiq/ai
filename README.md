@@ -24,7 +24,7 @@ The launch profile selects Development and http://127.0.0.1:5080.
 
 Initialization applies all committed migrations and creates the initial preview services, draft content fixtures and role definitions. Re-running it preserves existing records. It creates no user/password. Demo initialization and the fallback prototype are Development-only; normal startup does not migrate or seed. On a new checkout, run `dotnet run --project src/NLOIQ.Web --no-build -- --create-admin` to create your own administrator interactively.
 
-See [Phase 7 functional review](docs/PHASE_7_CMS.md), [local setup](docs/LOCAL_SETUP.md), and [progress](docs/PROJECT_PROGRESS.md). Media/SEO/appearance and the full publishing workflow remain later phases.
+See [Phase 7 functional review](docs/PHASE_7_CMS.md), [local setup](docs/LOCAL_SETUP.md), and [progress](docs/PROJECT_PROGRESS.md). Media/SEO/appearance editors are now available; full localization and the complete publishing workflow remain later phases.
 
 Interaction checks: npm.cmd run test:interactions and dotnet run --project tests/NLOIQ.Checks. With the app running and Microsoft Edge installed, npm.cmd run test:browser runs the real browser checks. Screenshots are in docs/previews/phase4/. Actual external YouTube playback still needs user review.
 
@@ -36,4 +36,8 @@ Historical Phase 6 checkpoint (now approved). Open http://127.0.0.1:5080/en/acco
 
 ## Phase 7 core CMS review
 
-Open http://127.0.0.1:5080/en/admin/content (Arabic: /ar/admin/content). Use the existing ignored local login file. Published edit demonstration: http://127.0.0.1:5080/en/pages/cms-review and /ar/pages/cms-review. See [functional review instructions](docs/PHASE_7_CMS.md). Editor saves drafts; SuperAdmin publishes. Phase 8 has not started.
+Open http://127.0.0.1:5080/en/admin/content (Arabic: /ar/admin/content). Use the existing ignored local login file. Published edit demonstration: http://127.0.0.1:5080/en/pages/cms-review and /ar/pages/cms-review. See [functional review instructions](docs/PHASE_7_CMS.md). Editor saves drafts; SuperAdmin publishes. Phase 8 is now delivered for review.
+
+## Phase 8 media, SEO and appearance
+
+Use the existing login for [media library](http://127.0.0.1:5080/en/admin/media), [SEO](http://127.0.0.1:5080/en/admin/seo), [site settings](http://127.0.0.1:5080/en/admin/settings/site), [appearance](http://127.0.0.1:5080/en/admin/settings/appearance), and [audit history](http://127.0.0.1:5080/en/admin/audit). Arabic mirrors /ar/. See [Phase 8 review](docs/PHASE_8_MEDIA_SEO_APPEARANCE.md). Preserve ignored App_Data/media with the database; user uploads are runtime data, not Git/publish artifacts. Phase 9 has not started.

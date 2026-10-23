@@ -15,7 +15,7 @@ public sealed class CmsController(IContentEditor editor,NLOIQ.Application.Interf
 {
     [HttpGet("")]
     public async Task<IActionResult> Index(ContentKind? kind,SectionKind? sectionKind,string? search,CancellationToken ct) {
-        var rows=await editor.ListAsync(kind,search,ct);if(sectionKind.HasValue)rows=rows.Where(x=>x.Kind==ContentKind.Section&&x.SectionKind==sectionKind).ToList();return View(rows);
+        var rows=await editor.ListAsync(kind,search,ct);if(!User.IsInRole("SuperAdmin"))rows=rows.Where(x=>x.Kind is not (ContentKind.SiteSettings or ContentKind.ThemeSettings)).ToList();if(sectionKind.HasValue)rows=rows.Where(x=>x.Kind==ContentKind.Section&&x.SectionKind==sectionKind).ToList();return View(rows);
     }
     [HttpGet("new")]
     public async Task<IActionResult> Create(ContentKind kind=ContentKind.Page,SectionKind sectionKind=SectionKind.Hero,CancellationToken ct=default)
@@ -27,7 +27,7 @@ public sealed class CmsController(IContentEditor editor,NLOIQ.Application.Interf
     [HttpGet("{id:long}")]
     public async Task<IActionResult> Edit(long id,CancellationToken ct)
     {
-        var model=await editor.GetAsync(id,ct);return model is null?NotFound():await EditView(model,ct);
+        var model=await editor.GetAsync(id,ct);return model is null?NotFound():model.Kind is ContentKind.SiteSettings or ContentKind.ThemeSettings && !User.IsInRole("SuperAdmin")?Forbid():await EditView(model,ct);
     }
     private async Task<IActionResult> EditView(ContentEdit model,CancellationToken ct)
     {
@@ -44,6 +44,8 @@ public sealed class CmsController(IContentEditor editor,NLOIQ.Application.Interf
     public async Task<IActionResult> Save(long? id,ContentEdit model,CancellationToken ct)
     {
         if((id??0)!=model.Id)return BadRequest();
+        if(model.Id!=0){var existing=await editor.GetAsync(model.Id,ct);if(existing is null)return NotFound();if(existing.Kind is ContentKind.SiteSettings or ContentKind.ThemeSettings && !User.IsInRole("SuperAdmin"))return Forbid();if(existing.Kind!=model.Kind||existing.Key!=model.Key)return BadRequest();}
+        if(model.Kind is ContentKind.SiteSettings or ContentKind.ThemeSettings && !User.IsInRole("SuperAdmin"))return Forbid();
         if(ModelState.IsValid)try {
             var saved=await editor.SaveAsync(model,Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!),User.Identity!.Name!,ct);
             TempData["CmsNotice"]=localizer["CmsSaved"].Value;return RedirectToAction(nameof(Edit),new{id=saved,culture=RouteData.Values["culture"]});

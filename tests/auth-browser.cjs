@@ -48,6 +48,9 @@ const base='http://127.0.0.1:5080';
    const workspace=await context.request.get(base+'/en/admin/content');expect(workspace.status()).toBe(role==='Viewer'?403:200);
    const cmsCsrf=await context.request.post(base+'/en/admin/content/new',{form:{}});expect(cmsCsrf.status()).toBe(role==='Viewer'?403:400);
    const publishing=await context.request.post(base+'/en/admin/content/1/status',{form:{action:'publish'}});expect(publishing.status()).toBe(role==='SuperAdmin'?400:403);
+   for(const path of ['media','seo','settings/site','settings/appearance','audit']){const r=await context.request.get(base+'/en/admin/'+path);expect(r.status()).toBe(['media','seo'].includes(path)?(role==='Viewer'?403:200):(role==='SuperAdmin'?200:403));}
+   const mediaCsrf=await context.request.post(base+'/en/admin/media/upload',{form:{}});expect(mediaCsrf.status()).toBe(role==='Viewer'?403:400);
+   if(role==='Editor'){await p.goto(base+'/en/admin/content/new?kind=Page');const token=await p.locator('input[name=__RequestVerificationToken]').first().inputValue();const protectedPost=await context.request.post(base+'/en/admin/content/'+process.env.NLO_SITE_ID,{form:{__RequestVerificationToken:token,Id:process.env.NLO_SITE_ID,Kind:'Service',Key:'site'}});expect(protectedPost.status()).toBe(403);}
    const csrf=await context.request.post(base+'/en/account/logout');expect(csrf.status()).toBe(400);
    if(role==='SuperAdmin') {
      await fs.mkdir('artifacts/phase6',{recursive:true});

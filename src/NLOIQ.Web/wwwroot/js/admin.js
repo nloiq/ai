@@ -2,8 +2,8 @@
 (() => {
  const selector = document.getElementById('theme');
  const system = matchMedia('(prefers-color-scheme:dark)');
- let preference = 'system';
- try { preference = localStorage.getItem('nlo-theme') || 'system'; } catch {}
+ let preference = document.documentElement.dataset.defaultTheme || 'system';
+ try { preference = localStorage.getItem('nlo-theme') || preference; } catch {}
  if (!['light','dark','system'].includes(preference)) preference = 'system';
  selector.value = preference;
  const apply = () => { document.documentElement.dataset.theme = preference === 'system' ? (system.matches ? 'dark' : 'light') : preference; };

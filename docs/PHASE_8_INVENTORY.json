@@ -1,0 +1,203 @@
+{
+  "AppliedMigrations": [
+    "20261023065112_InitialPreviewFoundation",
+    "20261023123233_ContentArchitecture",
+    "20261023123627_ContentIdentityGeneration",
+    "20261023134044_BusinessHoursClockConversion"
+  ],
+  "Summary": {
+    "ContentItems": 23,
+    "Revisions": 50,
+    "Translations": 100,
+    "MediaAssets": 4,
+    "Roles": 3,
+    "Users": 1,
+    "Published": 3
+  },
+  "Items": [
+    {
+      "Kind": "Contact",
+      "Key": "primary",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Footer",
+      "Key": "main",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Navigation",
+      "Key": "main",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Page",
+      "Key": "cms-review",
+      "State": "Published",
+      "IsDemo": false,
+      "HasDraft": true,
+      "HasPublished": true
+    },
+    {
+      "Kind": "Page",
+      "Key": "home",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Project",
+      "Key": "automation-study",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Project",
+      "Key": "network-study",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Project",
+      "Key": "scada-study",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "ProjectCategory",
+      "Key": "automation",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "ProjectCategory",
+      "Key": "low-current",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "ProjectCategory",
+      "Key": "scada",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "ProjectCategory",
+      "Key": "software",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Section",
+      "Key": "about",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Section",
+      "Key": "contact",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Section",
+      "Key": "hero",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Section",
+      "Key": "projects",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Section",
+      "Key": "services",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Service",
+      "Key": "automation",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Service",
+      "Key": "low-current",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Service",
+      "Key": "scada",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "Service",
+      "Key": "software",
+      "State": "Draft",
+      "IsDemo": true,
+      "HasDraft": true,
+      "HasPublished": false
+    },
+    {
+      "Kind": "SiteSettings",
+      "Key": "site",
+      "State": "Published",
+      "IsDemo": false,
+      "HasDraft": true,
+      "HasPublished": true
+    },
+    {
+      "Kind": "ThemeSettings",
+      "Key": "brand",
+      "State": "Published",
+      "IsDemo": false,
+      "HasDraft": true,
+      "HasPublished": true
+    }
+  ]
+}
