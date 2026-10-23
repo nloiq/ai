@@ -45,7 +45,7 @@ APPROVE PHASE advances one phase. REVISE modifies the current phase. SHOW PREVIE
 
 ## GitHub sync limitation
 
-Phase 1 is committed locally. Two pushes failed with curl 52 (empty reply from server), including an HTTP/1.1 retry. Verified remote main still points to 0f40d6b. Phase 1 changes have not been synchronized; retry git push origin main after connectivity recovers.
+Phase 1 is committed locally. Two pushes failed with curl 52 (empty reply from server), including an HTTP/1.1 retry. Verified remote main still points to 0f40d6b. Resolved during the engineering-specialization revision: all Phase 1 commits and the revised Concept A were subsequently pushed successfully to origin/main.
 
 
 ## Phase 1 revision — engineering specializations
@@ -55,4 +55,3 @@ Phase 1 is committed locally. Two pushes failed with curl 52 (empty reply from s
 - Revised hero illustration, four labeled line-icon service rows, English/Arabic copy, charcoal surfaces and a semantic teal interface accent.
 - Preserved the editorial composition and original brand palette, with botanical elements reduced to a supporting role.
 - See the revision section in PHASE_1_DESIGN.md; no application foundation work started.
-
