@@ -42,3 +42,8 @@ Last approved code checkpoint: 0f40d6b (Phase 0 and repository setup).
 ## Commands
 
 APPROVE PHASE advances one phase. REVISE modifies the current phase. SHOW PREVIEW reports the latest actual preview. EXPLAIN makes no changes. STATUS reports progress. ROLLBACK requires confirming exactly what to discard before restoring the last approved checkpoint.
+
+## GitHub sync limitation
+
+Phase 1 is committed locally. Two pushes failed with curl 52 (empty reply from server), including an HTTP/1.1 retry. Verified remote main still points to 0f40d6b. Phase 1 changes have not been synchronized; retry git push origin main after connectivity recovers.
+
