@@ -40,3 +40,15 @@
 - Added theme-aware teal signal accent and charcoal dark surfaces while retaining brand colors.
 - Updated content and approval records; Phase 1 remains under review.
 
+
+## 2026-10-23 — Phase 2 foundation and seed preview
+
+- Recorded approval of revised Phase 1.
+- Added .NET 10 modular MVC solution, stable EF Core/MySQL provider, DI and initial migration.
+- Created WebSiteNLOIQDb and seeded four bilingual service categories with demo summaries.
+- Added database-backed English/Arabic Razor preview, shared Tailwind themes and safe local configuration.
+- Added repeatable HTTP checks and setup/review documentation.
+- Corrected Arabic pipeline encoding and verified four Arabic/four English translations.
+- Cleared tooling advisories by pinning patched watcher; verified builds, migration, seed rerun, headers, routes, package checks and publish credential exclusion.
+- Phase 2 awaits approval; full public website/CMS remain later phases.
+

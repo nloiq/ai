@@ -1,57 +1,44 @@
 ﻿# NLO IQ project progress
 
 Updated: 2026-10-23 (Asia/Baghdad).
-
-Current phase: **1 — Creative Direction and Design System**.
-Status: **Delivered for review; awaiting explicit design approval**.
-Approved phases: **Phase 0**, approved by user with APPROVE PHASE.
-Last approved code checkpoint: 0f40d6b (Phase 0 and repository setup).
+Current phase: **2 — Project Foundation**.
+Status: **Delivered for review; awaiting explicit Phase 2 approval**.
+Approved phases: **0 and 1**, explicitly approved by the user. Selected design: revised Concept A, engineering folio.
+Last approved checkpoint: 4215e1e (revised Phase 1 and recovered GitHub sync).
 
 ## Completed
 
-- Phase 0 discovery, architecture, schema plan and roadmap.
-- Saved supplied database configuration in ignored appsettings.Local.json; no password in Git.
-- Initialized main and synchronized with https://github.com/nloiq/ai.git.
-- Phase 1: two distinct local hero/layout concepts, palette, theme tokens, type/spacing, controls, image and motion directions, responsive and RTL design rules.
-- Added English/Arabic and light/dark/system review controls.
-- Compiled pinned Tailwind v4.3.3 styles; verified syntax, HTTP responses, secret URL rejection, anchors and selected contrast pairs.
+- Phase 0 discovery/architecture and Phase 1 visual system.
+- Four confirmed business areas: low-current engineering, software solutions, SCADA integration and system automation.
+- .NET 10 MVC solution with four architectural projects and DI.
+- Stable MySQL EF Core 10 provider, migration and verified MySQL connection.
+- Created dedicated development schema; charset utf8mb4; server 8.0.43.
+- Added four demo services/eight translations; repeated seeding inserts zero and does not overwrite content.
+- Development-only database initialization and bilingual database-backed foundation page.
+- Shared Tailwind v4 theme tokens, light/dark/system controls and Arabic interface resources/RTL.
+- Builds, migration consistency, HTTP smoke checks, production seed rejection and secret publish exclusion verified.
+- npm audits clear after patched watcher pin; .NET vulnerable-package report clear.
 
-## Preview and review
+## Preview
 
-- See docs/PHASE_1_DESIGN.md for the full review report and exact run instructions.
-- Run node docs/design/serve.mjs, then visit http://127.0.0.1:4173.
-- Or open docs/design/index.html directly; compiled CSS is committed.
-- Choose Botanical folio (A), Autumn field (B), or specify a combination.
-- Do not start Phase 2 without explicit approval.
+Run dotnet run --project src/NLOIQ.Web --no-build.
+English http://127.0.0.1:5080/en/; Arabic http://127.0.0.1:5080/ar/.
+See PHASE_2_FOUNDATION.md, README.md and LOCAL_SETUP.md for exact instructions and limitations.
 
 ## Known limitations
 
-- Browser automation runtime failed; screenshots, real browser interactions and responsive rendering remain unverified.
-- Current previews are design studies; no ASP.NET application, CMS or database migration exists.
-- Motion is specified but not implemented; full parallax is Phase 4.
-- EF Core 10/MySQL stable provider compatibility is unresolved.
-- MySQL server patch, schema access and authenticated connection remain unverified; credentials have been supplied locally.
-- Docker daemon unavailable; native MySQL service and TCP port were reachable in Phase 0.
-- Real company assets, approved bilingual content and hosting details remain missing.
-- Existing GitHub repository visibility was preserved.
+- Browser runtime failed to start; screenshots and responsive/theme/keyboard visual review remain unverified.
+- Foundation preview only: no full public site, CMS, authentication or publishing/revisions yet.
+- Seed summaries are demo copy; no fictional projects/clients/contact data seeded.
+- Final logo, actual project media, approved bilingual copy, contact information and hosting details are missing.
+- Docker unavailable; native MySQL used successfully.
+- Local credentials are ignored and excluded from publish. Production requires environment/secret configuration.
+- Provider license inventory and production deployment configuration remain handover work.
 
 ## Remaining phases
 
-2 Foundation; 3 Public prototype; 4 Motion; 5 Content schema; 6 Identity/admin shell; 7 Core CMS; 8 Media/SEO/appearance; 9 Complete localization; 10 Publishing/revisions; 11 QA; 12 Deployment/handover. Each requires a separate approval.
+3 Public prototype; 4 Motion; 5 Full content schema; 6 Identity/admin shell; 7 Core CMS; 8 Media/SEO/appearance; 9 Complete localization; 10 Publishing/revisions; 11 QA; 12 Deployment/handover. Each requires explicit approval. Do not start Phase 3 yet.
 
-## Commands
+## Review commands
 
-APPROVE PHASE advances one phase. REVISE modifies the current phase. SHOW PREVIEW reports the latest actual preview. EXPLAIN makes no changes. STATUS reports progress. ROLLBACK requires confirming exactly what to discard before restoring the last approved checkpoint.
-
-## GitHub sync limitation
-
-Phase 1 is committed locally. Two pushes failed with curl 52 (empty reply from server), including an HTTP/1.1 retry. Verified remote main still points to 0f40d6b. Resolved during the engineering-specialization revision: all Phase 1 commits and the revised Concept A were subsequently pushed successfully to origin/main.
-
-
-## Phase 1 revision — engineering specializations
-
-- User selected Concept A; full Phase 1 approval remains pending.
-- User confirmed low-current engineering, software solutions, SCADA integration and system automation.
-- Revised hero illustration, four labeled line-icon service rows, English/Arabic copy, charcoal surfaces and a semantic teal interface accent.
-- Preserved the editorial composition and original brand palette, with botanical elements reduced to a supporting role.
-- See the revision section in PHASE_1_DESIGN.md; no application foundation work started.
+APPROVE PHASE advances one phase. REVISE modifies the current phase. SHOW PREVIEW reports the actual preview. EXPLAIN makes no changes. STATUS reports progress. ROLLBACK requires confirming what will be discarded before restoring the last approved checkpoint.

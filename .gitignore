@@ -21,3 +21,6 @@ artifacts/
 # Local media and logs
 **/App_Data/
 *.log
+
+# Local verification artifacts
+/artifacts-npm-audit.json

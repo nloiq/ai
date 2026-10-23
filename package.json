@@ -1,0 +1,31 @@
+{
+  "name": "nloiq",
+  "version": "1.0.0",
+  "description": "NLO IQ ASP.NET Core MVC website",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "css:build": "tailwindcss -i src/NLOIQ.Web/Assets/styles/app.css -o src/NLOIQ.Web/wwwroot/css/app.css --minify",
+    "css:watch": "tailwindcss -i src/NLOIQ.Web/Assets/styles/app.css -o src/NLOIQ.Web/wwwroot/css/app.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nloiq/ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nloiq/ai/issues"
+  },
+  "homepage": "https://github.com/nloiq/ai#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "tailwindcss": "4.3.3"
+  },
+  "private": true,
+  "overrides": {
+    "@parcel/watcher": "2.6.0"
+  }
+}

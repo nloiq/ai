@@ -37,3 +37,15 @@ User revision: use the existing https://github.com/nloiq/ai.git repository as or
 
 Concept A selected. Business areas confirmed by user: low-current engineering, software solutions, SCADA system integration and system automation. Use labeled technical line icons, topology/monitoring/logic motifs, evergreen/charcoal base, copper connections and restrained theme-aware teal accents. Botanical elements support the engineering story. Phase 1 revision awaits approval.
 
+
+## Phase 2 foundation
+
+- Phase 1 approved explicitly; user requested visible seed data.
+- Use MySql.EntityFrameworkCore 10.0.12 with EF Core 10.0.13 on .NET 10.
+- Seed minimal development-only ServicePreview records and translation rows; full revision-backed CMS model stays in Phase 5.
+- Never seed invented company achievements, projects, contacts, users or passwords.
+- Initialize/migrate only via explicit development command; preserve existing seed keys on rerun.
+- Web-project local configuration is the active development source, ignored and excluded from publish; retain root ignored copy for reference.
+- Pin transitive @parcel/watcher 2.6.0 to remove the affected braces dependency in both tooling sets.
+- Browser visual verification remains pending; HTTP/SQL checks are real and recorded.
+
