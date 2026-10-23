@@ -72,4 +72,5 @@
 <data name="VideoTitle" xml:space="preserve"><value>Provided preview video</value></data>
 <data name="SuppliedVideoNote" xml:space="preserve"><value>Video supplied for interaction review. The accompanying illustration is a concept study, not evidence of a completed client project.</value></data>
 <data name="NoVideo" xml:space="preserve"><value>No video supplied for this study. The illustration is shown for design review.</value></data>
+<data name="WatchVideo" xml:space="preserve"><value>Watch video</value></data>
 </root>

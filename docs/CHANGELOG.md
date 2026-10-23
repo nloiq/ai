@@ -76,3 +76,11 @@
 - All application/HTTP/interaction checks passed; actual external video playback remains unconfirmed.
 - Phase 4 awaits approval; Phase 5 has not started.
 
+
+## Phase 4 revision — video discoverability
+
+- Verified the first study opens the actual supplied YouTube player.
+- Added Watch video / شاهد الفيديو labels and a play overlay for studies with configured videos.
+- Preserved Open study for illustration-only entries; Phase 4 approval remains pending.
+- Rebuilt, restarted and verified the dialog lifecycle browser test.
+

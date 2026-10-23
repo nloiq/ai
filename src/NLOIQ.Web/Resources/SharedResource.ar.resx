@@ -72,4 +72,5 @@
 <data name="VideoTitle" xml:space="preserve"><value>فيديو مقدّم للمعاينة</value></data>
 <data name="SuppliedVideoNote" xml:space="preserve"><value>فيديو مقدّم لمراجعة التفاعل. الرسم المرافق دراسة تصوّرية وليس توثيقاً لمشروع عميل منجز.</value></data>
 <data name="NoVideo" xml:space="preserve"><value>لم يُقدّم فيديو لهذه الدراسة. يُعرض الرسم لمراجعة التصميم.</value></data>
+<data name="WatchVideo" xml:space="preserve"><value>شاهد الفيديو</value></data>
 </root>
