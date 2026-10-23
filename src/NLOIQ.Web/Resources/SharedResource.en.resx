@@ -121,12 +121,8 @@
 <data name="AdminUsers" xml:space="preserve">
     <value>Accounts</value>
   </data>
-<data name="AdminPhase" xml:space="preserve">
-    <value>Phase 6 · Secure admin foundation</value>
-  </data>
-<data name="AdminPending" xml:space="preserve">
-    <value>Content editing arrives in Phase 7. The current fixtures remain drafts.</value>
-  </data>
+<data name="AdminPhase" xml:space="preserve"><value>Phase 7 · Content workspace</value></data>
+<data name="AdminPending" xml:space="preserve"><value>Save edits as a draft. SuperAdmin can publish reviewed content. Open the content workspace to begin.</value></data>
 <data name="AdminDenied" xml:space="preserve">
     <value>Access denied</value>
   </data>
@@ -155,4 +151,107 @@
     <value>Your role permits access here. Editing and management controls will be added in the approved CMS phases.</value>
   </data>
 <data name="AdminLoginError" xml:space="preserve"><value>Unable to sign in. Check your details or try again later.</value></data>
+<data name="CmsTitle" xml:space="preserve"><value>Content workspace</value></data>
+<data name="CmsIntro" xml:space="preserve"><value>Edit bilingual content, save a draft, then publish after review.</value></data>
+<data name="CmsNew" xml:space="preserve"><value>Create content</value></data>
+<data name="CmsEdit" xml:space="preserve"><value>Edit</value></data>
+<data name="CmsKey" xml:space="preserve"><value>Content key</value></data>
+<data name="CmsTitleField" xml:space="preserve"><value>Title</value></data>
+<data name="CmsSummary" xml:space="preserve"><value>Summary</value></data>
+<data name="CmsBody" xml:space="preserve"><value>Body</value></data>
+<data name="CmsSlug" xml:space="preserve"><value>URL slug</value></data>
+<data name="CmsSave" xml:space="preserve"><value>Save draft</value></data>
+<data name="CmsSaved" xml:space="preserve"><value>Draft saved. Published content is unchanged until you publish.</value></data>
+<data name="CmsState" xml:space="preserve"><value>Status</value></data>
+<data name="CmsDraft" xml:space="preserve"><value>Draft</value></data>
+<data name="CmsPublished" xml:space="preserve"><value>Published</value></data>
+<data name="CmsArchived" xml:space="preserve"><value>Archived</value></data>
+<data name="CmsRevision" xml:space="preserve"><value>Revision</value></data>
+<data name="CmsNote" xml:space="preserve"><value>Change note</value></data>
+<data name="CmsPublish" xml:space="preserve"><value>Publish saved draft</value></data>
+<data name="CmsUnpublish" xml:space="preserve"><value>Unpublish</value></data>
+<data name="CmsArchive" xml:space="preserve"><value>Archive / remove from website</value></data>
+<data name="CmsVerify" xml:space="preserve"><value>I reviewed both translations, links and media and approve them for publication.</value></data>
+<data name="CmsPublication" xml:space="preserve"><value>Publication</value></data>
+<data name="CmsStatusUpdated" xml:space="preserve"><value>Publication status updated.</value></data>
+<data name="CmsConflict" xml:space="preserve"><value>Another session changed this item. Reload before saving to avoid overwriting newer work.</value></data>
+<data name="CmsValidation" xml:space="preserve"><value>Could not save. Check field limits, unique keys, links and selected dependencies.</value></data>
+<data name="CmsPublishError" xml:space="preserve"><value>Could not publish. Both translations and valid slugs are required. Publish dependencies first; sample media must be removed or replaced with approved media.</value></data>
+<data name="CmsBack" xml:space="preserve"><value>All content</value></data>
+<data name="CmsDemo" xml:space="preserve"><value>Needs verification</value></data>
+<data name="CmsOrder" xml:space="preserve"><value>Order</value></data>
+<data name="CmsVisible" xml:space="preserve"><value>Visible</value></data>
+<data name="CmsFeatured" xml:space="preserve"><value>Featured</value></data>
+<data name="CmsSectionKind" xml:space="preserve"><value>Section type</value></data>
+<data name="CmsLayout" xml:space="preserve"><value>Layout</value></data>
+<data name="CmsBackground" xml:space="preserve"><value>Background</value></data>
+<data name="CmsParallax" xml:space="preserve"><value>Parallax intensity (0–1)</value></data>
+<data name="CmsPrimaryLabel" xml:space="preserve"><value>Primary button label</value></data>
+<data name="CmsSecondaryLabel" xml:space="preserve"><value>Secondary button label</value></data>
+<data name="CmsPrimaryTarget" xml:space="preserve"><value>Primary button link</value></data>
+<data name="CmsSecondaryTarget" xml:space="preserve"><value>Secondary button link</value></data>
+<data name="CmsVideo" xml:space="preserve"><value>YouTube video ID (11 characters)</value></data>
+<data name="CmsIcon" xml:space="preserve"><value>Service icon</value></data>
+<data name="CmsCopyright" xml:space="preserve"><value>Show copyright</value></data>
+<data name="CmsSections" xml:space="preserve"><value>Page sections</value></data>
+<data name="CmsPinned" xml:space="preserve"><value>Sections use their published revision when available. After publishing a section update, save and publish this page again to refresh its composition.</value></data>
+<data name="CmsCategories" xml:space="preserve"><value>Project categories</value></data>
+<data name="CmsImages" xml:space="preserve"><value>Selected images</value></data>
+<data name="CmsMediaHint" xml:space="preserve"><value>Choose from existing assets. Use “cover” for a project/service cover. Sample assets can be saved in drafts but cannot be published. Uploads arrive in Phase 8.</value></data>
+<data name="CmsUsage" xml:space="preserve"><value>Image role</value></data>
+<data name="CmsAltEn" xml:space="preserve"><value>Alternative text · English</value></data>
+<data name="CmsAltAr" xml:space="preserve"><value>Alternative text · Arabic</value></data>
+<data name="CmsCaptionEn" xml:space="preserve"><value>Caption · English</value></data>
+<data name="CmsCaptionAr" xml:space="preserve"><value>Caption · Arabic</value></data>
+<data name="CmsAdd" xml:space="preserve"><value>Add row</value></data>
+<data name="CmsRemove" xml:space="preserve"><value>Remove row</value></data>
+<data name="CmsUp" xml:space="preserve"><value>Move up</value></data>
+<data name="CmsDown" xml:space="preserve"><value>Move down</value></data>
+<data name="CmsLinks" xml:space="preserve"><value>Navigation links</value></data>
+<data name="CmsLabelEn" xml:space="preserve"><value>Label · English</value></data>
+<data name="CmsLabelAr" xml:space="preserve"><value>Label · Arabic</value></data>
+<data name="CmsTarget" xml:space="preserve"><value>Target URL or #anchor</value></data>
+<data name="CmsParent" xml:space="preserve"><value>Parent row number (optional; preceding row)</value></data>
+<data name="CmsContacts" xml:space="preserve"><value>Contact details</value></data>
+<data name="CmsValue" xml:space="preserve"><value>Value</value></data>
+<data name="CmsValueEn" xml:space="preserve"><value>Display value · English (optional)</value></data>
+<data name="CmsValueAr" xml:space="preserve"><value>Display value · Arabic (optional)</value></data>
+<data name="CmsSocial" xml:space="preserve"><value>Social links</value></data>
+<data name="CmsHours" xml:space="preserve"><value>Business hours · Asia/Baghdad</value></data>
+<data name="CmsDay" xml:space="preserve"><value>Day (0 Sunday–6 Saturday)</value></data>
+<data name="CmsClosed" xml:space="preserve"><value>Closed</value></data>
+<data name="CmsOpenTime" xml:space="preserve"><value>Opens</value></data>
+<data name="CmsCloseTime" xml:space="preserve"><value>Closes</value></data>
+<data name="CmsSearch" xml:space="preserve"><value>Search keys</value></data>
+<data name="CmsFilter" xml:space="preserve"><value>Filter</value></data>
+<data name="CmsAll" xml:space="preserve"><value>All modules</value></data>
+<data name="CmsEmpty" xml:space="preserve"><value>No matching content.</value></data>
+<data name="CmsReload" xml:space="preserve"><value>Reload saved draft</value></data>
+<data name="CmsFormatting" xml:space="preserve"><value>Formatting: **bold**, *italic*, [label](https://link), and - list items. HTML is displayed as text.</value></data>
+<data name="CmsBold" xml:space="preserve"><value>Bold</value></data>
+<data name="CmsItalic" xml:space="preserve"><value>Italic</value></data>
+<data name="CmsList" xml:space="preserve"><value>List</value></data>
+<data name="CmsLink" xml:space="preserve"><value>Link</value></data>
+<data name="CmsEnglish" xml:space="preserve"><value>English translation</value></data>
+<data name="CmsArabic" xml:space="preserve"><value>Arabic translation</value></data>
+<data name="CmsNewHint" xml:space="preserve"><value>Use a lowercase unique key. Navigation uses main/footer; Contact uses primary; Footer uses main.</value></data>
+<data name="CmsArchiveHint" xml:space="preserve"><value>Archive removes content from public readers and preserves its revision history. Saving an archived item restores it as a draft.</value></data>
+<data name="CmsPublishHint" xml:space="preserve"><value>These actions apply to the last saved draft. Save your form changes first.</value></data>
+<data name="CmsNone" xml:space="preserve"><value>None</value></data>
+<data name="CmsKindPage" xml:space="preserve"><value>Pages</value></data>
+<data name="CmsKindSection" xml:space="preserve"><value>Sections</value></data>
+<data name="CmsKindProject" xml:space="preserve"><value>Projects</value></data>
+<data name="CmsKindProjectCategory" xml:space="preserve"><value>Project categories</value></data>
+<data name="CmsKindService" xml:space="preserve"><value>Services</value></data>
+<data name="CmsKindNavigation" xml:space="preserve"><value>Navigation</value></data>
+<data name="CmsKindContact" xml:space="preserve"><value>Contact</value></data>
+<data name="CmsKindFooter" xml:space="preserve"><value>Footer</value></data>
+<data name="CmsSectionHero" xml:space="preserve"><value>Hero</value></data>
+<data name="CmsSectionAbout" xml:space="preserve"><value>About</value></data>
+<data name="CmsSectionProjects" xml:space="preserve"><value>Projects</value></data>
+<data name="CmsSectionServices" xml:space="preserve"><value>Services</value></data>
+<data name="CmsSectionContact" xml:space="preserve"><value>Contact</value></data>
+<data name="CmsSectionFooter" xml:space="preserve"><value>Footer</value></data>
+<data name="CmsDetails" xml:space="preserve"><value>Read project</value></data>
+<data name="CmsViewPublished" xml:space="preserve"><value>View published page</value></data>
 </root>

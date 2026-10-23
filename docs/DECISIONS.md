@@ -87,3 +87,7 @@ Concept A selected. Business areas confirmed by user: low-current engineering, s
 ## 2026-10-23 ? Phase 6 authentication
 
 Phase 5 approved. Use existing Identity schema and roles; server policies restrict admin workspaces. Explicit CLI creates administrators; no automatic startup password/account. Local review uses a generated, ignored credential file. Shared Tailwind tokens support bilingual RTL and themes. Phase 7 editing remains approval-gated.
+
+## 2026-10-23 - Phase 7 editorial boundaries
+
+Editors save drafts; SuperAdmin publishes/unpublishes/archives. Archive is reversible removal, preserving immutable revisions/audit. Existing image selection is supported now; demo assets remain unpublishable until approved media is available. Safe text formatting supports a bounded grammar with encoded HTML. Public home keeps the approved Development prototype until actual CMS home content is reviewed and published. Page composition remains revision-pinned and requires resave/republish to adopt new section revisions. Full workflow/preview/scheduling remains Phase 10.

@@ -196,8 +196,8 @@ namespace NLOIQ.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<TimeOnly?>("ClosesAt")
-                        .HasColumnType("time");
+                    b.Property<TimeSpan?>("ClosesAt")
+                        .HasColumnType("time(6)");
 
                     b.Property<int>("DayOfWeek")
                         .HasColumnType("int");
@@ -205,8 +205,8 @@ namespace NLOIQ.Infrastructure.Migrations
                     b.Property<bool>("IsClosed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<TimeOnly?>("OpensAt")
-                        .HasColumnType("time");
+                    b.Property<TimeSpan?>("OpensAt")
+                        .HasColumnType("time(6)");
 
                     b.Property<long>("RevisionId")
                         .HasColumnType("bigint");

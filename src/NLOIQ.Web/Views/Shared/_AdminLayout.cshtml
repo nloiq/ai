@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="@culture" dir="@(arabic ? "rtl" : "ltr")">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>@ViewData["Title"] · NLO IQ</title>
-<script src="~/js/theme-init.js" asp-append-version="true"></script><link rel="stylesheet" href="~/css/app.css" asp-append-version="true"><script src="~/js/admin.js" asp-append-version="true" defer></script></head>
+<script src="~/js/theme-init.js" asp-append-version="true"></script><script src="~/js/cms.js" asp-append-version="true" defer></script><link rel="stylesheet" href="~/css/app.css" asp-append-version="true"><script src="~/js/admin.js" asp-append-version="true" defer></script></head>
 <body class="min-h-screen bg-paper text-ink antialiased">
 <a href="#admin-main" class="sr-only focus:not-sr-only focus:block focus:p-4">@L["Skip"]</a>
 <header class="flex flex-wrap items-center justify-between gap-4 border-b border-line px-5 py-4 md:px-8"><a href="/@culture/admin" class="border border-ink px-3 py-2 text-xl font-bold" dir="ltr">NLO IQ <span class="text-sm text-muted">/ CMS</span></a>
@@ -14,8 +14,8 @@
 @if (signedIn) {
 <aside class="border-b border-line bg-panel p-5 lg:min-h-[calc(100vh-90px)] lg:border-b-0 lg:border-e"><p class="mb-4 text-xs uppercase tracking-widest text-muted">@L["AdminTitle"]</p>
 <nav aria-label="@L["AdminTitle"]" class="flex flex-wrap gap-2 lg:flex-col">
-<a href="/@culture/admin" class="flex min-h-11 items-center border-s-2 border-accent px-3">@L["AdminDashboard"]</a>
-@if (User.IsInRole("SuperAdmin") || User.IsInRole("Editor")) { <a href="/@culture/admin/editor" class="flex min-h-11 items-center px-3">@L["AdminEditor"]</a> }
+<a href="/@culture/admin" class="flex min-h-11 items-center px-3">@L["AdminDashboard"]</a>
+@if (User.IsInRole("SuperAdmin") || User.IsInRole("Editor")) { <a href="/@culture/admin/content" class="flex min-h-11 items-center px-3">@L["AdminEditor"]</a> }
 @if (User.IsInRole("SuperAdmin")) { <a href="/@culture/admin/settings" class="flex min-h-11 items-center px-3">@L["AdminSettings"]</a> }
 <a href="/@culture/" class="flex min-h-11 items-center px-3 text-muted">@L["AdminBack"]</a></nav></aside>
 }

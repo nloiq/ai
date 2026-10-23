@@ -1,46 +1,46 @@
 # NLO IQ project progress
 
 Updated: 2026-10-23 (Asia/Baghdad).
-Current phase: **6 ? Authentication and Admin Shell**.
-Status: **Delivered for review; awaiting explicit Phase 6 approval**.
-Approved phases: **0, 1, 2, 3, 4 and 5**.
+Current phase: **7 - Core CMS Content Management**.
+Status: **Delivered for functional review; awaiting explicit Phase 7 approval**.
+Approved phases: **0, 1, 2, 3, 4, 5 and 6**.
+Last approved checkpoint: a0f88cf (Phase 6 authentication and admin shell).
 Selected design: revised Concept A, engineering folio.
-Last approved checkpoint: 5c69a82 (Phase 5 database architecture).
 
 ## Completed
 
-- Previous public prototype, SQL content architecture, immutable revisions and bilingual draft fixtures retained.
-- ASP.NET Core Identity sign-in and POST-only sign-out with anti-forgery tokens.
-- SuperAdmin, Editor and Viewer policies enforced on server routes and reflected in navigation.
-- Password hashing, 14-character password minimum, five-failure/15-minute account lockout, 20 login requests/IP/minute.
-- HttpOnly/Strict session cookies; 30-minute sliding ticket; Secure required outside Development.
-- Security stamps/roles and active/locked state checked on each authenticated request.
-- English/Arabic admin login, responsive sidebar/dashboard, RTL and shared system/light/dark themes.
-- Dashboard reports real database counts. CMS editing remains Phase 7.
-- Explicit administrator CLI; no registration endpoint, hardcoded password or automatic startup user seed.
-- One random local review administrator created; credentials only in ignored artifacts/PHASE_6_LOGIN.txt.
-- Real Identity/MySQL/browser checks passed for policies, lockout, CSRF, safe redirects, disabled-session revocation, rate limits and logout.
-- Existing 16 database scenarios, five public browser tests and validation/HTTP regressions passed.
+- Hero/About section editors, Pages/Sections, Projects/categories, Services, Contact, Navigation and Footer modules.
+- Bilingual translation tabs, safe formatting toolbar, existing-image selection and per-revision bilingual alt/captions.
+- Ordering controls with keyboard-friendly move buttons and drag handles, visibility and project featured/video settings.
+- Structured page composition, navigation hierarchy, contact details, business hours and social links.
+- Create/read/update and reversible archive; immutable revisions, audit entries, stale-form conflict protection.
+- Explicit basic publish/unpublish/archive by SuperAdmin; Editor saves drafts; Viewer retains dashboard-only access.
+- Atomic route/pointer/publication updates, dependency validation and demo-media publication safeguards.
+- Published-only CMS public renderer, localized page/project routes and language switching.
+- Original home prototype retained in Development until the real home page is explicitly published. An already verified home does not fall back to the prototype when unpublished.
+- A factual bilingual CMS review page created and updated through the real browser form; original 22 seed roots remain draft/demo.
+- Clock conversion migration applied: BusinessHours time columns widened to time(6) with TimeOnly/TimeSpan conversion; backup saved locally before this correction.
+- Build clean; no pending model changes; 26 rollback-only database/CMS scenarios plus formatted-text checks, actual CMS browser flow, Identity/role checks and five public browser regressions passed.
 
 ## Review
 
-English login: http://127.0.0.1:5080/en/account/login
-Arabic login: http://127.0.0.1:5080/ar/account/login
-Credentials: artifacts/PHASE_6_LOGIN.txt (local only; never commit).
-Review instructions and permission matrix: PHASE_6_ADMIN.md.
+CMS: http://127.0.0.1:5080/en/admin/content (Arabic: /ar/admin/content).
+Published demonstration: http://127.0.0.1:5080/en/pages/cms-review (Arabic: /ar/pages/cms-review).
+Use the same local login from ignored artifacts/PHASE_6_LOGIN.txt.
+Review instructions: PHASE_7_CMS.md.
+Inventory checkpoint: PHASE_7_INVENTORY.json.
 Restart: dotnet run --project src/NLOIQ.Web --no-build.
 
-## Limitations and remaining phases
+## Limits and next phases
 
-- CMS/public revision wiring and editing start only after Phase 6 approval, in Phase 7.
-- Editor/settings destinations currently show an honest upcoming-phase page, protected by their final role policies.
-- No account management UI, password reset email or MFA setup yet; administrator creation is CLI only.
-- Fixtures remain draft/demo; real logo, approved project copy and contact details are outstanding.
-- Production HTTPS/domain/proxy, shared persistent Data Protection keys and deployment checks remain Phase 12.
-- Full publishing/scheduler/revisions, media/SEO/appearance, complete localization and final QA remain their planned phases.
-- Live external video playback still requires user review.
+- Existing sample illustrations can be selected in drafts; demo media remains blocked from publication. Approved upload/media-library management is Phase 8.
+- Public home remains the approved prototype until its actual content/dependencies are reviewed and published. Publishing a section requires resaving/republishing pages that should use its new revision.
+- Formatting supports bold, italic, links and lists; raw HTML is encoded rather than accepted as trusted markup.
+- Basic publishing is implemented for functional CMS proof. Scheduling, preview links, revision browsing/restoration and complete editorial workflow remain Phase 10.
+- SEO/appearance editors, full localization QA, media optimization and deployment remain their planned phases.
+- Production TLS/proxy/shared Data Protection, account recovery/MFA and release QA remain outstanding.
 
-7 Core CMS; 8 Media/SEO/appearance; 9 Complete localization; 10 Publishing/preview/revisions; 11 QA; 12 Deployment/handover. Each requires explicit approval. **Do not start Phase 7 yet.**
+8 Media/SEO/appearance; 9 Complete localization; 10 Publishing/preview/revisions; 11 QA; 12 Deployment/handover. Each requires explicit approval. **Do not start Phase 8 yet.**
 
 ## Commands
 

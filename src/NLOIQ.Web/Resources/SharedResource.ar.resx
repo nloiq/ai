@@ -121,12 +121,8 @@
 <data name="AdminUsers" xml:space="preserve">
     <value>الحسابات</value>
   </data>
-<data name="AdminPhase" xml:space="preserve">
-    <value>المرحلة 6 · أساس الإدارة الآمنة</value>
-  </data>
-<data name="AdminPending" xml:space="preserve">
-    <value>سيتم توفير تحرير المحتوى في المرحلة 7. البيانات الحالية مسودات.</value>
-  </data>
+<data name="AdminPhase" xml:space="preserve"><value>المرحلة 7 · مساحة المحتوى</value></data>
+<data name="AdminPending" xml:space="preserve"><value>احفظ التعديلات كمسودة. يمكن للمسؤول نشر المحتوى المعتمد. افتح مساحة المحتوى للبدء.</value></data>
 <data name="AdminDenied" xml:space="preserve">
     <value>الوصول مرفوض</value>
   </data>
@@ -155,4 +151,107 @@
     <value>يسمح دورك بالدخول هنا. ستتم إضافة أدوات التحرير والإدارة في مراحل نظام المحتوى المعتمدة.</value>
   </data>
 <data name="AdminLoginError" xml:space="preserve"><value>تعذر تسجيل الدخول. تحقق من البيانات أو حاول لاحقاً.</value></data>
+<data name="CmsTitle" xml:space="preserve"><value>مساحة المحتوى</value></data>
+<data name="CmsIntro" xml:space="preserve"><value>حرر المحتوى باللغتين واحفظ مسودة ثم انشر بعد المراجعة.</value></data>
+<data name="CmsNew" xml:space="preserve"><value>إنشاء محتوى</value></data>
+<data name="CmsEdit" xml:space="preserve"><value>تحرير</value></data>
+<data name="CmsKey" xml:space="preserve"><value>مفتاح المحتوى</value></data>
+<data name="CmsTitleField" xml:space="preserve"><value>العنوان</value></data>
+<data name="CmsSummary" xml:space="preserve"><value>الملخص</value></data>
+<data name="CmsBody" xml:space="preserve"><value>المحتوى</value></data>
+<data name="CmsSlug" xml:space="preserve"><value>اسم الرابط</value></data>
+<data name="CmsSave" xml:space="preserve"><value>حفظ المسودة</value></data>
+<data name="CmsSaved" xml:space="preserve"><value>تم حفظ المسودة. يبقى المنشور كما هو حتى تنشر التحديث.</value></data>
+<data name="CmsState" xml:space="preserve"><value>الحالة</value></data>
+<data name="CmsDraft" xml:space="preserve"><value>مسودة</value></data>
+<data name="CmsPublished" xml:space="preserve"><value>منشور</value></data>
+<data name="CmsArchived" xml:space="preserve"><value>مؤرشف</value></data>
+<data name="CmsRevision" xml:space="preserve"><value>المراجعة</value></data>
+<data name="CmsNote" xml:space="preserve"><value>ملاحظة التغيير</value></data>
+<data name="CmsPublish" xml:space="preserve"><value>نشر المسودة المحفوظة</value></data>
+<data name="CmsUnpublish" xml:space="preserve"><value>إلغاء النشر</value></data>
+<data name="CmsArchive" xml:space="preserve"><value>أرشفة وإزالة من الموقع</value></data>
+<data name="CmsVerify" xml:space="preserve"><value>راجعت الترجمتين والروابط والوسائط وأعتمدها للنشر.</value></data>
+<data name="CmsPublication" xml:space="preserve"><value>النشر</value></data>
+<data name="CmsStatusUpdated" xml:space="preserve"><value>تم تحديث حالة النشر.</value></data>
+<data name="CmsConflict" xml:space="preserve"><value>عدلت جلسة أخرى هذا العنصر. أعد التحميل قبل الحفظ لتجنب تجاوز العمل الأحدث.</value></data>
+<data name="CmsValidation" xml:space="preserve"><value>تعذر الحفظ. تحقق من حدود الحقول والمفاتيح الفريدة والروابط والعناصر المرتبطة.</value></data>
+<data name="CmsPublishError" xml:space="preserve"><value>تعذر النشر. يلزم توفير الترجمتين وروابط صحيحة ونشر العناصر المرتبطة أولاً. أزل الوسائط التجريبية أو استبدلها بوسائط معتمدة.</value></data>
+<data name="CmsBack" xml:space="preserve"><value>كل المحتوى</value></data>
+<data name="CmsDemo" xml:space="preserve"><value>بحاجة إلى اعتماد</value></data>
+<data name="CmsOrder" xml:space="preserve"><value>الترتيب</value></data>
+<data name="CmsVisible" xml:space="preserve"><value>مرئي</value></data>
+<data name="CmsFeatured" xml:space="preserve"><value>مميز</value></data>
+<data name="CmsSectionKind" xml:space="preserve"><value>نوع القسم</value></data>
+<data name="CmsLayout" xml:space="preserve"><value>التخطيط</value></data>
+<data name="CmsBackground" xml:space="preserve"><value>الخلفية</value></data>
+<data name="CmsParallax" xml:space="preserve"><value>شدة الحركة (0–1)</value></data>
+<data name="CmsPrimaryLabel" xml:space="preserve"><value>نص الزر الرئيسي</value></data>
+<data name="CmsSecondaryLabel" xml:space="preserve"><value>نص الزر الثانوي</value></data>
+<data name="CmsPrimaryTarget" xml:space="preserve"><value>رابط الزر الرئيسي</value></data>
+<data name="CmsSecondaryTarget" xml:space="preserve"><value>رابط الزر الثانوي</value></data>
+<data name="CmsVideo" xml:space="preserve"><value>معرف فيديو يوتيوب (11 حرفاً)</value></data>
+<data name="CmsIcon" xml:space="preserve"><value>أيقونة الخدمة</value></data>
+<data name="CmsCopyright" xml:space="preserve"><value>إظهار حقوق النشر</value></data>
+<data name="CmsSections" xml:space="preserve"><value>أقسام الصفحة</value></data>
+<data name="CmsPinned" xml:space="preserve"><value>تستخدم الأقسام المراجعة المنشورة عند توفرها. بعد نشر تحديث قسم احفظ الصفحة وانشرها مجدداً لتحديث محتواها.</value></data>
+<data name="CmsCategories" xml:space="preserve"><value>فئات المشاريع</value></data>
+<data name="CmsImages" xml:space="preserve"><value>الصور المحددة</value></data>
+<data name="CmsMediaHint" xml:space="preserve"><value>اختر من الملفات الحالية. استخدم cover لغلاف المشروع أو الخدمة. يمكن حفظ الملفات التجريبية في المسودات فقط. رفع الملفات في المرحلة 8.</value></data>
+<data name="CmsUsage" xml:space="preserve"><value>دور الصورة</value></data>
+<data name="CmsAltEn" xml:space="preserve"><value>النص البديل · الإنجليزية</value></data>
+<data name="CmsAltAr" xml:space="preserve"><value>النص البديل · العربية</value></data>
+<data name="CmsCaptionEn" xml:space="preserve"><value>التعليق · الإنجليزية</value></data>
+<data name="CmsCaptionAr" xml:space="preserve"><value>التعليق · العربية</value></data>
+<data name="CmsAdd" xml:space="preserve"><value>إضافة صف</value></data>
+<data name="CmsRemove" xml:space="preserve"><value>حذف الصف</value></data>
+<data name="CmsUp" xml:space="preserve"><value>تحريك للأعلى</value></data>
+<data name="CmsDown" xml:space="preserve"><value>تحريك للأسفل</value></data>
+<data name="CmsLinks" xml:space="preserve"><value>روابط التنقل</value></data>
+<data name="CmsLabelEn" xml:space="preserve"><value>التسمية · الإنجليزية</value></data>
+<data name="CmsLabelAr" xml:space="preserve"><value>التسمية · العربية</value></data>
+<data name="CmsTarget" xml:space="preserve"><value>الرابط أو #المرساة</value></data>
+<data name="CmsParent" xml:space="preserve"><value>رقم الصف الأب (اختياري؛ صف سابق)</value></data>
+<data name="CmsContacts" xml:space="preserve"><value>بيانات التواصل</value></data>
+<data name="CmsValue" xml:space="preserve"><value>القيمة</value></data>
+<data name="CmsValueEn" xml:space="preserve"><value>القيمة المعروضة · الإنجليزية (اختياري)</value></data>
+<data name="CmsValueAr" xml:space="preserve"><value>القيمة المعروضة · العربية (اختياري)</value></data>
+<data name="CmsSocial" xml:space="preserve"><value>روابط التواصل الاجتماعي</value></data>
+<data name="CmsHours" xml:space="preserve"><value>ساعات العمل · آسيا/بغداد</value></data>
+<data name="CmsDay" xml:space="preserve"><value>اليوم (0 الأحد–6 السبت)</value></data>
+<data name="CmsClosed" xml:space="preserve"><value>مغلق</value></data>
+<data name="CmsOpenTime" xml:space="preserve"><value>الفتح</value></data>
+<data name="CmsCloseTime" xml:space="preserve"><value>الإغلاق</value></data>
+<data name="CmsSearch" xml:space="preserve"><value>البحث بالمفتاح</value></data>
+<data name="CmsFilter" xml:space="preserve"><value>تصفية</value></data>
+<data name="CmsAll" xml:space="preserve"><value>كل الوحدات</value></data>
+<data name="CmsEmpty" xml:space="preserve"><value>لا يوجد محتوى مطابق.</value></data>
+<data name="CmsReload" xml:space="preserve"><value>تحميل المسودة المحفوظة</value></data>
+<data name="CmsFormatting" xml:space="preserve"><value>التنسيق: **عريض** و*مائل* و[نص](https://link) وقوائم تبدأ بـ -. يعرض HTML كنص.</value></data>
+<data name="CmsBold" xml:space="preserve"><value>عريض</value></data>
+<data name="CmsItalic" xml:space="preserve"><value>مائل</value></data>
+<data name="CmsList" xml:space="preserve"><value>قائمة</value></data>
+<data name="CmsLink" xml:space="preserve"><value>رابط</value></data>
+<data name="CmsEnglish" xml:space="preserve"><value>الترجمة الإنجليزية</value></data>
+<data name="CmsArabic" xml:space="preserve"><value>الترجمة العربية</value></data>
+<data name="CmsNewHint" xml:space="preserve"><value>استخدم مفتاحاً فريداً بأحرف صغيرة. للتنقل main أو footer وللتواصل primary وللتذييل main.</value></data>
+<data name="CmsArchiveHint" xml:space="preserve"><value>تزيل الأرشفة المحتوى من العرض العام وتحفظ مراجعاته. حفظ العنصر المؤرشف يعيده كمسودة.</value></data>
+<data name="CmsPublishHint" xml:space="preserve"><value>تطبق هذه الإجراءات على آخر مسودة محفوظة. احفظ تعديلات النموذج أولاً.</value></data>
+<data name="CmsNone" xml:space="preserve"><value>لا شيء</value></data>
+<data name="CmsKindPage" xml:space="preserve"><value>الصفحات</value></data>
+<data name="CmsKindSection" xml:space="preserve"><value>الأقسام</value></data>
+<data name="CmsKindProject" xml:space="preserve"><value>المشاريع</value></data>
+<data name="CmsKindProjectCategory" xml:space="preserve"><value>فئات المشاريع</value></data>
+<data name="CmsKindService" xml:space="preserve"><value>الخدمات</value></data>
+<data name="CmsKindNavigation" xml:space="preserve"><value>التنقل</value></data>
+<data name="CmsKindContact" xml:space="preserve"><value>التواصل</value></data>
+<data name="CmsKindFooter" xml:space="preserve"><value>التذييل</value></data>
+<data name="CmsSectionHero" xml:space="preserve"><value>الواجهة الرئيسية</value></data>
+<data name="CmsSectionAbout" xml:space="preserve"><value>من نحن</value></data>
+<data name="CmsSectionProjects" xml:space="preserve"><value>المشاريع</value></data>
+<data name="CmsSectionServices" xml:space="preserve"><value>الخدمات</value></data>
+<data name="CmsSectionContact" xml:space="preserve"><value>التواصل</value></data>
+<data name="CmsSectionFooter" xml:space="preserve"><value>التذييل</value></data>
+<data name="CmsDetails" xml:space="preserve"><value>قراءة المشروع</value></data>
+<data name="CmsViewPublished" xml:space="preserve"><value>عرض الصفحة المنشورة</value></data>
 </root>

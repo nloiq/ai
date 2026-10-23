@@ -60,6 +60,7 @@ builder.Services.ConfigureApplicationCookie(options => {
 builder.Services.AddAuthorization(options => {
     options.AddPolicy("AdminAccess", policy => policy.RequireAuthenticatedUser().RequireRole("SuperAdmin", "Editor", "Viewer"));
     options.AddPolicy("ContentEdit", policy => policy.RequireAuthenticatedUser().RequireRole("SuperAdmin", "Editor"));
+    options.AddPolicy("ContentPublish", policy => policy.RequireAuthenticatedUser().RequireRole("SuperAdmin"));
     options.AddPolicy("Administration", policy => policy.RequireAuthenticatedUser().RequireRole("SuperAdmin"));
 });
 builder.Services.AddRateLimiter(options => {
@@ -74,7 +75,7 @@ builder.Services.AddAntiforgery(options => {
     options.Cookie.SecurePolicy = builder.Environment.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always;
 });
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-builder.Services.AddControllersWithViews().AddViewLocalization();
+builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true).AddViewLocalization();
 var app = builder.Build();
 if (args.Contains("--create-admin", StringComparer.Ordinal))
 {

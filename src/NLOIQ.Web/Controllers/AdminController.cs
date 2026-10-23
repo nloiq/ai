@@ -18,7 +18,7 @@ public sealed class AdminController(NloDbContext database) : Controller
         await database.MediaAssets.CountAsync(cancellationToken),
         User.IsInRole("SuperAdmin") ? await database.Users.CountAsync(cancellationToken) : 0));
     [Authorize(Policy = "ContentEdit"), HttpGet("editor")]
-    public IActionResult Editor() => View("Upcoming");
+    public IActionResult Editor(string culture) => Redirect($"/{culture}/admin/content");
     [Authorize(Policy = "Administration"), HttpGet("settings")]
     public IActionResult Settings() => View("Upcoming");
 }

@@ -1,5 +1,6 @@
 
 using System.Text.Json;
+using NLOIQ.Application.Content;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using MySql.Data.MySqlClient;
@@ -15,8 +16,8 @@ if (string.IsNullOrEmpty(connection))
 var settings = new MySqlConnectionStringBuilder(connection);
 if (!settings.Database.Equals("WebSiteNLOIQDb", StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException("Database checks only permit the dedicated WebSiteNLOIQDb development schema.");
 var options = new DbContextOptionsBuilder<NloDbContext>().UseMySQL(connection!).Options;
-int baselineUsers;
-await using (var initial = new NloDbContext(options)) baselineUsers = await initial.Users.CountAsync();
+int baselineUsers,baselineItems,baselineRevisions,baselineTranslations;
+await using (var initial = new NloDbContext(options)) { baselineUsers = await initial.Users.CountAsync();baselineItems=await initial.ContentItems.CountAsync();baselineRevisions=await initial.ContentRevisions.CountAsync();baselineTranslations=await initial.ContentTranslations.CountAsync(); }
 static void Check(bool condition, string message) { if (!condition) throw new Exception(message); }
 async Task Scenario(string name, Func<NloDbContext, Task> action)
 {
@@ -53,12 +54,12 @@ async Task<(ContentItem Item, ContentRevision Revision)> Service(NloDbContext db
     if (publish) { item.PublishedRevisionId = revision.Id; item.State = PublicationState.Published; }
     await db.SaveChangesAsync(); return (item, revision);
 }
-await Scenario("seed is draft-only and public reader exposes no sample content", async db => {
-    Check(await db.ContentItems.CountAsync() == 22, "Expected 22 initial draft items.");
-    Check(await db.ContentTranslations.CountAsync() == 44, "Expected 44 revision translations.");
-    Check(await db.ContentItems.AllAsync(x => x.IsDemo && x.State == PublicationState.Draft && x.PublishedRevisionId == null && x.DraftRevisionId != null), "Seed publication state invalid.");
+await Scenario("existing inventory is consistent and public reader exposes no demo content", async db => {
+    Check(await db.ContentItems.CountAsync() == baselineItems && baselineItems>=22, "Existing inventory changed.");
+    Check(await db.ContentTranslations.CountAsync() == baselineTranslations, "Existing translations changed.");
+    Check(!await db.ContentItems.AnyAsync(x => x.State == PublicationState.Published && (x.IsDemo || x.PublishedRevisionId == null)), "Published pointer/demo invariant invalid.");
     Check(await db.Users.CountAsync() == baselineUsers && await db.Roles.CountAsync() == 3, "Role definitions and existing administrator accounts must be preserved.");
-    Check(await new PublishedContentReader(db).FindAsync(ContentKind.Page, "home", "en") is null, "Draft leaked.");
+    foreach(var demo in await db.ContentItems.Where(x=>x.IsDemo).ToListAsync()) Check(await new PublishedContentReader(db).FindAsync(demo.Kind,demo.Key,"en") is null,"Demo content leaked.");
     var arabic = await db.ContentTranslations.Where(x => x.Culture == "ar").Select(x => x.Title).ToListAsync();
     Check(arabic.Any(x => x.Contains("هندسة")) && arabic.All(x => !x.Contains("??")), "Arabic encoding damaged.");
     Check(await db.ContentRevisions.AllAsync(x => x.CreatedUtc < DateTime.UtcNow.AddMinutes(1)), "Invalid timestamp.");
@@ -165,11 +166,86 @@ await Scenario("snapshot types must match their stable content kind", async db =
     await Rejected(()=>db.SaveChangesAsync(),"Snapshot kind");
 });
 
+
+Guid actorId;
+await using(var actorDb=new NloDbContext(options)) actorId=await actorDb.Users.Select(x=>x.Id).FirstAsync();
+ContentEdit Draft(ContentKind kind,string? key=null)=>new(){Kind=kind,Key=key??"cmscheck-"+Guid.NewGuid().ToString("N"),English=new(){Title="CMS integration check",Slug="cmscheck-"+Guid.NewGuid().ToString("N")},Arabic=new(){Title="تحقق من إدارة المحتوى",Slug="cmscheck-"+Guid.NewGuid().ToString("N")}};
+async Task Publish(ContentEditor editor,long id){var form=(await editor.GetAsync(id))!;await editor.TransitionAsync(id,form.Version,"publish",true,actorId,"Rollback-only CMS checks");}
+await Scenario("CMS service CRUD preserves published content until explicit publication",async db=>{
+    var editor=new ContentEditor(db);var form=Draft(ContentKind.Service);var id=await editor.SaveAsync(form,actorId,"Rollback-only CMS checks");
+    Check((await editor.GetAsync(id))!.English.Title==form.English.Title,"Draft read failed.");await Publish(editor,id);
+    var reader=new PublishedContentReader(db);var first=await reader.FindAsync(ContentKind.Service,form.Key,"en");
+    var update=(await editor.GetAsync(id))!;update.English.Title="Updated service title";await editor.SaveAsync(update,actorId,"Rollback-only CMS checks");
+    Check((await reader.FindAsync(ContentKind.Service,form.Key,"en"))!.Title==first!.Title,"Unpublished edit leaked.");
+    await Publish(editor,id);Check((await reader.FindAsync(ContentKind.Service,form.Key,"en"))!.Title=="Updated service title","Publication failed.");
+    var current=(await editor.GetAsync(id))!;await editor.TransitionAsync(id,current.Version,"archive",false,actorId,"Rollback-only CMS checks");Check(await reader.FindAsync(ContentKind.Service,form.Key,"en") is null,"Archive leaked.");
+    await editor.SaveAsync((await editor.GetAsync(id))!,actorId,"Rollback-only CMS checks");Check((await db.ContentItems.SingleAsync(x=>x.Id==id)).State==PublicationState.Draft,"Archive restore failed.");
+});
+await Scenario("CMS stale forms cannot create a revision or overwrite newer drafts",async db=>{
+    var editor=new ContentEditor(db);var id=await editor.SaveAsync(Draft(ContentKind.Service),actorId,"Rollback-only CMS checks");var stale=(await editor.GetAsync(id))!;await editor.SaveAsync((await editor.GetAsync(id))!,actorId,"Rollback-only CMS checks");
+    var before=await db.ContentRevisions.CountAsync();try{await editor.SaveAsync(stale,actorId,"Rollback-only CMS checks");throw new Exception("Stale form accepted.");}catch(ContentConflictException){}
+    Check(await db.ContentRevisions.CountAsync()==before,"Conflict left a revision.");
+});
+await Scenario("CMS sections and page composition pin published revisions and republish explicitly",async db=>{
+    var editor=new ContentEditor(db);var section=Draft(ContentKind.Section);section.SectionKind=SectionKind.Hero;var sid=await editor.SaveAsync(section,actorId,"Rollback-only CMS checks");await Publish(editor,sid);
+    var page=Draft(ContentKind.Page);page.Sections=[new(){ContentItemId=sid}];var pid=await editor.SaveAsync(page,actorId,"Rollback-only CMS checks");await Publish(editor,pid);
+    var reader=new PublicSiteReader(db,new PublishedContentReader(db));var slug=(await editor.GetAsync(pid))!.English.Slug!;
+    var old=(await reader.ReadAsync("en",slug))!.Sections[0].Title;
+    var update=(await editor.GetAsync(sid))!;update.English.Title="New hero revision";await editor.SaveAsync(update,actorId,"Rollback-only CMS checks");await Publish(editor,sid);
+    Check((await reader.ReadAsync("en",slug))!.Sections[0].Title==old,"Page composition unexpectedly changed.");
+    await editor.SaveAsync((await editor.GetAsync(pid))!,actorId,"Rollback-only CMS checks");await Publish(editor,pid);Check((await reader.ReadAsync("en",slug))!.Sections[0].Title=="New hero revision","Page did not refresh dependency.");
+});
+await Scenario("CMS project save clones gallery alt text, categories and SEO without changing old snapshots",async db=>{
+    var editor=new ContentEditor(db);var root=await db.ContentItems.SingleAsync(x=>x.Kind==ContentKind.Project&&x.Key=="network-study");var previous=root.DraftRevisionId;
+    var form=(await editor.GetAsync(root.Id))!;await editor.SaveAsync(form,actorId,"Rollback-only CMS checks");var next=(await editor.GetAsync(root.Id))!;
+    Check(next.Media.Count==form.Media.Count&&next.Categories.SequenceEqual(form.Categories),"Project composition lost.");Check(await db.Set<SeoMetadata>().CountAsync(x=>x.RevisionId==root.DraftRevisionId)==2,"SEO snapshots lost.");
+    Check(await db.Set<RevisionMedia>().CountAsync(x=>x.RevisionId==previous)==1,"Old media snapshot changed.");await Rejected(()=>Publish(editor,root.Id),"Demo media");
+});
+await Scenario("CMS navigation contact and footer structured fields round-trip",async db=>{
+    var editor=new ContentEditor(db);
+    foreach(var (kind,key) in new[]{(ContentKind.Navigation,"main"),(ContentKind.Contact,"primary"),(ContentKind.Footer,"main")}){
+        var root=await db.ContentItems.SingleAsync(x=>x.Kind==kind&&x.Key==key);var form=(await editor.GetAsync(root.Id))!;
+        if(kind==ContentKind.Navigation)form.Links=[new(){LabelEn="Parent",LabelAr="رئيسي",Href="#main"},new(){LabelEn="Child",LabelAr="فرعي",Href="/en/pages/cms-review",ParentIndex=0}];
+        if(kind==ContentKind.Contact){form.Contacts=[new(){Kind=ContactKind.Email,Value="test@example.invalid",LabelEn="Test email",LabelAr="بريد الاختبار"}];form.Hours=[new(){DayOfWeek=1,OpensAt=new(9,0),ClosesAt=new(17,0)}];}
+        if(kind==ContentKind.Footer)form.Social=[new(){Platform="linkedin",Url="https://example.invalid/test"}];
+        await editor.SaveAsync(form,actorId,"Rollback-only CMS checks");await Publish(editor,root.Id);var saved=(await editor.GetAsync(root.Id))!;
+        Check(saved.Links.Count==form.Links.Count&&saved.Contacts.Count==form.Contacts.Count&&saved.Social.Count==form.Social.Count&&saved.Hours.Count==form.Hours.Count,"Structured fields lost.");
+    }
+});
+await Scenario("CMS unsafe links and invalid relationships are rejected before writing",async db=>{
+    var editor=new ContentEditor(db);var form=Draft(ContentKind.Section);form.PrimaryButtonTarget="javascript:alert(1)";await Rejected(()=>editor.SaveAsync(form,actorId,"Rollback-only CMS checks"),"Unsafe section link");
+});
+await Scenario("CMS missing translations and unverified publication are rejected",async db=>{
+    var editor=new ContentEditor(db);var form=Draft(ContentKind.Page);form.Arabic.Title="";var id=await editor.SaveAsync(form,actorId,"Rollback-only CMS checks");
+    var current=(await editor.GetAsync(id))!;await Rejected(()=>editor.TransitionAsync(id,current.Version,"publish",false,actorId,"Rollback-only CMS checks"),"Confirm");await Rejected(()=>Publish(editor,id),"Both English");
+});
+await Scenario("CMS changes produce append-only audit records with actor and revision",async db=>{
+    var editor=new ContentEditor(db);var id=await editor.SaveAsync(Draft(ContentKind.ProjectCategory),actorId,"Rollback-only CMS checks");await Publish(editor,id);
+    var audit=await db.AuditLogs.Where(x=>x.ContentItemId==id).ToListAsync();Check(audit.Count==2&&audit.All(x=>x.ActorUserId==actorId&&x.RevisionId!=null),"Audit information missing.");
+});
+await Scenario("CMS public composition filters hidden services and unpublished projects",async db=>{
+    var editor=new ContentEditor(db);var page=Draft(ContentKind.Page);var pid=await editor.SaveAsync(page,actorId,"Rollback-only CMS checks");await Publish(editor,pid);
+    var service=Draft(ContentKind.Service);service.IsVisible=false;var sid=await editor.SaveAsync(service,actorId,"Rollback-only CMS checks");await Publish(editor,sid);
+    var category=Draft(ContentKind.ProjectCategory);var cid=await editor.SaveAsync(category,actorId,"Rollback-only CMS checks");await Publish(editor,cid);
+    var project=Draft(ContentKind.Project);project.Categories=[cid];project.YouTubeVideoId="NNiszX0-A7M";var projectId=await editor.SaveAsync(project,actorId,"Rollback-only CMS checks");
+    var reader=new PublicSiteReader(db,new PublishedContentReader(db));var live=(await reader.ReadAsync("en",page.English.Slug!))!;
+    Check(live.Services.All(x=>x.Id!=sid)&&live.Projects.All(x=>x.Id!=projectId),"Hidden/unpublished content leaked.");
+    await Publish(editor,projectId);var update=(await editor.GetAsync(sid))!;update.IsVisible=true;await editor.SaveAsync(update,actorId,"Rollback-only CMS checks");await Publish(editor,sid);
+    live=(await reader.ReadAsync("en",page.English.Slug!))!;Check(live.Services.Any(x=>x.Id==sid)&&live.Projects.Any(x=>x.Id==projectId&&x.VideoId=="NNiszX0-A7M"&&x.Categories.Count==1),"Published project/service missing.");
+});
+await Scenario("CMS approved image selection reaches published public media without exposing demo assets",async db=>{
+    var source=await db.MediaAssets.FirstAsync();var asset=new MediaAsset{StorageProvider="Bundled",StorageKey="images/cmscheck-approved.svg",OriginalFileName="cmscheck-approved.svg",ContentType="image/svg+xml",ByteSize=source.ByteSize,Width=source.Width,Height=source.Height,Sha256=source.Sha256,IsDemo=false};db.Add(asset);await db.SaveChangesAsync();
+    var editor=new ContentEditor(db);var page=Draft(ContentKind.Page);page.Media=[new(){AssetId=asset.Id,UsageKey="cover",AltEn="Approved illustration",AltAr="??? ?????"}];var id=await editor.SaveAsync(page,actorId,"Rollback-only CMS checks");await Publish(editor,id);
+    var reader=new PublicSiteReader(db,new PublishedContentReader(db));Check((await reader.ReadAsync("ar",page.Arabic.Slug!))!.Page.Images.Single().Alt=="??? ?????","Localized media missing.");
+});
+var markup=ContentMarkup.Render("**bold** *italic* [safe](https://example.com) [bad](javascript:alert) <script>alert(1)</script>\n- Item");
+Check(markup.Contains("<strong>bold</strong>")&&markup.Contains("<em>italic</em>")&&markup.Contains("<ul>")&&!markup.Contains("<script>")&&!markup.Contains("href=\"javascript:"),"Unsafe formatted text.");Console.WriteLine("PASS: formatted text is encoded and only safe links render");
+
 await using(var verify=new NloDbContext(options))
 {
     Check(await verify.Users.CountAsync()==baselineUsers,"Existing accounts changed.");
-    Check(await verify.ContentItems.CountAsync()==22,"Test data was not rolled back.");
+    Check(await verify.ContentItems.CountAsync()==baselineItems,"Test data was not rolled back.");
     Check(await verify.ServicePreviews.CountAsync()==4,"Preview data changed.");
-    Check(await verify.ContentRevisions.CountAsync()==22,"Revision fixture count changed.");
+    Check(await verify.ContentRevisions.CountAsync()==baselineRevisions,"Revision fixture count changed.");
     Console.WriteLine("PASS: all verification transactions rolled back; preview and draft fixtures retained.");
 }

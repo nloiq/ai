@@ -22,9 +22,9 @@ The launch profile selects Development and http://127.0.0.1:5080.
 - Arabic: http://127.0.0.1:5080/ar/
 - With the application running: `node tests/prototype-smoke.mjs`
 
-Initialization applies the committed migration and inserts missing demo service keys only. Re-running it preserves existing records. Demo initialization and demo pages are blocked outside Development. Normal application startup does not run migrations or insert seed data.
+Initialization applies all committed migrations and creates the initial preview services, draft content fixtures and role definitions. Re-running it preserves existing records. It creates no user/password. Demo initialization and the fallback prototype are Development-only; normal startup does not migrate or seed. On a new checkout, run `dotnet run --project src/NLOIQ.Web --no-build -- --create-admin` to create your own administrator interactively.
 
-See [Phase 5 review](docs/PHASE_5_DATABASE.md), [local setup](docs/LOCAL_SETUP.md), and [progress](docs/PROJECT_PROGRESS.md). This is not the complete public website or CMS.
+See [Phase 7 functional review](docs/PHASE_7_CMS.md), [local setup](docs/LOCAL_SETUP.md), and [progress](docs/PROJECT_PROGRESS.md). Media/SEO/appearance and the full publishing workflow remain later phases.
 
 Interaction checks: npm.cmd run test:interactions and dotnet run --project tests/NLOIQ.Checks. With the app running and Microsoft Edge installed, npm.cmd run test:browser runs the real browser checks. Screenshots are in docs/previews/phase4/. Actual external YouTube playback still needs user review.
 
@@ -32,4 +32,8 @@ Database review: dotnet run --project src/NLOIQ.Web -- --inspect-content. Integr
 
 ## Phase 6 admin preview
 
-Phase 5 approved; Phase 6 is ready for review. Open http://127.0.0.1:5080/en/account/login or /ar/account/login. Local review credentials are in ignored artifacts/PHASE_6_LOGIN.txt. See [Phase 6 review](docs/PHASE_6_ADMIN.md) for role permissions, administrator setup and verification. Phase 7 has not started.
+Historical Phase 6 checkpoint (now approved). Open http://127.0.0.1:5080/en/account/login or /ar/account/login. Local review credentials are in ignored artifacts/PHASE_6_LOGIN.txt. See [Phase 6 review](docs/PHASE_6_ADMIN.md) for role permissions, administrator setup and verification. Phase 7 is now delivered for functional review.
+
+## Phase 7 core CMS review
+
+Open http://127.0.0.1:5080/en/admin/content (Arabic: /ar/admin/content). Use the existing ignored local login file. Published edit demonstration: http://127.0.0.1:5080/en/pages/cms-review and /ar/pages/cms-review. See [functional review instructions](docs/PHASE_7_CMS.md). Editor saves drafts; SuperAdmin publishes. Phase 8 has not started.

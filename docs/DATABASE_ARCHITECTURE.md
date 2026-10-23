@@ -100,3 +100,7 @@ All new fixtures are marked demo and Draft; no published route or schedule is cr
 | Media assets / roles / users | 3 / 3 / 0 |
 
 Initial seed creation is transactional. Rerunning preserves existing content and inserts zero. It is not a tool for restoring manually removed or edited content. Existing nonfixture content conflicts are rejected without overwrite. See PHASE_5_SEED_INVENTORY.json for the actual captured inventory.
+
+## Phase 7 clock mapping correction
+
+Applied BusinessHoursClockConversion (20261023134044): nullable business-hour times use a TimeOnly/TimeSpan value converter and MySQL time(6). Existing records preserved, no additional tables. CMS services now implement transactional revision creation, publication pointers/routes, concurrency checks and actor/revision audit entries.

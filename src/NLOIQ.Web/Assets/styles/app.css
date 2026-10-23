@@ -35,3 +35,12 @@ html { scroll-behavior:smooth; scrollbar-gutter:stable; }
 
 #primary-navigation[data-menu-open=true] { animation:menu-enter 150ms ease-out; }
 @keyframes menu-enter { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+
+/* CMS controls use the same semantic tokens as the public site. */
+.cms-input { @apply mt-2 block min-h-11 w-full min-w-0 border border-line bg-paper px-3 py-2 text-sm text-ink; }
+.cms-field { @apply block min-w-0 text-sm; }
+.cms-panel { @apply border border-line p-5; }
+.cms-small { @apply inline-flex min-h-11 items-center justify-center border border-line bg-paper px-3 text-sm; }
+.cms-row { @apply border border-line bg-panel p-4; }
+.cms-body p { margin-block:1rem; } .cms-body ul { list-style:disc; padding-inline-start:1.5rem; } .cms-body a { text-decoration:underline; text-underline-offset:3px; }
+[role=tab][aria-selected=true] { background:var(--accent);color:var(--on-accent); }

@@ -45,6 +45,9 @@ const base='http://127.0.0.1:5080';
    expect((await context.request.get(base+'/en/admin')).headers()['cache-control']).toContain('no-store');
    const editor=await context.request.get(base+'/en/admin/editor');expect(editor.status()).toBe(role==='Viewer'?403:200);
    const settings=await context.request.get(base+'/en/admin/settings');expect(settings.status()).toBe(role==='SuperAdmin'?200:403);
+   const workspace=await context.request.get(base+'/en/admin/content');expect(workspace.status()).toBe(role==='Viewer'?403:200);
+   const cmsCsrf=await context.request.post(base+'/en/admin/content/new',{form:{}});expect(cmsCsrf.status()).toBe(role==='Viewer'?403:400);
+   const publishing=await context.request.post(base+'/en/admin/content/1/status',{form:{action:'publish'}});expect(publishing.status()).toBe(role==='SuperAdmin'?400:403);
    const csrf=await context.request.post(base+'/en/account/logout');expect(csrf.status()).toBe(400);
    if(role==='SuperAdmin') {
      await fs.mkdir('artifacts/phase6',{recursive:true});

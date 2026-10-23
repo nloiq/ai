@@ -27,7 +27,11 @@ navigation.addEventListener('click', event => {
     if (link && !desktop.matches) {
         menuOpen = false;
         syncMenu();
-        const target = document.querySelector(link.getAttribute('href'));
+        const url = new URL(link.href, location.href);
+        let target = null;
+        if (url.origin === location.origin && url.pathname === location.pathname && url.hash) {
+            try { target = document.getElementById(decodeURIComponent(url.hash.slice(1))); } catch {}
+        }
         if (target) { target.tabIndex = -1; target.focus({ preventScroll: true }); }
     }
 });

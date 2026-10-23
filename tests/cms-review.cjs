@@ -1,0 +1,35 @@
+const {chromium,expect}=require('@playwright/test');
+const fs=require('node:fs/promises');
+const base='http://127.0.0.1:5080';
+(async()=>{
+ const text=await fs.readFile('artifacts/PHASE_6_LOGIN.txt','utf8');const browser=await chromium.launch({channel:'msedge',headless:true});
+ try {
+  const context=await browser.newContext();const page=await context.newPage();const errors=[];page.on('pageerror',error=>errors.push(error.message));page.on('dialog',dialog=>dialog.accept());
+  await page.goto(base+'/en/account/login');await page.locator('#Email').fill(text.match(/^Email: (.+)$/m)[1]);await page.locator('#Password').fill(text.match(/^Password: (.+)$/m)[1]);await page.locator('button[type=submit]').click();
+  await page.goto(base+'/en/admin/content?search=cms-review');const card=page.locator('article').filter({hasText:'/ cms-review'});const existed=await card.count()>0;
+  if(existed)await card.first().getByRole('link').click();else await page.goto(base+'/en/admin/content/new?kind=Page');
+  if(!existed)await page.locator('#Key').fill('cms-review');
+  await page.locator('#English_Title').fill('NLO IQ CMS review');await page.locator('#English_Slug').fill('cms-review');await page.locator('#English_Summary').fill('A working demonstration of bilingual content editing.');
+  await page.locator('#English_Body').fill('**Published content** is read from the NLO IQ database.\n- Save drafts privately\n- Publish after review\n[safe link](/en/)\n<script>window.cmsInjected=true</script>');
+  await page.locator('#arabic-tab').click();await page.locator('#Arabic_Title').fill('مراجعة نظام إدارة محتوى NLO IQ');await page.locator('#Arabic_Slug').fill('cms-review');await page.locator('#Arabic_Summary').fill('عرض عملي لتحرير المحتوى باللغتين.');await page.locator('#Arabic_Body').fill('**المحتوى المنشور** يقرأ من قاعدة بيانات الموقع.\n- احفظ المسودات بشكل خاص\n- انشر بعد المراجعة');
+  await page.locator('button[type=submit]').click();await expect(page.getByRole('status')).toContainText('Draft saved');const editorUrl=page.url();
+  const anonymous=await browser.newContext();if(!existed)expect((await anonymous.request.get(base+'/en/pages/cms-review')).status()).toBe(404);
+  async function publish(){await page.locator('input[name=verified]').check();await page.locator('button[value=publish]').click();await expect(page.getByRole('status')).toContainText('Publication status updated');}
+  await publish();const publicPage=await anonymous.newPage();await publicPage.goto(base+'/en/pages/cms-review');await expect(publicPage.locator('h1')).toHaveText('NLO IQ CMS review');await expect(publicPage.locator('strong')).toContainText('Published content');expect(await publicPage.evaluate(()=>window.cmsInjected)).toBeUndefined();expect(await publicPage.locator('main script').count()).toBe(0);
+  await page.locator('#English_Title').fill('NLO IQ CMS review — updated');await page.locator('button[type=submit]').click();await expect(page.getByRole('status')).toContainText('Draft saved');await publicPage.reload();await expect(publicPage.locator('h1')).toHaveText('NLO IQ CMS review');await publish();await publicPage.reload();await expect(publicPage.locator('h1')).toHaveText('NLO IQ CMS review — updated');
+  await publicPage.goto(base+'/ar/pages/cms-review');await expect(publicPage.locator('html')).toHaveAttribute('dir','rtl');await expect(publicPage.locator('h1')).toHaveText('مراجعة نظام إدارة محتوى NLO IQ');
+  console.log('PASS: real CMS create, bilingual save, draft isolation, publish/update and encoded formatted text');
+  const stale=await context.newPage();stale.on('dialog',dialog=>dialog.accept());await stale.goto(editorUrl);await page.locator('#English_Summary').fill('Published from the bilingual NLO IQ CMS after review.');await page.locator('button[type=submit]').click();await stale.locator('#English_Title').fill('Stale overwrite attempt');const response=await Promise.all([stale.waitForResponse(r=>r.request().method()==='POST'),stale.locator('button[type=submit]').click()]);expect(response[0].status()).toBe(409);await expect(stale.getByRole('alert')).toContainText('Another session');await stale.close();await publish();
+  await page.locator('button[value=unpublish]').click();expect((await anonymous.request.get(base+'/en/pages/cms-review')).status()).toBe(404);await publish();await page.locator('button[value=archive]').click();expect((await anonymous.request.get(base+'/en/pages/cms-review')).status()).toBe(404);await page.locator('button[type=submit]').click();await expect(page.getByRole('status')).toContainText('Draft saved');await publish();
+  console.log('PASS: stale browser form conflict, unpublish, archive and draft restoration');
+  await page.locator('#English_Body').fill('**Published content** is read from the NLO IQ database.\n- Save drafts privately\n- Publish after review\n[View website](/en/)');await page.locator('button[type=submit]').click();await publish();
+  await fs.mkdir('artifacts/phase7',{recursive:true});
+  await page.goto(base+'/en/admin/content');await page.setViewportSize({width:1440,height:1000});await page.screenshot({path:'artifacts/phase7/cms-workspace.png',fullPage:true});
+  for(const kind of ['Page','Section','Project','ProjectCategory','Service','Navigation','Contact','Footer']) {await page.goto(base+'/en/admin/content/new?kind='+kind);await expect(page.locator('#cms-editor')).toBeVisible();}
+  await page.goto(base+'/en/admin/content/new?kind=Page');const collection=page.locator('[data-collection=Sections]');await collection.locator('[data-row-add]').click();await collection.locator('[data-row-add]').click();await expect(collection.locator('[data-rows] [data-row]')).toHaveCount(2);await collection.locator('[data-row-up]').last().click();await expect(collection.locator('input[name="Sections[0].DisplayOrder"]')).toHaveValue('0');await collection.locator('[data-row-remove]').first().click();await expect(collection.locator('[data-rows] [data-row]')).toHaveCount(1);await expect(collection.locator('input[name="Sections[0].DisplayOrder"]')).toHaveCount(1);
+  console.log('PASS: all eight module forms and dynamic row ordering/removal');
+  await page.goto(editorUrl.replace('/en/','/ar/'));await page.selectOption('#theme','dark');for(const width of [320,390,768,1440]){await page.setViewportSize({width,height:1000});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);}
+  await page.setViewportSize({width:390,height:844});await page.locator('#arabic-tab').click();await page.screenshot({path:'artifacts/phase7/cms-editor-ar-mobile.png',fullPage:true});
+  await publicPage.goto(base+'/en/pages/cms-review');await publicPage.setViewportSize({width:1440,height:1000});await publicPage.screenshot({path:'artifacts/phase7/cms-public-review.png',fullPage:true});expect(errors).toEqual([]);console.log('PASS: responsive RTL editor, theme and zero browser script errors');await anonymous.close();await context.close();
+ }finally{await browser.close();}
+})().catch(error=>{console.error(error);process.exitCode=1;});

@@ -112,6 +112,9 @@ internal static class ContentModelConfiguration
         contactText.HasOne(x => x.ContactDetail).WithMany().HasForeignKey(x => new { x.RevisionId, x.ContactDetailId }).HasPrincipalKey(x => new { x.RevisionId, x.Id }).OnDelete(DeleteBehavior.Restrict);
         contactText.Property(x => x.Label).HasMaxLength(120).IsRequired(); contactText.Property(x => x.LocalizedValue).HasMaxLength(1000); Culture(contactText, "ContactTranslations");
         var hours = Owned<BusinessHours>(model, "BusinessHours"); hours.HasKey(x => x.Id);
+        var clockConverter = new ValueConverter<TimeOnly, TimeSpan>(value => value.ToTimeSpan(), value => TimeOnly.FromTimeSpan(value));
+        hours.Property(x => x.OpensAt).HasConversion(clockConverter);
+        hours.Property(x => x.ClosesAt).HasConversion(clockConverter);
         hours.HasOne<ContactSettings>().WithMany().HasForeignKey(x => x.RevisionId).OnDelete(DeleteBehavior.Restrict);
         hours.HasIndex(x => new { x.RevisionId, x.DayOfWeek }).IsUnique();
         hours.ToTable("BusinessHours", table => { table.HasCheckConstraint("CK_BusinessHours_Day", "`DayOfWeek` BETWEEN 0 AND 6"); table.HasCheckConstraint("CK_BusinessHours_Times", "(`IsClosed` = 1 AND `OpensAt` IS NULL AND `ClosesAt` IS NULL) OR (`IsClosed` = 0 AND `OpensAt` IS NOT NULL AND `ClosesAt` IS NOT NULL)"); });

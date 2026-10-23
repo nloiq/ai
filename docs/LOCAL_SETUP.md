@@ -51,3 +51,7 @@ The full Phase 1 design comparison remains available via node docs/design/serve.
 The initialization command now also creates 22 draft-only content identities/revisions, 44 translations, metadata for the three actual bundled illustrations and SuperAdmin/Editor/Viewer role definitions. It creates no users or passwords. Existing preview tables remain intact.
 
 Run dotnet run --project src/NLOIQ.Web -- --inspect-content to read the new inventory. Database architecture and migration details are in PHASE_5_DATABASE.md and DATABASE_ARCHITECTURE.md. Upload workflows and administrator authentication are later phases.
+
+## Phase 7 CMS review
+
+Core CMS is at /en/admin/content and /ar/admin/content. Use the Phase 6 local review login. The retained bilingual published example is /en/pages/cms-review and /ar/pages/cms-review. Apply all four checked-in migrations, including BusinessHoursClockConversion, when preparing a fresh database. Existing-file selection is available; uploads/SEO/appearance remain Phase 8. See PHASE_7_CMS.md for safe functional checks.

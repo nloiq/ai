@@ -51,7 +51,7 @@ internal static class ContentWriteGuard
             if (!hasSnapshot) throw new InvalidOperationException("Published revision is missing its typed content snapshot.");
             var missingAlt = await database.Set<RevisionMedia>().AnyAsync(media => media.RevisionId == revisionId &&
                 (!database.Set<RevisionMediaTranslation>().Any(text => text.RevisionMediaId == media.Id && text.Culture == "en" && text.AltText.Trim() != "") ||
-                 !database.Set<RevisionMediaTranslation>().Any(text => text.RevisionMediaId == media.Id && text.Culture == "ar" && text.AltText != "")), cancellationToken);
+                 !database.Set<RevisionMediaTranslation>().Any(text => text.RevisionMediaId == media.Id && text.Culture == "ar" && text.AltText.Trim() != "")), cancellationToken);
             if (await database.Set<RevisionMedia>().AnyAsync(media => media.RevisionId == revisionId && media.MediaAsset.IsDemo, cancellationToken)) throw new InvalidOperationException("Demo media cannot be published.");
             if (missingAlt) throw new InvalidOperationException("Published media requires English and Arabic alt text snapshots.");
             if (item.Kind == ContentKind.Page && await database.Set<PageSection>().AnyAsync(link => link.RevisionId == revisionId &&
