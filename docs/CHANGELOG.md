@@ -32,3 +32,11 @@
 - Verified compilation, JavaScript syntax, HTTP assets, secret URL rejection, anchors and contrast calculations.
 - Browser visual QA unavailable because the computer-use runtime failed. Awaiting design choice and Phase 1 approval.
 
+
+## Phase 1 revision — align design with confirmed expertise
+
+- Replaced dominant leaf plate with a conceptual systems integration diagram in selected Concept A.
+- Added four expandable specialty rows with consistent line icons and Arabic translations.
+- Added theme-aware teal signal accent and charcoal dark surfaces while retaining brand colors.
+- Updated content and approval records; Phase 1 remains under review.
+

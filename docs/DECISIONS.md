@@ -32,3 +32,8 @@ User revision: use the existing https://github.com/nloiq/ai.git repository as or
 - Compile Tailwind 4.3.3 in isolated design tooling; no application foundation yet.
 - Keep previews local and do not deploy publicly. Browser rendering remains unverified due to runtime failure.
 
+
+## Confirmed company expertise and selected visual direction
+
+Concept A selected. Business areas confirmed by user: low-current engineering, software solutions, SCADA system integration and system automation. Use labeled technical line icons, topology/monitoring/logic motifs, evergreen/charcoal base, copper connections and restrained theme-aware teal accents. Botanical elements support the engineering story. Phase 1 revision awaits approval.
+

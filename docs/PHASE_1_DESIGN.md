@@ -1,4 +1,4 @@
-﻿# Phase 1 — Creative direction and design system
+# Phase 1 — Creative direction and design system
 
 Date: 2026-10-23 (Asia/Baghdad).
 Status: delivered for design review; Phase 1 approval pending.
@@ -109,3 +109,17 @@ Executed successfully: Tailwind compilation; node --check for both JavaScript fi
 Choose A, B, or a combination; revise typography, autumn warmth, artwork direction, text scale, project proportions, navigation, Arabic spacing or planned motion intensity. Approval should identify the preferred composition so Phase 2 can carry a concrete design decision forward. Unselected concepts remain in version control as review history.
 
 Phase 1 design deliverables are prepared. Final logo, licensed imagery, approved bilingual company content, verified service/project/contact data and browser visual review remain outstanding. Phase 2 starts only after explicit Phase 1 approval and establishes the ASP.NET/MySQL foundation; the full public prototype belongs to Phase 3.
+
+## Revision — confirmed engineering expertise (supersedes earlier service/art direction)
+
+The user selected Concept A and confirmed four business areas: low-current engineering, software solutions, SCADA system integration and system automation. This confirms the categories; project achievements, detailed service scope and delivery claims still require approved content.
+
+Concept A is now the engineering folio: retain its asymmetrical editorial composition, use a conceptual system topology as the hero artwork, and make botanical geometry a subtle background layer. The diagram is illustrative and does not claim to document an actual installation. Concept B remains an earlier alternative for comparison, not the selected direction.
+
+Four numbered expandable rows use consistent 32-unit line icons: network distribution for low current; code brackets for software; a monitoring screen with a trend for SCADA; and connected input/logic/output blocks for automation. Icons share square geometry, 1.5-unit strokes and visible text labels. They represent service categories, not certified engineering symbols. Physical diagrams and software brackets do not mirror in RTL; text and reading flow do.
+
+Color roles retain the original brand: evergreen for technical depth, warm ivory for readability, copper for connections, gold for selected actions, charcoal for dark panels. Added semantic signal teal is #17665F in light mode and #82C6B8 in dark mode. It highlights information flow and interfaces; these decorative colors are not operational alarm/status conventions. Real SCADA safety or alarm semantics are outside this marketing design study.
+
+Measured added pairs: teal/ivory 5.90:1; pale teal/charcoal 7.76:1; ivory/charcoal 13.24:1. Existing CTA and focus roles are unchanged. The shared token plan applies to the future CMS too.
+
+Updated English/Arabic introductions and expertise descriptions reflect the four confirmed areas. Detailed copy remains proposed for review. No Phase 2 work has started. Design review is still required for this revision; selecting Concept A did not approve the entire phase. JavaScript syntax and Tailwind compilation passed. Static anchor, unique ID and specialty checks passed. Browser screenshot/interaction verification remains unavailable from the previous runtime failure.

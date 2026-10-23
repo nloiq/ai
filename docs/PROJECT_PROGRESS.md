@@ -47,3 +47,12 @@ APPROVE PHASE advances one phase. REVISE modifies the current phase. SHOW PREVIE
 
 Phase 1 is committed locally. Two pushes failed with curl 52 (empty reply from server), including an HTTP/1.1 retry. Verified remote main still points to 0f40d6b. Phase 1 changes have not been synchronized; retry git push origin main after connectivity recovers.
 
+
+## Phase 1 revision — engineering specializations
+
+- User selected Concept A; full Phase 1 approval remains pending.
+- User confirmed low-current engineering, software solutions, SCADA integration and system automation.
+- Revised hero illustration, four labeled line-icon service rows, English/Arabic copy, charcoal surfaces and a semantic teal interface accent.
+- Preserved the editorial composition and original brand palette, with botanical elements reduced to a supporting role.
+- See the revision section in PHASE_1_DESIGN.md; no application foundation work started.
+
