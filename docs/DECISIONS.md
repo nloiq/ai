@@ -22,3 +22,13 @@ User revision: perform local configuration and Git setup now, before Phase 1. St
 
 User revision: use the existing https://github.com/nloiq/ai.git repository as origin instead of creating nloiq/NLOIQ. Keep main as the tracked branch and preserve existing repository visibility.
 
+
+## Phase 1 — proposed design decisions
+
+- Phase 0 approved explicitly; Phase 1 approval pending.
+- Preserve two composition choices: Botanical folio and Autumn field.
+- Use source-native concept artwork and local system fonts until company assets and typography are approved.
+- Use accessible orange #884125 for light CTAs; preserve #C56A3D as the brand swatch.
+- Compile Tailwind 4.3.3 in isolated design tooling; no application foundation yet.
+- Keep previews local and do not deploy publicly. Browser rendering remains unverified due to runtime failure.
+

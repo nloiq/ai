@@ -2,43 +2,43 @@
 
 Updated: 2026-10-23 (Asia/Baghdad).
 
-Current phase: **0 â€” Discovery and Planning**.
-Status: **Delivered for review; awaiting explicit approval**.
-Approved phases: none.
+Current phase: **1 — Creative Direction and Design System**.
+Status: **Delivered for review; awaiting explicit design approval**.
+Approved phases: **Phase 0**, approved by user with APPROVE PHASE.
+Last approved code checkpoint: 0f40d6b (Phase 0 and repository setup).
 
 ## Completed
 
-- Read the master project brief; confirmed phase-by-phase approval gates.
-- Inspected the empty workspace and installed toolchain.
-- Confirmed running MySQL80 service and reachable local TCP port 3306; no authenticated database check.
-- Documented architecture, initial schema, revision isolation, localization, themes, security, roadmap and missing assets in PHASE_0_DISCOVERY.md.
-- Created progress, decision and change records.
+- Phase 0 discovery, architecture, schema plan and roadmap.
+- Saved supplied database configuration in ignored appsettings.Local.json; no password in Git.
+- Initialized main and synchronized with https://github.com/nloiq/ai.git.
+- Phase 1: two distinct local hero/layout concepts, palette, theme tokens, type/spacing, controls, image and motion directions, responsive and RTL design rules.
+- Added English/Arabic and light/dark/system review controls.
+- Compiled pinned Tailwind v4.3.3 styles; verified syntax, HTTP responses, secret URL rejection, anchors and selected contrast pairs.
 
-## Pending
+## Preview and review
 
-- User review of Phase 0. Do not start Phase 1 without explicit approval.
-- Phase 1: two distinct design compositions and design system.
-- Phases 2â€“12: application foundation through deployment handover, each separately approved.
+- See docs/PHASE_1_DESIGN.md for the full review report and exact run instructions.
+- Run node docs/design/serve.mjs, then visit http://127.0.0.1:4173.
+- Or open docs/design/index.html directly; compiled CSS is committed.
+- Choose Botanical folio (A), Autumn field (B), or specify a combination.
+- Do not start Phase 2 without explicit approval.
 
 ## Known limitations
 
-- No application code, runnable preview, screenshots, builds or application tests yet.
-- EF Core 10/MySQL provider compatibility and exact package pins are unresolved.
-- MySQL credentials, schema, patch version and authenticated connection are unverified.
-- Docker daemon is unavailable; native MySQL is present.
-- Company assets/content and hosting information are missing.
-- Git initialized on main at user request; local checkpoint prepared. User selected https://github.com/nloiq/ai.git as origin; synchronization is verified through Git remote tracking.
+- Browser automation runtime failed; screenshots, real browser interactions and responsive rendering remain unverified.
+- Current previews are design studies; no ASP.NET application, CMS or database migration exists.
+- Motion is specified but not implemented; full parallax is Phase 4.
+- EF Core 10/MySQL stable provider compatibility is unresolved.
+- MySQL server patch, schema access and authenticated connection remain unverified; credentials have been supplied locally.
+- Docker daemon unavailable; native MySQL service and TCP port were reachable in Phase 0.
+- Real company assets, approved bilingual content and hosting details remain missing.
+- Existing GitHub repository visibility was preserved.
 
-## Review commands
+## Remaining phases
 
-APPROVE PHASE advances one phase. REVISE modifies the current phase. SHOW PREVIEW reports the latest actual preview. EXPLAIN makes no changes. STATUS reports progress. ROLLBACK requires confirming discarded work; no approved checkpoint currently exists.
+2 Foundation; 3 Public prototype; 4 Motion; 5 Content schema; 6 Identity/admin shell; 7 Core CMS; 8 Media/SEO/appearance; 9 Complete localization; 10 Publishing/revisions; 11 QA; 12 Deployment/handover. Each requires a separate approval.
 
-## User-requested setup revision
+## Commands
 
-- Supplied database connection saved in ignored appsettings.Local.json; tracked example contains no password.
-- Credentials supplied; authenticated database check remains pending Phase 2.
-- User initially requested nloiq/NLOIQ, then explicitly selected existing repository https://github.com/nloiq/ai.git.
-- Origin configured as https://github.com/nloiq/ai.git. Remote had no refs before the initial push. Use git status -sb and git ls-remote origin refs/heads/main to verify synchronization. Repository visibility was not changed.
-- Phase 0 approval remains pending; no advancement to Phase 1.
-
-
+APPROVE PHASE advances one phase. REVISE modifies the current phase. SHOW PREVIEW reports the latest actual preview. EXPLAIN makes no changes. STATUS reports progress. ROLLBACK requires confirming exactly what to discard before restoring the last approved checkpoint.

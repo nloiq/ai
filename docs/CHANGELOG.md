@@ -21,3 +21,14 @@
 - Configured the user-selected nloiq/ai repository as origin after confirming it had no remote refs.
 - Kept database credentials excluded from version control.
 
+
+## 2026-10-23 — Phase 1 design review
+
+- Recorded explicit Phase 0 approval.
+- Added two distinct hero/layout concepts with local illustrative artwork.
+- Added semantic light/dark tokens, theme persistence, Arabic/English design switching and component studies.
+- Added isolated Tailwind v4 tooling, compiled CSS and a restricted loopback preview server.
+- Documented responsive, typography, imagery, navigation and parallax directions.
+- Verified compilation, JavaScript syntax, HTTP assets, secret URL rejection, anchors and contrast calculations.
+- Browser visual QA unavailable because the computer-use runtime failed. Awaiting design choice and Phase 1 approval.
+
