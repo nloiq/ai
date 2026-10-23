@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><root><resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>2.0</value></resheader><data name="Title" xml:space="preserve"><value>NLO IQ — Engineering systems</value></data>
-<data name="Phase" xml:space="preserve"><value>Phase 2 / Foundation preview</value></data>
-<data name="Demo" xml:space="preserve"><value>Development preview · Service categories confirmed; descriptions are demo copy. No real projects or contact details are seeded.</value></data>
+<data name="Phase" xml:space="preserve"><value>Phase 3 / Public prototype</value></data>
+<data name="Demo" xml:space="preserve"><value>Design preview · Illustrations and sample copy are clearly marked.</value></data>
 <data name="Logo" xml:space="preserve"><value>Logo placeholder</value></data>
 <data name="Services" xml:space="preserve"><value>Expertise</value></data>
 <data name="Theme" xml:space="preserve"><value>Appearance</value></data>
@@ -15,11 +15,54 @@
 <data name="Intro" xml:space="preserve"><value>NLO IQ brings together low-current engineering, software solutions, SCADA system integration, and system automation.</value></data>
 <data name="Explore" xml:space="preserve"><value>Explore our expertise</value></data>
 <data name="Foundation" xml:space="preserve"><value>ASP.NET Core MVC · MySQL · Tailwind v4</value></data>
-<data name="ServiceLabel" xml:space="preserve"><value>01 / Four connected disciplines</value></data>
+<data name="ServiceLabel" xml:space="preserve"><value>03 / Four connected disciplines</value></data>
 <data name="ServiceHeading" xml:space="preserve"><value>Systems, working together.</value></data>
-<data name="SeedNote" xml:space="preserve"><value>These records are loaded from MySQL. Descriptions are seed data for review.</value></data>
+<data name="SeedNote" xml:space="preserve"><value>Four confirmed areas of expertise. Expand a row to read the sample description, prepared for this prototype.</value></data>
 <data name="DemoTag" xml:space="preserve"><value>Demo description</value></data>
 <data name="Empty" xml:space="preserve"><value>No sample content yet. Run the development database initialization command in the setup guide.</value></data>
 <data name="ArchitectureNote" xml:space="preserve"><value>Conceptual architecture · Not a live system diagram</value></data>
-<data name="Footer" xml:space="preserve"><value>Foundation preview only. Full website and CMS follow in later approved phases.</value></data>
-<data name="Skip" xml:space="preserve"><value>Skip to main content</value></data></root>
+<data name="Footer" xml:space="preserve"><value>Public prototype · Sample content · CMS and publishing follow in later phases.</value></data>
+<data name="Skip" xml:space="preserve"><value>Skip to main content</value></data><data name="Home" xml:space="preserve"><value>NLO IQ home</value></data>
+<data name="Menu" xml:space="preserve"><value>Menu</value></data>
+<data name="Navigation" xml:space="preserve"><value>Main navigation</value></data>
+<data name="FooterNavigation" xml:space="preserve"><value>Footer navigation</value></data>
+<data name="About" xml:space="preserve"><value>About</value></data>
+<data name="Projects" xml:space="preserve"><value>Projects</value></data>
+<data name="Contact" xml:space="preserve"><value>Let’s connect</value></data>
+<data name="ExploreWork" xml:space="preserve"><value>Explore our work</value></data>
+<data name="Discover" xml:space="preserve"><value>Discover NLO IQ</value></data>
+<data name="AboutLabel" xml:space="preserve"><value>01 / The thinking</value></data>
+<data name="AboutHeading1" xml:space="preserve"><value>Where precision</value></data>
+<data name="AboutHeading2" xml:space="preserve"><value>meets possibility.</value></data>
+<data name="AboutBody" xml:space="preserve"><value>NLO IQ works across low-current engineering, software solutions, SCADA system integration, and system automation.</value></data>
+<data name="AboutSecondary" xml:space="preserve"><value>Our focus brings infrastructure, information, and control into one engineering conversation. This introduction is proposed copy for company review.</value></data>
+<data name="AboutArt" xml:space="preserve"><value>Concept illustration: an organic branch becomes structured signal pathways</value></data>
+<data name="FromSignal" xml:space="preserve"><value>From the connection</value></data>
+<data name="FromSignalNote" xml:space="preserve"><value>Low-current engineering and the software that connects information.</value></data>
+<data name="ToSystem" xml:space="preserve"><value>To the complete system</value></data>
+<data name="ToSystemNote" xml:space="preserve"><value>SCADA integration and automation that bring the system into view.</value></data>
+<data name="ProjectsLabel" xml:space="preserve"><value>02 / Portfolio composition</value></data>
+<data name="ProjectsHeading" xml:space="preserve"><value>Connections, made visible.</value></data>
+<data name="ProjectsNote" xml:space="preserve"><value>These three original illustrations demonstrate the portfolio layout. They are concept studies, not completed NLO IQ projects. Real project photography and approved descriptions will replace them.</value></data>
+<data name="Illustration" xml:space="preserve"><value>Illustrative study / Not a client project</value></data>
+<data name="Project1" xml:space="preserve"><value>Connected infrastructure</value></data>
+<data name="Project1Note" xml:space="preserve"><value>A topology illustration exploring distribution, structured connections, and the space between systems.</value></data>
+<data name="Project1Alt" xml:space="preserve"><value>Illustrative low-current distribution topology in copper and evergreen</value></data>
+<data name="Project2" xml:space="preserve"><value>A clearer view of control</value></data>
+<data name="Project2Note" xml:space="preserve"><value>A supervisory monitoring study: signals, trends, and interfaces arranged into an architectural composition.</value></data>
+<data name="Project2Alt" xml:space="preserve"><value>Conceptual supervisory monitoring illustration with signal traces</value></data>
+<data name="Project3" xml:space="preserve"><value>Logic into action</value></data>
+<data name="Project3Note" xml:space="preserve"><value>An illustration of software workflows and automation logic linking inputs to outputs.</value></data>
+<data name="Project3Alt" xml:space="preserve"><value>Conceptual input, logic and output architecture for software and automation</value></data>
+<data name="ContactLabel" xml:space="preserve"><value>04 / Start a conversation</value></data>
+<data name="ContactHeading1" xml:space="preserve"><value>Have a system</value></data>
+<data name="ContactHeading2" xml:space="preserve"><value>in mind?</value></data>
+<data name="ContactIntro" xml:space="preserve"><value>Tell us where your infrastructure, software, or control systems need to connect.</value></data>
+<data name="ContactPending" xml:space="preserve"><value>Verified email, phone, WhatsApp, office, business hours, and social links are awaiting company details. This preview does not accept inquiries.</value></data>
+<data name="ContactStatus" xml:space="preserve"><value>Contact details / Pending</value></data>
+<data name="Email" xml:space="preserve"><value>Email</value></data>
+<data name="Phone" xml:space="preserve"><value>Phone / WhatsApp</value></data>
+<data name="Office" xml:space="preserve"><value>Office / Map</value></data>
+<data name="Hours" xml:space="preserve"><value>Business hours</value></data>
+<data name="AwaitingDetails" xml:space="preserve"><value>Awaiting verified company details</value></data>
+</root>

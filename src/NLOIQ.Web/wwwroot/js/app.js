@@ -10,4 +10,28 @@ function apply() { document.documentElement.dataset.theme = preference === 'syst
 selector.addEventListener('change', () => { preference = selector.value; try { localStorage.setItem('nlo-theme', preference); } catch {} apply(); });
 system.addEventListener('change', apply);
 apply();
+const menuButton = document.getElementById('menu-toggle');
+const navigation = document.getElementById('primary-navigation');
+const desktop = matchMedia('(min-width:1024px)');
+let menuOpen = false;
+function syncMenu() {
+    navigation.hidden = !desktop.matches && !menuOpen;
+    menuButton.setAttribute('aria-expanded', String(menuOpen));
+}
+menuButton.hidden = false;
+menuButton.addEventListener('click', () => { menuOpen = !menuOpen; syncMenu(); });
+desktop.addEventListener('change', () => { menuOpen = false; syncMenu(); });
+navigation.addEventListener('click', event => {
+    const link = event.target.closest('a');
+    if (link && !desktop.matches) {
+        menuOpen = false;
+        syncMenu();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) { target.tabIndex = -1; target.focus({ preventScroll: true }); }
+    }
+});
+document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menuOpen && !desktop.matches) { menuOpen = false; syncMenu(); menuButton.focus(); }
+});
+syncMenu();
 })();

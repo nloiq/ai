@@ -1,0 +1,5 @@
+@model HomeViewModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> Localizer
+<section class="grid scroll-mt-32 items-center gap-5 overflow-hidden border-b border-line py-10 lg:grid-cols-[1.12fr_1fr] lg:py-16" aria-labelledby="hero-title"><div><p class="mb-5 text-xs uppercase tracking-[.18em] text-signal">@Localizer["Phase"]</p><p class="mb-8 text-xs uppercase tracking-[.2em] text-muted">@Localizer["Eyebrow"]</p>
+<h1 id="hero-title" class="font-editorial text-[clamp(2.75rem,6.1vw,6.5rem)] leading-[1.02] tracking-[-.055em]">@Localizer["Heading1"]<br>@Localizer["Heading2"]<br><em class="text-accent">@Localizer["Heading3"]</em><br>@Localizer["Heading4"]</h1>
+<p class="mt-8 max-w-md text-base leading-7 text-muted">@Localizer["Intro"]</p><a href="#projects" class="mt-9 inline-flex min-h-12 items-center bg-accent px-6 py-3 text-sm text-on-accent">@Localizer["ExploreWork"] <span aria-hidden="true" class="ms-4">@(Model.IsArabic ? "↖" : "↗")</span></a><a href="#about" class="ms-5 mt-4 inline-flex min-h-12 items-center border-b border-ink text-sm">@Localizer["Discover"]</a></div><partial name="_SystemStudy" /></section>

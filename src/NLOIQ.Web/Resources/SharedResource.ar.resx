@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><root><resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>2.0</value></resheader><data name="Title" xml:space="preserve"><value>NLO IQ — الأنظمة الهندسية</value></data>
-<data name="Phase" xml:space="preserve"><value>المرحلة الثانية / معاينة الأساس</value></data>
-<data name="Demo" xml:space="preserve"><value>معاينة تطوير · فئات الخدمات مؤكّدة، والأوصاف نصوص تجريبية. لم تُضف مشاريع فعلية أو بيانات تواصل.</value></data>
+<data name="Phase" xml:space="preserve"><value>المرحلة الثالثة / النموذج العام</value></data>
+<data name="Demo" xml:space="preserve"><value>معاينة تصميم · الرسومات والنصوص التجريبية موضّحة بوضوح.</value></data>
 <data name="Logo" xml:space="preserve"><value>موضع الشعار</value></data>
 <data name="Services" xml:space="preserve"><value>التخصّصات</value></data>
 <data name="Theme" xml:space="preserve"><value>المظهر</value></data>
@@ -15,11 +15,54 @@
 <data name="Intro" xml:space="preserve"><value>تجمع NLO IQ بين هندسة التيار الخفيف والحلول البرمجية وتكامل أنظمة SCADA وأتمتة الأنظمة.</value></data>
 <data name="Explore" xml:space="preserve"><value>استكشف تخصّصاتنا</value></data>
 <data name="Foundation" xml:space="preserve"><value>ASP.NET Core MVC · MySQL · Tailwind v4</value></data>
-<data name="ServiceLabel" xml:space="preserve"><value>٠١ / أربعة تخصّصات مترابطة</value></data>
+<data name="ServiceLabel" xml:space="preserve"><value>٠٣ / أربعة تخصّصات مترابطة</value></data>
 <data name="ServiceHeading" xml:space="preserve"><value>أنظمة تعمل معاً.</value></data>
-<data name="SeedNote" xml:space="preserve"><value>تُحمّل هذه السجلات من MySQL. الأوصاف بيانات تجريبية للمراجعة.</value></data>
+<data name="SeedNote" xml:space="preserve"><value>أربعة مجالات تخصّص مؤكّدة. افتح أي صف لقراءة وصف تجريبي أُعدّ لهذا النموذج.</value></data>
 <data name="DemoTag" xml:space="preserve"><value>وصف تجريبي</value></data>
 <data name="Empty" xml:space="preserve"><value>لا توجد بيانات تجريبية بعد. شغّل أمر تهيئة قاعدة بيانات التطوير الوارد في دليل الإعداد.</value></data>
 <data name="ArchitectureNote" xml:space="preserve"><value>بنية تصوّرية · ليست مخطّطاً لنظام فعلي</value></data>
-<data name="Footer" xml:space="preserve"><value>معاينة للأساس فقط. يُنفّذ الموقع الكامل ونظام الإدارة في المراحل اللاحقة بعد اعتمادها.</value></data>
-<data name="Skip" xml:space="preserve"><value>انتقل إلى المحتوى الرئيسي</value></data></root>
+<data name="Footer" xml:space="preserve"><value>نموذج عام · محتوى تجريبي · نظام الإدارة والنشر في المراحل اللاحقة.</value></data>
+<data name="Skip" xml:space="preserve"><value>انتقل إلى المحتوى الرئيسي</value></data><data name="Home" xml:space="preserve"><value>الصفحة الرئيسية لـ NLO IQ</value></data>
+<data name="Menu" xml:space="preserve"><value>القائمة</value></data>
+<data name="Navigation" xml:space="preserve"><value>التنقّل الرئيسي</value></data>
+<data name="FooterNavigation" xml:space="preserve"><value>روابط التذييل</value></data>
+<data name="About" xml:space="preserve"><value>من نحن</value></data>
+<data name="Projects" xml:space="preserve"><value>المشاريع</value></data>
+<data name="Contact" xml:space="preserve"><value>لنتواصل</value></data>
+<data name="ExploreWork" xml:space="preserve"><value>استكشف أعمالنا</value></data>
+<data name="Discover" xml:space="preserve"><value>تعرّف على NLO IQ</value></data>
+<data name="AboutLabel" xml:space="preserve"><value>٠١ / الفكرة</value></data>
+<data name="AboutHeading1" xml:space="preserve"><value>حيث تلتقي الدقّة</value></data>
+<data name="AboutHeading2" xml:space="preserve"><value>بالإمكانات.</value></data>
+<data name="AboutBody" xml:space="preserve"><value>تعمل NLO IQ في هندسة التيار الخفيف والحلول البرمجية وتكامل أنظمة SCADA وأتمتة الأنظمة.</value></data>
+<data name="AboutSecondary" xml:space="preserve"><value>يجمع تركيزنا البنية التحتية والمعلومات والتحكّم في رؤية هندسية واحدة. هذه المقدّمة نص مقترح لمراجعة الشركة.</value></data>
+<data name="AboutArt" xml:space="preserve"><value>رسم تصوّري: يتحوّل فرع عضوي إلى مسارات إشارات منظّمة</value></data>
+<data name="FromSignal" xml:space="preserve"><value>من الوصلة</value></data>
+<data name="FromSignalNote" xml:space="preserve"><value>هندسة التيار الخفيف والبرمجيات التي تربط المعلومات.</value></data>
+<data name="ToSystem" xml:space="preserve"><value>إلى النظام المتكامل</value></data>
+<data name="ToSystemNote" xml:space="preserve"><value>تكامل أنظمة SCADA والأتمتة لإظهار الصورة الكاملة للنظام.</value></data>
+<data name="ProjectsLabel" xml:space="preserve"><value>٠٢ / تصميم معرض الأعمال</value></data>
+<data name="ProjectsHeading" xml:space="preserve"><value>روابط تتّضح صورتها.</value></data>
+<data name="ProjectsNote" xml:space="preserve"><value>توضّح هذه الرسومات الثلاثة تصميم معرض الأعمال. وهي دراسات تصوّرية وليست مشاريع منجزة للشركة. ستُستبدل بصور مشاريع فعلية وأوصاف معتمدة.</value></data>
+<data name="Illustration" xml:space="preserve"><value>دراسة توضيحية / ليست مشروع عميل</value></data>
+<data name="Project1" xml:space="preserve"><value>بنية تحتية مترابطة</value></data>
+<data name="Project1Note" xml:space="preserve"><value>رسم لطوبولوجيا الربط يستكشف التوزيع والوصلات المنظّمة والمسافات بين الأنظمة.</value></data>
+<data name="Project1Alt" xml:space="preserve"><value>رسم توضيحي لطوبولوجيا توزيع التيار الخفيف بالنحاسي والأخضر الداكن</value></data>
+<data name="Project2" xml:space="preserve"><value>رؤية أوضح للتحكّم</value></data>
+<data name="Project2Note" xml:space="preserve"><value>دراسة تصوّرية للمراقبة الإشرافية تجمع الإشارات والمنحنيات والواجهات في تكوين معماري.</value></data>
+<data name="Project2Alt" xml:space="preserve"><value>رسم تصوّري للمراقبة الإشرافية مع مسارات للإشارات</value></data>
+<data name="Project3" xml:space="preserve"><value>من المنطق إلى التنفيذ</value></data>
+<data name="Project3Note" xml:space="preserve"><value>رسم توضيحي لسير العمل البرمجي ومنطق الأتمتة الذي يربط المدخلات بالمخرجات.</value></data>
+<data name="Project3Alt" xml:space="preserve"><value>بنية تصوّرية للمدخلات والمنطق والمخرجات في البرمجيات والأتمتة</value></data>
+<data name="ContactLabel" xml:space="preserve"><value>٠٤ / نبدأ الحوار</value></data>
+<data name="ContactHeading1" xml:space="preserve"><value>هل تفكّر</value></data>
+<data name="ContactHeading2" xml:space="preserve"><value>في نظام جديد؟</value></data>
+<data name="ContactIntro" xml:space="preserve"><value>حدّثنا عن الوصلات التي تحتاجها بنيتك التحتية أو برمجياتك أو أنظمة التحكّم لديك.</value></data>
+<data name="ContactPending" xml:space="preserve"><value>ننتظر بيانات الشركة المؤكّدة للبريد والهاتف وواتساب والمكتب وأوقات العمل وروابط التواصل. لا تستقبل هذه المعاينة استفسارات.</value></data>
+<data name="ContactStatus" xml:space="preserve"><value>بيانات التواصل / قيد الإضافة</value></data>
+<data name="Email" xml:space="preserve"><value>البريد الإلكتروني</value></data>
+<data name="Phone" xml:space="preserve"><value>الهاتف / واتساب</value></data>
+<data name="Office" xml:space="preserve"><value>المكتب / الخريطة</value></data>
+<data name="Hours" xml:space="preserve"><value>أوقات العمل</value></data>
+<data name="AwaitingDetails" xml:space="preserve"><value>بانتظار بيانات الشركة المؤكّدة</value></data>
+</root>

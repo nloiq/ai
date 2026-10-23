@@ -49,3 +49,14 @@ Concept A selected. Business areas confirmed by user: low-current engineering, s
 - Pin transitive @parcel/watcher 2.6.0 to remove the affected braces dependency in both tooling sets.
 - Browser visual verification remains pending; HTTP/SQL checks are real and recorded.
 
+
+## Phase 3 public prototype
+
+- Phase 2 explicitly approved; build the full visual public prototype using selected Concept A.
+- Preserve four database-backed service categories and demo descriptions without schema changes.
+- Use local engineering illustrations for portfolio layout studies; never present them as client projects.
+- Keep pending contact fields honest; no invented links or disconnected form.
+- Split public sections into Razor partials; retain shared semantic tokens and bilingual route architecture.
+- Basic responsive navigation belongs to this phase; parallax, video lightbox and advanced motion remain Phase 4.
+- Browser runtime remains unavailable; report HTTP/source verification separately from visual review.
+

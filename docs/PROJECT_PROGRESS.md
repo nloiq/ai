@@ -1,44 +1,44 @@
 ﻿# NLO IQ project progress
 
 Updated: 2026-10-23 (Asia/Baghdad).
-Current phase: **2 — Project Foundation**.
-Status: **Delivered for review; awaiting explicit Phase 2 approval**.
-Approved phases: **0 and 1**, explicitly approved by the user. Selected design: revised Concept A, engineering folio.
-Last approved checkpoint: 4215e1e (revised Phase 1 and recovered GitHub sync).
+Current phase: **3 — Public Website Prototype**.
+Status: **Delivered for visual review; awaiting explicit Phase 3 approval**.
+Approved phases: **0, 1 and 2**. Phase 2 approval received before this work.
+Selected design: revised Concept A, engineering folio.
+Last approved checkpoint: 30a0a15 (Phase 2 foundation and seed preview).
 
 ## Completed
 
-- Phase 0 discovery/architecture and Phase 1 visual system.
-- Four confirmed business areas: low-current engineering, software solutions, SCADA integration and system automation.
-- .NET 10 MVC solution with four architectural projects and DI.
-- Stable MySQL EF Core 10 provider, migration and verified MySQL connection.
-- Created dedicated development schema; charset utf8mb4; server 8.0.43.
-- Added four demo services/eight translations; repeated seeding inserts zero and does not overwrite content.
-- Development-only database initialization and bilingual database-backed foundation page.
-- Shared Tailwind v4 theme tokens, light/dark/system controls and Arabic interface resources/RTL.
-- Builds, migration consistency, HTTP smoke checks, production seed rejection and secret publish exclusion verified.
-- npm audits clear after patched watcher pin; .NET vulnerable-package report clear.
+- .NET 10 layered MVC foundation, stable EF/MySQL provider and verified MySQL database.
+- Four confirmed specialty categories with demo summaries and eight translations; database content preserved.
+- Shared theme tokens and localized English/Arabic routes.
+- Full public prototype: responsive navigation, hero, About, illustrated portfolio, database-backed services, Contact and footer.
+- Three original local engineering illustrations, clearly labeled as non-client concept studies.
+- Responsive menu and focus handling; sticky navigation; semantic headings and local anchor targets.
+- Reusable Razor section partials and 68 matching resource keys.
+- Build, JavaScript syntax and foundation/prototype HTTP checks passed.
 
 ## Preview
 
-Run dotnet run --project src/NLOIQ.Web --no-build.
 English http://127.0.0.1:5080/en/; Arabic http://127.0.0.1:5080/ar/.
-See PHASE_2_FOUNDATION.md, README.md and LOCAL_SETUP.md for exact instructions and limitations.
+Restart: dotnet run --project src/NLOIQ.Web --no-build.
+Verification: node tests/prototype-smoke.mjs with the app running.
+See PHASE_3_PROTOTYPE.md for review instructions, implementation files and limitations.
 
 ## Known limitations
 
-- Browser runtime failed to start; screenshots and responsive/theme/keyboard visual review remain unverified.
-- Foundation preview only: no full public site, CMS, authentication or publishing/revisions yet.
-- Seed summaries are demo copy; no fictional projects/clients/contact data seeded.
-- Final logo, actual project media, approved bilingual copy, contact information and hosting details are missing.
-- Docker unavailable; native MySQL used successfully.
-- Local credentials are ignored and excluded from publish. Production requires environment/secret configuration.
-- Provider license inventory and production deployment configuration remain handover work.
+- Browser runtime unavailable; screenshots, responsive visual inspection and actual menu/theme/keyboard interactions remain unverified.
+- About/service copy remains proposed/demo. Portfolio is illustration-only; no actual project claims.
+- Logo, real project media/video IDs, approved bilingual company text and verified contact details are missing.
+- Contact placeholders are explicit; no inquiry form or invented email/phone links.
+- Only services are database-backed now; full CMS content and publishing are future phases.
+- Parallax and video lightbox are Phase 4; no fake playback or motion claims.
+- Preview is Development-only. Production configuration/deployment and provider license inventory remain later work.
 
 ## Remaining phases
 
-3 Public prototype; 4 Motion; 5 Full content schema; 6 Identity/admin shell; 7 Core CMS; 8 Media/SEO/appearance; 9 Complete localization; 10 Publishing/revisions; 11 QA; 12 Deployment/handover. Each requires explicit approval. Do not start Phase 3 yet.
+4 Motion/interactions; 5 Full content schema; 6 Identity/admin shell; 7 Core CMS; 8 Media/SEO/appearance; 9 Complete localization; 10 Publishing/revisions; 11 QA; 12 Deployment/handover. Each requires explicit approval. Do not start Phase 4 yet.
 
 ## Review commands
 
-APPROVE PHASE advances one phase. REVISE modifies the current phase. SHOW PREVIEW reports the actual preview. EXPLAIN makes no changes. STATUS reports progress. ROLLBACK requires confirming what will be discarded before restoring the last approved checkpoint.
+APPROVE PHASE advances one phase. REVISE modifies the current phase. SHOW PREVIEW reports the actual preview. EXPLAIN makes no changes. STATUS reports progress. ROLLBACK requires confirming discarded changes before restoring an approved checkpoint.
