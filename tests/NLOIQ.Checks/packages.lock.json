@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "nloiq.application": {
+        "type": "Project",
+        "dependencies": {
+          "NLOIQ.Domain": "[1.0.0, )"
+        }
+      },
+      "nloiq.domain": {
+        "type": "Project"
+      }
+    }
+  }
+}

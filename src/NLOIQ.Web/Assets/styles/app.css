@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @source "../../Views/**/*.cshtml";
-@source "../../wwwroot/js/*.js";
+@source "../../wwwroot/js/*.{js,mjs}";
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @theme inline {
   --color-paper: var(--paper);
@@ -19,9 +19,19 @@
 }
 :root { color-scheme: light; --signal:#17665f; --paper:#f3efe5; --ink:#14271f; --muted:#53644f; --line:#bec3b2; --panel:#e6e6d9; --accent:#884125; --on-accent:#f3efe5; }
 :root[data-theme=dark] { color-scheme:dark; --signal:#82c6b8; --paper:#14271f; --ink:#f3efe5; --muted:#bdc8b0; --line:#53644f; --panel:#222722; --accent:#d8ad64; --on-accent:#14271f; }
-html { scroll-behavior:smooth; }
+html { scroll-behavior:smooth; scrollbar-gutter:stable; }
 :lang(ar) { font-family: Tahoma, Arial, sans-serif; }
 :lang(ar) .font-editorial { font-family: Tahoma, Arial, sans-serif; line-height:1.5; letter-spacing:0; }
 :focus-visible { outline:3px solid var(--accent); outline-offset:5px; }
 [hidden] { display:none !important; }
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *, *::before, *::after { animation:none !important; transition:none !important; } }
+
+/* Motion stays progressive: all content is visible before module initialization. */
+[data-reveal] { transition: opacity 450ms ease, transform 450ms ease; }
+.reveal-pending { opacity:0; transform:translateY(12px); }
+#project-dialog[open] { animation:dialog-enter 180ms ease-out; }
+@keyframes dialog-enter { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+@media (prefers-reduced-motion:reduce) { .reveal-pending { opacity:1; transform:none; } }
+
+#primary-navigation[data-menu-open=true] { animation:menu-enter 150ms ease-out; }
+@keyframes menu-enter { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }

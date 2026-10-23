@@ -13,6 +13,10 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 if (string.IsNullOrWhiteSpace(connectionString))
     throw new InvalidOperationException("Configure ConnectionStrings:DefaultConnection using local configuration or environment variables.");
 builder.Services.AddInfrastructure(connectionString);
+builder.Services.AddOptions<NLOIQ.Web.Configuration.PreviewOptions>()
+    .Bind(builder.Configuration.GetSection("Preview"))
+    .Validate(options => options.IsValid(), "Preview video settings require known project keys and valid 11-character YouTube IDs.")
+    .ValidateOnStart();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.AddControllersWithViews().AddViewLocalization();
 var app = builder.Build();
@@ -30,7 +34,7 @@ if (!app.Environment.IsDevelopment()) app.UseExceptionHandler("/error");
 app.Use(async (context, next) => {
     context.Response.Headers.XContentTypeOptions = "nosniff";
     context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
-    context.Response.Headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'";
+    context.Response.Headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; frame-src https://www.youtube-nocookie.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'";
     if (app.Environment.IsDevelopment()) context.Response.Headers["X-Robots-Tag"] = "noindex, nofollow";
     await next();
 });

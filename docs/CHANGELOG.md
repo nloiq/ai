@@ -63,3 +63,16 @@
 - Build, syntax, section/asset, translation and foundation checks passed; browser visual review remains unverified.
 - Awaiting Phase 3 approval; no Phase 4 implementation started.
 
+
+## 2026-10-23 — Phase 4 motion and interactions
+
+- Recorded Phase 3 approval.
+- Added bounded scroll layers, progressive reveals, hover/menu/header/service transitions and reduced-motion handling.
+- Added a safe, accessible project dialog with lazy YouTube loading, previous/next, Escape/backdrop, scroll lock and focus restoration.
+- Configured the user-supplied preview video and honest no-video fallback studies.
+- Added shared/server validation, fail-closed options and constrained frame-src CSP.
+- Added helper/server checks, five real Edge tests, scheduler measurements and reviewed screenshots.
+- Corrected keyboard focus wrapping and retained visible dialog controls after browser inspection.
+- All application/HTTP/interaction checks passed; actual external video playback remains unconfirmed.
+- Phase 4 awaits approval; Phase 5 has not started.
+

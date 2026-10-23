@@ -17,6 +17,7 @@ let menuOpen = false;
 function syncMenu() {
     navigation.hidden = !desktop.matches && !menuOpen;
     menuButton.setAttribute('aria-expanded', String(menuOpen));
+    navigation.dataset.menuOpen = String(menuOpen && !desktop.matches);
 }
 menuButton.hidden = false;
 menuButton.addEventListener('click', () => { menuOpen = !menuOpen; syncMenu(); });

@@ -10,11 +10,13 @@
 <script src="~/js/theme-init.js" asp-append-version="true"></script>
 <link rel="stylesheet" href="~/css/app.css" asp-append-version="true">
 <script src="~/js/app.js" asp-append-version="true" defer></script>
+<script src="~/js/motion.mjs" type="module" asp-append-version="true"></script>
+<script src="~/js/project-dialog.mjs" type="module" asp-append-version="true"></script>
 </head>
 <body class="bg-paper text-ink antialiased">
 <a href="#main" class="sr-only focus:not-sr-only focus:block focus:p-4">@Localizer["Skip"]</a>
 <div class="border-b border-line bg-panel px-5 py-3 text-xs leading-6 text-muted md:px-10"><div class="mx-auto flex max-w-[1500px] flex-wrap justify-between gap-x-8"><span>@Localizer["Demo"]</span><span class="text-signal">@Localizer["Phase"]</span></div></div>
-<header class="sticky top-0 z-30 border-b border-line bg-paper/95">
+<header id="site-header" class="sticky top-0 z-30 transition-shadow duration-200 motion-reduce:transition-none border-b border-line bg-paper/95">
 <div class="mx-auto flex max-w-[1500px] flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-4 md:px-10">
 <a href="/@Model.Culture/" class="flex min-h-11 items-center gap-3" aria-label="@Localizer["Home"]"><span class="border border-ink px-3 py-2 text-xl font-bold tracking-tight" dir="ltr">NLO IQ</span><span class="max-w-16 text-[10px] uppercase tracking-widest text-muted">@Localizer["Logo"]</span></a>
 <div class="ms-auto flex flex-wrap items-center gap-3 text-sm lg:order-3 lg:ms-0">
@@ -30,6 +32,7 @@
 <div class="mx-auto max-w-[1500px] px-5 md:px-10"><partial name="Sections/_Projects" model="Model" /><partial name="Sections/_Services" model="Model" /></div>
 <partial name="Sections/_Contact" model="Model" />
 </main>
+<partial name="_ProjectDialog" model="Model" />
 <footer class="bg-evergreen px-5 pb-8 pt-14 text-ivory md:px-10">
-<div class="mx-auto max-w-[1500px]"><div class="grid gap-10 border-b border-ivory/30 pb-12 md:grid-cols-[1.5fr_1fr_1fr]"><div><p class="font-editorial text-5xl" dir="ltr">NLO IQ<span class="text-gold">.</span></p><p class="mt-5 max-w-md text-sm leading-7 text-ivory/80">@Localizer["Intro"]</p></div><nav class="flex flex-col items-start gap-2 text-sm" aria-label="@Localizer["FooterNavigation"]"><a href="#about" class="inline-flex min-h-11 items-center">@Localizer["About"]</a><a href="#projects" class="inline-flex min-h-11 items-center">@Localizer["Projects"]</a><a href="#expertise" class="inline-flex min-h-11 items-center">@Localizer["Services"]</a><a href="#contact" class="inline-flex min-h-11 items-center">@Localizer["Contact"]</a></nav><div><p class="text-xs uppercase tracking-widest text-gold">@Localizer["ContactStatus"]</p><p class="mt-5 text-sm leading-7 text-ivory/80">@Localizer["ContactPending"]</p><p class="mt-4 text-xs leading-6 text-ivory/80">@Localizer["Logo"]</p></div></div><div class="flex flex-wrap justify-between gap-4 pt-6 text-xs leading-6 text-ivory/80"><p>@Localizer["Footer"]</p><p dir="ltr">© @DateTime.UtcNow.Year NLO IQ</p></div></div>
+<div class="mx-auto max-w-[1500px]"><div class="grid gap-10 border-b border-ivory/30 pb-12 md:grid-cols-[1.5fr_1fr_1fr]"><div><p data-parallax="8" class="font-editorial text-5xl" dir="ltr">NLO IQ<span class="text-gold">.</span></p><p class="mt-5 max-w-md text-sm leading-7 text-ivory/80">@Localizer["Intro"]</p></div><nav class="flex flex-col items-start gap-2 text-sm" aria-label="@Localizer["FooterNavigation"]"><a href="#about" class="inline-flex min-h-11 items-center">@Localizer["About"]</a><a href="#projects" class="inline-flex min-h-11 items-center">@Localizer["Projects"]</a><a href="#expertise" class="inline-flex min-h-11 items-center">@Localizer["Services"]</a><a href="#contact" class="inline-flex min-h-11 items-center">@Localizer["Contact"]</a></nav><div><p class="text-xs uppercase tracking-widest text-gold">@Localizer["ContactStatus"]</p><p class="mt-5 text-sm leading-7 text-ivory/80">@Localizer["ContactPending"]</p><p class="mt-4 text-xs leading-6 text-ivory/80">@Localizer["Logo"]</p></div></div><div class="flex flex-wrap justify-between gap-4 pt-6 text-xs leading-6 text-ivory/80"><p>@Localizer["Footer"]</p><p dir="ltr">© @DateTime.UtcNow.Year NLO IQ</p></div></div>
 </footer></body></html>

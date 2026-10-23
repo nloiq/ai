@@ -60,3 +60,14 @@ Concept A selected. Business areas confirmed by user: low-current engineering, s
 - Basic responsive navigation belongs to this phase; parallax, video lightbox and advanced motion remain Phase 4.
 - Browser runtime remains unavailable; report HTTP/source verification separately from visual review.
 
+
+## Phase 4 motion and interactions
+
+- Phase 3 approved explicitly; preserve its layout and database seed content.
+- User supplied YouTube video NNiszX0-A7M; assign it to the first illustrative study for interaction review without inventing a company project claim.
+- Use native dialog plus explicit focus-boundary wrap, always-available close/navigation controls and scrolling content area.
+- Construct embed URLs from validated IDs only; allow only youtube-nocookie in frame-src; create no initial iframe and remove it on close/navigation.
+- Use a single scheduled frame with cached geometry; disable parallax on mobile/reduced motion and reset on runtime preference changes.
+- Use installed Edge headlessly for actual browser tests after interactive runtime failures; no user's browser profile is accessed.
+- Keep actual playback review pending despite successful live document/title load; deterministic lifecycle test is separate.
+

@@ -7,7 +7,9 @@
   },
   "scripts": {
     "css:build": "tailwindcss -i src/NLOIQ.Web/Assets/styles/app.css -o src/NLOIQ.Web/wwwroot/css/app.css --minify",
-    "css:watch": "tailwindcss -i src/NLOIQ.Web/Assets/styles/app.css -o src/NLOIQ.Web/wwwroot/css/app.css --watch"
+    "css:watch": "tailwindcss -i src/NLOIQ.Web/Assets/styles/app.css -o src/NLOIQ.Web/wwwroot/css/app.css --watch",
+    "test:interactions": "node --test tests/interactions.test.mjs",
+    "test:browser": "playwright test"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
   },
   "homepage": "https://github.com/nloiq/ai#readme",
   "devDependencies": {
+    "@playwright/test": "1.64.1",
     "@tailwindcss/cli": "4.3.3",
     "tailwindcss": "4.3.3"
   },
