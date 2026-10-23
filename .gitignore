@@ -1,0 +1,23 @@
+# Local credentials and environment files
+**/appsettings.Local.json
+**/appsettings.*.Local.json
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+
+# Build outputs and tooling
+**/bin/
+**/obj/
+node_modules/
+.vs/
+.idea/
+*.user
+*.suo
+TestResults/
+artifacts/
+
+# Local media and logs
+**/App_Data/
+*.log
