@@ -84,3 +84,15 @@
 - Preserved Open study for illustration-only entries; Phase 4 approval remains pending.
 - Rebuilt, restarted and verified the dialog lifecycle browser test.
 
+
+## 2026-10-23 — Phase 5 database/content architecture
+
+- Recorded Phase 4 approval.
+- Added normalized immutable content snapshots, translations, media usage, settings, navigation/contact, SEO, schedules and audit models.
+- Added Identity persistence, three role definitions and zero user/password seeds.
+- Applied new schema/identity migrations and seeded 22 draft identities with 44 translations and three bundled media assets.
+- Preserved four existing preview services/eight translations; repeat initialization inserted zero.
+- Verified 16 rollback-only MySQL scenarios, server validation, migration consistency and retained HTTP/browser regressions.
+- Added schema documentation, ER diagram, inventory and read-only inspection command.
+- Phase 5 awaits approval; Phase 6 has not started.
+

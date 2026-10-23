@@ -45,3 +45,9 @@ dotnet list NLOIQ.sln package --vulnerable --include-transitive
 Smoke checks need the initialized database and running development application. They exercise real HTTP responses and database-backed English/Arabic content; they are not browser interaction or screenshot tests.
 
 The full Phase 1 design comparison remains available via node docs/design/serve.mjs on port 4173. The actual ASP.NET foundation runs on port 5080. Do not confuse the design-only preview with database-backed application behavior.
+
+## Phase 5 content fixtures
+
+The initialization command now also creates 22 draft-only content identities/revisions, 44 translations, metadata for the three actual bundled illustrations and SuperAdmin/Editor/Viewer role definitions. It creates no users or passwords. Existing preview tables remain intact.
+
+Run dotnet run --project src/NLOIQ.Web -- --inspect-content to read the new inventory. Database architecture and migration details are in PHASE_5_DATABASE.md and DATABASE_ARCHITECTURE.md. Upload workflows and administrator authentication are later phases.

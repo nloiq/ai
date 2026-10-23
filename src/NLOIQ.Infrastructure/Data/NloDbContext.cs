@@ -1,11 +1,34 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using NLOIQ.Domain.Content;
+using NLOIQ.Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLOIQ.Domain.Entities;
 namespace NLOIQ.Infrastructure.Data;
-public sealed class NloDbContext(DbContextOptions<NloDbContext> options) : DbContext(options)
+public sealed class NloDbContext(DbContextOptions<NloDbContext> options) : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>(options)
 {
     public DbSet<ServicePreview> ServicePreviews => Set<ServicePreview>();
+    public DbSet<ContentItem> ContentItems => Set<ContentItem>();
+    public DbSet<ContentRevision> ContentRevisions => Set<ContentRevision>();
+    public DbSet<ContentTranslation> ContentTranslations => Set<ContentTranslation>();
+    public DbSet<MediaAsset> MediaAssets => Set<MediaAsset>();
+    public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
+    public override int SaveChanges(bool acceptAllChangesOnSuccess)
+    {
+        ContentWriteGuard.Validate(this);
+        ContentWriteGuard.ValidatePublicationAsync(this, CancellationToken.None).GetAwaiter().GetResult();
+        return base.SaveChanges(acceptAllChangesOnSuccess);
+    }
+    public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+    {
+        ContentWriteGuard.Validate(this);
+        await ContentWriteGuard.ValidatePublicationAsync(this, cancellationToken);
+        return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+    }
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        base.OnModelCreating(builder);
+        ContentModelConfiguration.Configure(builder);
         builder.Entity<ServicePreview>(entity => {
             entity.ToTable("ServicePreviews"); entity.HasKey(x => x.Id);
             entity.Property(x => x.Key).HasMaxLength(40).IsRequired();

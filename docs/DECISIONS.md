@@ -71,3 +71,15 @@ Concept A selected. Business areas confirmed by user: low-current engineering, s
 - Use installed Edge headlessly for actual browser tests after interactive runtime failures; no user's browser profile is accessed.
 - Keep actual playback review pending despite successful live document/title load; deterministic lifecycle test is separate.
 
+
+## Phase 5 database architecture
+
+- Phase 4 approved; preserve its current lightbox/navigation behavior.
+- Use stable ContentItems, immutable ContentRevisions, shared revision-scoped ContentTranslations and typed snapshot tables.
+- Composite foreign keys constrain revision pointers/media/nav parents to their owners; pinned revision links protect composition.
+- Keep all new seed content draft/demo and leave the existing preview data path in place until Phase 7.
+- Add Identity persistence and role definitions now; login/bootstrap/admin remains Phase 6.
+- Enforce append-only history through the context, database relational constraints, publication prerequisites and optimistic root versions.
+- Use longtext for bodies with bounded application length; explicitly annotate MySQL root identity generation and rebuild dependent foreign keys in its correction migration.
+- Use rollback-only real-MySQL verification and a development-only read-only CLI inventory; no public schema endpoint.
+

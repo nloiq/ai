@@ -20,6 +20,20 @@ builder.Services.AddOptions<NLOIQ.Web.Configuration.PreviewOptions>()
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.AddControllersWithViews().AddViewLocalization();
 var app = builder.Build();
+if (args.Contains("--inspect-content", StringComparer.Ordinal))
+{
+    if (!app.Environment.IsDevelopment()) throw new InvalidOperationException("Content inspection is available only in Development.");
+    await using var scope = app.Services.CreateAsyncScope();
+    var database = scope.ServiceProvider.GetRequiredService<NloDbContext>();
+    var items = await database.ContentItems.AsNoTracking().OrderBy(item => item.Kind).ThenBy(item => item.Key).Select(item => new { item.Kind, item.Key, item.State, item.IsDemo, item.DraftRevisionId, item.PublishedRevisionId }).ToListAsync();
+    var report = new {
+        AppliedMigrations = (await database.Database.GetAppliedMigrationsAsync()).ToArray(),
+        Summary = new { ContentItems = items.Count, Revisions = await database.ContentRevisions.CountAsync(), Translations = await database.ContentTranslations.CountAsync(), MediaAssets = await database.MediaAssets.CountAsync(), Roles = await database.Roles.CountAsync(), Users = await database.Users.CountAsync(), Published = items.Count(item => item.State == NLOIQ.Domain.Content.PublicationState.Published) },
+        Items = items.Select(item => new { Kind = item.Kind.ToString(), item.Key, State = item.State.ToString(), item.IsDemo, HasDraft = item.DraftRevisionId.HasValue, HasPublished = item.PublishedRevisionId.HasValue })
+    };
+    Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(report, new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
+    return;
+}
 if (args.Contains("--initialize-database", StringComparer.Ordinal))
 {
     if (!app.Environment.IsDevelopment()) throw new InvalidOperationException("Demo initialization is allowed only in Development.");
@@ -27,7 +41,9 @@ if (args.Contains("--initialize-database", StringComparer.Ordinal))
     var database = scope.ServiceProvider.GetRequiredService<NloDbContext>();
     await database.Database.MigrateAsync();
     var inserted = await scope.ServiceProvider.GetRequiredService<DevelopmentSeeder>().SeedAsync();
-    Console.WriteLine($"Database initialized. Inserted {inserted} demo services; existing records preserved.");
+    var contentInserted = await scope.ServiceProvider.GetRequiredService<ContentArchitectureSeeder>()
+        .SeedAsync(app.Environment.WebRootPath, builder.Configuration["Preview:VideoIds:network"]);
+    Console.WriteLine($"Database initialized. Inserted {inserted} preview services and {contentInserted} draft content items; existing records preserved.");
     return;
 }
 if (!app.Environment.IsDevelopment()) app.UseExceptionHandler("/error");

@@ -10,6 +10,8 @@ public static class DependencyInjection
         services.AddDbContext<NloDbContext>(options => options.UseMySQL(connectionString));
         services.AddScoped<IPreviewContentReader, PreviewContentReader>();
         services.AddScoped<DevelopmentSeeder>();
+        services.AddScoped<ContentArchitectureSeeder>();
+        services.AddScoped<IPublishedContentReader, PublishedContentReader>();
         return services;
     }
 }
