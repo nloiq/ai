@@ -19,3 +19,6 @@ Date: 2026-10-23. All architecture choices below are proposed pending Phase 0 ap
 
 User revision: perform local configuration and Git setup now, before Phase 1. Store credentials only in ignored local configuration. Target private GitHub repository: nloiq/NLOIQ; remote is not created yet.
 
+
+User revision: use the existing https://github.com/nloiq/ai.git repository as origin instead of creating nloiq/NLOIQ. Keep main as the tracked branch and preserve existing repository visibility.
+

@@ -27,7 +27,7 @@ Approved phases: none.
 - MySQL credentials, schema, patch version and authenticated connection are unverified.
 - Docker daemon is unavailable; native MySQL is present.
 - Company assets/content and hosting information are missing.
-- Git initialized on main at user request; local checkpoint prepared. GitHub synchronization pending private repository creation.
+- Git initialized on main at user request; local checkpoint prepared. User selected https://github.com/nloiq/ai.git as origin; synchronization is verified through Git remote tracking.
 
 ## Review commands
 
@@ -37,7 +37,8 @@ APPROVE PHASE advances one phase. REVISE modifies the current phase. SHOW PREVIE
 
 - Supplied database connection saved in ignored appsettings.Local.json; tracked example contains no password.
 - Credentials supplied; authenticated database check remains pending Phase 2.
-- User requested an empty private nloiq/NLOIQ GitHub repository.
-- GitHub connector cannot create repositories; browser runtime failed to start. Remote creation/push remains pending.
+- User initially requested nloiq/NLOIQ, then explicitly selected existing repository https://github.com/nloiq/ai.git.
+- Origin configured as https://github.com/nloiq/ai.git. Remote had no refs before the initial push. Use git status -sb and git ls-remote origin refs/heads/main to verify synchronization. Repository visibility was not changed.
 - Phase 0 approval remains pending; no advancement to Phase 1.
+
 

@@ -15,3 +15,9 @@
 - Added .gitignore and local configuration instructions.
 - Initialized main branch; private GitHub repository creation and push remain pending.
 
+
+## GitHub remote selection
+
+- Configured the user-selected nloiq/ai repository as origin after confirming it had no remote refs.
+- Kept database credentials excluded from version control.
+
