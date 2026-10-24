@@ -1,0 +1,6 @@
+@model NLOIQ.Application.Content.ContentEdit
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> L
+@{Layout="_AdminLayout";ViewData["Title"]=L["WorkflowPreview"];var site=(NLOIQ.Application.Content.PublicSite)ViewData["PreviewSite"]!;}
+<partial name="_PreviewBanner" model="site" /><h1 class="my-7 text-3xl">@site.Page.Title</h1>
+<div id="cms-editor"><fieldset disabled class="space-y-6">@if(Model.Kind==NLOIQ.Domain.Content.ContentKind.SiteSettings){<partial name="~/Views/Cms/_SiteFields.cshtml" model="Model.Site" />}else{<partial name="~/Views/Cms/_ThemeFields.cshtml" model="Model.Theme" />}</fieldset></div>
+@foreach(var image in site.Page.Images){<img src="@image.Url" alt="@image.Alt" width="@image.Width" height="@image.Height" class="my-6 max-h-40 max-w-full object-contain">}

@@ -1,0 +1,3 @@
+@model NLOIQ.Application.Content.PublicSite
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> L
+<aside class="border-b border-accent bg-panel px-5 py-4 text-sm text-ink md:px-10" role="status"><div class="mx-auto flex max-w-[1500px] flex-wrap items-center justify-between gap-4"><div><strong>@L["WorkflowPreview"]</strong><p class="mt-2 leading-7">@L["WorkflowPreviewHelp"]</p></div><a href="/@Model.Culture/admin/content/@Model.Page.Id/history" class="inline-flex min-h-11 items-center underline">@L["WorkflowHistory"]</a></div></aside>

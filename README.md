@@ -1,6 +1,6 @@
 ﻿# NLO IQ
 
-ASP.NET Core MVC modular monolith — Phase 9 localization review.
+ASP.NET Core MVC modular monolith — Phase 10 publishing workflow review.
 
 ## Quick start (PowerShell)
 
@@ -24,7 +24,7 @@ The launch profile selects Development and http://127.0.0.1:5080.
 
 Initialization applies all committed migrations and creates the initial preview services, draft content fixtures and role definitions. Re-running it preserves existing records. It creates no user/password. Demo initialization and the fallback prototype are Development-only; normal startup does not migrate or seed. On a new checkout, run `dotnet run --project src/NLOIQ.Web --no-build -- --create-admin` to create your own administrator interactively.
 
-See [Phase 7 functional review](docs/PHASE_7_CMS.md), [local setup](docs/LOCAL_SETUP.md), and [progress](docs/PROJECT_PROGRESS.md). Media/SEO/appearance editors are now available; Arabic/English localization is available; the complete publishing workflow remains Phase 10.
+See [Phase 7 functional review](docs/PHASE_7_CMS.md), [local setup](docs/LOCAL_SETUP.md), and [progress](docs/PROJECT_PROGRESS.md). Media/SEO/appearance editors are now available; Arabic/English localization is available; private previews, revision restoration and scheduled publication are available.
 
 Interaction checks: npm.cmd run test:interactions and dotnet run --project tests/NLOIQ.Checks. With the app running and Microsoft Edge installed, npm.cmd run test:browser runs the real browser checks. Screenshots are in docs/previews/phase4/. Actual external YouTube playback still needs user review.
 
@@ -44,4 +44,8 @@ Use the existing login for [media library](http://127.0.0.1:5080/en/admin/media)
 
 ## Phase 9 localization
 
-Open the [translation overview](http://127.0.0.1:5080/en/admin/translations) or [Arabic overview](http://127.0.0.1:5080/ar/admin/translations). Review the published [English language demonstration](http://127.0.0.1:5080/en/pages/localization-review) and [Arabic demonstration](http://127.0.0.1:5080/ar/pages/مراجعة-اللغات), then use the header language link. Visiting `/` remembers your last language. See [Phase 9 instructions](docs/PHASE_9_LOCALIZATION.md). Phase 10 requires explicit approval.
+Open the [translation overview](http://127.0.0.1:5080/en/admin/translations) or [Arabic overview](http://127.0.0.1:5080/ar/admin/translations). Review the published [English language demonstration](http://127.0.0.1:5080/en/pages/localization-review) and [Arabic demonstration](http://127.0.0.1:5080/ar/pages/مراجعة-اللغات), then use the header language link. Visiting `/` remembers your last language. See [Phase 9 instructions](docs/PHASE_9_LOCALIZATION.md). Phase 9 is approved. Phase 10 is delivered for review.
+
+## Phase 10 publishing workflow
+
+Open [revision history](http://127.0.0.1:5080/en/admin/content/334/history) and the [private saved draft](http://127.0.0.1:5080/en/admin/content/334/preview) using the existing login. Compare the [published review page](http://127.0.0.1:5080/en/pages/publishing-review). See [Phase 10 review](docs/PHASE_10_PUBLISHING.md) for restoration, scheduling in Baghdad time and verification. Phase 11 requires explicit approval.

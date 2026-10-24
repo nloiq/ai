@@ -72,7 +72,7 @@ public sealed class ContactEdit
 }
 public sealed class SocialEdit { public string Platform { get; set; } = "linkedin"; [Required(ErrorMessage="ValidationRequired"),StringLength(1000,ErrorMessage="ValidationLength")] public string Url { get; set; } = ""; }
 public sealed class HoursEdit { [Range(0,6,ErrorMessage="ValidationRange")] public int DayOfWeek { get; set; } public bool IsClosed { get; set; } public TimeOnly? OpensAt { get; set; } public TimeOnly? ClosesAt { get; set; } }
-public sealed record ContentListRow(long Id, ContentKind Kind, string Key, PublicationState State, bool IsDemo, long Version, int Revision, string Title, SectionKind? SectionKind=null);
+public sealed record ContentListRow(long Id, ContentKind Kind, string Key, PublicationState State, bool IsDemo, long Version, int Revision, string Title, SectionKind? SectionKind=null,bool HasUnpublishedChanges=false);
 public sealed record ContentChoice(long Id, string Label);
 public sealed record MediaChoice(long Id, string Label, bool IsDemo,string AltEn="",string AltAr="");
 public sealed record EditorChoices(IReadOnlyList<ContentChoice> Sections,IReadOnlyList<ContentChoice> Categories,IReadOnlyList<MediaChoice> Media);
@@ -80,9 +80,10 @@ public interface IContentEditor
 {
     Task<IReadOnlyList<ContentListRow>> ListAsync(ContentKind? kind, string? search, CancellationToken ct = default, string culture = "en");
     Task<ContentEdit?> GetAsync(long id, CancellationToken ct = default);
+    Task<ContentEdit?> GetRevisionAsync(long id,long revisionId,CancellationToken ct=default);
     Task<EditorChoices> ChoicesAsync(CancellationToken ct = default, string culture = "en");
     Task<long> SaveAsync(ContentEdit model, Guid actorId, string actorLabel, CancellationToken ct = default);
-    Task TransitionAsync(long id, long version, string action, bool verified, Guid actorId, string actorLabel, CancellationToken ct = default);
+    Task TransitionAsync(long id, long version, string action, bool verified, Guid actorId, string actorLabel, CancellationToken ct = default, long? executingScheduleId=null);
 }
 public sealed class ContentConflictException : Exception { public ContentConflictException() : base("Content changed in another session. Reload before saving.") {} }
 

@@ -60,6 +60,9 @@ public sealed class PublishedRoute
 }
 public sealed class PublicationSchedule
 {
+    public Guid? RequestedByUserId { get; set; }
+    public string RequestedByLabel { get; set; } = "";
+    public DateTime CreatedUtc { get; set; } = DateTime.UtcNow;
     public long Id { get; set; }
     public long ContentItemId { get; set; }
     public long RevisionId { get; set; }

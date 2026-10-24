@@ -14,8 +14,8 @@ namespace NLOIQ.Web.Controllers;
 public sealed class CmsController(IContentEditor editor,NLOIQ.Application.Interfaces.IPublishedContentReader published,IStringLocalizer<SharedResource> localizer,ILogger<CmsController> logger):Controller
 {
     [HttpGet("")]
-    public async Task<IActionResult> Index(ContentKind? kind,SectionKind? sectionKind,string? search,CancellationToken ct) {
-        var rows=await editor.ListAsync(kind,search,ct,RouteData.Values["culture"]?.ToString()??"en");if(!User.IsInRole("SuperAdmin"))rows=rows.Where(x=>x.Kind is not (ContentKind.SiteSettings or ContentKind.ThemeSettings)).ToList();if(sectionKind.HasValue)rows=rows.Where(x=>x.Kind==ContentKind.Section&&x.SectionKind==sectionKind).ToList();return View(rows);
+    public async Task<IActionResult> Index(ContentKind? kind,SectionKind? sectionKind,PublicationState? state,bool changes,string? search,CancellationToken ct) {
+        var rows=await editor.ListAsync(kind,search,ct,RouteData.Values["culture"]?.ToString()??"en");if(!User.IsInRole("SuperAdmin"))rows=rows.Where(x=>x.Kind is not (ContentKind.SiteSettings or ContentKind.ThemeSettings)).ToList();if(state.HasValue)rows=rows.Where(x=>x.State==state).ToList();if(changes)rows=rows.Where(x=>x.HasUnpublishedChanges).ToList();if(sectionKind.HasValue)rows=rows.Where(x=>x.Kind==ContentKind.Section&&x.SectionKind==sectionKind).ToList();return View(rows);
     }
     [HttpGet("new")]
     public async Task<IActionResult> Create(ContentKind kind=ContentKind.Page,SectionKind sectionKind=SectionKind.Hero,CancellationToken ct=default)

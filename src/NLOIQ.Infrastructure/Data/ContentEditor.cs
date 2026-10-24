@@ -15,19 +15,23 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
         if(!string.IsNullOrWhiteSpace(search)) query=query.Where(x=>x.Key.Contains(search));
         return await query.OrderBy(x=>x.Kind).ThenBy(x=>x.Key).Select(x=>new ContentListRow(x.Id,x.Kind,x.Key,x.State,x.IsDemo,x.Version,
             x.DraftRevision==null?0:x.DraftRevision.RevisionNumber,
-            db.ContentTranslations.Where(t=>t.RevisionId==x.DraftRevisionId && t.Culture==culture).Select(t=>t.Title).FirstOrDefault()??x.Key,db.Set<ContentSection>().Where(section=>section.RevisionId==x.DraftRevisionId).Select(section=>(SectionKind?)section.SectionKind).FirstOrDefault())).ToListAsync(ct);
+            db.ContentTranslations.Where(t=>t.RevisionId==x.DraftRevisionId && t.Culture==culture).Select(t=>t.Title).FirstOrDefault()??x.Key,db.Set<ContentSection>().Where(section=>section.RevisionId==x.DraftRevisionId).Select(section=>(SectionKind?)section.SectionKind).FirstOrDefault(),x.DraftRevisionId!=x.PublishedRevisionId)).ToListAsync(ct);
     }
     private Task<List<T>> Children<T>(long revisionId,CancellationToken ct) where T:class,IRevisionOwned => db.Set<T>().AsNoTracking().Where(x=>x.RevisionId==revisionId).ToListAsync(ct);
     public async Task<EditorChoices> ChoicesAsync(CancellationToken ct=default,string culture="en") => new(
         await db.ContentItems.AsNoTracking().Where(x=>x.Kind==ContentKind.Section && x.State!=PublicationState.Archived).OrderBy(x=>x.Key).Select(x=>new ContentChoice(x.Id,db.ContentTranslations.Where(t=>t.RevisionId==x.DraftRevisionId&&t.Culture==culture).Select(t=>t.Title).FirstOrDefault()??x.Key)).ToListAsync(ct),
         await db.ContentItems.AsNoTracking().Where(x=>x.Kind==ContentKind.ProjectCategory && x.State!=PublicationState.Archived).OrderBy(x=>x.Key).Select(x=>new ContentChoice(x.Id,db.ContentTranslations.Where(t=>t.RevisionId==x.DraftRevisionId&&t.Culture==culture).Select(t=>t.Title).FirstOrDefault()??x.Key)).ToListAsync(ct),
         await db.MediaAssets.AsNoTracking().OrderBy(x=>x.Id).Select(x=>new MediaChoice(x.Id,x.OriginalFileName,x.IsDemo,db.Set<MediaAssetTranslation>().Where(t=>t.MediaAssetId==x.Id&&t.Culture=="en").Select(t=>t.AltText).FirstOrDefault()??"",db.Set<MediaAssetTranslation>().Where(t=>t.MediaAssetId==x.Id&&t.Culture=="ar").Select(t=>t.AltText).FirstOrDefault()??"")).ToListAsync(ct));
-    public async Task<ContentEdit?> GetAsync(long id,CancellationToken ct=default)
+    public Task<ContentEdit?> GetAsync(long id,CancellationToken ct=default)=>LoadAsync(id,null,ct);
+    public Task<ContentEdit?> GetRevisionAsync(long id,long revisionId,CancellationToken ct=default)=>LoadAsync(id,revisionId,ct);
+    private async Task<ContentEdit?> LoadAsync(long id,long? revisionId,CancellationToken ct)
     {
         var item=await db.ContentItems.AsNoTracking().SingleOrDefaultAsync(x=>x.Id==id,ct);
         if(item is null || !Supported.Contains(item.Kind))return null;
         var model=new ContentEdit{Id=id,Version=item.Version,Kind=item.Kind,Key=item.Key};
-        if(item.DraftRevisionId is not long revision)return model;
+        var selected=revisionId??item.DraftRevisionId;
+        if(selected is not long revision)return model;
+        if(!await db.ContentRevisions.AnyAsync(x=>x.Id==revision&&x.ContentItemId==id,ct))return null;
         foreach(var t in await Children<ContentTranslation>(revision,ct)) {
             var text=new TranslationEdit{Title=t.Title,Summary=t.Summary,Body=t.Body,Slug=t.Slug,PrimaryButtonLabel=t.PrimaryButtonLabel,SecondaryButtonLabel=t.SecondaryButtonLabel};
             if(t.Culture=="en")model.English=text;else if(t.Culture=="ar")model.Arabic=text;
@@ -155,13 +159,14 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
             }
             if(m.Kind is ContentKind.Contact or ContentKind.Footer or ContentKind.SiteSettings)foreach(var (social,index) in m.Social.Select((x,i)=>(x,i)))db.Add(new SocialLink{Revision=revision,Platform=social.Platform,Url=social.Url,DisplayOrder=index});
             await db.SaveChangesAsync(ct);
+            await ScheduleCancellation.PendingAsync(db,item.Id,actorId,actorLabel,"DraftChanged",null,ct);
             item.DraftRevisionId=revision.Id;
             if(item.State==PublicationState.Archived)item.State=PublicationState.Draft;
             db.AuditLogs.Add(new(){ActorUserId=actorId,ActorLabel=actorLabel,Action=m.Id==0?"CreateDraft":"SaveDraft",ContentItemId=item.Id,RevisionId=revision.Id});
             await db.SaveChangesAsync(ct);if(tx is not null)await tx.CommitAsync(ct);return item.Id;
         }catch(DbUpdateConcurrencyException){throw new ContentConflictException();}
     }
-    public async Task TransitionAsync(long id,long version,string action,bool verified,Guid actorId,string actorLabel,CancellationToken ct=default)
+    public async Task TransitionAsync(long id,long version,string action,bool verified,Guid actorId,string actorLabel,CancellationToken ct=default,long? executingScheduleId=null)
     {
         actorLabel=actorLabel[..Math.Min(actorLabel.Length,160)];
         Require(action is "publish" or "unpublish" or "archive","Unknown publication action.");
@@ -185,6 +190,7 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
             item.IsDemo=false;item.State=PublicationState.Published;item.PublishedRevisionId=revisionId;
             if(item.Kind is ContentKind.Page or ContentKind.Project)foreach(var t in translations)db.Add(new PublishedRoute{ContentItemId=id,RevisionId=revisionId,Culture=t.Culture,Scope=item.Kind==ContentKind.Page?"pages":"projects",Slug=t.Slug!});
         } else {item.State=action=="archive"?PublicationState.Archived:PublicationState.Draft;item.PublishedRevisionId=null;}
+        await ScheduleCancellation.PendingAsync(db,id,actorId,actorLabel,"PublicationChanged",executingScheduleId,ct);
         db.AuditLogs.Add(new(){ActorUserId=actorId,ActorLabel=actorLabel,Action=action,ContentItemId=id,RevisionId=item.DraftRevisionId,DetailsJson=JsonSerializer.Serialize(new{verified})});
         try{await db.SaveChangesAsync(ct);if(tx is not null)await tx.CommitAsync(ct);}catch(DbUpdateConcurrencyException){throw new ContentConflictException();}
     }

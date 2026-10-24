@@ -36,6 +36,7 @@ try {
         start.Environment["NLO_AUTH_FIXTURES"] = JsonSerializer.Serialize(accounts);
         start.Environment["NLO_AUTH_MODE"] = mode;
         start.Environment["NLO_SITE_ID"] = (await db.ContentItems.Where(x=>x.Kind==NLOIQ.Domain.Content.ContentKind.SiteSettings).Select(x=>x.Id).SingleAsync()).ToString();
+        start.Environment["NLO_CONTENT_ID"] = (await db.ContentItems.Where(x=>x.Kind==NLOIQ.Domain.Content.ContentKind.Page).Select(x=>x.Id).FirstAsync()).ToString();
         using var process = Process.Start(start)!; await process.WaitForExitAsync();
         if(process.ExitCode!=0) throw new Exception("Authentication browser checks failed.");
     }

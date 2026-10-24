@@ -414,4 +414,46 @@
 <data name="StudyScada" xml:space="preserve"><value>سكادا</value></data>
 <data name="StudyAutomation" xml:space="preserve"><value>البرمجيات والأتمتة</value></data>
 <data name="RequestFailed" xml:space="preserve"><value>تعذر إكمال الطلب.</value></data>
+<data name="WorkflowHistory" xml:space="preserve"><value>سجل المراجعات</value></data>
+<data name="WorkflowPreview" xml:space="preserve"><value>معاينة النسخة المحفوظة</value></data>
+<data name="WorkflowPreviewHelp" xml:space="preserve"><value>معاينة خاصة. لا تنشر هذه النسخة المحفوظة تلقائيًا. تستخدم الأقسام المرتبطة نسخها المثبتة، وتستخدم بقية عناصر الموقع النسخ المنشورة.</value></data>
+<data name="WorkflowSaveFirst" xml:space="preserve"><value>احفظ التغييرات قبل المعاينة. تعرض المعاينة النسخ المحفوظة.</value></data>
+<data name="WorkflowHistoryHelp" xml:space="preserve"><value>استعد أي نسخة محفوظة كمسودة جديدة. تبقى المراجعات السابقة والمحتوى المنشور كما هما حتى تنشر المسودة المستعادة. الأوقات المعروضة بتوقيت بغداد.</value></data>
+<data name="WorkflowRestore" xml:space="preserve"><value>استعادة كمسودة جديدة</value></data>
+<data name="WorkflowRestoreConfirm" xml:space="preserve"><value>أريد استبدال المسودة الحالية بنسخة من هذه المراجعة.</value></data>
+<data name="WorkflowRestored" xml:space="preserve"><value>تمت استعادة المراجعة كمسودة جديدة. لم يتغير المحتوى المنشور.</value></data>
+<data name="WorkflowSchedule" xml:space="preserve"><value>جدولة النشر</value></data>
+<data name="WorkflowScheduleHelp" xml:space="preserve"><value>جدول المسودة المحفوظة الحالية قبل الموعد بدقيقة على الأقل ولسنة قادمة كحد أقصى. يؤدي حفظ مسودة أخرى أو استعادتها أو تغيير حالة النشر إلى إلغاء الجداول المعلقة. يجب أن يعمل التطبيق؛ تنفذ الجداول المتأخرة التي لم تتغير بعد إعادة التشغيل. تعاد مراجعة صلاحية الناشر عند التنفيذ.</value></data>
+<data name="WorkflowSchedules" xml:space="preserve"><value>جداول النشر</value></data>
+<data name="WorkflowBaghdad" xml:space="preserve"><value>وقت النشر — بغداد (UTC+03:00)</value></data>
+<data name="WorkflowBaghdadShort" xml:space="preserve"><value>توقيت بغداد</value></data>
+<data name="WorkflowScheduled" xml:space="preserve"><value>تمت جدولة نشر هذه النسخة المحفوظة.</value></data>
+<data name="WorkflowCancel" xml:space="preserve"><value>إلغاء الجدولة</value></data>
+<data name="WorkflowCancelled" xml:space="preserve"><value>تم إلغاء جدول النشر.</value></data>
+<data name="WorkflowError" xml:space="preserve"><value>تعذر إكمال إجراء النشر. أعد تحميل الصفحة وراجع اختياراتك.</value></data>
+<data name="WorkflowCurrentDraft" xml:space="preserve"><value>المسودة الحالية</value></data>
+<data name="WorkflowSystem" xml:space="preserve"><value>النظام / بيانات تجريبية</value></data>
+<data name="WorkflowState" xml:space="preserve"><value>حالة النشر</value></data>
+<data name="WorkflowChanges" xml:space="preserve"><value>تغييرات غير منشورة</value></data>
+<data name="WorkflowStatePending" xml:space="preserve"><value>بانتظار التنفيذ</value></data>
+<data name="WorkflowStateCompleted" xml:space="preserve"><value>تم النشر</value></data>
+<data name="WorkflowStateCancelled" xml:space="preserve"><value>ملغى</value></data>
+<data name="WorkflowStateFailed" xml:space="preserve"><value>تعذر التنفيذ — تلزم المراجعة</value></data>
+<data name="WorkflowReasonDraftChanged" xml:space="preserve"><value>تغيرت المسودة الحالية. راجع النسخة الجديدة وأعد جدولتها.</value></data>
+<data name="WorkflowReasonPublicationChanged" xml:space="preserve"><value>أدى تغيير حالة النشر يدويًا إلى إلغاء هذا الجدول.</value></data>
+<data name="WorkflowReasonManual" xml:space="preserve"><value>ألغاه مسؤول الموقع.</value></data>
+<data name="WorkflowReasonReplaced" xml:space="preserve"><value>استبدل بجدول آخر.</value></data>
+<data name="WorkflowReasonPublisherUnavailable" xml:space="preserve"><value>الناشر الأصلي غير نشط أو مقفل أو لم تعد لديه صلاحية النشر.</value></data>
+<data name="WorkflowReasonValidationFailed" xml:space="preserve"><value>فشل التحقق من شروط النشر. بقيت النسخة المنشورة السابقة كما هي. راجع الترجمات والروابط والوسائط والعناصر المرتبطة.</value></data>
+<data name="AuditActionRestoreRevision" xml:space="preserve"><value>استعادة مراجعة</value></data>
+<data name="AuditActionSchedulePublish" xml:space="preserve"><value>جدولة نشر</value></data>
+<data name="AuditActionCancelSchedule" xml:space="preserve"><value>إلغاء جدول نشر</value></data>
+<data name="AuditActionCancelSchedules" xml:space="preserve"><value>إلغاء الجداول المعلقة</value></data>
+<data name="AuditActionScheduledPublish" xml:space="preserve"><value>اكتمل النشر المجدول</value></data>
+<data name="AuditActionScheduleFailed" xml:space="preserve"><value>تعذر النشر المجدول</value></data>
+<data name="Confirm restoration before continuing." xml:space="preserve"><value>أكد الاستعادة قبل المتابعة.</value></data>
+<data name="Choose a valid Baghdad publication time." xml:space="preserve"><value>اختر وقت نشر صحيحًا بتوقيت بغداد.</value></data>
+<data name="Schedule must be between one minute and one year ahead." xml:space="preserve"><value>يجب أن يكون وقت النشر بين دقيقة واحدة وسنة قادمة.</value></data>
+<data name="Scheduled publisher is no longer authorized." xml:space="preserve"><value>لم تعد لدى الناشر صلاحية تنفيذ النشر المجدول.</value></data>
+<data name="Unsupported revision schema." xml:space="preserve"><value>بنية هذه المراجعة غير مدعومة.</value></data>
 </root>

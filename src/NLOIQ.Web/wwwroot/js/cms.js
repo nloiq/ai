@@ -4,7 +4,7 @@
  const tabs=[...form.querySelectorAll('[data-tab]')];
  const panels=[...form.querySelectorAll('[data-translation-panel]')];
  function activate(id){for(const panel of panels){panel.hidden=panel.id!==id;panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby',panel.id.replace('-panel','-tab'));}for(const tab of tabs){const active=tab.dataset.tab===id;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;}}
- form.querySelector('[data-translation-tabs]').hidden=false;activate(location.hash.toLowerCase().includes('arabic')?'arabic-panel':location.hash.toLowerCase().includes('english')?'english-panel':document.documentElement.lang==='ar'?'arabic-panel':'english-panel');
+ const tablist=form.querySelector('[data-translation-tabs]');if(tablist)tablist.hidden=false;activate(location.hash.toLowerCase().includes('arabic')?'arabic-panel':location.hash.toLowerCase().includes('english')?'english-panel':document.documentElement.lang==='ar'?'arabic-panel':'english-panel');
  for(const tab of tabs){tab.addEventListener('click',()=>activate(tab.dataset.tab));tab.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const next=event.key==='Home'?tabs[0]:event.key==='End'?tabs.at(-1):tabs.find(x=>x!==tab);activate(next.dataset.tab);next.focus();});}
  form.addEventListener('invalid',event=>{const panel=event.target.closest('[data-translation-panel]');if(panel)activate(panel.id);},true);
  let dirty=false;function changed(){dirty=true;for(const button of document.querySelectorAll('form[action$="/status"] button'))button.disabled=true;}

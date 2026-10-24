@@ -272,6 +272,70 @@ await Scenario("independent Arabic slugs and localized editor titles survive pub
     Check((await reader.ReadAsync("ar",form.Arabic.Slug))!.Page.Title==form.Arabic.Title,"Private Arabic draft leaked.");
     Check(await reader.ReadAsync("en",form.Arabic.Slug) is null,"Arabic route resolved under English prefix.");
 });
+await Scenario("private revision previews include drafts without changing public eligibility",async db=>{
+    var editor=new ContentEditor(db);var form=Draft(ContentKind.Page);var id=await editor.SaveAsync(form,actorId,"Rollback-only preview check");var revision=(await db.ContentItems.SingleAsync(x=>x.Id==id)).DraftRevisionId!.Value;
+    var reader=new PublicSiteReader(db,new PublishedContentReader(db));Check(await reader.ReadAsync("en",form.English.Slug) is null,"Draft route leaked.");
+    Check((await reader.PreviewAsync(id,revision,"ar")) is {IsPreview:true} preview&&preview.Page.Title==form.Arabic.Title,"Private Arabic preview missing.");
+    var other=await editor.SaveAsync(Draft(ContentKind.Page),actorId,"Rollback-only preview check");Check(await reader.PreviewAsync(other,revision,"en") is null,"Cross-owner revision preview allowed.");
+});
+await Scenario("restore creates an immutable draft and preserves exact pinned section revisions",async db=>{
+    var editor=new ContentEditor(db);var workflow=new ContentWorkflow(db,editor,TimeProvider.System);
+    var block=Draft(ContentKind.Section);var sid=await editor.SaveAsync(block,actorId,"Rollback-only restore check");await Publish(editor,sid);
+    var page=Draft(ContentKind.Page);page.Sections=[new(){ContentItemId=sid}];var id=await editor.SaveAsync(page,actorId,"Rollback-only restore check");await Publish(editor,id);var root=await db.ContentItems.SingleAsync(x=>x.Id==id);var source=root.DraftRevisionId!.Value;var pin=await db.Set<PageSection>().Where(x=>x.RevisionId==source).Select(x=>x.SectionRevisionId).SingleAsync();
+    var update=(await editor.GetAsync(sid))!;update.English.Title="Updated linked section";await editor.SaveAsync(update,actorId,"Rollback-only restore check");await Publish(editor,sid);
+    var changed=(await editor.GetAsync(id))!;changed.English.Title="Private replacement";await editor.SaveAsync(changed,actorId,"Rollback-only restore check");var before=root.Version;
+    await workflow.RestoreAsync(id,source,before,actorId,"Rollback-only restore check");Check(root.DraftRevisionId!=source&&root.PublishedRevisionId==source,"Restore changed history or publication.");
+    Check((await editor.GetAsync(id))!.English.Title==page.English.Title,"Restored text differs.");Check(await db.Set<PageSection>().Where(x=>x.RevisionId==root.DraftRevisionId).Select(x=>x.SectionRevisionId).SingleAsync()==pin,"Restore silently retargeted a section.");
+    Check((await workflow.HistoryAsync(id))!.Revisions.Count==3,"History missing revisions.");
+    try{await workflow.RestoreAsync(id,source,before,actorId,"stale restore");throw new Exception("Stale restore accepted");}catch(ContentConflictException){}
+    var foreign=await db.ContentRevisions.Where(x=>x.ContentItemId==sid).Select(x=>x.Id).FirstAsync();try{await workflow.RestoreAsync(id,foreign,root.Version,actorId,"foreign restore");throw new Exception("Cross-owner restore accepted");}catch(KeyNotFoundException){}
+});
+await Scenario("restore remaps project cover gallery alt and SEO relationships",async db=>{
+    var root=new ContentItem{Kind=ContentKind.Project,Key="restore-"+Guid.NewGuid().ToString("N")};var source=Revision(root,1,"Original project");var asset=await db.MediaAssets.FirstAsync();
+    var media=new RevisionMedia{Revision=source,MediaAssetId=asset.Id,UsageKey="hero",DisplayOrder=4};db.Add(new ContentProject{Revision=source,CoverMediaUsage=media,DisplayOrder=3,YouTubeVideoId="NNiszX0-A7M"});db.Add(new ProjectMedia{Revision=source,MediaUsage=media,DisplayOrder=7});
+    db.Add(new RevisionMediaTranslation{Revision=source,RevisionMedia=media,Culture="en",AltText="Historical image",Caption="Historical caption"});db.Add(new RevisionMediaTranslation{Revision=source,RevisionMedia=media,Culture="ar",AltText="صورة تاريخية"});
+    db.Add(new SeoMetadata{Revision=source,Culture="en",Title="Historical SEO",OpenGraphMediaUsage=media});await db.SaveChangesAsync();root.DraftRevisionId=source.Id;await db.SaveChangesAsync();
+    var editor=new ContentEditor(db);var workflow=new ContentWorkflow(db,editor,TimeProvider.System);await workflow.RestoreAsync(root.Id,source.Id,root.Version,actorId,"Rollback-only graph check");var revision=root.DraftRevisionId!.Value;
+    var copy=await db.Set<ContentProject>().SingleAsync(x=>x.RevisionId==revision);var copiedMedia=await db.Set<RevisionMedia>().SingleAsync(x=>x.RevisionId==revision);Check(copy.CoverMediaUsageId==copiedMedia.Id&&copiedMedia.Id!=media.Id&&copiedMedia.DisplayOrder==4,"Cover remapping failed.");
+    Check((await db.Set<ProjectMedia>().SingleAsync(x=>x.RevisionId==revision)).MediaUsageId==copiedMedia.Id,"Gallery remapping failed.");Check((await db.Set<ProjectMedia>().SingleAsync(x=>x.RevisionId==revision)).DisplayOrder==7,"Gallery ordering changed.");Check((await db.Set<SeoMetadata>().SingleAsync(x=>x.RevisionId==revision)).OpenGraphMediaUsageId==copiedMedia.Id,"SEO image remapping failed.");Check((await db.Set<RevisionMediaTranslation>().SingleAsync(x=>x.RevisionId==revision&&x.Culture=="en")).Caption=="Historical caption","Historical caption lost.");
+});
+await Scenario("restore preserves navigation parent and target references and all settings payloads",async db=>{
+    var editor=new ContentEditor(db);var workflow=new ContentWorkflow(db,editor,TimeProvider.System);
+    foreach(var kind in new[]{ContentKind.Navigation,ContentKind.Contact,ContentKind.Footer,ContentKind.SiteSettings,ContentKind.ThemeSettings,ContentKind.Service,ContentKind.ProjectCategory,ContentKind.Section}) {
+        var root=await db.ContentItems.FirstAsync(x=>x.Kind==kind);
+        if(kind==ContentKind.Contact){var form=(await editor.GetAsync(root.Id))!;form.Contacts=[new(){Kind=ContactKind.Email,Value="review@example.invalid",LabelEn="Review email",LabelAr="بريد المراجعة"}];form.Hours=[new(){DayOfWeek=0,OpensAt=new TimeOnly(8,30),ClosesAt=new TimeOnly(17,15)}];form.Social=[new(){Platform="linkedin",Url="https://example.invalid/review"}];await editor.SaveAsync(form,actorId,"Rollback-only structured restore check");}
+        if(kind==ContentKind.SiteSettings){var form=(await editor.GetAsync(root.Id))!;var asset=await db.MediaAssets.FirstAsync();form.Site.LogoAssetId=asset.Id;form.Site.FaviconAssetId=asset.Id;form.Site.LogoAltEn="Review logo";form.Site.LogoAltAr="شعار للمراجعة";await editor.SaveAsync(form,actorId,"Rollback-only logo restore check");}
+        var source=root.DraftRevisionId!.Value;var snapshot=(await editor.GetRevisionAsync(root.Id,source))!;
+        await workflow.RestoreAsync(root.Id,source,root.Version,actorId,"Rollback-only module restore check");var copy=(await editor.GetAsync(root.Id))!;
+        Check(copy.English.Title==snapshot.English.Title&&copy.Arabic.Body==snapshot.Arabic.Body,"Restored translation differs.");Check(copy.Links.Count==snapshot.Links.Count&&copy.Contacts.Count==snapshot.Contacts.Count&&copy.Hours.Count==snapshot.Hours.Count&&copy.Social.Count==snapshot.Social.Count,"Structured rows lost.");Check(copy.Site.SiteName==snapshot.Site.SiteName&&copy.Theme.Copper==snapshot.Theme.Copper&&copy.Site.LogoAssetId==snapshot.Site.LogoAssetId&&copy.Site.FaviconAssetId==snapshot.Site.FaviconAssetId,"Settings lost.");if(kind==ContentKind.Contact)Check(copy.Hours.Single().OpensAt==new TimeOnly(8,30)&&copy.Contacts.Single().Value=="review@example.invalid","Contact hours/value lost.");
+    }
+});
+await Scenario("restored navigation remaps parent IDs while retaining target identities",async db=>{
+    var root=new ContentItem{Kind=ContentKind.Navigation,Key="nav-restore-"+Guid.NewGuid().ToString("N")};var source=Revision(root,1,"Navigation restore check");db.Add(new NavigationSettings{Revision=source,Location="main"});var target=await db.ContentItems.Where(x=>x.Kind==ContentKind.Page).Select(x=>x.Id).FirstAsync();
+    var parent=new NavigationItem{Revision=source,Href="/{culture}/",DisplayOrder=0};var child=new NavigationItem{Revision=source,Parent=parent,Href="#contact",TargetContentItemId=target,DisplayOrder=1};db.Add(parent);db.Add(child);
+    foreach(var item in new[]{parent,child})foreach(var culture in new[]{"en","ar"})db.Add(new NavigationTranslation{Revision=source,NavigationItem=item,Culture=culture,Label=culture=="en"?"Review link":"رابط مراجعة"});await db.SaveChangesAsync();root.DraftRevisionId=source.Id;await db.SaveChangesAsync();
+    var editor=new ContentEditor(db);var workflow=new ContentWorkflow(db,editor,TimeProvider.System);await workflow.RestoreAsync(root.Id,source.Id,root.Version,actorId,"Rollback-only hierarchy restore check");
+    var copies=await db.Set<NavigationItem>().Where(x=>x.RevisionId==root.DraftRevisionId).OrderBy(x=>x.DisplayOrder).ToListAsync();Check(copies[0].Id!=parent.Id&&copies[1].ParentItemId==copies[0].Id&&copies[1].TargetContentItemId==target,"Hierarchy or stable target lost.");Check(await db.Set<NavigationTranslation>().CountAsync(x=>x.RevisionId==root.DraftRevisionId)==4,"Labels missing.");
+});
+await Scenario("scheduled publication pins a revision and executes once at due time",async db=>{
+    var editor=new ContentEditor(db);var clock=new PublishingClock(DateTimeOffset.UtcNow);var workflow=new ContentWorkflow(db,editor,clock);var form=Draft(ContentKind.Page);var id=await editor.SaveAsync(form,actorId,"Rollback-only schedule check");var root=await db.ContentItems.SingleAsync(x=>x.Id==id);
+    await workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,clock.GetUtcNow().UtcDateTime.AddMinutes(2),true,actorId,"Rollback-only schedule check");var job=await db.Set<PublicationSchedule>().SingleAsync(x=>x.ContentItemId==id);
+    Check(root.State==PublicationState.Draft&&root.PublishedRevisionId is null,"Schedule published early.");await workflow.ExecuteAsync(job.Id);Check(job.State==ScheduleState.Pending,"Not-due job ran.");clock.Current=clock.Current.AddMinutes(3);Check((await workflow.DueAsync()).Contains(job.Id),"Due job missing.");await workflow.ExecuteAsync(job.Id);Check(job.State==ScheduleState.Completed&&root.PublishedRevisionId==job.RevisionId,"Due job did not publish pinned revision.");var count=await db.AuditLogs.CountAsync(x=>x.ContentItemId==id&&x.Action=="ScheduledPublish");await workflow.ExecuteAsync(job.Id);Check(await db.AuditLogs.CountAsync(x=>x.ContentItemId==id&&x.Action=="ScheduledPublish")==count,"Job ran twice.");
+});
+await Scenario("saving another draft and manual publication cancel pending schedules",async db=>{
+    var editor=new ContentEditor(db);var clock=new PublishingClock(DateTimeOffset.UtcNow);var workflow=new ContentWorkflow(db,editor,clock);var id=await editor.SaveAsync(Draft(ContentKind.Page),actorId,"Rollback-only schedule check");var root=await db.ContentItems.SingleAsync(x=>x.Id==id);
+    await workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,clock.GetUtcNow().UtcDateTime.AddMinutes(2),true,actorId,"Rollback-only schedule check");var update=(await editor.GetAsync(id))!;update.English.Title="Changed after approval";await editor.SaveAsync(update,actorId,"Rollback-only schedule check");Check((await db.Set<PublicationSchedule>().SingleAsync(x=>x.ContentItemId==id)).State==ScheduleState.Cancelled,"Draft save retained schedule.");
+    await workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,clock.GetUtcNow().UtcDateTime.AddMinutes(2),true,actorId,"Rollback-only schedule check");await Publish(editor,id);Check(!await db.Set<PublicationSchedule>().AnyAsync(x=>x.ContentItemId==id&&x.State==ScheduleState.Pending),"Manual publish retained schedule.");
+});
+await Scenario("schedule cancellation rescheduling and publisher revocation are enforced",async db=>{
+    var editor=new ContentEditor(db);var clock=new PublishingClock(DateTimeOffset.UtcNow);var workflow=new ContentWorkflow(db,editor,clock);var id=await editor.SaveAsync(Draft(ContentKind.Page),actorId,"Rollback-only schedule check");var root=await db.ContentItems.SingleAsync(x=>x.Id==id);var due=clock.GetUtcNow().UtcDateTime.AddMinutes(2);
+    await workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,due,true,actorId,"Rollback-only schedule check");var job=await db.Set<PublicationSchedule>().SingleAsync(x=>x.ContentItemId==id);await workflow.CancelAsync(id,job.Id,root.Version,job.Version,actorId,"Rollback-only schedule check");
+    await workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,due,true,actorId,"Rollback-only schedule check");var second=await db.Set<PublicationSchedule>().SingleAsync(x=>x.ContentItemId==id&&x.State==ScheduleState.Pending);var user=await db.Users.SingleAsync(x=>x.Id==actorId);user.IsActive=false;await db.SaveChangesAsync();clock.Current=clock.Current.AddMinutes(3);await workflow.ExecuteAsync(second.Id);Check(second.State==ScheduleState.Failed&&second.FailureCode=="PublisherUnavailable"&&root.PublishedRevisionId is null,"Revoked publisher's schedule executed.");
+});
+await Scenario("schedule confirmation time bounds and publication checks reject invalid jobs",async db=>{
+    var editor=new ContentEditor(db);var clock=new PublishingClock(DateTimeOffset.UtcNow);var workflow=new ContentWorkflow(db,editor,clock);var form=Draft(ContentKind.Page);form.Arabic.Title="";var id=await editor.SaveAsync(form,actorId,"Rollback-only schedule check");var root=await db.ContentItems.SingleAsync(x=>x.Id==id);var due=clock.GetUtcNow().UtcDateTime.AddMinutes(2);
+    await Rejected(()=>workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,due,false,actorId,"check"),"Confirm");await Rejected(()=>workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,clock.GetUtcNow().UtcDateTime,false,actorId,"check"),"Confirm");await Rejected(()=>workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,clock.GetUtcNow().UtcDateTime,true,actorId,"check"),"one minute");await Rejected(()=>workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,due,true,actorId,"check"),"titles");Check(!await db.Set<PublicationSchedule>().AnyAsync(x=>x.ContentItemId==id),"Invalid schedule persisted.");
+});
 var markup=ContentMarkup.Render("**bold** *italic* [safe](https://example.com) [bad](javascript:alert) <script>alert(1)</script>\n- Item");
 Check(markup.Contains("<strong>bold</strong>")&&markup.Contains("<em>italic</em>")&&markup.Contains("<ul>")&&!markup.Contains("<script>")&&!markup.Contains("href=\"javascript:"),"Unsafe formatted text.");Console.WriteLine("PASS: formatted text is encoded and only safe links render");
 
@@ -283,3 +347,5 @@ await using(var verify=new NloDbContext(options))
     Check(await verify.ContentRevisions.CountAsync()==baselineRevisions,"Revision fixture count changed.");
     Console.WriteLine("PASS: all verification transactions rolled back; preview and draft fixtures retained.");
 }
+
+sealed class PublishingClock(DateTimeOffset now):TimeProvider { public DateTimeOffset Current {get;set;}=now; public override DateTimeOffset GetUtcNow()=>Current; }

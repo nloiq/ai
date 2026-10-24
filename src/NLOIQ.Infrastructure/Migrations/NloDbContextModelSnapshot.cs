@@ -819,9 +819,24 @@ namespace NLOIQ.Infrastructure.Migrations
                     b.Property<long>("ContentItemId")
                         .HasColumnType("bigint");
 
+                    b.Property<DateTime>("CreatedUtc")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
                     b.Property<string>("FailureCode")
                         .HasMaxLength(80)
                         .HasColumnType("varchar(80)");
+
+                    b.Property<string>("RequestedByLabel")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(160)
+                        .HasColumnType("varchar(160)")
+                        .HasDefaultValue("");
+
+                    b.Property<Guid?>("RequestedByUserId")
+                        .HasColumnType("char(36)");
 
                     b.Property<long>("RevisionId")
                         .HasColumnType("bigint");
@@ -840,8 +855,9 @@ namespace NLOIQ.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContentItemId", "RevisionId")
-                        .IsUnique();
+                    b.HasIndex("RequestedByUserId");
+
+                    b.HasIndex("ContentItemId", "RevisionId");
 
                     b.HasIndex("State", "ScheduledUtc");
 
@@ -1678,6 +1694,11 @@ namespace NLOIQ.Infrastructure.Migrations
 
             modelBuilder.Entity("NLOIQ.Domain.Content.PublicationSchedule", b =>
                 {
+                    b.HasOne("NLOIQ.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("RequestedByUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("NLOIQ.Domain.Content.ContentRevision", null)
                         .WithMany()
                         .HasForeignKey("ContentItemId", "RevisionId")

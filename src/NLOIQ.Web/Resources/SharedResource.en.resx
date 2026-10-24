@@ -414,4 +414,46 @@
 <data name="StudyScada" xml:space="preserve"><value>SCADA</value></data>
 <data name="StudyAutomation" xml:space="preserve"><value>SOFTWARE + AUTOMATION</value></data>
 <data name="RequestFailed" xml:space="preserve"><value>The request could not be completed.</value></data>
+<data name="WorkflowHistory" xml:space="preserve"><value>Revision history</value></data>
+<data name="WorkflowPreview" xml:space="preserve"><value>Saved revision preview</value></data>
+<data name="WorkflowPreviewHelp" xml:space="preserve"><value>Private preview. This saved revision is not automatically published. Linked sections use their pinned revisions; other site content uses published versions.</value></data>
+<data name="WorkflowSaveFirst" xml:space="preserve"><value>Save your changes before previewing. Previews show saved revisions.</value></data>
+<data name="WorkflowHistoryHelp" xml:space="preserve"><value>Restore any saved version as a new draft. Existing revisions and published content stay intact until you publish the restored draft. Times shown are Baghdad time.</value></data>
+<data name="WorkflowRestore" xml:space="preserve"><value>Restore as new draft</value></data>
+<data name="WorkflowRestoreConfirm" xml:space="preserve"><value>I want to replace the working draft with a copy of this revision.</value></data>
+<data name="WorkflowRestored" xml:space="preserve"><value>Revision restored as a new draft. Published content is unchanged.</value></data>
+<data name="WorkflowSchedule" xml:space="preserve"><value>Schedule publication</value></data>
+<data name="WorkflowScheduleHelp" xml:space="preserve"><value>Schedule the current saved draft, at least one minute and at most one year ahead. Saving or restoring another draft, or changing publication, cancels pending schedules. The application must be running; overdue unchanged schedules run after restart. Your publishing permission is checked again when the job runs.</value></data>
+<data name="WorkflowSchedules" xml:space="preserve"><value>Publication schedules</value></data>
+<data name="WorkflowBaghdad" xml:space="preserve"><value>Publication time — Baghdad (UTC+03:00)</value></data>
+<data name="WorkflowBaghdadShort" xml:space="preserve"><value>Baghdad time</value></data>
+<data name="WorkflowScheduled" xml:space="preserve"><value>Publication scheduled for this saved revision.</value></data>
+<data name="WorkflowCancel" xml:space="preserve"><value>Cancel schedule</value></data>
+<data name="WorkflowCancelled" xml:space="preserve"><value>Publication schedule cancelled.</value></data>
+<data name="WorkflowError" xml:space="preserve"><value>The publishing action could not be completed. Reload and check your selections.</value></data>
+<data name="WorkflowCurrentDraft" xml:space="preserve"><value>Current draft</value></data>
+<data name="WorkflowSystem" xml:space="preserve"><value>System / development seed</value></data>
+<data name="WorkflowState" xml:space="preserve"><value>Publication state</value></data>
+<data name="WorkflowChanges" xml:space="preserve"><value>Unpublished changes</value></data>
+<data name="WorkflowStatePending" xml:space="preserve"><value>Pending</value></data>
+<data name="WorkflowStateCompleted" xml:space="preserve"><value>Published</value></data>
+<data name="WorkflowStateCancelled" xml:space="preserve"><value>Cancelled</value></data>
+<data name="WorkflowStateFailed" xml:space="preserve"><value>Failed — review required</value></data>
+<data name="WorkflowReasonDraftChanged" xml:space="preserve"><value>The working draft changed. Review and schedule the new revision.</value></data>
+<data name="WorkflowReasonPublicationChanged" xml:space="preserve"><value>A manual publication change cancelled this schedule.</value></data>
+<data name="WorkflowReasonManual" xml:space="preserve"><value>Cancelled by an administrator.</value></data>
+<data name="WorkflowReasonReplaced" xml:space="preserve"><value>Replaced by another schedule.</value></data>
+<data name="WorkflowReasonPublisherUnavailable" xml:space="preserve"><value>The original publisher is inactive, locked, or no longer has publishing permission.</value></data>
+<data name="WorkflowReasonValidationFailed" xml:space="preserve"><value>Publication validation failed. The previous public version remains unchanged. Review translations, routes, media and dependencies.</value></data>
+<data name="AuditActionRestoreRevision" xml:space="preserve"><value>Restore revision</value></data>
+<data name="AuditActionSchedulePublish" xml:space="preserve"><value>Schedule publication</value></data>
+<data name="AuditActionCancelSchedule" xml:space="preserve"><value>Cancel publication schedule</value></data>
+<data name="AuditActionCancelSchedules" xml:space="preserve"><value>Cancel pending schedules</value></data>
+<data name="AuditActionScheduledPublish" xml:space="preserve"><value>Scheduled publication completed</value></data>
+<data name="AuditActionScheduleFailed" xml:space="preserve"><value>Scheduled publication failed</value></data>
+<data name="Confirm restoration before continuing." xml:space="preserve"><value>Confirm restoration before continuing.</value></data>
+<data name="Choose a valid Baghdad publication time." xml:space="preserve"><value>Choose a valid Baghdad publication time.</value></data>
+<data name="Schedule must be between one minute and one year ahead." xml:space="preserve"><value>Schedule must be between one minute and one year ahead.</value></data>
+<data name="Scheduled publisher is no longer authorized." xml:space="preserve"><value>Scheduled publisher is no longer authorized.</value></data>
+<data name="Unsupported revision schema." xml:space="preserve"><value>Unsupported revision schema.</value></data>
 </root>

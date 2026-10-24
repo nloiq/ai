@@ -28,7 +28,11 @@ internal static class ContentWriteGuard
         foreach (var entry in database.ChangeTracker.Entries<ContentItem>().Where(x => x.Entity.State == PublicationState.Published &&
                      (x.State == EntityState.Added || (x.State == EntityState.Modified && (x.Property(item => item.State).IsModified || x.Property(item => item.PublishedRevisionId).IsModified)))))
         {
-            var item = entry.Entity;
+            await ValidateCandidateAsync(database,entry.Entity,cancellationToken);
+        }
+    }
+    internal static async Task ValidateCandidateAsync(NloDbContext database, ContentItem item, CancellationToken cancellationToken)
+    {
             if (item.IsDemo) throw new InvalidOperationException("Demo content cannot be published. Verify and replace sample material first.");
             if (item.PublishedRevisionId is not long revisionId) throw new InvalidOperationException("Published content requires a published revision pointer.");
             var revision = await database.ContentRevisions.AsNoTracking().SingleOrDefaultAsync(x => x.Id == revisionId && x.ContentItemId == item.Id, cancellationToken)
@@ -60,6 +64,13 @@ internal static class ContentWriteGuard
             if (item.Kind == ContentKind.Project && await database.Set<ProjectCategoryAssignment>().AnyAsync(link => link.RevisionId == revisionId &&
                 !database.ContentRevisions.Any(target => target.Id == link.CategoryRevisionId && database.ContentItems.Any(owner => owner.Id == target.ContentItemId && owner.State == PublicationState.Published && !owner.IsDemo && owner.PublishedRevisionId == target.Id)), cancellationToken))
                 throw new InvalidOperationException("Project categories must be published before the project.");
+        if(item.PublishedRevisionId is long candidate) {
+            if(item.Kind==ContentKind.Navigation && await database.Set<NavigationItem>().AnyAsync(link=>link.RevisionId==candidate&&link.IsVisible&&
+                (!database.Set<NavigationTranslation>().Any(text=>text.NavigationItemId==link.Id&&text.Culture=="en"&&text.Label.Trim()!="")||!database.Set<NavigationTranslation>().Any(text=>text.NavigationItemId==link.Id&&text.Culture=="ar"&&text.Label.Trim()!="")),cancellationToken))
+                throw new InvalidOperationException("Visible navigation requires both labels.");
+            if(item.Kind==ContentKind.Contact && await database.Set<ContactDetail>().AnyAsync(detail=>detail.RevisionId==candidate&&
+                (!database.Set<ContactTranslation>().Any(text=>text.ContactDetailId==detail.Id&&text.Culture=="en"&&text.Label.Trim()!="")||!database.Set<ContactTranslation>().Any(text=>text.ContactDetailId==detail.Id&&text.Culture=="ar"&&text.Label.Trim()!="")),cancellationToken))
+                throw new InvalidOperationException("Contact details require both labels.");
         }
     }
 }

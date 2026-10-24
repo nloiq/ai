@@ -16,7 +16,7 @@ public sealed class PublicNode
     public string? VideoId { get; set; }public bool ShowCopyright { get; set; }=true;
     public List<PublicImage> Images { get; set; }=[];public List<PublicLink> Links { get; set; }=[];public List<PublicContact> Contacts { get; set; }=[];public List<PublicLink> Social { get; set; }=[];public List<PublicHours> Hours { get; set; }=[];public List<string> Categories { get; set; }=[];
 }
-public sealed record PublicSite(string Culture,PublicNode Page,IReadOnlyList<PublicNode> Sections,IReadOnlyList<PublicNode> Projects,IReadOnlyList<PublicNode> Services,PublicNode? Navigation,PublicNode? FooterNavigation,PublicNode? Contact,PublicNode? Footer,string AlternateUrl);
+public sealed record PublicSite(string Culture,PublicNode Page,IReadOnlyList<PublicNode> Sections,IReadOnlyList<PublicNode> Projects,IReadOnlyList<PublicNode> Services,PublicNode? Navigation,PublicNode? FooterNavigation,PublicNode? Contact,PublicNode? Footer,string AlternateUrl,bool IsPreview=false);
 public interface IPublicSiteReader
 {
     Task<PublicSite?> ReadAsync(string culture,string? slug=null,bool project=false,CancellationToken ct=default);

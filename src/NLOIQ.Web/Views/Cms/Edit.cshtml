@@ -10,6 +10,7 @@ Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary RowData(string collecti
 @if(TempData["CmsNotice"] is string notice){<p role="status" class="mb-6 border border-line bg-panel p-4 text-signal">@notice</p>}
 @if(TempData["CmsError"] is string error){<p role="alert" class="mb-6 border border-accent p-4">@error</p>}
 @if(ViewData["PublishedPath"] is string live){<a href="@live" class="mb-6 inline-flex min-h-11 items-center text-sm underline underline-offset-4">@L["CmsViewPublished"]</a>}
+@if(Model.Id!=0){<nav class="mb-6 flex flex-wrap gap-4 text-sm"><a href="/@culture/admin/content/@Model.Id/preview" target="_blank" rel="noopener" class="inline-flex min-h-11 items-center underline">@L["WorkflowPreview"]</a><a href="/@culture/admin/content/@Model.Id/history" class="inline-flex min-h-11 items-center underline">@L["WorkflowHistory"]</a></nav><p class="mb-5 text-xs text-muted">@L["WorkflowSaveFirst"]</p>}
 <form method="post" asp-antiforgery="true" id="cms-editor" class="space-y-8">
 <input asp-for="Id" type="hidden"><input asp-for="Version" type="hidden"><input asp-for="Kind" type="hidden">
 <div asp-validation-summary="All" class="text-accent" role="alert"></div>

@@ -154,8 +154,11 @@ internal static class ContentModelConfiguration
         routes.HasOne<ContentRevision>().WithMany().HasForeignKey(x => new { x.ContentItemId, x.RevisionId }).HasPrincipalKey(x => new { x.ContentItemId, x.Id }).OnDelete(DeleteBehavior.Restrict);
         var schedule = model.Entity<PublicationSchedule>(); schedule.ToTable("PublicationSchedules"); schedule.HasKey(x => x.Id);
         schedule.Property(x => x.State).HasConversion<string>().HasMaxLength(16); schedule.Property(x => x.Version).IsConcurrencyToken(); schedule.Property(x => x.FailureCode).HasMaxLength(80);
-        schedule.HasIndex(x => new { x.State, x.ScheduledUtc }); schedule.HasIndex(x => new { x.ContentItemId, x.RevisionId }).IsUnique();
+        schedule.HasIndex(x => new { x.State, x.ScheduledUtc }); schedule.HasIndex(x => new { x.ContentItemId, x.RevisionId });
         schedule.HasOne<ContentRevision>().WithMany().HasForeignKey(x => new { x.ContentItemId, x.RevisionId }).HasPrincipalKey(x => new { x.ContentItemId, x.Id }).OnDelete(DeleteBehavior.Restrict);
+        schedule.Property(x=>x.RequestedByLabel).HasMaxLength(160).HasDefaultValue("");
+        schedule.Property(x=>x.CreatedUtc).HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+        schedule.HasOne<ApplicationUser>().WithMany().HasForeignKey(x=>x.RequestedByUserId).OnDelete(DeleteBehavior.Restrict);
         var audit = model.Entity<AuditLog>(); audit.ToTable("AuditLogs"); audit.HasKey(x => x.Id);
         audit.Property(x => x.ActorLabel).HasMaxLength(160).IsRequired(); audit.Property(x => x.Action).HasMaxLength(80).IsRequired(); audit.Property(x => x.DetailsJson).HasColumnType("longtext");
         audit.HasIndex(x => x.OccurredUtc); audit.HasIndex(x => new { x.ContentItemId, x.OccurredUtc }); audit.HasIndex(x => new { x.ActorUserId, x.OccurredUtc });

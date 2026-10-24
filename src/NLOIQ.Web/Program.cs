@@ -79,6 +79,7 @@ builder.Services.AddAntiforgery(options => {
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true).AddViewLocalization().AddDataAnnotationsLocalization(options => options.DataAnnotationLocalizerProvider = (_, factory) => factory.Create(typeof(NLOIQ.Web.SharedResource)));
 builder.Services.AddTransient<Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>, NLOIQ.Web.Localization.LocalizedMvcOptions>();
+builder.Services.AddHostedService<NLOIQ.Web.Publishing.PublicationWorker>();
 var app = builder.Build();
 if (args.Contains("--create-admin", StringComparer.Ordinal))
 {
@@ -94,7 +95,7 @@ if (args.Contains("--inspect-content", StringComparer.Ordinal))
     var items = await database.ContentItems.AsNoTracking().OrderBy(item => item.Kind).ThenBy(item => item.Key).Select(item => new { item.Kind, item.Key, item.State, item.IsDemo, item.DraftRevisionId, item.PublishedRevisionId }).ToListAsync();
     var report = new {
         AppliedMigrations = (await database.Database.GetAppliedMigrationsAsync()).ToArray(),
-        Summary = new { ContentItems = items.Count, Revisions = await database.ContentRevisions.CountAsync(), Translations = await database.ContentTranslations.CountAsync(), MediaAssets = await database.MediaAssets.CountAsync(), Roles = await database.Roles.CountAsync(), Users = await database.Users.CountAsync(), Published = items.Count(item => item.State == NLOIQ.Domain.Content.PublicationState.Published) },
+        Summary = new { ContentItems = items.Count, Revisions = await database.ContentRevisions.CountAsync(), Translations = await database.ContentTranslations.CountAsync(), MediaAssets = await database.MediaAssets.CountAsync(), Roles = await database.Roles.CountAsync(), Users = await database.Users.CountAsync(), Published = items.Count(item => item.State == NLOIQ.Domain.Content.PublicationState.Published), PublicationSchedules = await database.Set<NLOIQ.Domain.Content.PublicationSchedule>().CountAsync(), PendingSchedules = await database.Set<NLOIQ.Domain.Content.PublicationSchedule>().CountAsync(x=>x.State==NLOIQ.Domain.Content.ScheduleState.Pending) },
         Items = items.Select(item => new { Kind = item.Kind.ToString(), item.Key, State = item.State.ToString(), item.IsDemo, HasDraft = item.DraftRevisionId.HasValue, HasPublished = item.PublishedRevisionId.HasValue })
     };
     Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(report, new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
