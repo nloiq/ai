@@ -32,7 +32,7 @@
 </div>
 <nav id="primary-navigation" class="flex basis-full flex-wrap items-center gap-x-6 gap-y-2 py-2 text-sm lg:basis-auto lg:py-0" aria-label="@Localizer["Navigation"]"><a href="#about" class="inline-flex min-h-11 items-center">@Localizer["About"]</a><a href="#projects" class="inline-flex min-h-11 items-center">@Localizer["Projects"]</a><a href="#expertise" class="inline-flex min-h-11 items-center">@Localizer["Services"]</a><a href="#contact" class="inline-flex min-h-11 items-center border-b border-accent text-accent">@Localizer["Contact"] <span class="ms-2" aria-hidden="true">@(Model.IsArabic ? "↖" : "↗")</span></a></nav>
 </div></header>
-<main id="main">
+<main id="main" tabindex="-1">
 <div class="mx-auto max-w-[1500px] px-5 md:px-10"><partial name="Sections/_Hero" model="Model" /></div>
 <partial name="Sections/_About" model="Model" />
 <div class="mx-auto max-w-[1500px] px-5 md:px-10"><partial name="Sections/_Projects" model="Model" /><partial name="Sections/_Services" model="Model" /></div>

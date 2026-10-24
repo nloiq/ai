@@ -1,0 +1,609 @@
+{
+  "scanner": "4.14.0",
+  "pages": [
+    {
+      "path": "/en/missing-quality-page",
+      "theme": "light",
+      "width": 1440,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/missing-quality-page",
+      "theme": "light",
+      "width": 1440,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/",
+      "theme": "light",
+      "width": 1440,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-valid-attr-value",
+          "count": 6
+        },
+        {
+          "id": "color-contrast",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "path": "/en/pages/publishing-review",
+      "theme": "light",
+      "width": 1440,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/account/login",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/",
+      "theme": "dark",
+      "width": 1440,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-valid-attr-value",
+          "count": 6
+        },
+        {
+          "id": "color-contrast",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "path": "/en/pages/publishing-review",
+      "theme": "dark",
+      "width": 1440,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/account/login",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-valid-attr-value",
+          "count": 6
+        },
+        {
+          "id": "color-contrast",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "path": "/ar/pages/مراجعة-النشر",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/account/login",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "aria-valid-attr-value",
+          "count": 6
+        },
+        {
+          "id": "color-contrast",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "path": "/ar/pages/مراجعة-النشر",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/account/login",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "open-image-dialog",
+      "violations": []
+    },
+    {
+      "path": "/en/admin",
+      "theme": "light",
+      "width": 1440,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/content",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/translations",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/media",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/content/new?kind=Page",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/content/new?kind=Section",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/content/new?kind=Project",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "/en/admin/content/new?kind=ProjectCategory",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/content/new?kind=Service",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/content/new?kind=Navigation",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/content/new?kind=Contact",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/content/new?kind=Footer",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/settings/site",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/settings/appearance",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/seo",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/audit",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/content/334/history",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/en/admin/content/334/preview",
+      "theme": "light",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/content",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/translations",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/media",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Page",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Section",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Project",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "/ar/admin/content/new?kind=ProjectCategory",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Service",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Navigation",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Contact",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Footer",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/settings/site",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/settings/appearance",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/seo",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/audit",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/content/334/history",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "path": "/ar/admin/content/334/preview",
+      "theme": "dark",
+      "width": 390,
+      "violations": [],
+      "incomplete": []
+    }
+  ],
+  "security": [
+    {
+      "path": "/.git/config",
+      "status": 404
+    },
+    {
+      "path": "/appsettings.json",
+      "status": 404
+    },
+    {
+      "path": "/appsettings.Local.json",
+      "status": 404
+    },
+    {
+      "path": "/App_Data/media",
+      "status": 404
+    },
+    {
+      "path": "/src/NLOIQ.Web/Program.cs",
+      "status": 404
+    }
+  ],
+  "metrics": [
+    {
+      "route": "/en/",
+      "domNodes": 280,
+      "navigation": [
+        {
+          "ttfbMs": 10,
+          "domContentLoadedMs": 52
+        }
+      ],
+      "resources": [
+        {
+          "path": "/js/theme-init.js",
+          "bytes": 362
+        },
+        {
+          "path": "/css/app.css",
+          "bytes": 30458
+        },
+        {
+          "path": "/brand/867.css",
+          "bytes": 497
+        },
+        {
+          "path": "/js/app.js",
+          "bytes": 2211
+        },
+        {
+          "path": "/js/motion.mjs",
+          "bytes": 3621
+        },
+        {
+          "path": "/js/project-dialog.mjs",
+          "bytes": 5140
+        },
+        {
+          "path": "/js/interaction-utils.mjs",
+          "bytes": 929
+        }
+      ]
+    }
+  ],
+  "controlContrast": [
+    {
+      "path": "/en/account/login",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/en/account/login",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/ar/account/login",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/ar/account/login",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/en/admin/content/new?kind=Page",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/en/admin/content/new?kind=Section",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/en/admin/content/new?kind=Project",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/en/admin/content/new?kind=ProjectCategory",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/en/admin/content/new?kind=Service",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/en/admin/content/new?kind=Navigation",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/en/admin/content/new?kind=Contact",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/en/admin/content/new?kind=Footer",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/en/admin/settings/site",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/en/admin/settings/appearance",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/en/admin/content/334/history",
+      "theme": "light",
+      "ratio": 3.9866876422628303
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Page",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Section",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Project",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/ar/admin/content/new?kind=ProjectCategory",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Service",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Navigation",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Contact",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/ar/admin/content/new?kind=Footer",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/ar/admin/settings/site",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/ar/admin/settings/appearance",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    },
+    {
+      "path": "/ar/admin/content/334/history",
+      "theme": "dark",
+      "ratio": 3.424184169738936
+    }
+  ],
+  "keyboard": {
+    "skipLink": true,
+    "dynamicRowFocus": true
+  },
+  "manualReview": {
+    "closedDialogReferences": "The six homepage popup controls point to the unique project-dialog element, which is hidden until opened. The scanner flags these as incomplete while closed; browser lifecycle/focus checks verify opening, keyboard trapping, Escape and focus return.",
+    "limits": "Color/background incomplete checks remain listed. Automated checks plus palette and measured control contrast are not a full WCAG certification or screen-reader audit."
+  }
+}

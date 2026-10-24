@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><root><resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>2.0</value></resheader><data name="Title" xml:space="preserve"><value>NLO IQ — الأنظمة الهندسية</value></data>
-<data name="Phase" xml:space="preserve"><value>المرحلة الرابعة / الحركة والتفاعلات</value></data>
+<data name="Phase" xml:space="preserve"><value>الأنظمة الهندسية / معاينة التصميم</value></data>
 <data name="Demo" xml:space="preserve"><value>معاينة تصميم · الرسومات والنصوص التجريبية موضّحة بوضوح.</value></data>
 <data name="Logo" xml:space="preserve"><value>موضع الشعار</value></data>
 <data name="Services" xml:space="preserve"><value>التخصّصات</value></data>
@@ -456,4 +456,8 @@
 <data name="Schedule must be between one minute and one year ahead." xml:space="preserve"><value>يجب أن يكون وقت النشر بين دقيقة واحدة وسنة قادمة.</value></data>
 <data name="Scheduled publisher is no longer authorized." xml:space="preserve"><value>لم تعد لدى الناشر صلاحية تنفيذ النشر المجدول.</value></data>
 <data name="Unsupported revision schema." xml:space="preserve"><value>بنية هذه المراجعة غير مدعومة.</value></data>
+<data name="StatusNotFound" xml:space="preserve"><value>الصفحة غير موجودة</value></data>
+<data name="StatusRateLimited" xml:space="preserve"><value>يرجى المحاولة بعد قليل</value></data>
+<data name="StatusForbidden" xml:space="preserve"><value>الوصول غير مسموح</value></data>
+<data name="StatusHelp" xml:space="preserve"><value>تحقق من العنوان أو حاول مجددًا أو عد إلى الموقع.</value></data>
 </root>

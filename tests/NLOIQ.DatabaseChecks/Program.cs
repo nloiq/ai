@@ -15,7 +15,8 @@ if (string.IsNullOrEmpty(connection))
 }
 var settings = new MySqlConnectionStringBuilder(connection);
 if (!settings.Database.Equals("WebSiteNLOIQDb", StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException("Database checks only permit the dedicated WebSiteNLOIQDb development schema.");
-var options = new DbContextOptionsBuilder<NloDbContext>().UseMySQL(connection!).Options;
+var queryCounter=new QueryCounter();
+var options = new DbContextOptionsBuilder<NloDbContext>().UseMySQL(connection!).AddInterceptors(queryCounter).Options;
 int baselineUsers,baselineItems,baselineRevisions,baselineTranslations;
 await using (var initial = new NloDbContext(options)) { baselineUsers = await initial.Users.CountAsync();baselineItems=await initial.ContentItems.CountAsync();baselineRevisions=await initial.ContentRevisions.CountAsync();baselineTranslations=await initial.ContentTranslations.CountAsync(); }
 static void Check(bool condition, string message) { if (!condition) throw new Exception(message); }
@@ -335,6 +336,16 @@ await Scenario("schedule cancellation rescheduling and publisher revocation are 
 await Scenario("schedule confirmation time bounds and publication checks reject invalid jobs",async db=>{
     var editor=new ContentEditor(db);var clock=new PublishingClock(DateTimeOffset.UtcNow);var workflow=new ContentWorkflow(db,editor,clock);var form=Draft(ContentKind.Page);form.Arabic.Title="";var id=await editor.SaveAsync(form,actorId,"Rollback-only schedule check");var root=await db.ContentItems.SingleAsync(x=>x.Id==id);var due=clock.GetUtcNow().UtcDateTime.AddMinutes(2);
     await Rejected(()=>workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,due,false,actorId,"check"),"Confirm");await Rejected(()=>workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,clock.GetUtcNow().UtcDateTime,false,actorId,"check"),"Confirm");await Rejected(()=>workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,clock.GetUtcNow().UtcDateTime,true,actorId,"check"),"one minute");await Rejected(()=>workflow.ScheduleAsync(id,root.DraftRevisionId!.Value,root.Version,due,true,actorId,"check"),"titles");Check(!await db.Set<PublicationSchedule>().AnyAsync(x=>x.ContentItemId==id),"Invalid schedule persisted.");
+});
+await Scenario("public composition stays within its SQL query budget",async db=>{
+    var editor=new ContentEditor(db);var asset=await db.MediaAssets.Where(x=>!x.IsDemo).FirstAsync();var page=Draft(ContentKind.Page);
+    for(var index=0;index<6;index++){var section=Draft(ContentKind.Section);section.Media=[new(){AssetId=asset.Id,UsageKey="cover",AltEn="Quality fixture",AltAr="صورة للتحقق"}];var id=await editor.SaveAsync(section,actorId,"Rollback-only performance check");await Publish(editor,id);page.Sections.Add(new(){ContentItemId=id,DisplayOrder=index});}
+    for(var index=0;index<4;index++){var service=Draft(ContentKind.Service);service.Media=[new(){AssetId=asset.Id,UsageKey="cover",AltEn="Quality fixture",AltAr="صورة للتحقق"}];var id=await editor.SaveAsync(service,actorId,"Rollback-only performance check");await Publish(editor,id);}
+    await Publish(editor,await editor.SaveAsync(page,actorId,"Rollback-only performance check"));var reader=new PublicSiteReader(db,new PublishedContentReader(db));queryCounter.Reset();var timer=System.Diagnostics.Stopwatch.StartNew();var result=await reader.ReadAsync("en",page.English.Slug);timer.Stop();
+    Check(result is not null&&result.Sections.Count==6&&result.Services.Count>=4,"Composition missing nodes.");var budget=int.TryParse(Environment.GetEnvironmentVariable("NLO_QUERY_BUDGET"),out var value)?value:95;Console.WriteLine($"MEASURE: composed page: {queryCounter.Count} SQL queries, {timer.ElapsedMilliseconds} ms");Check(queryCounter.Count<=budget,"Public projection exceeded its SQL query budget.");
+});
+await Scenario("theme control borders retain contrast with pale decorative moss",async db=>{
+    var editor=new ContentEditor(db);var root=await db.ContentItems.SingleAsync(x=>x.Kind==ContentKind.ThemeSettings);var form=(await editor.GetAsync(root.Id))!;form.Theme.Moss=form.Theme.Ivory;await editor.SaveAsync(form,actorId,"Rollback-only control contrast check");await Publish(editor,root.Id);var css=(await new BrandReader(db).ThemeCssAsync(root.PublishedRevisionId!.Value))!;Check(css.Contains("--line:"+form.Theme.Evergreen+";"),"Pale control border did not select a contrasting token.");
 });
 var markup=ContentMarkup.Render("**bold** *italic* [safe](https://example.com) [bad](javascript:alert) <script>alert(1)</script>\n- Item");
 Check(markup.Contains("<strong>bold</strong>")&&markup.Contains("<em>italic</em>")&&markup.Contains("<ul>")&&!markup.Contains("<script>")&&!markup.Contains("href=\"javascript:"),"Unsafe formatted text.");Console.WriteLine("PASS: formatted text is encoded and only safe links render");

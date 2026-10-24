@@ -22,4 +22,4 @@
 @if(User.IsInRole("SuperAdmin")){<a href="/@culture/admin/settings/appearance" class="flex min-h-11 items-center px-3">@L["ThemeTitle"]</a><a href="/@culture/admin/audit" class="flex min-h-11 items-center px-3">@L["AuditTitle"]</a>}
 </nav></aside>
 }
-<main id="admin-main" class="min-w-0 px-5 py-10 md:px-10">@RenderBody()</main></div></body></html>
+<main id="admin-main" tabindex="-1" class="min-w-0 px-5 py-10 md:px-10">@RenderBody()</main></div></body></html>

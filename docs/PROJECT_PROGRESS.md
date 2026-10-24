@@ -1,40 +1,36 @@
 # NLO IQ project progress
 
 Updated: 2026-10-24 (Asia/Baghdad).
-Current phase: **10 — Publishing, preview and revision system**.
-Status: **Delivered for review; awaiting explicit Phase 10 approval**.
-Approved phases: **0 through 9**.
-Last approved checkpoint: `38512d3` (Phase 9 localization).
+Current phase: **11 — Testing and optimization**.
+Status: **Delivered for final quality review; awaiting Phase 11 approval**.
+Approved phases: **0 through 10**.
+Last approved checkpoint: `baa369a` (Phase 10 publishing).
 Selected design: Concept A, engineering folio.
 
-## Phase 10 delivered
+## Delivered
 
-- Draft/public-state filters and unpublished-change indicators.
-- Protected saved-revision previews with private revision-scoped images, no-store/noindex and no public SEO metadata.
-- Paged immutable revision history; exact snapshot restoration as a new draft with preserved publication.
-- SuperAdmin scheduled publication in Baghdad time, pinned revisions, cancellation and obsolete-job invalidation.
-- Persistent hosted worker with actor/role checks, row locking, once-only completion and transactional failure isolation.
-- Bilingual history/settings/preview flows and append-only audit records.
-- Applied backed-up migration `20261024054947_PublicationScheduleOwnership`.
-- Clean build; 41 rollback-only database scenarios, actual worker success/failure, role/CSRF and media/localization/public regressions pass.
+- Public composition reader reduced from 211 to 80 SQL commands in the fixed rollback fixture; 95-command budget added.
+- Stronger control-border contrast with custom-palette fallbacks; skip-link and dynamic-row keyboard focus fixes.
+- Empty mobile menu controls removed; accessible localized error pages; stale preview phase label removed.
+- Debug/Release builds, locked restore, release packaging and configured dependency audits pass.
+- 43 rollback database scenarios, media/unit checks, real CMS/restore/scheduling flows and authentication/authorization/CSRF checks pass.
+- 51 automated accessibility scans report no violations; measured tested control borders exceed 3:1.
+- Existing bilingual/RTL/theme/responsive, SEO/security, lightbox/parallax and idle/coalesced animation checks pass.
+- Isolated Production-mode HTTPS release smoke passes; its temporary process is stopped. No real deployment performed.
 
-Checkpoint: 25 roots, 85 revisions, 170 translations, 6 media assets, 5 published roots, 1 local review account and **0 pending schedules**. Counts grow when stateful review tools run. See PHASE_10_INVENTORY.json.
+Checkpoint: 26 roots, 104 revisions, 208 translations, 6 media assets, 5 published roots, 1 local account and 0 pending schedules. No new migration. Existing CMS demos are retained.
 
-## Review
+## Final quality review
 
-Published: http://127.0.0.1:5080/en/pages/publishing-review
-Private draft: http://127.0.0.1:5080/en/admin/content/334/preview
-History/restore/schedule: http://127.0.0.1:5080/en/admin/content/334/history
-Arabic uses /ar/; the published Arabic slug is مراجعة-النشر.
-Existing login: ignored artifacts/PHASE_6_LOGIN.txt.
-Guide: PHASE_10_PUBLISHING.md. Reviewed screenshots: docs/previews/phase10/.
+Guide: PHASE_11_QUALITY_REVIEW.md.
+Evidence: PHASE_11_QUALITY_RESULTS.json, PHASE_11_RELEASE_SMOKE.json, PHASE_11_INVENTORY.json.
+Reviewed screenshots: docs/previews/phase11/.
+Running Release preview: http://127.0.0.1:5080/en/ and /ar/.
+Admin: /en/account/login using ignored artifacts/PHASE_6_LOGIN.txt.
+Publishing example: /en/pages/publishing-review; private preview/history: /en/admin/content/334/preview and /history.
 
-The public page is version B; a different working draft is saved privately. History includes deliberately cancelled/failed test schedules. None remains pending. Older media/SEO/localization examples are preserved.
+## Remaining release gate
 
-## Remaining phases
+**Phase 12 has not started.** It requires explicit approval. Actual hosting/TLS/proxy/runtime, public origin, backups/media restore, operations and final company facts/assets remain required. Automated accessibility and local Edge tests do not certify full WCAG or cross-browser/host production readiness. See the guide for precise scope and limitations.
 
-Phase 11: testing and optimization. Phase 12: deployment and handover. **Do not start Phase 11 without explicit approval.** Normal verification of Phase 10 is part of this delivery.
-
-Final approved company copy/projects, logo/favicon, contact/social links and public HTTPS origin still require supplied values. CMS home/other demo roots remain drafts. Development remains noindex. Preserve ignored App_Data/media with its database. Schedules need the application running; unchanged overdue jobs execute after restart.
-
-APPROVE PHASE advances one phase. REVISE modifies this phase. SHOW PREVIEW reports the running preview. EXPLAIN makes no changes. STATUS reports progress. ROLLBACK requires reviewing discarded changes and database implications first.
+APPROVE PHASE advances to Phase 12. REVISE changes this quality phase. SHOW PREVIEW reports the running app. EXPLAIN makes no changes. STATUS reports progress. ROLLBACK requires reviewing discarded changes and database implications first.

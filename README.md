@@ -1,6 +1,6 @@
 ﻿# NLO IQ
 
-ASP.NET Core MVC modular monolith — Phase 10 publishing workflow review.
+ASP.NET Core MVC modular monolith — Phase 11 quality review.
 
 ## Quick start (PowerShell)
 
@@ -48,4 +48,8 @@ Open the [translation overview](http://127.0.0.1:5080/en/admin/translations) or 
 
 ## Phase 10 publishing workflow
 
-Open [revision history](http://127.0.0.1:5080/en/admin/content/334/history) and the [private saved draft](http://127.0.0.1:5080/en/admin/content/334/preview) using the existing login. Compare the [published review page](http://127.0.0.1:5080/en/pages/publishing-review). See [Phase 10 review](docs/PHASE_10_PUBLISHING.md) for restoration, scheduling in Baghdad time and verification. Phase 11 requires explicit approval.
+Open [revision history](http://127.0.0.1:5080/en/admin/content/334/history) and the [private saved draft](http://127.0.0.1:5080/en/admin/content/334/preview) using the existing login. Compare the [published review page](http://127.0.0.1:5080/en/pages/publishing-review). See [Phase 10 review](docs/PHASE_10_PUBLISHING.md) for restoration, scheduling in Baghdad time and verification. Phase 10 is approved; Phase 11 is delivered for final quality review.
+
+## Phase 11 quality review
+
+See the [final quality report](docs/PHASE_11_QUALITY_REVIEW.md) for verified workflows, accessibility/security evidence, SQL optimization and remaining production requirements. `npm.cmd run test:quality` runs the repeatable accessibility/contrast/keyboard/security/SEO audit against the local preview. Phase 12 deployment/handover requires explicit approval.

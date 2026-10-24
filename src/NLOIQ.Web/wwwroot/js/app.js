@@ -13,13 +13,14 @@ apply();
 const menuButton = document.getElementById('menu-toggle');
 const navigation = document.getElementById('primary-navigation');
 const desktop = matchMedia('(min-width:1024px)');
+const hasNavigation = navigation.querySelector('a') !== null;
 let menuOpen = false;
 function syncMenu() {
-    navigation.hidden = !desktop.matches && !menuOpen;
+    navigation.hidden = !hasNavigation || (!desktop.matches && !menuOpen);
     menuButton.setAttribute('aria-expanded', String(menuOpen));
     navigation.dataset.menuOpen = String(menuOpen && !desktop.matches);
 }
-menuButton.hidden = false;
+menuButton.hidden = !hasNavigation;
 menuButton.addEventListener('click', () => { menuOpen = !menuOpen; syncMenu(); });
 desktop.addEventListener('change', () => { menuOpen = false; syncMenu(); });
 navigation.addEventListener('click', event => {

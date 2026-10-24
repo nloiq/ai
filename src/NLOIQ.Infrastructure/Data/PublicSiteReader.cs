@@ -7,6 +7,7 @@ using NLOIQ.Infrastructure.Media;
 namespace NLOIQ.Infrastructure.Data;
 public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader published):IPublicSiteReader,IContentPreviewReader
 {
+    private readonly Dictionary<long,MediaAsset?> assets=[];
     private IQueryable<ContentItem> Eligible=>db.ContentItems.AsNoTracking().Where(x=>x.State==PublicationState.Published&&!x.IsDemo&&x.PublishedRevisionId!=null);
     private Task<List<T>> Children<T>(long revision,CancellationToken ct)where T:class,IRevisionOwned=>db.Set<T>().AsNoTracking().Where(x=>x.RevisionId==revision).ToListAsync(ct);
     private async Task<PublicNode?> Named(ContentKind kind,string key,string culture,CancellationToken ct) {
@@ -18,20 +19,21 @@ public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader pub
         if(!await db.ContentRevisions.AnyAsync(x=>x.Id==revision&&x.ContentItemId==owner,ct))return null;
         var text=await db.ContentTranslations.AsNoTracking().SingleOrDefaultAsync(x=>x.RevisionId==revision&&x.Culture==culture,ct);if(text is null)return null;
         var node=new PublicNode{Id=owner,RevisionId=revision,Kind=item.Kind,Key=item.Key,Title=text.Title,Summary=text.Summary,Body=text.Body,Slug=text.Slug,PrimaryLabel=text.PrimaryButtonLabel,SecondaryLabel=text.SecondaryButtonLabel};
-        var section=(await Children<ContentSection>(revision,ct)).SingleOrDefault();if(section is not null){node.SectionKind=section.SectionKind;node.Layout=section.LayoutKey;node.Background=section.Background;node.Parallax=section.ParallaxIntensity;node.Visible=section.IsVisible;node.PrimaryTarget=section.PrimaryButtonTarget;node.SecondaryTarget=section.SecondaryButtonTarget;}
-        var project=(await Children<ContentProject>(revision,ct)).SingleOrDefault();if(project is not null){node.VideoId=YouTubeVideoId.IsValid(project.YouTubeVideoId)?project.YouTubeVideoId:null;node.Featured=project.IsFeatured;node.Order=project.DisplayOrder;}
-        var service=(await Children<ContentService>(revision,ct)).SingleOrDefault();if(service is not null){node.Icon=service.IconKey;node.Visible=service.IsVisible;node.Order=service.DisplayOrder;}
-        var footer=(await Children<FooterSettings>(revision,ct)).SingleOrDefault();if(footer is not null)node.ShowCopyright=footer.ShowCopyright;
-        var mediaText=await Children<RevisionMediaTranslation>(revision,ct);
+        var section=item.Kind==ContentKind.Section?(await Children<ContentSection>(revision,ct)).SingleOrDefault():null;if(section is not null){node.SectionKind=section.SectionKind;node.Layout=section.LayoutKey;node.Background=section.Background;node.Parallax=section.ParallaxIntensity;node.Visible=section.IsVisible;node.PrimaryTarget=section.PrimaryButtonTarget;node.SecondaryTarget=section.SecondaryButtonTarget;}
+        var project=item.Kind==ContentKind.Project?(await Children<ContentProject>(revision,ct)).SingleOrDefault():null;if(project is not null){node.VideoId=YouTubeVideoId.IsValid(project.YouTubeVideoId)?project.YouTubeVideoId:null;node.Featured=project.IsFeatured;node.Order=project.DisplayOrder;}
+        var service=item.Kind==ContentKind.Service?(await Children<ContentService>(revision,ct)).SingleOrDefault():null;if(service is not null){node.Icon=service.IconKey;node.Visible=service.IsVisible;node.Order=service.DisplayOrder;}
+        var footer=item.Kind==ContentKind.Footer?(await Children<FooterSettings>(revision,ct)).SingleOrDefault():null;if(footer is not null)node.ShowCopyright=footer.ShowCopyright;
+        var usages=await Children<RevisionMedia>(revision,ct);
+        var mediaText=usages.Count==0?[]:await Children<RevisionMediaTranslation>(revision,ct);
         var imageUsages=new Dictionary<long,PublicImage>();
-        foreach(var usage in (await Children<RevisionMedia>(revision,ct)).OrderBy(x=>x.UsageKey=="cover"?0:1).ThenBy(x=>x.DisplayOrder)) {
-            var asset=await db.MediaAssets.AsNoTracking().SingleOrDefaultAsync(x=>x.Id==usage.MediaAssetId&&(preview||!x.IsDemo),ct);var alt=mediaText.SingleOrDefault(x=>x.RevisionMediaId==usage.Id&&x.Culture==culture);
-            if(asset is null||alt is null||string.IsNullOrWhiteSpace(alt.AltText))continue;
+        foreach(var usage in usages.OrderBy(x=>x.UsageKey=="cover"?0:1).ThenBy(x=>x.DisplayOrder)) {
+            if(!assets.TryGetValue(usage.MediaAssetId,out var asset)){asset=await db.MediaAssets.AsNoTracking().SingleOrDefaultAsync(x=>x.Id==usage.MediaAssetId,ct);assets[usage.MediaAssetId]=asset;}var alt=mediaText.SingleOrDefault(x=>x.RevisionMediaId==usage.Id&&x.Culture==culture);
+            if(asset is null||(!preview&&asset.IsDemo)||alt is null||string.IsNullOrWhiteSpace(alt.AltText))continue;
             var image=MediaAccess.Image(asset,alt.AltText,alt.Caption,preview);if(image is null)continue;node.Images.Add(image);imageUsages[usage.Id]=image;
         }
-        var seo=await db.Set<SeoMetadata>().AsNoTracking().SingleOrDefaultAsync(x=>x.RevisionId==revision&&x.Culture==culture,ct);
+        var seo=item.Kind is ContentKind.Page or ContentKind.Project?await db.Set<SeoMetadata>().AsNoTracking().SingleOrDefaultAsync(x=>x.RevisionId==revision&&x.Culture==culture,ct):null;
         if(seo is not null)node.Seo=new(seo.Title,seo.Description,seo.OpenGraphTitle,seo.OpenGraphDescription,seo.OpenGraphMediaUsageId is long imageId?imageUsages.GetValueOrDefault(imageId):null,seo.CanonicalPath,seo.NoIndex);
-        var nav=(await Children<NavigationItem>(revision,ct)).OrderBy(x=>x.DisplayOrder).ToList();var navText=await Children<NavigationTranslation>(revision,ct);
+        var nav=item.Kind==ContentKind.Navigation?(await Children<NavigationItem>(revision,ct)).OrderBy(x=>x.DisplayOrder).ToList():[];var navText=nav.Count==0?[]:await Children<NavigationTranslation>(revision,ct);
         foreach(var link in nav.Where(x=>x.IsVisible)) {
             var label=navText.SingleOrDefault(x=>x.NavigationItemId==link.Id&&x.Culture==culture)?.Label;
             if(string.IsNullOrWhiteSpace(label)||string.IsNullOrWhiteSpace(link.Href)||!ContentRules.IsSafeTarget(link.Href))continue;
@@ -39,15 +41,15 @@ public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader pub
             while(parent.ParentItemId is long parentId){if(!visited.Add(parentId)){visible=false;break;}var ancestor=nav.SingleOrDefault(x=>x.Id==parentId);if(ancestor is null||!ancestor.IsVisible){visible=false;break;}parent=ancestor;depth++;}
             if(visible)node.Links.Add(new(label,link.Href.Replace("{culture}",culture,StringComparison.Ordinal),depth));
         }
-        var contactText=await Children<ContactTranslation>(revision,ct);
-        foreach(var detail in (await Children<ContactDetail>(revision,ct)).OrderBy(x=>x.DisplayOrder)) {
+        var contactText=item.Kind==ContentKind.Contact?await Children<ContactTranslation>(revision,ct):[];
+        foreach(var detail in (item.Kind==ContentKind.Contact?await Children<ContactDetail>(revision,ct):[]).OrderBy(x=>x.DisplayOrder)) {
             var label=contactText.SingleOrDefault(x=>x.ContactDetailId==detail.Id&&x.Culture==culture);if(label is null)continue;
             var href=detail.Kind switch{ContactKind.Email=>"mailto:"+detail.Value,ContactKind.Phone=>"tel:"+detail.Value,ContactKind.WhatsApp=>"https://wa.me/"+new string(detail.Value.Where(char.IsDigit).ToArray()),ContactKind.Map=>detail.Value,_=>null};
             node.Contacts.Add(new(label.Label,label.LocalizedValue??detail.Value,href));
         }
-        foreach(var social in (await Children<SocialLink>(revision,ct)).OrderBy(x=>x.DisplayOrder))if(ContentRules.IsSafeTarget(social.Url))node.Social.Add(new(social.Platform,social.Url));
-        foreach(var hours in (await Children<BusinessHours>(revision,ct)).OrderBy(x=>x.DayOfWeek))node.Hours.Add(new(hours.DayOfWeek,hours.IsClosed,hours.OpensAt,hours.ClosesAt));
-        foreach(var category in await Children<ProjectCategoryAssignment>(revision,ct)) {
+        foreach(var social in (item.Kind is ContentKind.Contact or ContentKind.Footer or ContentKind.SiteSettings?await Children<SocialLink>(revision,ct):[]).OrderBy(x=>x.DisplayOrder))if(ContentRules.IsSafeTarget(social.Url))node.Social.Add(new(social.Platform,social.Url));
+        foreach(var hours in (item.Kind==ContentKind.Contact?await Children<BusinessHours>(revision,ct):[]).OrderBy(x=>x.DayOfWeek))node.Hours.Add(new(hours.DayOfWeek,hours.IsClosed,hours.OpensAt,hours.ClosesAt));
+        foreach(var category in item.Kind==ContentKind.Project?await Children<ProjectCategoryAssignment>(revision,ct):[]) {
             var target=await db.ContentRevisions.AsNoTracking().SingleAsync(x=>x.Id==category.CategoryRevisionId,ct);
             if(preview||await Eligible.AnyAsync(x=>x.Id==target.ContentItemId,ct)){var title=await db.ContentTranslations.AsNoTracking().Where(x=>x.RevisionId==target.Id&&x.Culture==culture).Select(x=>x.Title).SingleOrDefaultAsync(ct);if(title is not null)node.Categories.Add(title);}
         }
@@ -55,6 +57,7 @@ public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader pub
     }
     public async Task<PublicSite?> ReadAsync(string culture,string? slug=null,bool project=false,CancellationToken ct=default)
     {
+        assets.Clear();
         if(!ContentRules.IsCulture(culture))return null;
         var found=slug is null?await published.FindAsync(ContentKind.Page,"home",culture,ct):await published.FindRouteAsync(project?"projects":"pages",slug,culture,ct);
         if(found is null)return null;
@@ -77,6 +80,7 @@ public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader pub
     }
     public async Task<PublicSite?> PreviewAsync(long id,long revisionId,string culture,CancellationToken ct=default)
     {
+        assets.Clear();
         if(!ContentRules.IsCulture(culture))return null;
         var page=await Node(id,revisionId,culture,ct,true);if(page is null)return null;
         var sections=new List<PublicNode>();

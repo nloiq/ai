@@ -1,5 +1,15 @@
 ﻿using NLOIQ.Domain.Content;
 using NLOIQ.Application.Validation;
+// Generate a one-day, untrusted loopback certificate for the isolated release smoke test only.
+if(args.Length==2&&args[0]=="--probe-certificate") {
+    var destination=Path.GetFullPath(args[1]);var allowed=Path.GetFullPath(Path.Combine(Environment.CurrentDirectory,"artifacts","phase11"))+Path.DirectorySeparatorChar;
+    if(!destination.StartsWith(allowed,StringComparison.OrdinalIgnoreCase))throw new InvalidOperationException("Certificate must stay in the ignored quality artifacts directory.");
+    var password=Environment.GetEnvironmentVariable("NLO_PROBE_CERT_PASSWORD")??throw new InvalidOperationException("Probe certificate password is required.");
+    using var key=System.Security.Cryptography.RSA.Create(2048);
+    var request=new System.Security.Cryptography.X509Certificates.CertificateRequest("CN=localhost",key,System.Security.Cryptography.HashAlgorithmName.SHA256,System.Security.Cryptography.RSASignaturePadding.Pkcs1);
+    var names=new System.Security.Cryptography.X509Certificates.SubjectAlternativeNameBuilder();names.AddDnsName("localhost");names.AddIpAddress(System.Net.IPAddress.Loopback);request.CertificateExtensions.Add(names.Build());
+    using var certificate=request.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-5),DateTimeOffset.UtcNow.AddDays(1));Directory.CreateDirectory(Path.GetDirectoryName(destination)!);File.WriteAllBytes(destination,certificate.Export(System.Security.Cryptography.X509Certificates.X509ContentType.Pfx,password));return;
+}
 string?[] invalid = [null, "", "short", "NNiszX0-A7M\n", "NNiszX0-A7M\r", "https://youtu.be/NNiszX0-A7M", "NNiszX0/A7M", "NNiszX0-A7M?autoplay=1", "<iframe />"];
 foreach (var value in invalid)
     if (YouTubeVideoId.IsValid(value)) throw new Exception("Invalid video ID was accepted.");

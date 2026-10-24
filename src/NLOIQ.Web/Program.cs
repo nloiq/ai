@@ -136,6 +136,7 @@ app.Use(async (context, next) => {
     }
     await next();
 });
+app.UseStatusCodePages(NLOIQ.Web.Localization.StatusPages.WriteAsync);
 app.UseAuthentication();
 app.UseRateLimiter();
 app.UseAuthorization();

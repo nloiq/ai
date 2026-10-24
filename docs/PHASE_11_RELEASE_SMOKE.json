@@ -1,0 +1,13 @@
+{
+  "productionMode": true,
+  "loopbackOnly": true,
+  "temporaryUntrustedTestCertificate": true,
+  "publishedPage": 200,
+  "anonymousPreview": 302,
+  "secureAntiforgery": true,
+  "arabic404": true,
+  "privateConfigExcluded": true,
+  "uploadsExcluded": true,
+  "prototypeDisabled": true,
+  "errorDetailsHidden": true
+}
