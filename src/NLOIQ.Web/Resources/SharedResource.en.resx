@@ -218,7 +218,7 @@
 <data name="CmsValueAr" xml:space="preserve"><value>Display value · Arabic (optional)</value></data>
 <data name="CmsSocial" xml:space="preserve"><value>Social links</value></data>
 <data name="CmsHours" xml:space="preserve"><value>Business hours · Asia/Baghdad</value></data>
-<data name="CmsDay" xml:space="preserve"><value>Day (0 Sunday–6 Saturday)</value></data>
+<data name="CmsDay" xml:space="preserve"><value>Day</value></data>
 <data name="CmsClosed" xml:space="preserve"><value>Closed</value></data>
 <data name="CmsOpenTime" xml:space="preserve"><value>Opens</value></data>
 <data name="CmsCloseTime" xml:space="preserve"><value>Closes</value></data>
@@ -316,4 +316,102 @@
 <data name="ThemeLightAction" xml:space="preserve"><value>Light action</value></data>
 <data name="ThemeSignalLight" xml:space="preserve"><value>Light signal</value></data>
 <data name="ThemeSignalDark" xml:space="preserve"><value>Dark signal</value></data>
+<data name="TranslationsTitle" xml:space="preserve"><value>Translations</value></data>
+<data name="TranslationsHelp" xml:space="preserve"><value>Review paired text, localized URLs and image descriptions in the latest draft. Check structured rows and SEO in the editor. Translation coverage does not imply company approval.</value></data>
+<data name="TranslationsReady" xml:space="preserve"><value>Paired fields complete</value></data>
+<data name="TranslationsMissing" xml:space="preserve"><value>Needs translation</value></data>
+<data name="TranslationsEdit" xml:space="preserve"><value>Review translation</value></data>
+<data name="TranslationsNoTitle" xml:space="preserve"><value>Untitled</value></data>
+<data name="TranslationsShared" xml:space="preserve"><value>Shared fields</value></data>
+<data name="TranslationTitle" xml:space="preserve"><value>Title</value></data>
+<data name="TranslationSummary" xml:space="preserve"><value>Summary</value></data>
+<data name="TranslationBody" xml:space="preserve"><value>Body</value></data>
+<data name="TranslationSlug" xml:space="preserve"><value>URL slug</value></data>
+<data name="TranslationPrimary" xml:space="preserve"><value>Primary button</value></data>
+<data name="TranslationSecondary" xml:space="preserve"><value>Secondary button</value></data>
+<data name="TranslationAlt" xml:space="preserve"><value>Image description</value></data>
+<data name="TranslationCaption" xml:space="preserve"><value>Image caption</value></data>
+<data name="ValidationRequired" xml:space="preserve"><value>{0} is required.</value></data>
+<data name="ValidationLength" xml:space="preserve"><value>{0} must contain at most {1} characters.</value></data>
+<data name="ValidationPattern" xml:space="preserve"><value>Enter a valid value for {0}.</value></data>
+<data name="ValidationRange" xml:space="preserve"><value>{0} must be between {1} and {2}.</value></data>
+<data name="ValidationValue" xml:space="preserve"><value>Enter a valid value for {0}.</value></data>
+<data name="ValidationInvalid" xml:space="preserve"><value>Enter a valid value.</value></data>
+<data name="ValidationNumber" xml:space="preserve"><value>{0} must be a number.</value></data>
+<data name="ValidationComplete" xml:space="preserve"><value>Please complete this field.</value></data>
+<data name="ValidationField" xml:space="preserve"><value>This field</value></data>
+<data name="FormatText" xml:space="preserve"><value>text</value></data>
+<data name="OptionLayoutdefault" xml:space="preserve"><value>Default</value></data>
+<data name="OptionLayoutfolio" xml:space="preserve"><value>Folio</value></data>
+<data name="OptionLayoutwide" xml:space="preserve"><value>Wide</value></data>
+<data name="OptionLayoutnumbered" xml:space="preserve"><value>Numbered</value></data>
+<data name="OptionBackgroundpaper" xml:space="preserve"><value>Paper</value></data>
+<data name="OptionBackgroundpanel" xml:space="preserve"><value>Panel</value></data>
+<data name="OptionBackgroundevergreen" xml:space="preserve"><value>Evergreen</value></data>
+<data name="OptionIconnetwork" xml:space="preserve"><value>Network</value></data>
+<data name="OptionIconcode" xml:space="preserve"><value>Code</value></data>
+<data name="OptionIconmonitor" xml:space="preserve"><value>Monitoring</value></data>
+<data name="OptionIconlogic" xml:space="preserve"><value>Automation logic</value></data>
+<data name="ContactKindEmail" xml:space="preserve"><value>Email</value></data>
+<data name="ContactKindPhone" xml:space="preserve"><value>Phone</value></data>
+<data name="ContactKindWhatsApp" xml:space="preserve"><value>WhatsApp</value></data>
+<data name="ContactKindAddress" xml:space="preserve"><value>Address</value></data>
+<data name="ContactKindMap" xml:space="preserve"><value>Map</value></data>
+<data name="Sociallinkedin" xml:space="preserve"><value>LinkedIn</value></data>
+<data name="Socialfacebook" xml:space="preserve"><value>Facebook</value></data>
+<data name="Socialinstagram" xml:space="preserve"><value>Instagram</value></data>
+<data name="Socialyoutube" xml:space="preserve"><value>YouTube</value></data>
+<data name="Socialx" xml:space="preserve"><value>X</value></data>
+<data name="HoursClosed" xml:space="preserve"><value>Closed</value></data>
+<data name="HoursOpen" xml:space="preserve"><value>Open</value></data>
+<data name="AuditActionCreateDraft" xml:space="preserve"><value>Create draft</value></data>
+<data name="AuditActionSaveDraft" xml:space="preserve"><value>Save draft</value></data>
+<data name="AuditActionpublish" xml:space="preserve"><value>Publish</value></data>
+<data name="AuditActionunpublish" xml:space="preserve"><value>Unpublish</value></data>
+<data name="AuditActionarchive" xml:space="preserve"><value>Archive</value></data>
+<data name="AuditActionUploadMedia" xml:space="preserve"><value>Upload media</value></data>
+<data name="AuditActionEditMediaAltHints" xml:space="preserve"><value>Edit image descriptions</value></data>
+<data name="AuditActionDeleteUnusedMedia" xml:space="preserve"><value>Delete unused media</value></data>
+<data name="AuditActionSeedContentArchitecture" xml:space="preserve"><value>Initialize demo content</value></data>
+<data name="AuditActionOther" xml:space="preserve"><value>System action</value></data>
+<data name="Both English and Arabic titles are required before publication." xml:space="preserve"><value>Both English and Arabic titles are required before publication.</value></data>
+<data name="Localized page/project slugs are required before publication." xml:space="preserve"><value>Localized page/project slugs are required before publication.</value></data>
+<data name="Invalid localized slug." xml:space="preserve"><value>Invalid localized slug.</value></data>
+<data name="Content translation exceeds field limits." xml:space="preserve"><value>Content translation exceeds field limits.</value></data>
+<data name="Confirm that both translations, links and media have been reviewed before publication." xml:space="preserve"><value>Confirm that both translations, links and media have been reviewed before publication.</value></data>
+<data name="Save a draft before publication." xml:space="preserve"><value>Save a draft before publication.</value></data>
+<data name="Visible navigation requires both labels." xml:space="preserve"><value>Visible navigation requires both labels.</value></data>
+<data name="Contact details require both labels." xml:space="preserve"><value>Contact details require both labels.</value></data>
+<data name="Each navigation link requires a safe target." xml:space="preserve"><value>Each navigation link requires a safe target.</value></data>
+<data name="Navigation parents must precede their children." xml:space="preserve"><value>Navigation parents must precede their children.</value></data>
+<data name="Opening and closing times must form a valid same-day interval." xml:space="preserve"><value>Opening and closing times must form a valid same-day interval.</value></data>
+<data name="Too many collection rows." xml:space="preserve"><value>Too many collection rows.</value></data>
+<data name="A section may only appear once on a page." xml:space="preserve"><value>A section may only appear once on a page.</value></data>
+<data name="Duplicate project categories." xml:space="preserve"><value>Duplicate project categories.</value></data>
+<data name="Image usage names must be unique." xml:space="preserve"><value>Image usage names must be unique.</value></data>
+<data name="Duplicate social platforms." xml:space="preserve"><value>Duplicate social platforms.</value></data>
+<data name="Duplicate business-hour days." xml:space="preserve"><value>Duplicate business-hour days.</value></data>
+<data name="A selected dependency is missing or archived." xml:space="preserve"><value>A selected dependency is missing or archived.</value></data>
+<data name="Selected image does not exist." xml:space="preserve"><value>Selected image does not exist.</value></data>
+<data name="Parallax intensity must be between zero and one." xml:space="preserve"><value>Parallax intensity must be between zero and one.</value></data>
+<data name="Unsafe section link." xml:space="preserve"><value>Unsafe section link.</value></data>
+<data name="Invalid project video ID." xml:space="preserve"><value>Invalid project video ID.</value></data>
+<data name="Invalid contact value." xml:space="preserve"><value>Invalid contact value.</value></data>
+<data name="Social links require HTTPS." xml:space="preserve"><value>Social links require HTTPS.</value></data>
+<data name="Canonical must be a local path without query/fragment." xml:space="preserve"><value>Canonical must be a local path without query/fragment.</value></data>
+<data name="Site name is required." xml:space="preserve"><value>Site name is required.</value></data>
+<data name="Invalid site defaults." xml:space="preserve"><value>Invalid site defaults.</value></data>
+<data name="Invalid public base URL." xml:space="preserve"><value>Invalid public base URL.</value></data>
+<data name="Theme colors require six-digit hex values." xml:space="preserve"><value>Theme colors require six-digit hex values.</value></data>
+<data name="Theme text colors fail shared surface contrast checks." xml:space="preserve"><value>Theme text colors fail shared surface contrast checks.</value></data>
+<data name="Theme customization fails approved text contrast pairs." xml:space="preserve"><value>Theme customization fails approved text contrast pairs.</value></data>
+<data name="Demo content cannot be published. Verify and replace sample material first." xml:space="preserve"><value>Demo content cannot be published. Verify and replace sample material first.</value></data>
+<data name="Demo media cannot be published." xml:space="preserve"><value>Demo media cannot be published.</value></data>
+<data name="Published media requires English and Arabic alt text snapshots." xml:space="preserve"><value>Published media requires English and Arabic alt text snapshots.</value></data>
+<data name="Page sections must reference published, verified section revisions before publication." xml:space="preserve"><value>Page sections must reference published, verified section revisions before publication.</value></data>
+<data name="Project categories must be published before the project." xml:space="preserve"><value>Project categories must be published before the project.</value></data>
+<data name="StudyLowCurrent" xml:space="preserve"><value>LOW CURRENT</value></data>
+<data name="StudyScada" xml:space="preserve"><value>SCADA</value></data>
+<data name="StudyAutomation" xml:space="preserve"><value>SOFTWARE + AUTOMATION</value></data>
+<data name="RequestFailed" xml:space="preserve"><value>The request could not be completed.</value></data>
 </root>

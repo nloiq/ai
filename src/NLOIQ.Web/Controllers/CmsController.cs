@@ -15,7 +15,7 @@ public sealed class CmsController(IContentEditor editor,NLOIQ.Application.Interf
 {
     [HttpGet("")]
     public async Task<IActionResult> Index(ContentKind? kind,SectionKind? sectionKind,string? search,CancellationToken ct) {
-        var rows=await editor.ListAsync(kind,search,ct);if(!User.IsInRole("SuperAdmin"))rows=rows.Where(x=>x.Kind is not (ContentKind.SiteSettings or ContentKind.ThemeSettings)).ToList();if(sectionKind.HasValue)rows=rows.Where(x=>x.Kind==ContentKind.Section&&x.SectionKind==sectionKind).ToList();return View(rows);
+        var rows=await editor.ListAsync(kind,search,ct,RouteData.Values["culture"]?.ToString()??"en");if(!User.IsInRole("SuperAdmin"))rows=rows.Where(x=>x.Kind is not (ContentKind.SiteSettings or ContentKind.ThemeSettings)).ToList();if(sectionKind.HasValue)rows=rows.Where(x=>x.Kind==ContentKind.Section&&x.SectionKind==sectionKind).ToList();return View(rows);
     }
     [HttpGet("new")]
     public async Task<IActionResult> Create(ContentKind kind=ContentKind.Page,SectionKind sectionKind=SectionKind.Hero,CancellationToken ct=default)
@@ -31,8 +31,8 @@ public sealed class CmsController(IContentEditor editor,NLOIQ.Application.Interf
     }
     private async Task<IActionResult> EditView(ContentEdit model,CancellationToken ct)
     {
-        ViewData["Choices"]=await editor.ChoicesAsync(ct);
-        if(model.Id!=0)ViewData["Item"]=(await editor.ListAsync(model.Kind,null,ct)).Single(x=>x.Id==model.Id);
+        ViewData["Choices"]=await editor.ChoicesAsync(ct,RouteData.Values["culture"]?.ToString()??"en");
+        if(model.Id!=0)ViewData["Item"]=(await editor.ListAsync(model.Kind,null,ct,RouteData.Values["culture"]?.ToString()??"en")).Single(x=>x.Id==model.Id);
         if(model.Id!=0 && model.Kind is ContentKind.Page or ContentKind.Project) {
             var culture=RouteData.Values["culture"]?.ToString()??"en";
             var live=await published.FindAsync(model.Kind,model.Key,culture,ct);
@@ -52,7 +52,7 @@ public sealed class CmsController(IContentEditor editor,NLOIQ.Application.Interf
         }catch(ContentConflictException){Response.StatusCode=409;ModelState.AddModelError("",localizer["CmsConflict"]);}
         catch(Exception error)when(error is InvalidOperationException or ValidationException or DbUpdateException) {
             logger.LogWarning("CMS draft rejected for item {Id}: {ErrorType}",model.Id,error.GetType().Name);
-            ModelState.AddModelError("",localizer["CmsValidation"]+(RouteData.Values["culture"]?.ToString()=="en"&&error is not DbUpdateException?" "+error.Message:""));
+            ModelState.AddModelError("",localizer["CmsValidation"]+(error is not DbUpdateException&&!localizer[error.Message].ResourceNotFound?" "+localizer[error.Message].Value:""));
         }
         return await EditView(model,ct);
     }
@@ -66,7 +66,7 @@ public sealed class CmsController(IContentEditor editor,NLOIQ.Application.Interf
         catch(ContentConflictException){TempData["CmsError"]=localizer["CmsConflict"].Value;}
         catch(Exception error)when(error is InvalidOperationException or DbUpdateException) {
             logger.LogWarning("CMS publication rejected for item {Id}: {ErrorType}",id,error.GetType().Name);
-            TempData["CmsError"]=localizer["CmsPublishError"].Value+(RouteData.Values["culture"]?.ToString()=="en"&&error is not DbUpdateException?" "+error.Message:"");
+            TempData["CmsError"]=localizer["CmsPublishError"].Value+(error is not DbUpdateException&&!localizer[error.Message].ResourceNotFound?" "+localizer[error.Message].Value:"");
         }
         return RedirectToAction(nameof(Edit),new{id,culture=RouteData.Values["culture"]});
     }

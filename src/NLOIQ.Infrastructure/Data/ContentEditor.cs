@@ -8,19 +8,19 @@ namespace NLOIQ.Infrastructure.Data;
 public sealed class ContentEditor(NloDbContext db) : IContentEditor
 {
     private static readonly ContentKind[] Supported = [ContentKind.Page,ContentKind.Section,ContentKind.Project,ContentKind.ProjectCategory,ContentKind.Service,ContentKind.Navigation,ContentKind.Contact,ContentKind.Footer,ContentKind.SiteSettings,ContentKind.ThemeSettings];
-    public async Task<IReadOnlyList<ContentListRow>> ListAsync(ContentKind? kind,string? search,CancellationToken ct=default)
+    public async Task<IReadOnlyList<ContentListRow>> ListAsync(ContentKind? kind,string? search,CancellationToken ct=default,string culture="en")
     {
         var query=db.ContentItems.AsNoTracking().Where(x=>Supported.Contains(x.Kind));
         if(kind.HasValue) query=query.Where(x=>x.Kind==kind);
         if(!string.IsNullOrWhiteSpace(search)) query=query.Where(x=>x.Key.Contains(search));
         return await query.OrderBy(x=>x.Kind).ThenBy(x=>x.Key).Select(x=>new ContentListRow(x.Id,x.Kind,x.Key,x.State,x.IsDemo,x.Version,
             x.DraftRevision==null?0:x.DraftRevision.RevisionNumber,
-            db.ContentTranslations.Where(t=>t.RevisionId==x.DraftRevisionId && t.Culture=="en").Select(t=>t.Title).FirstOrDefault()??x.Key,db.Set<ContentSection>().Where(section=>section.RevisionId==x.DraftRevisionId).Select(section=>(SectionKind?)section.SectionKind).FirstOrDefault())).ToListAsync(ct);
+            db.ContentTranslations.Where(t=>t.RevisionId==x.DraftRevisionId && t.Culture==culture).Select(t=>t.Title).FirstOrDefault()??x.Key,db.Set<ContentSection>().Where(section=>section.RevisionId==x.DraftRevisionId).Select(section=>(SectionKind?)section.SectionKind).FirstOrDefault())).ToListAsync(ct);
     }
     private Task<List<T>> Children<T>(long revisionId,CancellationToken ct) where T:class,IRevisionOwned => db.Set<T>().AsNoTracking().Where(x=>x.RevisionId==revisionId).ToListAsync(ct);
-    public async Task<EditorChoices> ChoicesAsync(CancellationToken ct=default) => new(
-        await db.ContentItems.AsNoTracking().Where(x=>x.Kind==ContentKind.Section && x.State!=PublicationState.Archived).OrderBy(x=>x.Key).Select(x=>new ContentChoice(x.Id,x.Key)).ToListAsync(ct),
-        await db.ContentItems.AsNoTracking().Where(x=>x.Kind==ContentKind.ProjectCategory && x.State!=PublicationState.Archived).OrderBy(x=>x.Key).Select(x=>new ContentChoice(x.Id,x.Key)).ToListAsync(ct),
+    public async Task<EditorChoices> ChoicesAsync(CancellationToken ct=default,string culture="en") => new(
+        await db.ContentItems.AsNoTracking().Where(x=>x.Kind==ContentKind.Section && x.State!=PublicationState.Archived).OrderBy(x=>x.Key).Select(x=>new ContentChoice(x.Id,db.ContentTranslations.Where(t=>t.RevisionId==x.DraftRevisionId&&t.Culture==culture).Select(t=>t.Title).FirstOrDefault()??x.Key)).ToListAsync(ct),
+        await db.ContentItems.AsNoTracking().Where(x=>x.Kind==ContentKind.ProjectCategory && x.State!=PublicationState.Archived).OrderBy(x=>x.Key).Select(x=>new ContentChoice(x.Id,db.ContentTranslations.Where(t=>t.RevisionId==x.DraftRevisionId&&t.Culture==culture).Select(t=>t.Title).FirstOrDefault()??x.Key)).ToListAsync(ct),
         await db.MediaAssets.AsNoTracking().OrderBy(x=>x.Id).Select(x=>new MediaChoice(x.Id,x.OriginalFileName,x.IsDemo,db.Set<MediaAssetTranslation>().Where(t=>t.MediaAssetId==x.Id&&t.Culture=="en").Select(t=>t.AltText).FirstOrDefault()??"",db.Set<MediaAssetTranslation>().Where(t=>t.MediaAssetId==x.Id&&t.Culture=="ar").Select(t=>t.AltText).FirstOrDefault()??"")).ToListAsync(ct));
     public async Task<ContentEdit?> GetAsync(long id,CancellationToken ct=default)
     {

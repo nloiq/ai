@@ -77,7 +77,8 @@ builder.Services.AddAntiforgery(options => {
     options.Cookie.SecurePolicy = builder.Environment.IsDevelopment() ? CookieSecurePolicy.SameAsRequest : CookieSecurePolicy.Always;
 });
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true).AddViewLocalization();
+builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true).AddViewLocalization().AddDataAnnotationsLocalization(options => options.DataAnnotationLocalizerProvider = (_, factory) => factory.Create(typeof(NLOIQ.Web.SharedResource)));
+builder.Services.AddTransient<Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>, NLOIQ.Web.Localization.LocalizedMvcOptions>();
 var app = builder.Build();
 if (args.Contains("--create-admin", StringComparer.Ordinal))
 {
@@ -119,18 +120,36 @@ app.Use(async (context, next) => {
     if (app.Environment.IsDevelopment()) context.Response.Headers["X-Robots-Tag"] = "noindex, nofollow";
     await next();
 });
-var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("ar") };
+var supportedCultures = new[] { new CultureInfo("en"), ArabicCulture() };
 app.UseRouting();
 app.UseRequestLocalization(new RequestLocalizationOptions {
     DefaultRequestCulture = new RequestCulture("en"), SupportedCultures = supportedCultures, SupportedUICultures = supportedCultures,
     RequestCultureProviders = [new Microsoft.AspNetCore.Localization.Routing.RouteDataRequestCultureProvider { RouteDataStringKey = "culture", UIRouteDataStringKey = "culture", Options = new RequestLocalizationOptions { SupportedCultures = supportedCultures, SupportedUICultures = supportedCultures } }]
 });
+app.Use(async (context, next) => {
+    var culture = NLOIQ.Web.Localization.SiteLanguage.Supported(context.Request.RouteValues["culture"]?.ToString());
+    if (culture is not null) {
+        context.Response.Headers["Content-Language"] = culture;
+        if (HttpMethods.IsGet(context.Request.Method) && context.Request.Cookies[NLOIQ.Web.Localization.SiteLanguage.CookieName] != culture)
+            context.Response.Cookies.Append(NLOIQ.Web.Localization.SiteLanguage.CookieName, culture, new CookieOptions { HttpOnly=true, IsEssential=true, SameSite=SameSiteMode.Lax, Secure=!app.Environment.IsDevelopment(), Path="/", MaxAge=TimeSpan.FromDays(365) });
+    }
+    await next();
+});
 app.UseAuthentication();
 app.UseRateLimiter();
 app.UseAuthorization();
 app.UseStaticFiles();
-app.MapGet("/", async (NLOIQ.Application.Content.IBrandReader brand) => Results.Redirect($"/{(await brand.ReadAsync("en")).DefaultCulture}/"));
-app.MapGet("/error", () => Results.Problem("The request could not be completed."));
+app.MapGet("/", async (HttpContext context, NLOIQ.Application.Content.IBrandReader brand) => {
+    context.Response.Headers.CacheControl = "no-store";
+    context.Response.Headers.Vary = "Cookie";
+    var culture = NLOIQ.Web.Localization.SiteLanguage.Supported(context.Request.Cookies[NLOIQ.Web.Localization.SiteLanguage.CookieName]) ?? (await brand.ReadAsync("en")).DefaultCulture;
+    return Results.Redirect($"/{culture}/");
+});
+app.MapGet("/error", (HttpContext context, Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> text) => {
+    CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo(NLOIQ.Web.Localization.SiteLanguage.Supported(context.Request.Cookies[NLOIQ.Web.Localization.SiteLanguage.CookieName])??"en");
+    return Results.Problem(text["RequestFailed"]);
+});
 app.MapControllerRoute("localized", "{culture:regex(^(en|ar)$)}/{controller=Home}/{action=Index}/{id?}");
 app.Run();
+static CultureInfo ArabicCulture() { var culture = new CultureInfo("ar"); culture.DateTimeFormat.Calendar = new GregorianCalendar(); return culture; }
 public partial class Program { }

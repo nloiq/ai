@@ -235,8 +235,8 @@ await Scenario("CMS public composition filters hidden services and unpublished p
 });
 await Scenario("CMS approved image selection reaches published public media without exposing demo assets",async db=>{
     var source=await db.MediaAssets.FirstAsync();var asset=new MediaAsset{StorageProvider="Bundled",StorageKey="images/cmscheck-approved.svg",OriginalFileName="cmscheck-approved.svg",ContentType="image/svg+xml",ByteSize=source.ByteSize,Width=source.Width,Height=source.Height,Sha256=source.Sha256,IsDemo=false};db.Add(asset);await db.SaveChangesAsync();
-    var editor=new ContentEditor(db);var page=Draft(ContentKind.Page);page.Media=[new(){AssetId=asset.Id,UsageKey="cover",AltEn="Approved illustration",AltAr="??? ?????"}];var id=await editor.SaveAsync(page,actorId,"Rollback-only CMS checks");await Publish(editor,id);
-    var reader=new PublicSiteReader(db,new PublishedContentReader(db));Check((await reader.ReadAsync("ar",page.Arabic.Slug!))!.Page.Images.Single().Alt=="??? ?????","Localized media missing.");
+    var editor=new ContentEditor(db);var page=Draft(ContentKind.Page);page.Media=[new(){AssetId=asset.Id,UsageKey="cover",AltEn="Approved illustration",AltAr="رسم معتمد"}];var id=await editor.SaveAsync(page,actorId,"Rollback-only CMS checks");await Publish(editor,id);
+    var reader=new PublicSiteReader(db,new PublishedContentReader(db));Check((await reader.ReadAsync("ar",page.Arabic.Slug!))!.Page.Images.Single().Alt=="رسم معتمد","Localized media missing.");
 });
 await Scenario("SEO draft metadata is isolated and published metadata persists in both languages",async db=>{
     var editor=new ContentEditor(db);var form=Draft(ContentKind.Page);form.SeoEnglish=new(){Title="Search title",Description="Search description",CanonicalPath="/en/pages/review",NoIndex=false};form.SeoArabic=new(){Title="عنوان البحث",Description="وصف البحث"};
@@ -260,6 +260,17 @@ await Scenario("draft image selections do not make new assets publicly readable"
     var asset=new MediaAsset{StorageProvider="Local",StorageKey=Guid.NewGuid().ToString("N")+"/main.webp",OriginalFileName="private.webp",ContentType="image/webp",ByteSize=10,Width=10,Height=10,Sha256=new string('a',64)};db.Add(asset);await db.SaveChangesAsync();
     var update=(await editor.GetAsync(id))!;update.Media=[new(){AssetId=asset.Id,UsageKey="cover",AltEn="Private draft image",AltAr="صورة مسودة خاصة"}];await editor.SaveAsync(update,actorId,"Rollback-only media access check");Check(!await NLOIQ.Infrastructure.Media.MediaAccess.IsPublicAsync(db,asset.Id),"Draft image leaked.");await Publish(editor,id);Check(await NLOIQ.Infrastructure.Media.MediaAccess.IsPublicAsync(db,asset.Id),"Published image blocked.");
     update=(await editor.GetAsync(id))!;await editor.TransitionAsync(id,update.Version,"unpublish",false,actorId,"Rollback-only media access check");Check(!await NLOIQ.Infrastructure.Media.MediaAccess.IsPublicAsync(db,asset.Id),"Unpublished image remained public.");
+});
+await Scenario("independent Arabic slugs and localized editor titles survive publication",async db=>{
+    var editor=new ContentEditor(db);var form=Draft(ContentKind.Page);form.Arabic.Slug="مراجعة-لغات-"+Guid.NewGuid().ToString("N");
+    var id=await editor.SaveAsync(form,actorId,"Rollback-only localization check");await Publish(editor,id);
+    var reader=new PublicSiteReader(db,new PublishedContentReader(db));var ar=(await reader.ReadAsync("ar",form.Arabic.Slug))!;var en=(await reader.ReadAsync("en",form.English.Slug!))!;
+    Check(ar.Page.Title==form.Arabic.Title&&en.Page.Title==form.English.Title,"Localized public title missing.");
+    Check(ar.AlternateUrl=="/en/pages/"+form.English.Slug&&en.AlternateUrl=="/ar/pages/"+form.Arabic.Slug,"Alternate uses the wrong language slug.");
+    Check((await editor.ListAsync(ContentKind.Page,form.Key,default,"ar")).Single().Title==form.Arabic.Title,"Arabic listing uses English title.");
+    var update=(await editor.GetAsync(id))!;update.Arabic.Title="عنوان مسودة خاص";await editor.SaveAsync(update,actorId,"Rollback-only localization check");
+    Check((await reader.ReadAsync("ar",form.Arabic.Slug))!.Page.Title==form.Arabic.Title,"Private Arabic draft leaked.");
+    Check(await reader.ReadAsync("en",form.Arabic.Slug) is null,"Arabic route resolved under English prefix.");
 });
 var markup=ContentMarkup.Render("**bold** *italic* [safe](https://example.com) [bad](javascript:alert) <script>alert(1)</script>\n- Item");
 Check(markup.Contains("<strong>bold</strong>")&&markup.Contains("<em>italic</em>")&&markup.Contains("<ul>")&&!markup.Contains("<script>")&&!markup.Contains("href=\"javascript:"),"Unsafe formatted text.");Console.WriteLine("PASS: formatted text is encoded and only safe links render");

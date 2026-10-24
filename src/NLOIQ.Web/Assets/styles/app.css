@@ -44,3 +44,8 @@ html { scroll-behavior:smooth; scrollbar-gutter:stable; }
 .cms-row { @apply border border-line bg-panel p-4; }
 .cms-body p { margin-block:1rem; } .cms-body ul { list-style:disc; padding-inline-start:1.5rem; } .cms-body a { text-decoration:underline; text-underline-offset:3px; }
 [role=tab][aria-selected=true] { background:var(--accent);color:var(--on-accent); }
+
+/* Arabic joining and diacritics need natural tracking and comfortable leading. */
+:lang(ar) { letter-spacing:normal; }
+:lang(ar):is(h1,h2,h3,p,label,button,a) { line-height:1.7; }
+bdi { unicode-bidi:isolate; }

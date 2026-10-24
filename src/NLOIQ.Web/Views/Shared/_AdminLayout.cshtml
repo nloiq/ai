@@ -1,11 +1,11 @@
 @inject NLOIQ.Application.Content.IBrandReader BrandReader
 @inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> L
-@{ var culture = ViewContext.RouteData.Values["culture"]?.ToString() == "ar" ? "ar" : "en"; var arabic = culture == "ar"; var signedIn = User.Identity?.IsAuthenticated == true; var alternate = arabic ? "en" : "ar"; var currentPath = Context.Request.Path.Value ?? ""; var alternatePath = "/" + alternate + currentPath[3..]; var brand=await BrandReader.ReadAsync(culture); }
+@{ var culture = ViewContext.RouteData.Values["culture"]?.ToString() == "ar" ? "ar" : "en"; var arabic = culture == "ar"; var signedIn = User.Identity?.IsAuthenticated == true; var alternate = arabic ? "en" : "ar"; var currentPath = Context.Request.Path.Value ?? ""; var alternatePath = NLOIQ.Web.Localization.SiteLanguage.SwitchAdmin(Context.Request, alternate); var brand=await BrandReader.ReadAsync(culture); }
 <!doctype html>
 <html lang="@culture" dir="@(arabic ? "rtl" : "ltr")" data-default-theme="@brand.DefaultTheme">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>@ViewData["Title"] · NLO IQ</title>
-<script src="~/js/theme-init.js" asp-append-version="true"></script><script src="~/js/cms.js" asp-append-version="true" defer></script><link rel="stylesheet" href="~/css/app.css" asp-append-version="true"><partial name="_BrandHead" model="brand" /><script src="~/js/admin.js" asp-append-version="true" defer></script></head>
-<body class="min-h-screen bg-paper text-ink antialiased">
+<script src="~/js/theme-init.js" asp-append-version="true"></script><script src="~/js/cms.js" asp-append-version="true" defer></script><link rel="stylesheet" href="~/css/app.css" asp-append-version="true"><partial name="_BrandHead" model="brand" /><script src="~/js/localization.js" asp-append-version="true" defer></script><script src="~/js/admin.js" asp-append-version="true" defer></script></head>
+<body class="min-h-screen bg-paper text-ink antialiased" data-validation-required="@L["ValidationComplete"]" data-validation-invalid="@L["ValidationInvalid"]" data-format-text="@L["FormatText"]">
 <a href="#admin-main" class="sr-only focus:not-sr-only focus:block focus:p-4">@L["Skip"]</a>
 <header class="flex flex-wrap items-center justify-between gap-4 border-b border-line px-5 py-4 md:px-8"><a href="/@culture/admin" class="border border-ink px-3 py-2 text-xl font-bold" dir="ltr">@brand.SiteName <span class="text-sm text-muted">/ CMS</span></a>
 <div class="flex flex-wrap items-center gap-4 text-sm"><a href="@alternatePath" lang="@alternate" class="inline-flex min-h-11 items-center underline underline-offset-4">@(arabic ? "English" : "العربية")</a><select id="theme" aria-label="@L["Theme"]" class="min-h-11 border border-line bg-paper px-2"><option value="system">@L["System"]</option><option value="light">@L["Light"]</option><option value="dark">@L["Dark"]</option></select>
@@ -18,7 +18,7 @@
 <a href="/@culture/admin" class="flex min-h-11 items-center px-3">@L["AdminDashboard"]</a>
 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Editor")) { <a href="/@culture/admin/content" class="flex min-h-11 items-center px-3">@L["AdminEditor"]</a> }
 @if (User.IsInRole("SuperAdmin")) { <a href="/@culture/admin/settings" class="flex min-h-11 items-center px-3">@L["AdminSettings"]</a> }
-<a href="/@culture/" class="flex min-h-11 items-center px-3 text-muted">@L["AdminBack"]</a>@if(User.IsInRole("SuperAdmin") || User.IsInRole("Editor")){<a href="/@culture/admin/media" class="flex min-h-11 items-center px-3">@L["MediaTitle"]</a><a href="/@culture/admin/seo" class="flex min-h-11 items-center px-3">@L["SeoTitle"]</a>}
+<a href="/@culture/" class="flex min-h-11 items-center px-3 text-muted">@L["AdminBack"]</a>@if(User.IsInRole("SuperAdmin") || User.IsInRole("Editor")){<a href="/@culture/admin/media" class="flex min-h-11 items-center px-3">@L["MediaTitle"]</a><a href="/@culture/admin/translations" class="flex min-h-11 items-center px-3">@L["TranslationsTitle"]</a><a href="/@culture/admin/seo" class="flex min-h-11 items-center px-3">@L["SeoTitle"]</a>}
 @if(User.IsInRole("SuperAdmin")){<a href="/@culture/admin/settings/appearance" class="flex min-h-11 items-center px-3">@L["ThemeTitle"]</a><a href="/@culture/admin/audit" class="flex min-h-11 items-center px-3">@L["AuditTitle"]</a>}
 </nav></aside>
 }

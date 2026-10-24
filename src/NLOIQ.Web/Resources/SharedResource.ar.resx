@@ -218,7 +218,7 @@
 <data name="CmsValueAr" xml:space="preserve"><value>القيمة المعروضة · العربية (اختياري)</value></data>
 <data name="CmsSocial" xml:space="preserve"><value>روابط التواصل الاجتماعي</value></data>
 <data name="CmsHours" xml:space="preserve"><value>ساعات العمل · آسيا/بغداد</value></data>
-<data name="CmsDay" xml:space="preserve"><value>اليوم (0 الأحد–6 السبت)</value></data>
+<data name="CmsDay" xml:space="preserve"><value>اليوم</value></data>
 <data name="CmsClosed" xml:space="preserve"><value>مغلق</value></data>
 <data name="CmsOpenTime" xml:space="preserve"><value>الفتح</value></data>
 <data name="CmsCloseTime" xml:space="preserve"><value>الإغلاق</value></data>
@@ -316,4 +316,102 @@
 <data name="ThemeLightAction" xml:space="preserve"><value>إجراء الوضع الفاتح</value></data>
 <data name="ThemeSignalLight" xml:space="preserve"><value>إشارة الوضع الفاتح</value></data>
 <data name="ThemeSignalDark" xml:space="preserve"><value>إشارة الوضع الداكن</value></data>
+<data name="TranslationsTitle" xml:space="preserve"><value>الترجمات</value></data>
+<data name="TranslationsHelp" xml:space="preserve"><value>راجع النصوص المتقابلة وروابط اللغات وأوصاف الصور في أحدث مسودة. راجع الصفوف المنظمة وبيانات البحث داخل المحرر. اكتمال الترجمة لا يعني اعتماد المحتوى من الشركة.</value></data>
+<data name="TranslationsReady" xml:space="preserve"><value>الحقول المتقابلة مكتملة</value></data>
+<data name="TranslationsMissing" xml:space="preserve"><value>بحاجة إلى ترجمة</value></data>
+<data name="TranslationsEdit" xml:space="preserve"><value>مراجعة الترجمة</value></data>
+<data name="TranslationsNoTitle" xml:space="preserve"><value>بلا عنوان</value></data>
+<data name="TranslationsShared" xml:space="preserve"><value>حقول مشتركة</value></data>
+<data name="TranslationTitle" xml:space="preserve"><value>العنوان</value></data>
+<data name="TranslationSummary" xml:space="preserve"><value>الملخص</value></data>
+<data name="TranslationBody" xml:space="preserve"><value>النص</value></data>
+<data name="TranslationSlug" xml:space="preserve"><value>مقطع الرابط</value></data>
+<data name="TranslationPrimary" xml:space="preserve"><value>الزر الأساسي</value></data>
+<data name="TranslationSecondary" xml:space="preserve"><value>الزر الثانوي</value></data>
+<data name="TranslationAlt" xml:space="preserve"><value>وصف الصورة</value></data>
+<data name="TranslationCaption" xml:space="preserve"><value>التعليق على الصورة</value></data>
+<data name="ValidationRequired" xml:space="preserve"><value>حقل {0} مطلوب.</value></data>
+<data name="ValidationLength" xml:space="preserve"><value>يجب ألا يتجاوز حقل {0} عدد {1} حرفًا.</value></data>
+<data name="ValidationPattern" xml:space="preserve"><value>أدخل قيمة صحيحة لحقل {0}.</value></data>
+<data name="ValidationRange" xml:space="preserve"><value>يجب أن تكون قيمة {0} بين {1} و{2}.</value></data>
+<data name="ValidationValue" xml:space="preserve"><value>أدخل قيمة صحيحة لحقل {0}.</value></data>
+<data name="ValidationInvalid" xml:space="preserve"><value>أدخل قيمة صحيحة.</value></data>
+<data name="ValidationNumber" xml:space="preserve"><value>يجب إدخال رقم في حقل {0}.</value></data>
+<data name="ValidationComplete" xml:space="preserve"><value>يرجى إكمال هذا الحقل.</value></data>
+<data name="ValidationField" xml:space="preserve"><value>هذا الحقل</value></data>
+<data name="FormatText" xml:space="preserve"><value>نص</value></data>
+<data name="OptionLayoutdefault" xml:space="preserve"><value>افتراضي</value></data>
+<data name="OptionLayoutfolio" xml:space="preserve"><value>ملف أعمال</value></data>
+<data name="OptionLayoutwide" xml:space="preserve"><value>عريض</value></data>
+<data name="OptionLayoutnumbered" xml:space="preserve"><value>مرقّم</value></data>
+<data name="OptionBackgroundpaper" xml:space="preserve"><value>ورقي</value></data>
+<data name="OptionBackgroundpanel" xml:space="preserve"><value>لوحة</value></data>
+<data name="OptionBackgroundevergreen" xml:space="preserve"><value>أخضر داكن</value></data>
+<data name="OptionIconnetwork" xml:space="preserve"><value>شبكة</value></data>
+<data name="OptionIconcode" xml:space="preserve"><value>برمجة</value></data>
+<data name="OptionIconmonitor" xml:space="preserve"><value>مراقبة</value></data>
+<data name="OptionIconlogic" xml:space="preserve"><value>منطق الأتمتة</value></data>
+<data name="ContactKindEmail" xml:space="preserve"><value>البريد الإلكتروني</value></data>
+<data name="ContactKindPhone" xml:space="preserve"><value>الهاتف</value></data>
+<data name="ContactKindWhatsApp" xml:space="preserve"><value>واتساب</value></data>
+<data name="ContactKindAddress" xml:space="preserve"><value>العنوان</value></data>
+<data name="ContactKindMap" xml:space="preserve"><value>الخريطة</value></data>
+<data name="Sociallinkedin" xml:space="preserve"><value>لينكدإن</value></data>
+<data name="Socialfacebook" xml:space="preserve"><value>فيسبوك</value></data>
+<data name="Socialinstagram" xml:space="preserve"><value>إنستغرام</value></data>
+<data name="Socialyoutube" xml:space="preserve"><value>يوتيوب</value></data>
+<data name="Socialx" xml:space="preserve"><value>إكس</value></data>
+<data name="HoursClosed" xml:space="preserve"><value>مغلق</value></data>
+<data name="HoursOpen" xml:space="preserve"><value>مفتوح</value></data>
+<data name="AuditActionCreateDraft" xml:space="preserve"><value>إنشاء مسودة</value></data>
+<data name="AuditActionSaveDraft" xml:space="preserve"><value>حفظ مسودة</value></data>
+<data name="AuditActionpublish" xml:space="preserve"><value>نشر</value></data>
+<data name="AuditActionunpublish" xml:space="preserve"><value>إلغاء النشر</value></data>
+<data name="AuditActionarchive" xml:space="preserve"><value>أرشفة</value></data>
+<data name="AuditActionUploadMedia" xml:space="preserve"><value>رفع ملف وسائط</value></data>
+<data name="AuditActionEditMediaAltHints" xml:space="preserve"><value>تعديل أوصاف الصور</value></data>
+<data name="AuditActionDeleteUnusedMedia" xml:space="preserve"><value>حذف وسائط غير مستخدمة</value></data>
+<data name="AuditActionSeedContentArchitecture" xml:space="preserve"><value>تهيئة المحتوى التجريبي</value></data>
+<data name="AuditActionOther" xml:space="preserve"><value>إجراء نظام</value></data>
+<data name="Both English and Arabic titles are required before publication." xml:space="preserve"><value>يجب إدخال العنوانين بالعربية والإنجليزية قبل النشر.</value></data>
+<data name="Localized page/project slugs are required before publication." xml:space="preserve"><value>يجب إدخال مقطع الرابط لكل لغة قبل نشر الصفحة أو المشروع.</value></data>
+<data name="Invalid localized slug." xml:space="preserve"><value>مقطع الرابط غير صالح. استخدم حروفًا أو أرقامًا وافصل الكلمات بشرطات.</value></data>
+<data name="Content translation exceeds field limits." xml:space="preserve"><value>نص الترجمة يتجاوز الحد المسموح للحقل.</value></data>
+<data name="Confirm that both translations, links and media have been reviewed before publication." xml:space="preserve"><value>أكد مراجعة الترجمتين والروابط والوسائط قبل النشر.</value></data>
+<data name="Save a draft before publication." xml:space="preserve"><value>احفظ مسودة قبل النشر.</value></data>
+<data name="Visible navigation requires both labels." xml:space="preserve"><value>كل رابط تنقل ظاهر يحتاج تسمية بالعربية والإنجليزية.</value></data>
+<data name="Contact details require both labels." xml:space="preserve"><value>تفاصيل الاتصال تحتاج تسميات باللغتين.</value></data>
+<data name="Each navigation link requires a safe target." xml:space="preserve"><value>يحتاج كل رابط تنقل إلى وجهة آمنة.</value></data>
+<data name="Navigation parents must precede their children." xml:space="preserve"><value>يجب أن يسبق رابط التنقل الرئيسي الروابط التابعة له.</value></data>
+<data name="Opening and closing times must form a valid same-day interval." xml:space="preserve"><value>يجب أن يكون وقت الإغلاق بعد وقت الفتح في اليوم نفسه.</value></data>
+<data name="Too many collection rows." xml:space="preserve"><value>عدد الصفوف يتجاوز الحد المسموح.</value></data>
+<data name="A section may only appear once on a page." xml:space="preserve"><value>يمكن إضافة القسم مرة واحدة فقط إلى الصفحة.</value></data>
+<data name="Duplicate project categories." xml:space="preserve"><value>توجد تصنيفات مشاريع مكررة.</value></data>
+<data name="Image usage names must be unique." xml:space="preserve"><value>يجب ألا تتكرر أسماء استخدامات الصور.</value></data>
+<data name="Duplicate social platforms." xml:space="preserve"><value>توجد منصات تواصل مكررة.</value></data>
+<data name="Duplicate business-hour days." xml:space="preserve"><value>يوجد يوم مكرر في ساعات العمل.</value></data>
+<data name="A selected dependency is missing or archived." xml:space="preserve"><value>أحد العناصر المرتبطة غير موجود أو تمت أرشفته.</value></data>
+<data name="Selected image does not exist." xml:space="preserve"><value>الصورة المحددة غير موجودة.</value></data>
+<data name="Parallax intensity must be between zero and one." xml:space="preserve"><value>يجب أن تكون شدة الحركة بين صفر وواحد.</value></data>
+<data name="Unsafe section link." xml:space="preserve"><value>رابط القسم غير آمن.</value></data>
+<data name="Invalid project video ID." xml:space="preserve"><value>معرّف فيديو المشروع غير صالح.</value></data>
+<data name="Invalid contact value." xml:space="preserve"><value>قيمة الاتصال غير صالحة.</value></data>
+<data name="Social links require HTTPS." xml:space="preserve"><value>يجب أن تستخدم روابط التواصل بروتوكول HTTPS.</value></data>
+<data name="Canonical must be a local path without query/fragment." xml:space="preserve"><value>يجب أن يكون الرابط الأساسي مسارًا محليًا بلا استعلام أو جزء مرجعي.</value></data>
+<data name="Site name is required." xml:space="preserve"><value>اسم الموقع مطلوب.</value></data>
+<data name="Invalid site defaults." xml:space="preserve"><value>إعدادات اللغة أو المظهر الافتراضية غير صالحة.</value></data>
+<data name="Invalid public base URL." xml:space="preserve"><value>أدخل أصل موقع HTTPS فقط، بلا مسار أو استعلام أو جزء مرجعي.</value></data>
+<data name="Theme colors require six-digit hex values." xml:space="preserve"><value>يجب أن تتكون قيم الألوان من ست خانات ست عشرية بعد علامة #.</value></data>
+<data name="Theme text colors fail shared surface contrast checks." xml:space="preserve"><value>تباين ألوان النص مع أسطح العرض المشتركة غير كافٍ.</value></data>
+<data name="Theme customization fails approved text contrast pairs." xml:space="preserve"><value>تباين ألوان المظهر غير كافٍ لقراءة النص.</value></data>
+<data name="Demo content cannot be published. Verify and replace sample material first." xml:space="preserve"><value>لا يمكن نشر المحتوى التجريبي. استبدله بمحتوى معتمد أولًا.</value></data>
+<data name="Demo media cannot be published." xml:space="preserve"><value>لا يمكن نشر وسائط تجريبية.</value></data>
+<data name="Published media requires English and Arabic alt text snapshots." xml:space="preserve"><value>تحتاج الصور المنشورة إلى أوصاف بديلة محفوظة بالعربية والإنجليزية.</value></data>
+<data name="Page sections must reference published, verified section revisions before publication." xml:space="preserve"><value>يجب نشر نسخ الأقسام المرتبطة بالصفحة واعتمادها قبل نشر الصفحة.</value></data>
+<data name="Project categories must be published before the project." xml:space="preserve"><value>انشر تصنيفات المشروع قبل نشر المشروع.</value></data>
+<data name="StudyLowCurrent" xml:space="preserve"><value>التيار الخفيف</value></data>
+<data name="StudyScada" xml:space="preserve"><value>سكادا</value></data>
+<data name="StudyAutomation" xml:space="preserve"><value>البرمجيات والأتمتة</value></data>
+<data name="RequestFailed" xml:space="preserve"><value>تعذر إكمال الطلب.</value></data>
 </root>
