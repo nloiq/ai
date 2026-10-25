@@ -58,8 +58,8 @@ bdi { unicode-bidi:isolate; }
 .site-logo { display:inline-flex; align-items:center; border:var(--logo-border-width) solid var(--logo-border-color); border-radius:var(--logo-radius); padding:6px 10px; }
 .site-logo img { display:block; height:var(--logo-height); width:auto; max-width:min(240px,65vw); object-fit:contain; }
 .theme-select,.theme-choices { border:1px solid var(--line); border-radius:var(--theme-selector-radius); background:var(--paper); color:var(--ink); }
-.theme-select { padding:6px 10px; }
+.theme-select { height:36px; min-height:36px; padding:4px 8px; font-size:14px; line-height:1.25; }
 .theme-select option { background:var(--paper);color:var(--ink); }
 .theme-choices { display:inline-flex; flex-wrap:wrap; padding:2px; gap:2px; }
-.theme-choices button { border-radius:max(0px,calc(var(--theme-selector-radius) - 3px)); }
+.theme-choices button { height:30px; min-height:30px; padding:4px 10px; font-size:14px; line-height:1.25; border-radius:max(0px,calc(var(--theme-selector-radius) - 3px)); }
 .theme-choices button[aria-pressed=true] { background:var(--accent);color:var(--on-accent); }
