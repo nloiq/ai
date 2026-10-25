@@ -21,8 +21,8 @@
 :root { --evergreen:#14271f; --ivory:#f3efe5; --copper:#a65e40; --gold:#d8ad64; color-scheme: light; --signal:#17665f; --paper:#f3efe5; --ink:#14271f; --muted:#53644f; --line:#687c50; --panel:#e6e6d9; --accent:#884125; --on-accent:#f3efe5; }
 :root[data-theme=dark] { color-scheme:dark; --signal:#82c6b8; --paper:#14271f; --ink:#f3efe5; --muted:#bdc8b0; --line:#687c50; --panel:#222722; --accent:#d8ad64; --on-accent:#14271f; }
 html { scroll-behavior:smooth; scrollbar-gutter:stable; }
-:lang(ar) { font-family: "IBM Plex Sans Arabic", Tahoma, Arial, sans-serif; }
-:lang(ar) .font-editorial { font-family: "IBM Plex Sans Arabic", Tahoma, Arial, sans-serif; line-height:1.5; letter-spacing:0; }
+:lang(ar) { font-family: "Cairo", Tahoma, Arial, sans-serif; }
+:lang(ar) .font-editorial { font-family: "Cairo", Tahoma, Arial, sans-serif; line-height:1.5; letter-spacing:0; }
 :focus-visible { outline:3px solid var(--accent); outline-offset:5px; }
 [hidden] { display:none !important; }
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *, *::before, *::after { animation:none !important; transition:none !important; } }
