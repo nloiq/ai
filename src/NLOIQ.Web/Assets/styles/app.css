@@ -52,3 +52,14 @@ html { scroll-behavior:smooth; scrollbar-gutter:stable; }
 bdi { unicode-bidi:isolate; }
 
 :lang(ar):is(h1,h2,h3,h4) { font-weight:600; }
+
+/* Revision-owned header appearance, with safe defaults before published branding loads. */
+:root { --logo-border-width:0px; --logo-border-color:#687c50; --logo-radius:8px; --logo-height:48px; --theme-selector-radius:8px; }
+.site-logo { display:inline-flex; align-items:center; border:var(--logo-border-width) solid var(--logo-border-color); border-radius:var(--logo-radius); padding:6px 10px; }
+.site-logo img { display:block; height:var(--logo-height); width:auto; max-width:min(240px,65vw); object-fit:contain; }
+.theme-select,.theme-choices { border:1px solid var(--line); border-radius:var(--theme-selector-radius); background:var(--paper); color:var(--ink); }
+.theme-select { padding:6px 10px; }
+.theme-select option { background:var(--paper);color:var(--ink); }
+.theme-choices { display:inline-flex; flex-wrap:wrap; padding:2px; gap:2px; }
+.theme-choices button { border-radius:max(0px,calc(var(--theme-selector-radius) - 3px)); }
+.theme-choices button[aria-pressed=true] { background:var(--accent);color:var(--on-accent); }

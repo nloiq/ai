@@ -1126,6 +1126,19 @@ namespace NLOIQ.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("char(7)");
 
+                    b.Property<string>("LogoBorderColor")
+                        .IsRequired()
+                        .HasColumnType("char(7)");
+
+                    b.Property<bool>("LogoBorderEnabled")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("LogoHeight")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LogoRadius")
+                        .HasColumnType("int");
+
                     b.Property<string>("Moss")
                         .IsRequired()
                         .HasColumnType("char(7)");
@@ -1137,6 +1150,12 @@ namespace NLOIQ.Infrastructure.Migrations
                     b.Property<string>("SignalLight")
                         .IsRequired()
                         .HasColumnType("char(7)");
+
+                    b.Property<int>("ThemeSelectorRadius")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThemeSelectorStyle")
+                        .HasColumnType("int");
 
                     b.HasKey("RevisionId");
 

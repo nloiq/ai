@@ -8,7 +8,7 @@
 <body class="min-h-screen bg-paper text-ink antialiased" data-validation-required="@L["ValidationComplete"]" data-validation-invalid="@L["ValidationInvalid"]" data-format-text="@L["FormatText"]">
 <a href="#admin-main" class="sr-only focus:not-sr-only focus:block focus:p-4">@L["Skip"]</a>
 <header class="flex flex-wrap items-center justify-between gap-4 border-b border-line px-5 py-4 md:px-8"><a href="/@culture/admin" class="border border-ink px-3 py-2 text-xl font-bold" dir="ltr">@brand.SiteName <span class="text-sm text-muted">/ CMS</span></a>
-<div class="flex flex-wrap items-center gap-4 text-sm"><a href="@alternatePath" lang="@alternate" class="inline-flex min-h-11 items-center underline underline-offset-4">@(arabic ? "English" : "العربية")</a><select id="theme" aria-label="@L["Theme"]" class="min-h-11 border border-line bg-paper px-2"><option value="system">@L["System"]</option><option value="light">@L["Light"]</option><option value="dark">@L["Dark"]</option></select>
+<div class="flex flex-wrap items-center gap-4 text-sm"><a href="@alternatePath" lang="@alternate" class="inline-flex min-h-11 items-center underline underline-offset-4">@(arabic ? "English" : "العربية")</a><partial name="_ThemeSelector" model="brand" />
 @if (signedIn) { <form method="post" action="/@culture/account/logout" asp-antiforgery="true"><button class="min-h-11 border border-line px-4">@L["AdminLogout"]</button></form> }
 </div></header>
 <div class="@(signedIn ? "lg:grid lg:grid-cols-[16rem_1fr]" : "")">

@@ -10,5 +10,5 @@ public interface IMediaLibrary
     Task DeleteAsync(long id,Guid actor,string actorLabel,CancellationToken ct=default);
 }
 public sealed record PublicSeo(string Title,string Description,string? OpenGraphTitle,string? OpenGraphDescription,PublicImage? Image,string? CanonicalPath,bool NoIndex);
-public sealed record PublicBrand(string SiteName,string DefaultCulture,string DefaultTheme,string? BaseUrl,PublicImage? Logo,string? FaviconUrl,long? ThemeRevision,IReadOnlyList<PublicLink> Social);
+public sealed record PublicBrand(string SiteName,string DefaultCulture,string DefaultTheme,string? BaseUrl,PublicImage? Logo,string? FaviconUrl,long? ThemeRevision,IReadOnlyList<PublicLink> Social) { public int ThemeSelectorStyle { get; init; } }
 public interface IBrandReader { Task<PublicBrand> ReadAsync(string culture,CancellationToken ct=default); Task<string?> ThemeCssAsync(long revision,CancellationToken ct=default); }

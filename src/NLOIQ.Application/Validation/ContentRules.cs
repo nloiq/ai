@@ -67,6 +67,7 @@ public static partial class ContentRules
                 Require(IsCulture(settings.DefaultCulture) && settings.DefaultTheme is "light" or "dark" or "system", "Invalid site defaults.");
                 Require(settings.PublicBaseUrl is null || (Uri.TryCreate(settings.PublicBaseUrl, UriKind.Absolute, out var siteUri) && siteUri.Scheme == Uri.UriSchemeHttps && siteUri.AbsolutePath == "/" && siteUri.Query == "" && siteUri.Fragment == "" && IsSafeTarget(settings.PublicBaseUrl)), "Invalid public base URL."); break;
             case ThemeSettings theme:
+                Require(theme.LogoRadius is >=0 and <=32 && theme.LogoHeight is >=24 and <=96 && theme.ThemeSelectorStyle is >=0 and <=1 && theme.ThemeSelectorRadius is >=0 and <=28,"Invalid header appearance settings.");
                 foreach (var property in typeof(ThemeSettings).GetProperties().Where(x => x.PropertyType == typeof(string)))
                     Require(HexColor().IsMatch((string)property.GetValue(theme)!), "Theme colors require six-digit hex values.");
                 Require(Contrast(theme.Forest,theme.Ivory)>=4.5&&Contrast(theme.Ivory,theme.Charcoal)>=4.5&&Contrast(theme.SignalDark,theme.Evergreen)>=4.5&&Contrast(theme.Gold,theme.Charcoal)>=4.5,"Theme text colors fail shared surface contrast checks.");

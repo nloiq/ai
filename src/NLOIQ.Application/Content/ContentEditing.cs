@@ -110,6 +110,12 @@ public sealed class SiteEdit
 }
 public sealed class ThemeEdit
 {
+    public bool LogoBorderEnabled { get; set; }
+    [Required(ErrorMessage="ValidationRequired"),RegularExpression("^#[0-9a-fA-F]{6}$",ErrorMessage="ValidationPattern")] public string LogoBorderColor { get; set; } = "#687C50";
+    [Range(0,32,ErrorMessage="ValidationRange")] public int LogoRadius { get; set; } = 8;
+    [Range(24,96,ErrorMessage="ValidationRange")] public int LogoHeight { get; set; } = 48;
+    [Range(0,1,ErrorMessage="ValidationRange")] public int ThemeSelectorStyle { get; set; }
+    [Range(0,28,ErrorMessage="ValidationRange")] public int ThemeSelectorRadius { get; set; } = 8;
     [Required(ErrorMessage="ValidationRequired"),RegularExpression("^#[0-9a-fA-F]{6}$",ErrorMessage="ValidationPattern")] public string Evergreen { get; set; }="#14271F"; [Required(ErrorMessage="ValidationRequired"),RegularExpression("^#[0-9a-fA-F]{6}$",ErrorMessage="ValidationPattern")] public string Forest { get; set; }="#203D32";
     [Required(ErrorMessage="ValidationRequired"),RegularExpression("^#[0-9a-fA-F]{6}$",ErrorMessage="ValidationPattern")] public string Moss { get; set; }="#687C50";[Required(ErrorMessage="ValidationRequired"),RegularExpression("^#[0-9a-fA-F]{6}$",ErrorMessage="ValidationPattern")] public string BurntOrange { get; set; }="#C56A3D";
     [Required(ErrorMessage="ValidationRequired"),RegularExpression("^#[0-9a-fA-F]{6}$",ErrorMessage="ValidationPattern")] public string Copper { get; set; }="#A65E40";[Required(ErrorMessage="ValidationRequired"),RegularExpression("^#[0-9a-fA-F]{6}$",ErrorMessage="ValidationPattern")] public string Gold { get; set; }="#D8AD64";

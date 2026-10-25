@@ -34,3 +34,7 @@ A project's YouTube field accepts the **11-character video ID**, e.g. `NNiszX0-A
 Set language-specific SEO title/description, optional sharing text/image and noindex where appropriate. Review canonical and alternate-language URLs after publication. Site settings contain the canonical public HTTPS origin, default language/theme, logo and favicon; appearance contains the validated palette. Save and publish settings to expose changes. Review contrast after changing colors.
 
 Before launch, replace all demonstration text/assets with approved company material for low-current engineering, software solutions, SCADA integration and system automation. Check navigation/contact links and both home compositions. Keep your backup operator informed before bulk edits.
+
+## Logo frame and theme selector
+
+Open Appearance and scroll to Header appearance to adjust logo border/color/corners/height and choose a dropdown or segmented theme selector with rounded corners. Review the live light/dark samples, save the draft and publish after verification. See [Header appearance controls](HEADER_APPEARANCE.md). The logo image itself is selected in Site settings.

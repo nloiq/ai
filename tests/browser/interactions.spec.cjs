@@ -1,5 +1,6 @@
 ﻿const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
+async function chooseTheme(page,value) { if(await page.locator('#theme').isVisible()) await page.locator('#theme').selectOption(value); else await page.locator('[data-theme-choice="'+value+'"]').click(); }
 test('project dialog: focus, lazy iframe, navigation, Escape, backdrop and cleanup', async ({ page }) => {
     const errors=[]; page.on('pageerror', error => errors.push(error.message));
     // Deterministic embed lifecycle check; actual external playback is reviewed separately.
@@ -48,9 +49,9 @@ test('Arabic mobile menu, system theme, persistence and reduced motion', async (
     await expect(nav).not.toBeVisible();
     await expect(page.locator('#about')).toBeFocused();
     await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
-    await page.locator('#theme').selectOption('light');
+    await chooseTheme(page,'light');
     await page.reload(); await expect(page.locator('html')).toHaveAttribute('data-theme','light');
-    await page.locator('#theme').selectOption('system');
+    await chooseTheme(page,'system');
     await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
     await page.emulateMedia({colorScheme:'light'});
     await expect(page.locator('html')).toHaveAttribute('data-theme','light');
@@ -75,7 +76,7 @@ test('responsive layouts avoid horizontal overflow and produce review screenshot
         }
         await page.evaluate(()=>scrollTo(0,0));
         if (width===1440 && culture==='en') await page.screenshot({path:'artifacts/phase4/english-desktop.png',fullPage:true});
-        if (width===390 && culture==='ar') { await page.locator('#theme').selectOption('dark'); await page.screenshot({path:'artifacts/phase4/arabic-mobile-dark.png',fullPage:true}); }
+        if (width===390 && culture==='ar') { await chooseTheme(page,'dark'); await page.screenshot({path:'artifacts/phase4/arabic-mobile-dark.png',fullPage:true}); }
     }
 });
 test('desktop parallax is bounded and resets when reduced motion changes', async ({ page }) => {

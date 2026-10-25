@@ -1,0 +1,4 @@
+@model NLOIQ.Application.Content.PublicBrand
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> T
+<select id="theme" aria-label="@T["Theme"]" class="theme-select min-h-11 max-w-32" hidden="@(Model.ThemeSelectorStyle==1)"><option value="system">@T["System"]</option><option value="light">@T["Light"]</option><option value="dark">@T["Dark"]</option></select>
+<div class="theme-choices" role="group" aria-label="@T["Theme"]" hidden="@(Model.ThemeSelectorStyle!=1)">@foreach(var choice in new[]{"system","light","dark"}){<button type="button" class="min-h-11 px-3" data-theme-choice="@choice" aria-pressed="false">@T[choice=="system"?"System":choice=="light"?"Light":"Dark"]</button>}</div>

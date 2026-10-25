@@ -85,6 +85,12 @@ public sealed class SiteSettings : IContentSnapshot
 }
 public sealed class ThemeSettings : IContentSnapshot
 {
+    public bool LogoBorderEnabled { get; set; }
+    public string LogoBorderColor { get; set; } = "#687C50";
+    public int LogoRadius { get; set; } = 8;
+    public int LogoHeight { get; set; } = 48;
+    public int ThemeSelectorStyle { get; set; }
+    public int ThemeSelectorRadius { get; set; } = 8;
     public long RevisionId { get; set; }
     public ContentRevision Revision { get; set; } = null!;
     public ContentKind Kind => ContentKind.ThemeSettings;

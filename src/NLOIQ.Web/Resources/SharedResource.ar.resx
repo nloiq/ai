@@ -460,4 +460,14 @@
 <data name="StatusRateLimited" xml:space="preserve"><value>يرجى المحاولة بعد قليل</value></data>
 <data name="StatusForbidden" xml:space="preserve"><value>الوصول غير مسموح</value></data>
 <data name="StatusHelp" xml:space="preserve"><value>تحقق من العنوان أو حاول مجددًا أو عد إلى الموقع.</value></data>
+<data name="HeaderAppearance" xml:space="preserve"><value>مظهر رأس الموقع</value></data>
+<data name="HeaderHelp" xml:space="preserve"><value>احفظ المسودة وراجع المعاينتين ثم انشر لتحديث الموقع. اختر صورة الشعار في إعدادات الموقع.</value></data>
+<data name="LogoBorderEnabled" xml:space="preserve"><value>إظهار إطار الشعار</value></data>
+<data name="LogoBorderColor" xml:space="preserve"><value>لون إطار الشعار</value></data>
+<data name="LogoRadius" xml:space="preserve"><value>استدارة الشعار (٠–٣٢ بكسل)</value></data>
+<data name="LogoHeight" xml:space="preserve"><value>ارتفاع الشعار (٢٤–٩٦ بكسل)</value></data>
+<data name="ThemeSelectorStyle" xml:space="preserve"><value>نمط اختيار المظهر</value></data>
+<data name="ThemeDropdown" xml:space="preserve"><value>قائمة منسدلة</value></data>
+<data name="ThemeToggle" xml:space="preserve"><value>أزرار اختيار</value></data>
+<data name="ThemeSelectorRadius" xml:space="preserve"><value>استدارة أداة المظهر (٠–٢٨ بكسل)</value></data>
 </root>

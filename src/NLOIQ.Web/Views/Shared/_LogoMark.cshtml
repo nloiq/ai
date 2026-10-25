@@ -1,0 +1,2 @@
+@model NLOIQ.Application.Content.PublicBrand
+<span class="site-logo text-xl font-bold tracking-tight" dir="ltr">@if(Model.Logo is not null){<img src="@Model.Logo.Url" alt="@Model.Logo.Alt" width="@Model.Logo.Width" height="@Model.Logo.Height">}else{@Model.SiteName}</span>

@@ -1,12 +1,14 @@
 'use strict';
 (() => {
 const selector = document.getElementById('theme');
+const themeChoices = [...document.querySelectorAll('[data-theme-choice]')];
+for (const button of themeChoices) button.addEventListener('click', () => { selector.value = button.dataset.themeChoice; selector.dispatchEvent(new Event('change')); });
 const system = matchMedia('(prefers-color-scheme:dark)');
 let preference = document.documentElement.dataset.defaultTheme || 'system';
 try { preference = localStorage.getItem('nlo-theme') || preference; } catch {}
 if (!['light','dark','system'].includes(preference)) preference = 'system';
 selector.value = preference;
-function apply() { document.documentElement.dataset.theme = preference === 'system' ? (system.matches ? 'dark' : 'light') : preference; }
+function apply() { document.documentElement.dataset.theme = preference === 'system' ? (system.matches ? 'dark' : 'light') : preference; for (const button of themeChoices) button.setAttribute('aria-pressed', String(button.dataset.themeChoice === preference)); }
 selector.addEventListener('change', () => { preference = selector.value; try { localStorage.setItem('nlo-theme', preference); } catch {} apply(); });
 system.addEventListener('change', apply);
 apply();
