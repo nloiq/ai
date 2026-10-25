@@ -6,7 +6,7 @@ Implemented 2026-10-25. The homepage contact section now contains a professional
 
 - **Contact section**: `/en/admin/content/contact` (Arabic `/ar/admin/content/contact`). Edit the published heading/summary/body and bilingual contact details/social links. Business hours are rows near the bottom: add one per day, choose Open/Closed, then opening/closing time. Save, preview, verify and publish.
 - The hours card shows all seven days. Only configured days show opening times or Closed; missing days say Not provided. All times are Baghdad (UTC+3), with numeric ranges isolated left-to-right in Arabic. No additional company opening hours were invented.
-- **Contact inbox**: `/en/admin/inquiries` (Arabic mirror). SuperAdmin and Editor can list/open inquiries and mark them read. Viewer and anonymous visitors cannot access the inbox. Rows paginate in groups of 25, unread first and then newest first. Read status changes require POST and antiforgery protection.
+- **Contact inbox**: `/en/admin/inquiries` (Arabic mirror). The shorter `/en/inquiries` and `/ar/inquiries` addresses redirect to the protected admin inbox after sign-in. SuperAdmin and Editor can list/open inquiries and mark them read. Viewer and anonymous visitors cannot access the inbox. Rows paginate in groups of 25, unread first and then newest first. Read status changes require POST and antiforgery protection.
 - Form submissions are stored in the private MySQL inbox. **No email notification, email delivery, attachment upload or auto-reply is configured.** Staff must check the inbox. The submitted email is available to copy into an approved email client; no external message is sent by the site.
 
 ## Visitor behavior
