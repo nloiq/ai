@@ -64,8 +64,8 @@ bdi { unicode-bidi:isolate; }
 .theme-choices button { height:30px; min-height:30px; padding:4px 10px; font-size:14px; line-height:1.25; border-radius:max(0px,calc(var(--theme-selector-radius) - 3px)); }
 .theme-choices button[aria-pressed=true] { background:var(--accent);color:var(--on-accent); }
 
-.inquiry-card { background:var(--ivory);color:var(--evergreen);--paper:var(--ivory);--ink:var(--evergreen);--line:var(--forest,#203d32);--accent:var(--evergreen); }
+.inquiry-card { background:var(--panel);color:var(--ink);border:1px solid var(--line); }
 .inquiry-card .cms-input { border-radius:6px; }
-.inquiry-card input[type=checkbox] { accent-color:var(--evergreen); }
-.inquiry-submit { background:var(--evergreen);color:var(--ivory);border-radius:6px; }
-.contact-info-card { border:1px solid color-mix(in srgb,var(--ivory) 30%,var(--evergreen));background:color-mix(in srgb,var(--ivory) 4%,var(--evergreen)); }
+.inquiry-card input[type=checkbox] { accent-color:var(--accent); }
+.inquiry-submit { background:var(--accent);color:var(--on-accent);border-radius:6px; }
+.contact-info-card { border:1px solid var(--line);background:var(--panel);color:var(--ink); }
