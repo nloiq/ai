@@ -59,3 +59,5 @@ See the [final quality report](docs/PHASE_11_QUALITY_REVIEW.md) for verified wor
 See the [handover](docs/PHASE_12_HANDOVER.md), [deployment/configuration](docs/DEPLOYMENT.md), [CMS user guide](docs/CMS_USER_GUIDE.md), and [backup/maintenance](docs/OPERATIONS.md). No public deployment has been performed. A target host/domain, production secrets/storage and approved company content are required before launch.
 
 Header customization: [Appearance controls](docs/HEADER_APPEARANCE.md) manage logo borders/size/corners and dropdown or button-style theme selection through the normal draft/publication workflow.
+
+Contact section: [Editing guide](docs/CONTACT_SECTION.md) covers the direct admin link and bilingual heading/details, preview and publication.

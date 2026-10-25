@@ -17,6 +17,12 @@ public sealed class CmsController(IContentEditor editor,NLOIQ.Application.Interf
     public async Task<IActionResult> Index(ContentKind? kind,SectionKind? sectionKind,PublicationState? state,bool changes,string? search,CancellationToken ct) {
         var rows=await editor.ListAsync(kind,search,ct,RouteData.Values["culture"]?.ToString()??"en");if(!User.IsInRole("SuperAdmin"))rows=rows.Where(x=>x.Kind is not (ContentKind.SiteSettings or ContentKind.ThemeSettings)).ToList();if(state.HasValue)rows=rows.Where(x=>x.State==state).ToList();if(changes)rows=rows.Where(x=>x.HasUnpublishedChanges).ToList();if(sectionKind.HasValue)rows=rows.Where(x=>x.Kind==ContentKind.Section&&x.SectionKind==sectionKind).ToList();return View(rows);
     }
+    [HttpGet("contact")]
+    public async Task<IActionResult> Contact(CancellationToken ct)
+    {
+        var item=(await editor.ListAsync(ContentKind.Contact,null,ct)).SingleOrDefault(x=>x.Key=="primary");
+        return item is null?RedirectToAction(nameof(Create),new{culture=RouteData.Values["culture"],kind=ContentKind.Contact}):RedirectToAction(nameof(Edit),new{culture=RouteData.Values["culture"],id=item.Id});
+    }
     [HttpGet("new")]
     public async Task<IActionResult> Create(ContentKind kind=ContentKind.Page,SectionKind sectionKind=SectionKind.Hero,CancellationToken ct=default)
     {

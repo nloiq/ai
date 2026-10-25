@@ -12,6 +12,6 @@ public sealed class HomeController(IPreviewContentReader reader, NLOIQ.Infrastru
         if (!environment.IsDevelopment() || await database.ContentItems.AnyAsync(x => x.Kind == NLOIQ.Domain.Content.ContentKind.Page && x.Key == "home" && !x.IsDemo, cancellationToken)) return NotFound();
         if (culture is not ("en" or "ar")) return NotFound();
         var services = await reader.ReadServicesAsync(culture, cancellationToken);
-        return View(new NLOIQ.Web.ViewModels.HomeViewModel(culture, services, previewOptions.Value.VideoIds));
+        return View(new NLOIQ.Web.ViewModels.HomeViewModel(culture, services, previewOptions.Value.VideoIds) { Contact=await siteReader.ReadContactAsync(culture,cancellationToken) });
     }
 }

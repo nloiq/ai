@@ -38,3 +38,7 @@ Before launch, replace all demonstration text/assets with approved company mater
 ## Logo frame and theme selector
 
 Open Appearance and scroll to Header appearance to adjust logo border/color/corners/height and choose a dropdown or segmented theme selector with rounded corners. Review the live light/dark samples, save the draft and publish after verification. See [Header appearance controls](HEADER_APPEARANCE.md). The logo image itself is selected in Site settings.
+
+## Homepage contact section
+
+Use **Contact section** in the sidebar to edit the bilingual heading, optional gold heading line, small label, introduction and extra text, followed by email/phone/WhatsApp/address/map, hours and social rows. Save, open Saved revision preview, then verify and publish. This updates the contact section on the current homepage. See [Contact section guide](CONTACT_SECTION.md).

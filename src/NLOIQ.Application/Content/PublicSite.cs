@@ -20,4 +20,5 @@ public sealed record PublicSite(string Culture,PublicNode Page,IReadOnlyList<Pub
 public interface IPublicSiteReader
 {
     Task<PublicSite?> ReadAsync(string culture,string? slug=null,bool project=false,CancellationToken ct=default);
+    Task<PublicNode?> ReadContactAsync(string culture,CancellationToken ct=default);
 }

@@ -470,4 +470,8 @@
 <data name="ThemeDropdown" xml:space="preserve"><value>Dropdown</value></data>
 <data name="ThemeToggle" xml:space="preserve"><value>Segmented buttons</value></data>
 <data name="ThemeSelectorRadius" xml:space="preserve"><value>Theme control corner radius (0–28 px)</value></data>
+<data name="ContactManage" xml:space="preserve"><value>Contact section</value></data>
+<data name="ContactEyebrow" xml:space="preserve"><value>Small section label (optional)</value></data>
+<data name="ContactHighlight" xml:space="preserve"><value>Highlighted heading line (optional)</value></data>
+<data name="ContactEditHelp" xml:space="preserve"><value>This edits the homepage contact section. Title is the main heading; Summary is the introduction; Body is extra text. Set the small label and highlighted line in each language, then add contact details, business hours and social links below. Save, preview, then publish to update the website. Keep the content key primary.</value></data>
 </root>
