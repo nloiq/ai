@@ -52,7 +52,7 @@ Open [revision history](http://127.0.0.1:5080/en/admin/content/334/history) and 
 
 ## Phase 11 quality review
 
-See the [final quality report](docs/PHASE_11_QUALITY_REVIEW.md) for verified workflows, accessibility/security evidence, SQL optimization and remaining production requirements. `npm.cmd run test:quality` runs the repeatable accessibility/contrast/keyboard/security/SEO audit against the local preview. Phase 11 was approved on 2026-10-25; Phase 12 handover is prepared for final approval.
+See the [final quality report](docs/PHASE_11_QUALITY_REVIEW.md) for verified workflows, accessibility/security evidence, SQL optimization and remaining production requirements. `npm.cmd run test:quality` runs the repeatable accessibility/contrast/keyboard/security/SEO audit against the local preview. Phase 11 was approved on 2026-10-25; Phase 12 handover was approved on 2026-10-25; all planned development phases are approved.
 
 ## Phase 12 deployment and handover
 

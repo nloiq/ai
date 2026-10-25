@@ -18,7 +18,7 @@ The following require owner/host input and target-environment verification befor
 
 No real host, DNS, certificate, production database or external backup/monitoring service has been provisioned. Windows IIS is the documented reference; Linux/native image processing and arbitrary proxy setups need their own verification. Local automated accessibility checks are not a full accessibility certification.
 
-**Stop for final Phase 12 approval. Public deployment requires explicit authorization identifying the target.**
+**Phase 12 handover approved by the user on 2026-10-25 (Asia/Baghdad), checkpoint `72f80c2`. Public deployment requires explicit authorization identifying the target.**
 
 ## Preparation verification
 

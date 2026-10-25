@@ -2,9 +2,9 @@
 
 Updated: 2026-10-25 (Asia/Baghdad).
 Current phase: **12 — Deployment and handover**.
-Status: **Preparation complete; awaiting final Phase 12 approval**.
-Approved phases: **0 through 11**.
-Last approved checkpoint: `4b5a5f7` (Phase 11 quality).
+Status: **Phase 12 handover approved; planned development phases complete**.
+Approved phases: **0 through 12**.
+Last approved checkpoint: `72f80c2` (Phase 12 deployment and handover).
 Selected design: Concept A, engineering folio.
 
 Phase 11 was explicitly approved by the user on 2026-10-25. Its quality evidence and limitations remain in PHASE_11_QUALITY_REVIEW.md.
@@ -24,6 +24,6 @@ Local preview: http://127.0.0.1:5080/en/ and /ar/.
 
 ## Final gate
 
-**Stop for final Phase 12 approval. No public deployment or live infrastructure changes performed.** Hosting/domain/TLS, production secrets/storage, backup restore rehearsal, operations/monitoring and approved company copy/logo/contact/projects remain owner/host inputs and target-host acceptance work. A non-demo bilingual homepage must be published before launch. The local Development design preview is not a finished production content set.
+**Phase 12 handover approved by the user on 2026-10-25. No public deployment or live infrastructure changes performed.** Hosting/domain/TLS, production secrets/storage, backup restore rehearsal, operations/monitoring and approved company copy/logo/contact/projects remain owner/host inputs and target-host acceptance work. A non-demo bilingual homepage must be published before launch. The local Development design preview is not a finished production content set.
 
 Final handover approval does not select or authorize a production target. Public deployment requires explicit target authorization. REVISE requests changes; SHOW PREVIEW reports the app; STATUS reports progress.
