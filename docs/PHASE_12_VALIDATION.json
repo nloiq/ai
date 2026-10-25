@@ -1,0 +1,44 @@
+{
+  "preparedDate": "2026-10-25",
+  "approvedPhase11": "4b5a5f7",
+  "releaseBuild": {
+    "warnings": 0,
+    "errors": 0
+  },
+  "bootstrapRollbackCheck": {
+    "missingRolesCreated": true,
+    "passwordVerified": true,
+    "superAdminAssigned": true,
+    "existingAccountRefused": true,
+    "accountInventoryRestored": true
+  },
+  "productionHttpsSmoke": {
+    "productionMode": true,
+    "loopbackOnly": true,
+    "temporaryUntrustedTestCertificate": true,
+    "publishedPage": 200,
+    "anonymousPreview": 302,
+    "secureAntiforgery": true,
+    "arabic404": true,
+    "privateConfigExcluded": true,
+    "uploadsExcluded": true,
+    "prototypeDisabled": true,
+    "errorDetailsHidden": true
+  },
+  "artifact": {
+    "directory": "artifacts/phase12-publish",
+    "files": 97,
+    "privateConfigExcluded": true,
+    "runtimeUploadsExcluded": true,
+    "iisWebConfigPresent": true
+  },
+  "blankSchemaScript": {
+    "path": "artifacts/phase12-schema.sql",
+    "bytes": 31517,
+    "sha256": "c0f5c5d93107c2e6b383c2a820c141a76b17b897fb8b6e00c5513cd939dc1e72",
+    "appliedToDatabase": false
+  },
+  "productionDeploymentPerformed": false,
+  "targetHostAcceptancePerformed": false,
+  "backupRestoreRehearsalPerformed": false
+}

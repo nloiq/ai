@@ -1,6 +1,6 @@
 ﻿# NLO IQ
 
-ASP.NET Core MVC modular monolith — Phase 11 quality review.
+ASP.NET Core MVC modular monolith — Phase 12 deployment and handover.
 
 ## Quick start (PowerShell)
 
@@ -52,4 +52,8 @@ Open [revision history](http://127.0.0.1:5080/en/admin/content/334/history) and 
 
 ## Phase 11 quality review
 
-See the [final quality report](docs/PHASE_11_QUALITY_REVIEW.md) for verified workflows, accessibility/security evidence, SQL optimization and remaining production requirements. `npm.cmd run test:quality` runs the repeatable accessibility/contrast/keyboard/security/SEO audit against the local preview. Phase 12 deployment/handover requires explicit approval.
+See the [final quality report](docs/PHASE_11_QUALITY_REVIEW.md) for verified workflows, accessibility/security evidence, SQL optimization and remaining production requirements. `npm.cmd run test:quality` runs the repeatable accessibility/contrast/keyboard/security/SEO audit against the local preview. Phase 11 was approved on 2026-10-25; Phase 12 handover is prepared for final approval.
+
+## Phase 12 deployment and handover
+
+See the [handover](docs/PHASE_12_HANDOVER.md), [deployment/configuration](docs/DEPLOYMENT.md), [CMS user guide](docs/CMS_USER_GUIDE.md), and [backup/maintenance](docs/OPERATIONS.md). No public deployment has been performed. A target host/domain, production secrets/storage and approved company content are required before launch.

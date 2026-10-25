@@ -18,6 +18,10 @@ await using var provider = services.BuildServiceProvider();
 await using var scope = provider.CreateAsyncScope();
 var users = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 var db = scope.ServiceProvider.GetRequiredService<NloDbContext>();
+if (args.Contains("--bootstrap-check")) {
+    await BootstrapChecks.RunAsync(scope.ServiceProvider, db);
+    return;
+}
 var created = new List<ApplicationUser>();
 var accounts = new Dictionary<string, object>();
 try {

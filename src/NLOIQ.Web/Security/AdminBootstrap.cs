@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using NLOIQ.Infrastructure.Identity;
 namespace NLOIQ.Web.Security;
 public static class AdminBootstrap
@@ -26,8 +27,14 @@ public static class AdminBootstrap
             password = buffer.ToString(); Console.WriteLine();
         }
         if (password.Length > 256) throw new InvalidOperationException("Password must be at most 256 characters.");
-        if (!await roles.RoleExistsAsync("SuperAdmin"))
-            throw new InvalidOperationException("Initialize the database roles first.");
+        // Fresh production databases must not require the Development demo seeder.
+        foreach (var name in new[] { "SuperAdmin", "Editor", "Viewer" })
+        {
+            if (await roles.RoleExistsAsync(name)) continue;
+            var created = await roles.CreateAsync(new IdentityRole<Guid>(name) { Id = Guid.NewGuid() });
+            if (!created.Succeeded)
+                throw new InvalidOperationException("Role initialization failed: " + string.Join(" ", created.Errors.Select(error => error.Description)));
+        }
         var user = new ApplicationUser { Id = Guid.NewGuid(), UserName = email, Email = email, DisplayName = email };
         var result = await users.CreateAsync(user, password);
         if (!result.Succeeded) throw new InvalidOperationException(string.Join(" ", result.Errors.Select(error => error.Description)));

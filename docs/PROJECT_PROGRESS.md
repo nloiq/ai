@@ -1,36 +1,29 @@
 # NLO IQ project progress
 
-Updated: 2026-10-24 (Asia/Baghdad).
-Current phase: **11 — Testing and optimization**.
-Status: **Delivered for final quality review; awaiting Phase 11 approval**.
-Approved phases: **0 through 10**.
-Last approved checkpoint: `baa369a` (Phase 10 publishing).
+Updated: 2026-10-25 (Asia/Baghdad).
+Current phase: **12 — Deployment and handover**.
+Status: **Preparation complete; awaiting final Phase 12 approval**.
+Approved phases: **0 through 11**.
+Last approved checkpoint: `4b5a5f7` (Phase 11 quality).
 Selected design: Concept A, engineering folio.
 
-## Delivered
+Phase 11 was explicitly approved by the user on 2026-10-25. Its quality evidence and limitations remain in PHASE_11_QUALITY_REVIEW.md.
 
-- Public composition reader reduced from 211 to 80 SQL commands in the fixed rollback fixture; 95-command budget added.
-- Stronger control-border contrast with custom-palette fallbacks; skip-link and dynamic-row keyboard focus fixes.
-- Empty mobile menu controls removed; accessible localized error pages; stale preview phase label removed.
-- Debug/Release builds, locked restore, release packaging and configured dependency audits pass.
-- 43 rollback database scenarios, media/unit checks, real CMS/restore/scheduling flows and authentication/authorization/CSRF checks pass.
-- 51 automated accessibility scans report no violations; measured tested control borders exceed 3:1.
-- Existing bilingual/RTL/theme/responsive, SEO/security, lightbox/parallax and idle/coalesced animation checks pass.
-- Isolated Production-mode HTTPS release smoke passes; its temporary process is stopped. No real deployment performed.
+## Phase 12 delivered
 
-Checkpoint: 26 roots, 104 revisions, 208 translations, 6 media assets, 5 published roots, 1 local account and 0 pending schedules. No new migration. Existing CMS demos are retained.
+- Production configuration and environment-variable documentation.
+- Release/Tailwind build, reviewed-script migration procedure and interactive secure administrator bootstrap.
+- Fresh production role initialization without Development demo seeding; rollback-only verification passes.
+- IIS reference hosting and target-host acceptance/cutover instructions.
+- Coordinated database/media/key backup, restore rehearsal and maintenance guidance.
+- CMS user guide and final application summary.
+- Release build (zero warnings/errors), publish exclusions and actual artifact's isolated Production HTTPS smoke pass. Blank-schema SQL generated but not applied.
 
-## Final quality review
+Guide: PHASE_12_HANDOVER.md. Evidence: PHASE_12_VALIDATION.json.
+Local preview: http://127.0.0.1:5080/en/ and /ar/.
 
-Guide: PHASE_11_QUALITY_REVIEW.md.
-Evidence: PHASE_11_QUALITY_RESULTS.json, PHASE_11_RELEASE_SMOKE.json, PHASE_11_INVENTORY.json.
-Reviewed screenshots: docs/previews/phase11/.
-Running Release preview: http://127.0.0.1:5080/en/ and /ar/.
-Admin: /en/account/login using ignored artifacts/PHASE_6_LOGIN.txt.
-Publishing example: /en/pages/publishing-review; private preview/history: /en/admin/content/334/preview and /history.
+## Final gate
 
-## Remaining release gate
+**Stop for final Phase 12 approval. No public deployment or live infrastructure changes performed.** Hosting/domain/TLS, production secrets/storage, backup restore rehearsal, operations/monitoring and approved company copy/logo/contact/projects remain owner/host inputs and target-host acceptance work. A non-demo bilingual homepage must be published before launch. The local Development design preview is not a finished production content set.
 
-**Phase 12 has not started.** It requires explicit approval. Actual hosting/TLS/proxy/runtime, public origin, backups/media restore, operations and final company facts/assets remain required. Automated accessibility and local Edge tests do not certify full WCAG or cross-browser/host production readiness. See the guide for precise scope and limitations.
-
-APPROVE PHASE advances to Phase 12. REVISE changes this quality phase. SHOW PREVIEW reports the running app. EXPLAIN makes no changes. STATUS reports progress. ROLLBACK requires reviewing discarded changes and database implications first.
+Final handover approval does not select or authorize a production target. Public deployment requires explicit target authorization. REVISE requests changes; SHOW PREVIEW reports the app; STATUS reports progress.

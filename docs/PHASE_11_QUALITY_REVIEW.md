@@ -1,6 +1,6 @@
 # Phase 11 — Testing and optimization
 
-Status: complete for final quality review. Phase 10 checkpoint `baa369a` is approved. Phase 12 has not started. The application is running locally in Release configuration.
+Status: approved by the user on 2026-10-25 at checkpoint `4b5a5f7`. Phase 12 preparation is authorized. The application is running locally in Release configuration.
 
 ## Findings fixed
 
@@ -81,4 +81,4 @@ Zero automated violations is not a WCAG certification. The report retains incomp
 
 This checkpoint verifies local application workflows, **not production readiness or deployment**. Production host/runtime (including Linux native image support if chosen), real TLS/proxy configuration, public HTTPS origin, backups/media restoration, shared Data Protection keys, operations/monitoring and final company copy/logo/contact/project facts remain Phase 12 inputs/work. The Production-mode probe uses a temporary untrusted test certificate; it does not provision a production certificate or recreate runtime uploads.
 
-**Stop for final Phase 11 quality approval. Do not start Phase 12 until approved.**
+**Phase 11 approved on 2026-10-25. See PHASE_12_HANDOVER.md for the final release gate.**
