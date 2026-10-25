@@ -48,7 +48,7 @@ const base='http://127.0.0.1:5080';
    const workspace=await context.request.get(base+'/en/admin/content');expect(workspace.status()).toBe(role==='Viewer'?403:200);
    const cmsCsrf=await context.request.post(base+'/en/admin/content/new',{form:{}});expect(cmsCsrf.status()).toBe(role==='Viewer'?403:400);
    const publishing=await context.request.post(base+'/en/admin/content/1/status',{form:{action:'publish'}});expect(publishing.status()).toBe(role==='SuperAdmin'?400:403);
-   for(const path of ['media','seo','translations','settings/site','settings/appearance','audit']){const r=await context.request.get(base+'/en/admin/'+path);expect(r.status()).toBe(['media','seo','translations'].includes(path)?(role==='Viewer'?403:200):(role==='SuperAdmin'?200:403));}
+   for(const path of ['media','seo','translations','inquiries','settings/site','settings/appearance','audit']){const r=await context.request.get(base+'/en/admin/'+path);expect(r.status()).toBe(['media','seo','translations','inquiries'].includes(path)?(role==='Viewer'?403:200):(role==='SuperAdmin'?200:403));}
    for(const path of ['/history','/preview']){const r=await context.request.get(base+'/en/admin/content/'+process.env.NLO_CONTENT_ID+path);expect(r.status()).toBe(role==='Viewer'?403:200);}
    for(const path of ['/history','/preview']){const r=await context.request.get(base+'/en/admin/content/'+process.env.NLO_SITE_ID+path);expect(r.status()).toBe(role==='SuperAdmin'?200:403);}
    for(const action of ['restore','schedule']){const r=await context.request.post(base+'/en/admin/content/'+process.env.NLO_CONTENT_ID+'/'+action,{form:{}});expect(r.status()).toBe(action==='restore'?(role==='Viewer'?403:400):(role==='SuperAdmin'?400:403));}
@@ -63,7 +63,7 @@ const base='http://127.0.0.1:5080';
        await expect(p.locator('html')).toHaveAttribute('dir','rtl');
        expect(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
      }
-     await p.setViewportSize({width:390,height:844});await p.selectOption('#theme','dark');await expect(p.locator('html')).toHaveAttribute('data-theme','dark');
+     await p.setViewportSize({width:390,height:844});if(await p.locator('#theme').isVisible())await p.selectOption('#theme','dark');else await p.locator('[data-theme-choice="dark"]').click();await expect(p.locator('html')).toHaveAttribute('data-theme','dark');
      await p.screenshot({path:'artifacts/phase6/admin-ar-mobile-dark.png',fullPage:true});
      await p.reload();await expect(p.locator('#theme')).toHaveValue('dark');
    }

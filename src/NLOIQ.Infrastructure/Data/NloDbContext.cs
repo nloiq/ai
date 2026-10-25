@@ -7,6 +7,7 @@ using NLOIQ.Domain.Entities;
 namespace NLOIQ.Infrastructure.Data;
 public sealed class NloDbContext(DbContextOptions<NloDbContext> options) : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>(options)
 {
+    public DbSet<ContactInquiry> ContactInquiries => Set<ContactInquiry>();
     public DbSet<ServicePreview> ServicePreviews => Set<ServicePreview>();
     public DbSet<ContentItem> ContentItems => Set<ContentItem>();
     public DbSet<ContentRevision> ContentRevisions => Set<ContentRevision>();
@@ -29,6 +30,13 @@ public sealed class NloDbContext(DbContextOptions<NloDbContext> options) : Ident
     {
         base.OnModelCreating(builder);
         ContentModelConfiguration.Configure(builder);
+        builder.Entity<ContactInquiry>(entity => {
+            entity.ToTable("ContactInquiries");entity.HasKey(x=>x.Id);
+            entity.HasIndex(x=>x.SubmissionId).IsUnique();entity.HasIndex(x=>new{x.IsRead,x.CreatedUtc});
+            entity.Property(x=>x.Culture).HasMaxLength(2).IsRequired();entity.Property(x=>x.Name).HasMaxLength(120).IsRequired();
+            entity.Property(x=>x.Email).HasMaxLength(254).IsRequired();entity.Property(x=>x.Phone).HasMaxLength(40).IsRequired();entity.Property(x=>x.Company).HasMaxLength(160).IsRequired();
+            entity.Property(x=>x.Service).HasMaxLength(30).IsRequired();entity.Property(x=>x.Message).HasMaxLength(4000).IsRequired();
+        });
         builder.Entity<ServicePreview>(entity => {
             entity.ToTable("ServicePreviews"); entity.HasKey(x => x.Id);
             entity.Property(x => x.Key).HasMaxLength(40).IsRequired();

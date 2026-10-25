@@ -1,0 +1,3 @@
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> L
+@{Layout="_PublicFormLayout";ViewData["Title"]=L["InquiryThanks"];var culture=Context.Request.RouteValues["culture"]?.ToString()=="ar"?"ar":"en";}
+<div class="border border-line bg-panel p-8"><p class="text-xs uppercase tracking-widest text-signal">@L["InquiryContactUs"]</p><h1 class="mt-4 font-editorial text-4xl">@L["InquiryThanks"]</h1><p class="mt-5 leading-8">@L["InquiryThanksBody"]</p><a href="/@culture/" class="mt-7 inline-flex min-h-11 items-center underline">@L["InquiryBack"]</a></div>

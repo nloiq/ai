@@ -61,3 +61,5 @@ See the [handover](docs/PHASE_12_HANDOVER.md), [deployment/configuration](docs/D
 Header customization: [Appearance controls](docs/HEADER_APPEARANCE.md) manage logo borders/size/corners and dropdown or button-style theme selection through the normal draft/publication workflow.
 
 Contact section: [Editing guide](docs/CONTACT_SECTION.md) covers the direct admin link and bilingual heading/details, preview and publication.
+
+Contact inquiries: [Form and inbox guide](docs/CONTACT_FORM.md). The bilingual form stores messages in the protected admin Contact inbox; the seven-day hours card uses published CMS hours. Apply the ContactInquiries migration before deploying this feature.

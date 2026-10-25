@@ -474,4 +474,42 @@
 <data name="ContactEyebrow" xml:space="preserve"><value>Small section label (optional)</value></data>
 <data name="ContactHighlight" xml:space="preserve"><value>Highlighted heading line (optional)</value></data>
 <data name="ContactEditHelp" xml:space="preserve"><value>This edits the homepage contact section. Title is the main heading; Summary is the introduction; Body is extra text. Set the small label and highlighted line in each language, then add contact details, business hours and social links below. Save, preview, then publish to update the website. Keep the content key primary.</value></data>
+<data name="InquiryTitle" xml:space="preserve"><value>Send an inquiry</value></data>
+<data name="InquiryIntro" xml:space="preserve"><value>Tell us about your project. Your message will be saved for our team to review.</value></data>
+<data name="InquiryName" xml:space="preserve"><value>Full name</value></data>
+<data name="InquiryEmail" xml:space="preserve"><value>Email address</value></data>
+<data name="InquiryPhone" xml:space="preserve"><value>Phone (optional)</value></data>
+<data name="InquiryCompany" xml:space="preserve"><value>Company (optional)</value></data>
+<data name="InquiryService" xml:space="preserve"><value>Area of interest</value></data>
+<data name="InquiryMessage" xml:space="preserve"><value>Project details</value></data>
+<data name="InquiryGeneral" xml:space="preserve"><value>General inquiry</value></data>
+<data name="InquiryLowCurrent" xml:space="preserve"><value>Low-current engineering</value></data>
+<data name="InquirySoftware" xml:space="preserve"><value>Software solutions</value></data>
+<data name="InquiryScada" xml:space="preserve"><value>SCADA integration</value></data>
+<data name="InquiryAutomation" xml:space="preserve"><value>System automation</value></data>
+<data name="InquiryConsent" xml:space="preserve"><value>I agree that my details may be used to respond to this inquiry.</value></data>
+<data name="InquirySend" xml:space="preserve"><value>Send inquiry</value></data>
+<data name="InquiryNote" xml:space="preserve"><value>Required: name, email and a message of 10–4,000 characters.</value></data>
+<data name="InquiryPreview" xml:space="preserve"><value>Preview only. Submission is disabled here.</value></data>
+<data name="InquiryThanks" xml:space="preserve"><value>Your inquiry has been received</value></data>
+<data name="InquiryThanksBody" xml:space="preserve"><value>Your message is saved in our contact inbox. Thank you for sharing your project with us.</value></data>
+<data name="InquiryBack" xml:space="preserve"><value>Back to website</value></data>
+<data name="InquiryLength" xml:space="preserve"><value>{0} must be between {2} and {1} characters.</value></data>
+<data name="InquiryEmailInvalid" xml:space="preserve"><value>Enter a valid email address.</value></data>
+<data name="InquiryConsentRequired" xml:space="preserve"><value>Please agree to using your details to respond.</value></data>
+<data name="InquiryInvalidSubmission" xml:space="preserve"><value>Please check the form and try again.</value></data>
+<data name="InquiryInbox" xml:space="preserve"><value>Contact inbox</value></data>
+<data name="InquiryEmpty" xml:space="preserve"><value>No inquiries yet. New website messages will appear here.</value></data>
+<data name="InquiryUnread" xml:space="preserve"><value>New</value></data>
+<data name="InquiryRead" xml:space="preserve"><value>Read</value></data>
+<data name="InquiryMarkRead" xml:space="preserve"><value>Mark as read</value></data>
+<data name="InquiryReceived" xml:space="preserve"><value>Received (Asia/Baghdad)</value></data>
+<data name="InquiryOpen" xml:space="preserve"><value>Open inquiry</value></data>
+<data name="InquiryPrevious" xml:space="preserve"><value>Previous</value></data>
+<data name="InquiryNext" xml:space="preserve"><value>Next</value></data>
+<data name="InquiryHours" xml:space="preserve"><value>Business hours</value></data>
+<data name="InquiryTimezone" xml:space="preserve"><value>All times are Asia/Baghdad (UTC+3).</value></data>
+<data name="InquiryHoursMissing" xml:space="preserve"><value>Not provided</value></data>
+<data name="InquiryContactDetails" xml:space="preserve"><value>Contact details</value></data>
+<data name="InquiryContactUs" xml:space="preserve"><value>Contact us</value></data>
 </root>

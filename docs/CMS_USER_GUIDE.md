@@ -42,3 +42,7 @@ Open Appearance and scroll to Header appearance to adjust logo border/color/corn
 ## Homepage contact section
 
 Use **Contact section** in the sidebar to edit the bilingual heading, optional gold heading line, small label, introduction and extra text, followed by email/phone/WhatsApp/address/map, hours and social rows. Save, open Saved revision preview, then verify and publish. This updates the contact section on the current homepage. See [Contact section guide](CONTACT_SECTION.md).
+
+## Contact form messages and business hours
+
+The public contact form saves messages to **Contact inbox** in the sidebar. SuperAdmin/Editor can open a message and mark it read. Email notifications are not configured. Edit the seven-day schedule in **Contact section → Business hours**, then save and publish; unconfigured days display Not provided. See [Contact form guide](CONTACT_FORM.md).

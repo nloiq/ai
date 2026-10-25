@@ -474,4 +474,42 @@
 <data name="ContactEyebrow" xml:space="preserve"><value>عنوان القسم الصغير (اختياري)</value></data>
 <data name="ContactHighlight" xml:space="preserve"><value>سطر العنوان المميز (اختياري)</value></data>
 <data name="ContactEditHelp" xml:space="preserve"><value>هذه إعدادات قسم التواصل في الصفحة الرئيسية. العنوان هو العنوان الرئيسي، والملخص هو المقدمة، والمحتوى نص إضافي. أضف عنوان القسم والسطر المميز لكل لغة ثم بيانات التواصل وساعات العمل وروابط التواصل أدناه. احفظ وعاين ثم انشر لتحديث الموقع. أبقِ مفتاح المحتوى primary.</value></data>
+<data name="InquiryTitle" xml:space="preserve"><value>أرسل استفسارك</value></data>
+<data name="InquiryIntro" xml:space="preserve"><value>أخبرنا عن مشروعك. ستُحفظ رسالتك ليراجعها فريقنا.</value></data>
+<data name="InquiryName" xml:space="preserve"><value>الاسم الكامل</value></data>
+<data name="InquiryEmail" xml:space="preserve"><value>البريد الإلكتروني</value></data>
+<data name="InquiryPhone" xml:space="preserve"><value>الهاتف (اختياري)</value></data>
+<data name="InquiryCompany" xml:space="preserve"><value>الشركة (اختياري)</value></data>
+<data name="InquiryService" xml:space="preserve"><value>مجال الاهتمام</value></data>
+<data name="InquiryMessage" xml:space="preserve"><value>تفاصيل المشروع</value></data>
+<data name="InquiryGeneral" xml:space="preserve"><value>استفسار عام</value></data>
+<data name="InquiryLowCurrent" xml:space="preserve"><value>هندسة التيار الخفيف</value></data>
+<data name="InquirySoftware" xml:space="preserve"><value>الحلول البرمجية</value></data>
+<data name="InquiryScada" xml:space="preserve"><value>تكامل أنظمة SCADA</value></data>
+<data name="InquiryAutomation" xml:space="preserve"><value>أتمتة الأنظمة</value></data>
+<data name="InquiryConsent" xml:space="preserve"><value>أوافق على استخدام بياناتي للرد على هذا الاستفسار.</value></data>
+<data name="InquirySend" xml:space="preserve"><value>إرسال الاستفسار</value></data>
+<data name="InquiryNote" xml:space="preserve"><value>مطلوب: الاسم والبريد ورسالة من ١٠ إلى ٤٠٠٠ حرف.</value></data>
+<data name="InquiryPreview" xml:space="preserve"><value>معاينة فقط. الإرسال معطل هنا.</value></data>
+<data name="InquiryThanks" xml:space="preserve"><value>تم استلام استفسارك</value></data>
+<data name="InquiryThanksBody" xml:space="preserve"><value>حُفظت رسالتك في صندوق التواصل. شكراً لمشاركتنا تفاصيل مشروعك.</value></data>
+<data name="InquiryBack" xml:space="preserve"><value>العودة إلى الموقع</value></data>
+<data name="InquiryLength" xml:space="preserve"><value>يجب أن يكون طول {0} بين {2} و{1} حرفاً.</value></data>
+<data name="InquiryEmailInvalid" xml:space="preserve"><value>أدخل بريداً إلكترونياً صالحاً.</value></data>
+<data name="InquiryConsentRequired" xml:space="preserve"><value>يرجى الموافقة على استخدام بياناتك للرد.</value></data>
+<data name="InquiryInvalidSubmission" xml:space="preserve"><value>يرجى التحقق من النموذج والمحاولة مجدداً.</value></data>
+<data name="InquiryInbox" xml:space="preserve"><value>صندوق التواصل</value></data>
+<data name="InquiryEmpty" xml:space="preserve"><value>لا توجد استفسارات بعد. ستظهر رسائل الموقع الجديدة هنا.</value></data>
+<data name="InquiryUnread" xml:space="preserve"><value>جديد</value></data>
+<data name="InquiryRead" xml:space="preserve"><value>مقروء</value></data>
+<data name="InquiryMarkRead" xml:space="preserve"><value>وضع علامة مقروء</value></data>
+<data name="InquiryReceived" xml:space="preserve"><value>وقت الاستلام (بغداد)</value></data>
+<data name="InquiryOpen" xml:space="preserve"><value>فتح الاستفسار</value></data>
+<data name="InquiryPrevious" xml:space="preserve"><value>السابق</value></data>
+<data name="InquiryNext" xml:space="preserve"><value>التالي</value></data>
+<data name="InquiryHours" xml:space="preserve"><value>ساعات العمل</value></data>
+<data name="InquiryTimezone" xml:space="preserve"><value>جميع الأوقات بتوقيت بغداد (UTC+3).</value></data>
+<data name="InquiryHoursMissing" xml:space="preserve"><value>غير محدد</value></data>
+<data name="InquiryContactDetails" xml:space="preserve"><value>بيانات التواصل</value></data>
+<data name="InquiryContactUs" xml:space="preserve"><value>تواصل معنا</value></data>
 </root>

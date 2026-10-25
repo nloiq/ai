@@ -1,0 +1,4 @@
+@model NLOIQ.Web.ViewModels.ContactInquiryModel
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> L
+@{Layout="_PublicFormLayout";ViewData["Title"]=L["InquiryContactUs"];}
+<h1 class="mb-8 font-editorial text-4xl">@L["InquiryContactUs"]</h1><div class="inquiry-card rounded-2xl p-6 md:p-8"><partial name="_InquiryForm" model="Model" /></div>

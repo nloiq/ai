@@ -1,4 +1,5 @@
 @model NLOIQ.Application.Content.PublicSite
+@{ViewData["ContactPreview"]=Model.IsPreview;}
 @using NLOIQ.Application.Content
 @using NLOIQ.Domain.Content
 @inject NLOIQ.Application.Content.IBrandReader BrandReader
