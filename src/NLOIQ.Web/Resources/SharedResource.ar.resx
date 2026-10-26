@@ -526,4 +526,6 @@
 <data name="ProjectsConceptStudies" xml:space="preserve"><value>دراسات تصورية</value></data>
 <data name="CmsPageTypeHelp" xml:space="preserve"><value>أنت تحرر صفحة تتكون من أقسام منشورة. لعرض مشروع بصوره أو الفيديو الخاص به، أنشئ مشروعاً بدلاً من صفحة.</value></data>
 <data name="CmsProjectTypeHelp" xml:space="preserve"><value>هذا مشروع له صفحة تفاصيل عامة مستقلة. أضف العنوان والرابط لكل لغة والوصف والصور المعتمدة ثم احفظ وانشر. لا يتطلب المشروع أقسام صفحات.</value></data>
+<data name="CmsMatchingProjectHelp" xml:space="preserve"><value>هذا العنصر صفحة. يوجد مشروع بمفتاح المحتوى نفسه. لتحديث ذلك المشروع، افتح محرر المشروع أدناه.</value></data>
+<data name="CmsOpenProjectEditor" xml:space="preserve"><value>فتح محرر المشروع</value></data>
 </root>

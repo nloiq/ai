@@ -6,6 +6,7 @@
 Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary PrefixData(string prefix){var data=new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary(ViewData);data.TemplateInfo.HtmlFieldPrefix=prefix;return data;}
 Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary RowData(string collection,int index){var data=new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary(ViewData);data.TemplateInfo.HtmlFieldPrefix=collection+"["+index+"]";return data;}
 }
+@if(ViewData["MatchingProjectId"] is long matchingProject){<aside class="mb-6 border border-accent bg-panel p-5" role="note"><p class="text-sm leading-7">@L["CmsMatchingProjectHelp"]</p><a href="/@culture/admin/content/@matchingProject" class="mt-4 inline-flex min-h-11 items-center bg-accent px-4 text-sm font-semibold text-on-accent">@L["CmsOpenProjectEditor"]</a></aside>}
 @if(Model.Kind==ContentKind.Page){<p class="mb-5 border border-line bg-panel p-4 text-sm leading-7">@L["CmsPageTypeHelp"] <a href="/@culture/admin/content/new?kind=Project" class="underline underline-offset-4">+ @L["CmsKindProject"]</a></p>}
 @if(Model.Kind==ContentKind.Project){<p class="mb-5 border border-line bg-panel p-4 text-sm leading-7">@L["CmsProjectTypeHelp"]</p>}
 @if(Model.Kind==ContentKind.Contact){<p class="mb-5 border border-line bg-panel p-4 text-sm leading-7">@L["ContactEditHelp"]</p>}

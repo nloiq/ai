@@ -526,4 +526,6 @@
 <data name="ProjectsConceptStudies" xml:space="preserve"><value>Concept studies</value></data>
 <data name="CmsPageTypeHelp" xml:space="preserve"><value>You are editing a Page, built from published sections. To showcase a project with photos or video, create a Project instead.</value></data>
 <data name="CmsProjectTypeHelp" xml:space="preserve"><value>This is a Project with its own public details page. Add both language titles/slugs, descriptions and approved images, then save and publish. Page sections are not required.</value></data>
+<data name="CmsMatchingProjectHelp" xml:space="preserve"><value>This item is a Page. A Project with the same content key already exists. To update that project, use its Project editor below.</value></data>
+<data name="CmsOpenProjectEditor" xml:space="preserve"><value>Open Project editor</value></data>
 </root>

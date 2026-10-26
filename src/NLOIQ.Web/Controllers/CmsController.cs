@@ -39,6 +39,8 @@ public sealed class CmsController(IContentEditor editor,NLOIQ.Application.Interf
     {
         ViewData["Choices"]=await editor.ChoicesAsync(ct,RouteData.Values["culture"]?.ToString()??"en");
         if(model.Id!=0)ViewData["Item"]=(await editor.ListAsync(model.Kind,null,ct,RouteData.Values["culture"]?.ToString()??"en")).Single(x=>x.Id==model.Id);
+        if(model.Id!=0 && model.Kind==ContentKind.Page)
+            ViewData["MatchingProjectId"]=(await editor.ListAsync(ContentKind.Project,null,ct)).SingleOrDefault(x=>x.Key==model.Key&&x.State!=PublicationState.Archived)?.Id;
         if(model.Id!=0 && model.Kind is ContentKind.Page or ContentKind.Project) {
             var culture=RouteData.Values["culture"]?.ToString()??"en";
             var live=await published.FindAsync(model.Kind,model.Key,culture,ct);
