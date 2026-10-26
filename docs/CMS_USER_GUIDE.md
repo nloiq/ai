@@ -46,3 +46,7 @@ Use **Contact section** in the sidebar to edit the bilingual heading, optional g
 ## Contact form messages and business hours
 
 The public contact form saves messages to **Contact inbox** in the sidebar. SuperAdmin/Editor can open a message and mark it read. Email notifications are not configured. Edit the seven-day schedule in **Contact section → Business hours**, then save and publish; unconfigured days display Not provided. See [Contact form guide](CONTACT_FORM.md).
+
+## Compact content table
+
+The Content workspace now uses a table showing ID, localized title (or content key if untranslated), key, type/section subtype, publication state, draft revision, pending changes, demo/standard status and Edit/Preview/History actions. Existing search/type/status/change filters remain available. On narrow screens scroll the table horizontally; its region is keyboard-focusable. No content or publication state changes when switching this layout.

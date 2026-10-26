@@ -512,4 +512,14 @@
 <data name="InquiryHoursMissing" xml:space="preserve"><value>Not provided</value></data>
 <data name="InquiryContactDetails" xml:space="preserve"><value>Contact details</value></data>
 <data name="InquiryContactUs" xml:space="preserve"><value>Contact us</value></data>
+<data name="CmsContentTable" xml:space="preserve"><value>Content workspace table</value></data>
+<data name="CmsItemCount" xml:space="preserve"><value>{0} items</value></data>
+<data name="CmsContentType" xml:space="preserve"><value>Content</value></data>
+<data name="CmsActions" xml:space="preserve"><value>Actions</value></data>
+<data name="CmsPendingChanges" xml:space="preserve"><value>Pending</value></data>
+<data name="CmsUpToDate" xml:space="preserve"><value>Up to date</value></data>
+<data name="CmsStandard" xml:space="preserve"><value>Standard</value></data>
+<data name="CmsTablePreview" xml:space="preserve"><value>Preview</value></data>
+<data name="CmsTableHistory" xml:space="preserve"><value>History</value></data>
+<data name="CmsKind" xml:space="preserve"><value>Type</value></data>
 </root>

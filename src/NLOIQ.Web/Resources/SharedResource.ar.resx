@@ -512,4 +512,14 @@
 <data name="InquiryHoursMissing" xml:space="preserve"><value>غير محدد</value></data>
 <data name="InquiryContactDetails" xml:space="preserve"><value>بيانات التواصل</value></data>
 <data name="InquiryContactUs" xml:space="preserve"><value>تواصل معنا</value></data>
+<data name="CmsContentTable" xml:space="preserve"><value>جدول المحتوى</value></data>
+<data name="CmsItemCount" xml:space="preserve"><value>عدد العناصر: {0}</value></data>
+<data name="CmsContentType" xml:space="preserve"><value>المحتوى</value></data>
+<data name="CmsActions" xml:space="preserve"><value>الإجراءات</value></data>
+<data name="CmsPendingChanges" xml:space="preserve"><value>بانتظار النشر</value></data>
+<data name="CmsUpToDate" xml:space="preserve"><value>محدّث</value></data>
+<data name="CmsStandard" xml:space="preserve"><value>اعتيادي</value></data>
+<data name="CmsTablePreview" xml:space="preserve"><value>معاينة</value></data>
+<data name="CmsTableHistory" xml:space="preserve"><value>السجل</value></data>
+<data name="CmsKind" xml:space="preserve"><value>النوع</value></data>
 </root>

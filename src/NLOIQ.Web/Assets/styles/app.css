@@ -69,3 +69,14 @@ bdi { unicode-bidi:isolate; }
 .inquiry-card input[type=checkbox] { accent-color:var(--accent); }
 .inquiry-submit { background:var(--accent);color:var(--on-accent);border-radius:6px; }
 .contact-info-card { border:1px solid var(--line);background:var(--panel);color:var(--ink); }
+
+/* Compact CMS inventory with local horizontal scrolling on small screens. */
+.cms-table-scroll { max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:6px; }
+.cms-content-table { width:100%;min-width:1080px;border-collapse:collapse;font-size:14px;line-height:1.5; }
+.cms-content-table th,.cms-content-table td { padding:8px 12px;text-align:start;vertical-align:middle;border-bottom:1px solid var(--line); }
+.cms-content-table thead { background:var(--panel); }
+.cms-content-table thead th { white-space:nowrap;font-size:12px;font-weight:600; }
+.cms-content-table tbody tr:last-child > * { border-bottom:0; }
+.cms-content-table tbody tr:hover { background:var(--panel); }
+.cms-content-table .cms-table-title { min-width:180px;max-width:300px;overflow-wrap:anywhere;font-weight:400; }
+.cms-content-table .cms-table-key { min-width:130px;max-width:200px;overflow-wrap:anywhere;font-size:12px; }

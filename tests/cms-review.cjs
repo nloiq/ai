@@ -6,8 +6,8 @@ const base='http://127.0.0.1:5080';
  try {
   const context=await browser.newContext();const page=await context.newPage();const errors=[];page.on('pageerror',error=>errors.push(error.message));page.on('dialog',dialog=>dialog.accept());
   await page.goto(base+'/en/account/login');await page.locator('#Email').fill(text.match(/^Email: (.+)$/m)[1]);await page.locator('#Password').fill(text.match(/^Password: (.+)$/m)[1]);await page.locator('button[type=submit]').click();
-  await page.goto(base+'/en/admin/content?search=cms-review');const card=page.locator('article').filter({hasText:'/ cms-review'});const existed=await card.count()>0;
-  if(existed)await card.first().getByRole('link').click();else await page.goto(base+'/en/admin/content/new?kind=Page');
+  await page.goto(base+'/en/admin/content?search=cms-review');const card=page.locator('tr[data-content-key="cms-review"]');const existed=await card.count()>0;
+  if(existed)await card.first().locator('th[scope=row] a').click();else await page.goto(base+'/en/admin/content/new?kind=Page');
   if(!existed)await page.locator('#Key').fill('cms-review');
   await page.locator('#English_Title').fill('NLO IQ CMS review');await page.locator('#English_Slug').fill('cms-review');await page.locator('#English_Summary').fill('A working demonstration of bilingual content editing.');
   await page.locator('#English_Body').fill('**Published content** is read from the NLO IQ database.\n- Save drafts privately\n- Publish after review\n[safe link](/en/)\n<script>window.cmsInjected=true</script>');
