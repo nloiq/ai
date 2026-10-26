@@ -55,6 +55,13 @@ public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader pub
         }
         return node;
     }
+    public async Task<PublicNode?> ReadHeroAsync(string culture,CancellationToken ct=default)
+    {
+        assets.Clear();
+        if(!ContentRules.IsCulture(culture))return null;
+        var node=await Named(ContentKind.Section,"hero",culture,ct);
+        return node?.SectionKind==SectionKind.Hero?node:null;
+    }
     public async Task<PublicNode?> ReadContactAsync(string culture,CancellationToken ct=default)
     {
         assets.Clear();

@@ -50,3 +50,7 @@ The public contact form saves messages to **Contact inbox** in the sidebar. Supe
 ## Compact content table
 
 The Content workspace now uses a table showing ID, localized title (or content key if untranslated), key, type/section subtype, publication state, draft revision, pending changes, demo/standard status and Edit/Preview/History actions. Existing search/type/status/change filters remain available. On narrow screens scroll the table horizontally; its region is keyboard-focusable. No content or publication state changes when switching this layout.
+
+## Editing the current homepage Hero
+
+Edit Section key **hero**, complete both language titles and keep **Visible** checked, then save and publish. Its published text now drives the current preview homepage heading. See [Hero editing](HERO_EDITING.md) for fields, fallback behavior and pinned CMS-page revisions.
