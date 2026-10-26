@@ -83,12 +83,15 @@ test('desktop parallax is bounded and resets when reduced motion changes', async
     await page.setViewportSize({width:1440,height:900});
     await page.emulateMedia({reducedMotion:'no-preference'});
     await page.goto('/en/');
-    await page.evaluate(()=>scrollTo(0,300));
-    await expect.poll(async()=>page.locator('[data-parallax="24"] [data-parallax-layer]').evaluate(node=>node.style.transform)).not.toBe('');
-    const offset=await page.locator('[data-parallax="24"] [data-parallax-layer]').evaluate(node=>new DOMMatrix(getComputedStyle(node).transform).m42);
-    expect(Math.abs(offset)).toBeLessThanOrEqual(24);
+    await page.evaluate(()=>document.fonts.ready);
+    // The CMS Hero may replace its original illustration; use the retained project image.
+    const layer=page.locator('[data-project="network"] [data-parallax-layer]');
+    await layer.evaluate(node=>{const rect=node.closest('[data-parallax]').getBoundingClientRect();scrollTo(0,Math.max(0,scrollY+rect.top+rect.height/2-innerHeight/2+120));});
+    await expect.poll(async()=>layer.evaluate(node=>node.style.transform)).not.toBe('');
+    const offset=await layer.evaluate(node=>new DOMMatrix(getComputedStyle(node).transform).m42);
+    expect(Math.abs(offset)).toBeLessThanOrEqual(14);
     await page.emulateMedia({reducedMotion:'reduce'});
-    await expect.poll(async()=>page.locator('[data-parallax="24"] [data-parallax-layer]').evaluate(node=>getComputedStyle(node).transform)).toBe('none');
+    await expect.poll(async()=>layer.evaluate(node=>getComputedStyle(node).transform)).toBe('none');
     await expect(page.locator('.reveal-pending')).toHaveCount(0);
 });
 test('scroll work is coalesced and the scheduler rests when idle', async ({ page }) => {

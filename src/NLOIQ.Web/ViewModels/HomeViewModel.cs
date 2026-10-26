@@ -4,5 +4,6 @@ public sealed record HomeViewModel(string Culture, IReadOnlyList<ServicePreviewD
 {
     public NLOIQ.Application.Content.PublicNode? Contact { get; init; }
     public NLOIQ.Application.Content.PublicNode? Hero { get; init; }
+    public NLOIQ.Application.Content.PublicNode? ProjectsSection { get; init; }
     public bool IsArabic => Culture == "ar";
 }

@@ -54,3 +54,7 @@ The Content workspace now uses a table showing ID, localized title (or content k
 ## Editing the current homepage Hero
 
 Edit Section key **hero**, complete both language titles and keep **Visible** checked, then save and publish. Its published text now drives the current preview homepage heading. See [Hero editing](HERO_EDITING.md) for fields, fallback behavior and pinned CMS-page revisions.
+
+## Projects section gallery on the current homepage
+
+Section key **projects** now supplies the current preview homepage’s Projects heading/text and selected images. Use unique image roles, both alt-text languages and Visible, then save and publish. The uploaded gallery appears above the existing project studies. See [Projects section editing](PROJECTS_SECTION_EDITING.md).
