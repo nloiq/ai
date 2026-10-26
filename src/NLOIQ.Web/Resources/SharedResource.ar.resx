@@ -522,4 +522,8 @@
 <data name="CmsTablePreview" xml:space="preserve"><value>معاينة</value></data>
 <data name="CmsTableHistory" xml:space="preserve"><value>السجل</value></data>
 <data name="CmsKind" xml:space="preserve"><value>النوع</value></data>
+<data name="ProjectPortfolio" xml:space="preserve"><value>معرض المشاريع</value></data>
+<data name="ProjectsConceptStudies" xml:space="preserve"><value>دراسات تصورية</value></data>
+<data name="CmsPageTypeHelp" xml:space="preserve"><value>أنت تحرر صفحة تتكون من أقسام منشورة. لعرض مشروع بصوره أو الفيديو الخاص به، أنشئ مشروعاً بدلاً من صفحة.</value></data>
+<data name="CmsProjectTypeHelp" xml:space="preserve"><value>هذا مشروع له صفحة تفاصيل عامة مستقلة. أضف العنوان والرابط لكل لغة والوصف والصور المعتمدة ثم احفظ وانشر. لا يتطلب المشروع أقسام صفحات.</value></data>
 </root>

@@ -522,4 +522,8 @@
 <data name="CmsTablePreview" xml:space="preserve"><value>Preview</value></data>
 <data name="CmsTableHistory" xml:space="preserve"><value>History</value></data>
 <data name="CmsKind" xml:space="preserve"><value>Type</value></data>
+<data name="ProjectPortfolio" xml:space="preserve"><value>Project portfolio</value></data>
+<data name="ProjectsConceptStudies" xml:space="preserve"><value>Concept studies</value></data>
+<data name="CmsPageTypeHelp" xml:space="preserve"><value>You are editing a Page, built from published sections. To showcase a project with photos or video, create a Project instead.</value></data>
+<data name="CmsProjectTypeHelp" xml:space="preserve"><value>This is a Project with its own public details page. Add both language titles/slugs, descriptions and approved images, then save and publish. Page sections are not required.</value></data>
 </root>

@@ -23,4 +23,5 @@ public interface IPublicSiteReader
     Task<PublicNode?> ReadContactAsync(string culture,CancellationToken ct=default);
     Task<PublicNode?> ReadHeroAsync(string culture,CancellationToken ct=default);
     Task<PublicNode?> ReadProjectsSectionAsync(string culture,CancellationToken ct=default);
+    Task<IReadOnlyList<PublicNode>> ReadProjectsAsync(string culture,CancellationToken ct=default);
 }

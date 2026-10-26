@@ -55,6 +55,18 @@ public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader pub
         }
         return node;
     }
+    public async Task<IReadOnlyList<PublicNode>> ReadProjectsAsync(string culture,CancellationToken ct=default)
+    {
+        assets.Clear();
+        if(!ContentRules.IsCulture(culture))return [];
+        var projects=new List<PublicNode>();
+        foreach(var item in await Eligible.Where(x=>x.Kind==ContentKind.Project).ToListAsync(ct))
+        {
+            var node=await Node(item.Id,item.PublishedRevisionId!.Value,culture,ct);
+            if(node is not null)projects.Add(node);
+        }
+        return projects.OrderBy(x=>x.Order).ThenBy(x=>x.Id).ToList();
+    }
     public async Task<PublicNode?> ReadProjectsSectionAsync(string culture,CancellationToken ct=default)
     {
         assets.Clear();

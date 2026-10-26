@@ -6,6 +6,8 @@
 Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary PrefixData(string prefix){var data=new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary(ViewData);data.TemplateInfo.HtmlFieldPrefix=prefix;return data;}
 Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary RowData(string collection,int index){var data=new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary(ViewData);data.TemplateInfo.HtmlFieldPrefix=collection+"["+index+"]";return data;}
 }
+@if(Model.Kind==ContentKind.Page){<p class="mb-5 border border-line bg-panel p-4 text-sm leading-7">@L["CmsPageTypeHelp"] <a href="/@culture/admin/content/new?kind=Project" class="underline underline-offset-4">+ @L["CmsKindProject"]</a></p>}
+@if(Model.Kind==ContentKind.Project){<p class="mb-5 border border-line bg-panel p-4 text-sm leading-7">@L["CmsProjectTypeHelp"]</p>}
 @if(Model.Kind==ContentKind.Contact){<p class="mb-5 border border-line bg-panel p-4 text-sm leading-7">@L["ContactEditHelp"]</p>}
 <a href="/@culture/admin/content" class="inline-flex min-h-11 items-center text-sm underline underline-offset-4">@L["CmsBack"]</a><div class="my-5 flex flex-wrap items-end justify-between gap-4"><div><p class="text-xs text-signal">@L["CmsKind"+Model.Kind] / @Model.Key</p><h1 class="mt-3 text-3xl">@L["CmsEdit"]</h1></div>@if(item is not null){<p class="text-sm text-muted">@L["Cms"+item.State] · @L["CmsRevision"] @item.Revision</p>}</div>
 @if(TempData["CmsNotice"] is string notice){<p role="status" class="mb-6 border border-line bg-panel p-4 text-signal">@notice</p>}

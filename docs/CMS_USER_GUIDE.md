@@ -58,3 +58,7 @@ Edit Section key **hero**, complete both language titles and keep **Visible** ch
 ## Projects section gallery on the current homepage
 
 Section key **projects** now supplies the current preview homepage’s Projects heading/text and selected images. Use unique image roles, both alt-text languages and Visible, then save and publish. The uploaded gallery appears above the existing project studies. See [Projects section editing](PROJECTS_SECTION_EDITING.md).
+
+## Pages versus Projects
+
+To showcase work, use **Projects → + Projects**, not + Pages. Pages assemble published sections; Projects have independent details pages, images and optional video. Published Projects now appear in the current homepage’s Project portfolio. See [Project portfolio guide](PROJECT_PORTFOLIO.md).

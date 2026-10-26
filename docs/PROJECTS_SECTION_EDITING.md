@@ -9,3 +9,5 @@ Workflow: edit `/en/admin/content/4` or the section found in Content workspace; 
 A complete published CMS homepage continues using its pinned section revisions, as documented in the CMS guide. This connection makes section edits visible on the current Development preview without silently publishing/replacing the whole home composition.
 
 Verification: Release solution build zero warnings/errors. 48 rollback database scenarios pass, including section image publication, bilingual text/alt snapshots, draft isolation, unsupported culture and unpublication. Actual public asset URLs for IDs 76 and 28 return image responses with status 200 in both language views. Four light/dark accessibility scans pass, mobile does not overflow, and the five existing interaction tests pass. Screenshots under ignored artifacts/projects-cms. No schema migration.
+
+Published Project records now also appear in a separate portfolio above the section gallery, with links to their details pages. See PROJECT_PORTFOLIO.md. Section gallery images and Project records remain separate editable content.
