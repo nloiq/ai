@@ -528,4 +528,15 @@
 <data name="CmsProjectTypeHelp" xml:space="preserve"><value>This is a Project with its own public details page. Add both language titles/slugs, descriptions and approved images, then save and publish. Page sections are not required.</value></data>
 <data name="CmsMatchingProjectHelp" xml:space="preserve"><value>This item is a Page. A Project with the same content key already exists. To update that project, use its Project editor below.</value></data>
 <data name="CmsOpenProjectEditor" xml:space="preserve"><value>Open Project editor</value></data>
+<data name="ProjectBack" xml:space="preserve"><value>Back to projects</value></data>
+<data name="ProjectOverview" xml:space="preserve"><value>Project overview</value></data>
+<data name="ProjectGallery" xml:space="preserve"><value>Project gallery</value></data>
+<data name="ProjectEnlarge" xml:space="preserve"><value>View full-size image</value></data>
+<data name="ProjectDiscuss" xml:space="preserve"><value>Discuss a similar project</value></data>
+<data name="ProjectDiscussNote" xml:space="preserve"><value>Share your requirements with our team.</value></data>
+<data name="ProjectVideo" xml:space="preserve"><value>Project video</value></data>
+<data name="ProjectImage" xml:space="preserve"><value>Image</value></data>
+<data name="ProjectExpertise" xml:space="preserve"><value>Expertise</value></data>
+<data name="ProjectImageHint" xml:space="preserve"><value>Select a thumbnail to explore. Open the image for a larger view.</value></data>
+<data name="ProjectPhotoCount" xml:space="preserve"><value>{0} images</value></data>
 </root>

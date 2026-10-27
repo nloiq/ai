@@ -62,3 +62,7 @@ Section key **projects** now supplies the current preview homepage’s Projects 
 ## Pages versus Projects
 
 To showcase work, use **Projects → + Projects**, not + Pages. Pages assemble published sections; Projects have independent details pages, images and optional video. Published Projects now appear in the current homepage’s Project portfolio. See [Project portfolio guide](PROJECT_PORTFOLIO.md).
+
+## Project page gallery
+
+Project details now show a framed cover, clickable thumbnails and a full-size image viewer. Use unique image roles (cover, gallery-1, gallery-2), both language alt texts and optional captions, then save and publish. Categories, overview and optional video use the existing Project fields. See [Project detail design](PROJECT_DETAIL_DESIGN.md).

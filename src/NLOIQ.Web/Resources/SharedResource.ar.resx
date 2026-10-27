@@ -528,4 +528,15 @@
 <data name="CmsProjectTypeHelp" xml:space="preserve"><value>هذا مشروع له صفحة تفاصيل عامة مستقلة. أضف العنوان والرابط لكل لغة والوصف والصور المعتمدة ثم احفظ وانشر. لا يتطلب المشروع أقسام صفحات.</value></data>
 <data name="CmsMatchingProjectHelp" xml:space="preserve"><value>هذا العنصر صفحة. يوجد مشروع بمفتاح المحتوى نفسه. لتحديث ذلك المشروع، افتح محرر المشروع أدناه.</value></data>
 <data name="CmsOpenProjectEditor" xml:space="preserve"><value>فتح محرر المشروع</value></data>
+<data name="ProjectBack" xml:space="preserve"><value>العودة إلى المشاريع</value></data>
+<data name="ProjectOverview" xml:space="preserve"><value>نبذة عن المشروع</value></data>
+<data name="ProjectGallery" xml:space="preserve"><value>معرض صور المشروع</value></data>
+<data name="ProjectEnlarge" xml:space="preserve"><value>عرض الصورة بحجم كامل</value></data>
+<data name="ProjectDiscuss" xml:space="preserve"><value>ناقشنا حول مشروع مماثل</value></data>
+<data name="ProjectDiscussNote" xml:space="preserve"><value>شارك متطلباتك مع فريقنا.</value></data>
+<data name="ProjectVideo" xml:space="preserve"><value>فيديو المشروع</value></data>
+<data name="ProjectImage" xml:space="preserve"><value>صورة</value></data>
+<data name="ProjectExpertise" xml:space="preserve"><value>التخصصات</value></data>
+<data name="ProjectImageHint" xml:space="preserve"><value>اختر صورة مصغرة للتصفح، وافتح الصورة لعرض أكبر.</value></data>
+<data name="ProjectPhotoCount" xml:space="preserve"><value>عدد الصور: {0}</value></data>
 </root>
