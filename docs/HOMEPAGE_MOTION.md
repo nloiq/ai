@@ -24,3 +24,9 @@ The new motion is presentation code. Hero titles, summaries, buttons and Support
 Release solution build passed with zero warnings/errors. `node tests/motion-review.cjs` verifies changing rendered pixels, a frozen paused image, preference persistence, section focus/offset, offscreen idle behavior, English/Arabic themes and narrow layouts, four WCAG scans, live reduced-motion switching and no-WebGL/no-JavaScript fallbacks. Five browser interaction regressions pass; paused idle scheduling uses zero animation-frame requests and coalesces 50 scroll events into one frame. The 20-scan public redesign review passes. The full 51-scan quality suite and homepage smoke checks are also run before sync. Local visual evidence is under ignored `artifacts/motion`.
 
 Infinity refinement: both lobes fit desktop and narrow screens, with depth separating the center crossing and a periodic seam closing the geometry. Hero height and floating-label placement were adjusted. Motion, pause persistence, four accessibility scans and no-WebGL/no-JavaScript fallbacks were reverified.
+
+## Infinity / circle sequence
+
+The 12-second cycle now completes one internal signal lap around infinity (0-6s), morphs smoothly into a circle (6-8s), holds the circle (8-10s), and returns to infinity (10-12s). A cyan leading glow and violet trail follow the signal; the completion phase adds a restrained whole-loop glow. The shader recomputes surface positions/normals during the transformation, and an additive outer shell provides a localized halo. There is still only one rendering loop, with the same pause/reduced-motion/offscreen rules. Pausing holds the current shape and glow phase.
+
+Verified with two timeline/continuity unit tests (`node --test tests/hero-cycle.test.mjs`), a live full-cycle browser inspection including pause in the circle phase, the existing motion/fallback/accessibility review and five browser interaction tests. Local phase screenshots are in `artifacts/motion-cycle`.
