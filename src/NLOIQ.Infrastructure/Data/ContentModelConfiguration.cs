@@ -78,7 +78,7 @@ internal static class ContentModelConfiguration
         projects.HasIndex(x => new { x.IsFeatured, x.DisplayOrder });
         projects.HasOne(x => x.CoverMediaUsage).WithMany().HasForeignKey(x => new { x.RevisionId, x.CoverMediaUsageId }).HasPrincipalKey(x => new { x.RevisionId, x.Id }).OnDelete(DeleteBehavior.Restrict);
         Snapshot<ProjectCategory>(model, "ProjectCategories");
-        var services = Snapshot<ContentService>(model, "Services"); services.Property(x => x.IconKey).HasMaxLength(32).IsRequired();
+        var services = Snapshot<ContentService>(model, "Services"); services.Property(x=>x.CategoryKey).HasMaxLength(32).IsRequired(); services.Property(x => x.IconKey).HasMaxLength(32).IsRequired();
         services.HasIndex(x => x.DisplayOrder);
         services.ToTable("Services", table => table.HasCheckConstraint("CK_Services_Order", "`DisplayOrder` >= 0"));
         services.HasOne(x => x.MediaUsage).WithMany().HasForeignKey(x => new { x.RevisionId, x.MediaUsageId }).HasPrincipalKey(x => new { x.RevisionId, x.Id }).OnDelete(DeleteBehavior.Restrict);

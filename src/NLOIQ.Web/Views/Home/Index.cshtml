@@ -17,7 +17,6 @@
 <partial name="_BrandHead" model="brand" />
 <script src="~/js/app.js" asp-append-version="true" defer></script>
 <script src="~/js/motion.mjs" type="module" asp-append-version="true"></script>
-<script src="~/js/project-dialog.mjs" type="module" asp-append-version="true"></script>
 </head>
 <body class="bg-paper text-ink antialiased">
 <a href="#main" class="sr-only focus:not-sr-only focus:block focus:p-4">@Localizer["Skip"]</a>
@@ -30,7 +29,7 @@
 <partial name="_ThemeSelector" model="brand" />
 <button id="menu-toggle" type="button" hidden aria-expanded="false" aria-controls="primary-navigation" class="min-h-11 border border-line px-3 lg:hidden">@Localizer["Menu"]</button>
 </div>
-<nav id="primary-navigation" class="flex basis-full flex-wrap items-center gap-x-6 gap-y-2 py-2 text-sm lg:basis-auto lg:py-0" aria-label="@Localizer["Navigation"]"><a href="#about" class="inline-flex min-h-11 items-center">@Localizer["About"]</a><a href="#projects" class="inline-flex min-h-11 items-center">@Localizer["Projects"]</a><a href="#expertise" class="inline-flex min-h-11 items-center">@Localizer["Services"]</a><a href="#contact" class="inline-flex min-h-11 items-center border-b border-accent text-accent">@Localizer["Contact"] <span class="ms-2" aria-hidden="true">@(Model.IsArabic ? "↖" : "↗")</span></a></nav>
+<nav id="primary-navigation" class="flex basis-full flex-wrap items-center gap-x-6 gap-y-2 py-2 text-sm lg:basis-auto lg:py-0" aria-label="@Localizer["Navigation"]"><a href="#about" class="inline-flex min-h-11 items-center">@Localizer["About"]</a><a href="/@Model.Culture/projects" class="inline-flex min-h-11 items-center">@Localizer["Projects"]</a><a href="/@Model.Culture/services" class="inline-flex min-h-11 items-center">@Localizer["Services"]</a><a href="#contact" class="inline-flex min-h-11 items-center border-b border-accent text-accent">@Localizer["Contact"] <span class="ms-2" aria-hidden="true">@(Model.IsArabic ? "↖" : "↗")</span></a></nav>
 </div></header>
 <main id="main" tabindex="-1">
 <div class="mx-auto max-w-[1500px] px-5 md:px-10"><partial name="Sections/_Hero" model="Model" /></div>
@@ -38,7 +37,6 @@
 <div class="mx-auto max-w-[1500px] px-5 md:px-10"><partial name="Sections/_Projects" model="Model" /><partial name="Sections/_Services" model="Model" /></div>
 <partial name="Sections/_Contact" model="Model" />
 </main>
-<partial name="_ProjectDialog" model="Model" />
 <footer class="bg-evergreen px-5 pb-8 pt-14 text-ivory md:px-10">
-<div class="mx-auto max-w-[1500px]"><div class="grid gap-10 border-b border-ivory/30 pb-12 md:grid-cols-[1.5fr_1fr_1fr]"><div><p data-parallax="8" class="font-editorial text-5xl" dir="ltr">NLO IQ<span class="text-gold">.</span></p><p class="mt-5 max-w-md text-sm leading-7 text-ivory/80">@Localizer["Intro"]</p></div><nav class="flex flex-col items-start gap-2 text-sm" aria-label="@Localizer["FooterNavigation"]"><a href="#about" class="inline-flex min-h-11 items-center">@Localizer["About"]</a><a href="#projects" class="inline-flex min-h-11 items-center">@Localizer["Projects"]</a><a href="#expertise" class="inline-flex min-h-11 items-center">@Localizer["Services"]</a><a href="#contact" class="inline-flex min-h-11 items-center">@Localizer["Contact"]</a></nav><div><p class="text-xs uppercase tracking-widest text-gold">@Localizer["ContactStatus"]</p><p class="mt-5 text-sm leading-7 text-ivory/80">@Localizer["ContactPending"]</p><p class="mt-4 text-xs leading-6 text-ivory/80">@Localizer["Logo"]</p></div></div><div class="flex flex-wrap justify-between gap-4 pt-6 text-xs leading-6 text-ivory/80"><p>@Localizer["Footer"]</p><p dir="ltr">© @DateTime.UtcNow.Year NLO IQ</p></div></div>
+<div class="mx-auto max-w-[1500px]"><div class="grid gap-10 border-b border-ivory/30 pb-12 md:grid-cols-[1.5fr_1fr_1fr]"><div><p data-parallax="8" class="font-editorial text-5xl" dir="ltr">NLO IQ<span class="text-gold">.</span></p><p class="mt-5 max-w-md text-sm leading-7 text-ivory/80">@Localizer["Intro"]</p></div><nav class="flex flex-col items-start gap-2 text-sm" aria-label="@Localizer["FooterNavigation"]"><a href="#about" class="inline-flex min-h-11 items-center">@Localizer["About"]</a><a href="/@Model.Culture/projects" class="inline-flex min-h-11 items-center">@Localizer["Projects"]</a><a href="/@Model.Culture/services" class="inline-flex min-h-11 items-center">@Localizer["Services"]</a><a href="#contact" class="inline-flex min-h-11 items-center">@Localizer["Contact"]</a></nav><div><p class="text-xs uppercase tracking-widest text-gold">@Localizer["ContactStatus"]</p><p class="mt-5 text-sm leading-7 text-ivory/80">@Localizer["ContactPending"]</p><p class="mt-4 text-xs leading-6 text-ivory/80">@Localizer["Logo"]</p></div></div><div class="flex flex-wrap justify-between gap-4 pt-6 text-xs leading-6 text-ivory/80"><p>@Localizer["Footer"]</p><p dir="ltr">© @DateTime.UtcNow.Year NLO IQ</p></div></div>
 </footer></body></html>

@@ -45,6 +45,7 @@ public static partial class ContentRules
                 Require(project.YouTubeVideoId is null || YouTubeVideoId.IsValid(project.YouTubeVideoId), "Invalid project video ID.");
                 Require(project.DisplayOrder >= 0, "Project order cannot be negative."); break;
             case ContentService service:
+                Require(service.CategoryKey is "general" or "low-current" or "software" or "scada" or "automation","Invalid service category.");
                 Require(service.IconKey is "network" or "code" or "monitor" or "logic", "Unapproved service icon.");
                 Require(service.DisplayOrder >= 0, "Service order cannot be negative."); break;
             case NavigationItem navigation: Require(IsSafeTarget(navigation.Href) && navigation.DisplayOrder >= 0, "Invalid navigation target/order."); break;

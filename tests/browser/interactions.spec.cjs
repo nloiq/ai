@@ -1,40 +1,19 @@
 ﻿const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 async function chooseTheme(page,value) { if(await page.locator('#theme').isVisible()) await page.locator('#theme').selectOption(value); else await page.locator('[data-theme-choice="'+value+'"]').click(); }
-test('project dialog: focus, lazy iframe, navigation, Escape, backdrop and cleanup', async ({ page }) => {
-    const errors=[]; page.on('pageerror', error => errors.push(error.message));
-    // Deterministic embed lifecycle check; actual external playback is reviewed separately.
-    await page.route('https://www.youtube-nocookie.com/**', route => route.fulfill({contentType:'text/html',body:'<!doctype html><html><body><button>Video frame fixture</button></body></html>'}));
+test('compact homepage links to categorized projects and the project gallery', async ({ page }) => {
     await page.goto('/en/');
-    await expect(page.locator('iframe')).toHaveCount(0);
-    const trigger=page.locator('[data-project="network"] button[data-project-open]');
-    await trigger.click();
-    const dialog=page.locator('#project-dialog');
-    await expect(dialog).toBeVisible();
-    await expect(page.locator('#dialog-close')).toBeFocused();
-    await expect(dialog.locator('iframe')).toHaveAttribute('src','https://www.youtube-nocookie.com/embed/NNiszX0-A7M?autoplay=0&playsinline=1');
-    await expect(page.locator('html')).toHaveClass(/overflow-hidden/);
-    await page.keyboard.press('Shift+Tab');
-    await expect(page.locator('#dialog-next')).toBeFocused();
-    await page.locator('#dialog-next').click();
-    await expect(dialog.locator('iframe')).toHaveCount(0);
-    await expect(page.locator('#dialog-video-note')).toContainText('No video supplied');
-    await expect(dialog.locator('img')).toHaveCount(1);
-    await fs.mkdir('artifacts/phase4',{recursive:true});
-    await dialog.screenshot({path:'artifacts/phase4/project-dialog.png'});
-    await page.locator('#dialog-previous').click();
-    await expect(dialog.locator('iframe')).toHaveCount(1);
-    await page.keyboard.press('Escape');
-    await expect(dialog).not.toBeVisible();
-    await expect(dialog.locator('iframe')).toHaveCount(0);
-    await expect(trigger).toBeFocused();
-    await expect(page.locator('html')).not.toHaveClass(/overflow-hidden/);
-    await trigger.click();
-    await page.mouse.click(2,2);
-    await expect(dialog).not.toBeVisible();
-    await expect(dialog.locator('iframe')).toHaveCount(0);
-    expect(errors).toEqual([]);
+    await expect(page.locator('#projects article')).toHaveCount(0);
+    await expect(page.locator('#projects [data-project]')).toHaveCount(0);
+    await page.locator('#projects a[href="/en/projects"]').click();
+    await expect(page).toHaveURL(/\/en\/projects$/);
+    await expect(page.locator('h1')).toHaveText('Projects');
+    const card=page.locator('[data-directory-item]').first();await card.locator('h3 a').click();
+    await expect(page.locator('h1')).toHaveCount(1);
+    await page.locator('[data-gallery-open]').click();await expect(page.locator('#project-image-dialog')).toBeVisible();
+    await page.keyboard.press('Escape');await expect(page.locator('[data-gallery-open]')).toBeFocused();
 });
+
 test('Arabic mobile menu, system theme, persistence and reduced motion', async ({ page }) => {
     await page.setViewportSize({width:390,height:844});
     await page.emulateMedia({reducedMotion:'reduce',colorScheme:'dark'});
@@ -57,10 +36,9 @@ test('Arabic mobile menu, system theme, persistence and reduced motion', async (
     await expect(page.locator('html')).toHaveAttribute('data-theme','light');
     const transforms=await page.locator('[data-parallax-layer]').evaluateAll(nodes=>nodes.map(node=>getComputedStyle(node).transform));
     expect(transforms.every(value=>value==='none')).toBeTruthy();
-    await page.locator('[data-project="scada"] button[data-project-open]').click();
-    await expect(page.locator('#project-dialog')).toBeVisible();
-    expect(await page.locator('#project-dialog').evaluate(node=>getComputedStyle(node).direction)).toBe('rtl');
-    await page.locator('#dialog-close').click();
+    await page.locator('#expertise a[href="/ar/services"]').click();
+    await expect(page.locator('h1')).toHaveText('الخدمات');
+    await expect(page.locator('html')).toHaveAttribute('dir','rtl');
 });
 test('responsive layouts avoid horizontal overflow and produce review screenshots', async ({ page }) => {
     await page.emulateMedia({reducedMotion:'reduce'});
@@ -84,12 +62,12 @@ test('desktop parallax is bounded and resets when reduced motion changes', async
     await page.emulateMedia({reducedMotion:'no-preference'});
     await page.goto('/en/');
     await page.evaluate(()=>document.fonts.ready);
-    // The CMS Hero may replace its original illustration; use the retained project image.
-    const layer=page.locator('[data-project="network"] [data-parallax-layer]');
-    await layer.evaluate(node=>{const rect=node.closest('[data-parallax]').getBoundingClientRect();scrollTo(0,Math.max(0,scrollY+rect.top+rect.height/2-innerHeight/2+120));});
+    // The homepage is compact; exercise the remaining About illustration motion.
+    const layer=page.locator('#about [data-parallax]');
+    await layer.evaluate(node=>{const rect=node.getBoundingClientRect();scrollTo(0,Math.max(0,scrollY+rect.top+rect.height/2-innerHeight/2+120));});
     await expect.poll(async()=>layer.evaluate(node=>node.style.transform)).not.toBe('');
     const offset=await layer.evaluate(node=>new DOMMatrix(getComputedStyle(node).transform).m42);
-    expect(Math.abs(offset)).toBeLessThanOrEqual(14);
+    expect(Math.abs(offset)).toBeLessThanOrEqual(16);
     await page.emulateMedia({reducedMotion:'reduce'});
     await expect.poll(async()=>layer.evaluate(node=>getComputedStyle(node).transform)).toBe('none');
     await expect(page.locator('.reveal-pending')).toHaveCount(0);

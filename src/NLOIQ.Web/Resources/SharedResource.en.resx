@@ -539,4 +539,22 @@
 <data name="ProjectExpertise" xml:space="preserve"><value>Expertise</value></data>
 <data name="ProjectImageHint" xml:space="preserve"><value>Select a thumbnail to explore. Open the image for a larger view.</value></data>
 <data name="ProjectPhotoCount" xml:space="preserve"><value>{0} images</value></data>
+<data name="DirectoryProjects" xml:space="preserve"><value>Projects</value></data>
+<data name="DirectoryServices" xml:space="preserve"><value>Services</value></data>
+<data name="DirectoryProjectsIntro" xml:space="preserve"><value>Explore our project portfolio by category.</value></data>
+<data name="DirectoryServicesIntro" xml:space="preserve"><value>Explore engineering and software services by expertise.</value></data>
+<data name="DirectoryBrowseProjects" xml:space="preserve"><value>View all projects</value></data>
+<data name="DirectoryBrowseServices" xml:space="preserve"><value>View all services</value></data>
+<data name="DirectoryCategory" xml:space="preserve"><value>Category</value></data>
+<data name="DirectoryAll" xml:space="preserve"><value>All categories</value></data>
+<data name="DirectoryGeneral" xml:space="preserve"><value>Uncategorized</value></data>
+<data name="DirectoryEmpty" xml:space="preserve"><value>No items to display.</value></data>
+<data name="DirectoryReadService" xml:space="preserve"><value>Explore service</value></data>
+<data name="DirectoryBackServices" xml:space="preserve"><value>Back to services</value></data>
+<data name="DirectoryHome" xml:space="preserve"><value>Home</value></data>
+<data name="ServiceCategory_general" xml:space="preserve"><value>General</value></data>
+<data name="ServiceCategory_low-current" xml:space="preserve"><value>Low-current engineering</value></data>
+<data name="ServiceCategory_software" xml:space="preserve"><value>Software solutions</value></data>
+<data name="ServiceCategory_scada" xml:space="preserve"><value>SCADA integration</value></data>
+<data name="ServiceCategory_automation" xml:space="preserve"><value>System automation</value></data>
 </root>

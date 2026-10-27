@@ -539,4 +539,22 @@
 <data name="ProjectExpertise" xml:space="preserve"><value>التخصصات</value></data>
 <data name="ProjectImageHint" xml:space="preserve"><value>اختر صورة مصغرة للتصفح، وافتح الصورة لعرض أكبر.</value></data>
 <data name="ProjectPhotoCount" xml:space="preserve"><value>عدد الصور: {0}</value></data>
+<data name="DirectoryProjects" xml:space="preserve"><value>المشاريع</value></data>
+<data name="DirectoryServices" xml:space="preserve"><value>الخدمات</value></data>
+<data name="DirectoryProjectsIntro" xml:space="preserve"><value>استعرض مشاريعنا حسب التصنيف.</value></data>
+<data name="DirectoryServicesIntro" xml:space="preserve"><value>استعرض الخدمات الهندسية والبرمجية حسب التخصص.</value></data>
+<data name="DirectoryBrowseProjects" xml:space="preserve"><value>عرض جميع المشاريع</value></data>
+<data name="DirectoryBrowseServices" xml:space="preserve"><value>عرض جميع الخدمات</value></data>
+<data name="DirectoryCategory" xml:space="preserve"><value>التصنيف</value></data>
+<data name="DirectoryAll" xml:space="preserve"><value>جميع التصنيفات</value></data>
+<data name="DirectoryGeneral" xml:space="preserve"><value>غير مصنف</value></data>
+<data name="DirectoryEmpty" xml:space="preserve"><value>لا توجد عناصر للعرض.</value></data>
+<data name="DirectoryReadService" xml:space="preserve"><value>تفاصيل الخدمة</value></data>
+<data name="DirectoryBackServices" xml:space="preserve"><value>العودة إلى الخدمات</value></data>
+<data name="DirectoryHome" xml:space="preserve"><value>الرئيسية</value></data>
+<data name="ServiceCategory_general" xml:space="preserve"><value>عام</value></data>
+<data name="ServiceCategory_low-current" xml:space="preserve"><value>هندسة التيار الخفيف</value></data>
+<data name="ServiceCategory_software" xml:space="preserve"><value>الحلول البرمجية</value></data>
+<data name="ServiceCategory_scada" xml:space="preserve"><value>تكامل أنظمة SCADA</value></data>
+<data name="ServiceCategory_automation" xml:space="preserve"><value>أتمتة الأنظمة</value></data>
 </root>

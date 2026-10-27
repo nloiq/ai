@@ -39,6 +39,7 @@ public sealed class ProjectCategory : IContentSnapshot
 }
 public sealed class ContentService : IContentSnapshot
 {
+    public string CategoryKey { get; set; } = "general";
     public long RevisionId { get; set; }
     public ContentRevision Revision { get; set; } = null!;
     public ContentKind Kind => ContentKind.Service;

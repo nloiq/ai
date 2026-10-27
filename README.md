@@ -63,3 +63,5 @@ Header customization: [Appearance controls](docs/HEADER_APPEARANCE.md) manage lo
 Contact section: [Editing guide](docs/CONTACT_SECTION.md) covers the direct admin link and bilingual heading/details, preview and publication.
 
 Contact inquiries: [Form and inbox guide](docs/CONTACT_FORM.md). The bilingual form stores messages in the protected admin Contact inbox; the seven-day hours card uses published CMS hours. Apply the ContactInquiries migration before deploying this feature.
+
+Projects and Services: compact homepage links now lead to bilingual category directories. See [directory management](docs/PROJECTS_SERVICES_DIRECTORIES.md).

@@ -41,6 +41,7 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
         var project=(await Children<ContentProject>(revision,ct)).SingleOrDefault();
         if(project is not null){model.YouTubeVideoId=project.YouTubeVideoId;model.DisplayOrder=project.DisplayOrder;model.IsFeatured=project.IsFeatured;}
         var service=(await Children<ContentService>(revision,ct)).SingleOrDefault();
+        if(service is not null)model.ServiceCategoryKey=service.CategoryKey;
         if(service is not null){model.IconKey=service.IconKey;model.DisplayOrder=service.DisplayOrder;model.IsVisible=service.IsVisible;}
         var footer=(await Children<FooterSettings>(revision,ct)).SingleOrDefault();if(footer is not null)model.ShowCopyright=footer.ShowCopyright;
         model.Sections=await db.Set<PageSection>().AsNoTracking().Where(x=>x.RevisionId==revision).OrderBy(x=>x.DisplayOrder).Select(x=>new SectionEdit{ContentItemId=x.Section.Revision.ContentItemId,DisplayOrder=x.DisplayOrder}).ToListAsync(ct);
@@ -138,7 +139,7 @@ public sealed class ContentEditor(NloDbContext db) : IContentEditor
                     foreach(var usage in usages.Values)db.Add(new ProjectMedia{Revision=revision,MediaUsage=usage,DisplayOrder=usage.DisplayOrder});
                     foreach(var category in m.Categories)db.Add(new ProjectCategoryAssignment{Revision=revision,CategoryRevisionId=await Dependency(category,ContentKind.ProjectCategory,ct)});break;
                 case ContentKind.ProjectCategory: db.Add(new ProjectCategory{Revision=revision});break;
-                case ContentKind.Service: db.Add(new ContentService{Revision=revision,IconKey=m.IconKey,DisplayOrder=m.DisplayOrder,IsVisible=m.IsVisible,MediaUsage=usages.GetValueOrDefault("cover")});break;
+                case ContentKind.Service: db.Add(new ContentService{Revision=revision,CategoryKey=m.ServiceCategoryKey,IconKey=m.IconKey,DisplayOrder=m.DisplayOrder,IsVisible=m.IsVisible,MediaUsage=usages.GetValueOrDefault("cover")});break;
                 case ContentKind.Navigation:
                     db.Add(new NavigationSettings{Revision=revision,Location=m.Key});var links=new List<NavigationItem>();
                     foreach(var (link,index) in m.Links.Select((x,i)=>(x,i))) {

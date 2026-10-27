@@ -94,3 +94,6 @@ bdi { unicode-bidi:isolate; }
 .project-dialog-stage { display:grid;place-items:center;background:var(--panel); }
 .project-dialog-stage img { width:100%;height:min(66dvh,780px);object-fit:contain; }
 @media(max-width:640px) { .project-media-open > img { height:340px;max-height:60dvh; } .project-enlarge-label { font-size:11px; } }
+
+.directory-filter { display:inline-flex;min-height:44px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 16px;background:var(--panel);color:var(--ink);font-size:14px; }
+.directory-filter[aria-current=page] { background:var(--accent);color:var(--on-accent);border-color:var(--accent); }

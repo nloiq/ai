@@ -1,11 +1,14 @@
 using NLOIQ.Domain.Content;
 namespace NLOIQ.Application.Content;
+public sealed record PublicCategory(string Key,string Label);
 public sealed record PublicImage(string Url,string Alt,string? Caption,int Width,int Height,string? SrcSet=null);
 public sealed record PublicLink(string Label,string Href,int Depth=0);
 public sealed record PublicContact(string Label,string Value,string? Href);
 public sealed record PublicHours(int Day,bool Closed,TimeOnly? Opens,TimeOnly? Closes);
 public sealed class PublicNode
 {
+    public string ServiceCategoryKey { get; set; } = "general";
+    public List<PublicCategory> CategoryLinks { get; set; } = [];
     public long Id { get; set; } public long RevisionId { get; set; }
     public string Key { get; set; }=""; public ContentKind Kind { get; set; }
     public string Title { get; set; }="";public string Summary { get; set; }="";public string Body { get; set; }="";public string? Slug { get; set; }
@@ -24,4 +27,6 @@ public interface IPublicSiteReader
     Task<PublicNode?> ReadHeroAsync(string culture,CancellationToken ct=default);
     Task<PublicNode?> ReadProjectsSectionAsync(string culture,CancellationToken ct=default);
     Task<IReadOnlyList<PublicNode>> ReadProjectsAsync(string culture,CancellationToken ct=default);
+    Task<IReadOnlyList<PublicNode>> ReadServicesAsync(string culture,CancellationToken ct=default);
+    Task<PublicNode?> ReadServicesSectionAsync(string culture,CancellationToken ct=default);
 }

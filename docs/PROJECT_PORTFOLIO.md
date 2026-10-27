@@ -1,3 +1,5 @@
+Current layout: full collections and section images now appear in the dedicated Projects directory; the homepage shows a compact link. See [directory management](PROJECTS_SERVICES_DIRECTORIES.md).
+
 # Adding Projects and showing them on the homepage
 
 2026-10-26: the owner's `project-fnished` item was created as a Page, so publication required its selected page sections to be verified and published. Projects have a different content type and do not require page sections.

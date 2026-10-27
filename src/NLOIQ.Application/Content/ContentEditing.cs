@@ -34,6 +34,7 @@ public sealed class ContentEdit
     public bool IsFeatured { get; set; }
     [Range(0,99999,ErrorMessage="ValidationRange")] public int DisplayOrder { get; set; }
     public string IconKey { get; set; } = "network";
+    [Required(ErrorMessage="ValidationRequired"),RegularExpression("^(general|low-current|software|scada|automation)$",ErrorMessage="ValidationPattern")] public string ServiceCategoryKey { get; set; } = "general";
     public bool ShowCopyright { get; set; } = true;
     public List<SectionEdit> Sections { get; set; } = [];
     public List<long> Categories { get; set; } = [];

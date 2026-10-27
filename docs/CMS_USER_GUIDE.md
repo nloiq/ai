@@ -66,3 +66,7 @@ To showcase work, use **Projects → + Projects**, not + Pages. Pages assemble p
 ## Project page gallery
 
 Project details now show a framed cover, clickable thumbnails and a full-size image viewer. Use unique image roles (cover, gallery-1, gallery-2), both language alt texts and optional captions, then save and publish. Categories, overview and optional video use the existing Project fields. See [Project detail design](PROJECT_DETAIL_DESIGN.md).
+
+## Projects and Services directories
+
+The homepage links to compact category directories. Manage project categories through published Category records, and service categories through the new Category dropdown on each Service. See [directory management](PROJECTS_SERVICES_DIRECTORIES.md) for publication and grouping details.

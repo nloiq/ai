@@ -21,7 +21,7 @@ public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader pub
         var node=new PublicNode{Id=owner,RevisionId=revision,Kind=item.Kind,Key=item.Key,Title=text.Title,Summary=text.Summary,Body=text.Body,Slug=text.Slug,PrimaryLabel=text.PrimaryButtonLabel,SecondaryLabel=text.SecondaryButtonLabel};
         var section=item.Kind==ContentKind.Section?(await Children<ContentSection>(revision,ct)).SingleOrDefault():null;if(section is not null){node.SectionKind=section.SectionKind;node.Layout=section.LayoutKey;node.Background=section.Background;node.Parallax=section.ParallaxIntensity;node.Visible=section.IsVisible;node.PrimaryTarget=section.PrimaryButtonTarget;node.SecondaryTarget=section.SecondaryButtonTarget;}
         var project=item.Kind==ContentKind.Project?(await Children<ContentProject>(revision,ct)).SingleOrDefault():null;if(project is not null){node.VideoId=YouTubeVideoId.IsValid(project.YouTubeVideoId)?project.YouTubeVideoId:null;node.Featured=project.IsFeatured;node.Order=project.DisplayOrder;}
-        var service=item.Kind==ContentKind.Service?(await Children<ContentService>(revision,ct)).SingleOrDefault():null;if(service is not null){node.Icon=service.IconKey;node.Visible=service.IsVisible;node.Order=service.DisplayOrder;}
+        var service=item.Kind==ContentKind.Service?(await Children<ContentService>(revision,ct)).SingleOrDefault():null;if(service is not null){node.ServiceCategoryKey=service.CategoryKey;node.Icon=service.IconKey;node.Visible=service.IsVisible;node.Order=service.DisplayOrder;}
         var footer=item.Kind==ContentKind.Footer?(await Children<FooterSettings>(revision,ct)).SingleOrDefault():null;if(footer is not null)node.ShowCopyright=footer.ShowCopyright;
         var usages=await Children<RevisionMedia>(revision,ct);
         var mediaText=usages.Count==0?[]:await Children<RevisionMediaTranslation>(revision,ct);
@@ -51,9 +51,19 @@ public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader pub
         foreach(var hours in (item.Kind==ContentKind.Contact?await Children<BusinessHours>(revision,ct):[]).OrderBy(x=>x.DayOfWeek))node.Hours.Add(new(hours.DayOfWeek,hours.IsClosed,hours.OpensAt,hours.ClosesAt));
         foreach(var category in item.Kind==ContentKind.Project?await Children<ProjectCategoryAssignment>(revision,ct):[]) {
             var target=await db.ContentRevisions.AsNoTracking().SingleAsync(x=>x.Id==category.CategoryRevisionId,ct);
-            if(preview||await Eligible.AnyAsync(x=>x.Id==target.ContentItemId,ct)){var title=await db.ContentTranslations.AsNoTracking().Where(x=>x.RevisionId==target.Id&&x.Culture==culture).Select(x=>x.Title).SingleOrDefaultAsync(ct);if(title is not null)node.Categories.Add(title);}
+            var categoryKey=await (preview?db.ContentItems.AsNoTracking():Eligible).Where(x=>x.Id==target.ContentItemId).Select(x=>x.Key).SingleOrDefaultAsync(ct);if(categoryKey is not null){var title=await db.ContentTranslations.AsNoTracking().Where(x=>x.RevisionId==target.Id&&x.Culture==culture).Select(x=>x.Title).SingleOrDefaultAsync(ct);if(title is not null){node.Categories.Add(title);node.CategoryLinks.Add(new(categoryKey,title));}}
         }
         return node;
+    }
+    public async Task<PublicNode?> ReadServicesSectionAsync(string culture,CancellationToken ct=default)
+    {
+        assets.Clear();if(!ContentRules.IsCulture(culture))return null;var node=await Named(ContentKind.Section,"services",culture,ct);return node?.SectionKind==SectionKind.Services?node:null;
+    }
+    public async Task<IReadOnlyList<PublicNode>> ReadServicesAsync(string culture,CancellationToken ct=default)
+    {
+        assets.Clear();if(!ContentRules.IsCulture(culture))return [];var services=new List<PublicNode>();
+        foreach(var item in await Eligible.Where(x=>x.Kind==ContentKind.Service).ToListAsync(ct)){var node=await Node(item.Id,item.PublishedRevisionId!.Value,culture,ct);if(node is {Visible:true})services.Add(node);}
+        return services.OrderBy(x=>x.Order).ThenBy(x=>x.Id).ToList();
     }
     public async Task<IReadOnlyList<PublicNode>> ReadProjectsAsync(string culture,CancellationToken ct=default)
     {

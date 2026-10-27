@@ -1,3 +1,5 @@
+Current layout: full collections and section images now appear in the dedicated Projects directory; the homepage shows a compact link. See [directory management](PROJECTS_SERVICES_DIRECTORIES.md).
+
 # Projects section images
 
 2026-10-26: connected the current Development preview homepage's Projects section to eligible published Section key `projects`, subtype Projects (currently content ID 4). Previously publication succeeded but the homepage still used fixed prototype headings/images.

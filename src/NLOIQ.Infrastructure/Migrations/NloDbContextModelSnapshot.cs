@@ -495,6 +495,11 @@ namespace NLOIQ.Infrastructure.Migrations
                     b.Property<long>("RevisionId")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("CategoryKey")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("varchar(32)");
+
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
 
