@@ -238,6 +238,9 @@
 .hero-scene-floor{position:absolute;bottom:8%;left:19%;right:15%;height:35px;border-radius:50%;background:radial-gradient(ellipse,rgba(48,67,117,.22),transparent 70%);filter:blur(8px);transform:rotate(-12deg)}
 [data-theme=dark] .hero-scene-aura{opacity:.6;background:radial-gradient(ellipse,rgba(62,106,202,.32),rgba(89,224,209,.06) 50%,transparent 74%)}
 .hero-scene-tag{position:absolute;z-index:3;display:flex;gap:16px;align-items:center;padding:11px 15px;border:1px solid var(--line);border-radius:25px;background:var(--panel);color:var(--ink);font-size:11px;box-shadow:0 8px 28px rgb(0 0 0 / .05);pointer-events:none}
+.hero-circle-label{position:absolute;z-index:3;left:50%;top:50%;max-width:40%;padding:9px 13px;opacity:0;visibility:hidden;transform:translate(-50%,-50%) scale(.92);color:var(--ink);font-size:clamp(12px,1.3vw,16px);font-weight:650;letter-spacing:.03em;text-align:center;white-space:nowrap;pointer-events:none;transition:opacity .35s ease,transform .35s ease,visibility 0s linear .35s}
+.hero-scene.circle-label-visible .hero-circle-label{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1);transition-delay:0s}
+.hero-scene.circle-label-visible .hero-scene-tag{opacity:0;visibility:hidden;transition:opacity .25s ease,visibility 0s linear .25s}
 .hero-scene-tag-top{inset-inline-start:0;top:25%}.hero-scene-tag-middle{inset-inline-end:0;top:49%}.hero-scene-tag-bottom{inset-inline-start:15%;bottom:18%}
 .scene-status{width:5px;height:5px;background:var(--signal);border-radius:50%}
 .hero-scene-caption{position:absolute;inset-inline:10px;bottom:15px;display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-size:9px;letter-spacing:.6px}

@@ -2,6 +2,9 @@ import { heroCycle } from './hero-cycle.mjs';
 // Closed parametric infinity loop, rendered locally with WebGL. No external models or runtime.
 export function createSculpture(canvas, isPaused) {
     const scene=canvas.closest('.hero-scene');
+    let circleLabelVisible=false;
+    function setCircleLabel(circle){if(circleLabelVisible===circle)return;circleLabelVisible=circle;scene.classList.toggle('circle-label-visible',circle);}
+
     let gl;
     try { gl=canvas.getContext('webgl',{alpha:true,antialias:true,powerPreference:'low-power'}); } catch { return null; }
     if(!gl)return null;
@@ -63,6 +66,7 @@ export function createSculpture(canvas, isPaused) {
         gl.uniform1f(uniforms.glowPass,0);gl.drawElements(gl.TRIANGLES,indices.length,gl.UNSIGNED_SHORT,0);
         gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);gl.depthMask(false);gl.uniform1f(uniforms.glowPass,1);gl.drawElements(gl.TRIANGLES,indices.length,gl.UNSIGNED_SHORT,0);gl.depthMask(true);gl.disable(gl.BLEND);
         canvas.dataset.rendered='true';canvas.dataset.phase=cycle.phase;
+        setCircleLabel(cycle.phase==='circle');
         if(running)frame=requestAnimationFrame(draw);
     }
     function refresh(){if(frame){cancelAnimationFrame(frame);frame=0;}last=0;draw(performance.now());}
@@ -70,7 +74,7 @@ export function createSculpture(canvas, isPaused) {
     const resize=new ResizeObserver(refresh);resize.observe(scene);
     const theme=new MutationObserver(refresh);theme.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
     scene.addEventListener('pointermove',event=>{if(isPaused()||event.pointerType==='touch')return;const r=scene.getBoundingClientRect();px=(event.clientX-r.left)/r.width-.5;py=(event.clientY-r.top)/r.height-.5;},{passive:true});scene.addEventListener('pointerleave',()=>{px=py=0;});
-    canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();lost=true;if(frame)cancelAnimationFrame(frame);scene.classList.remove('sculpture-ready');});
+    canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();lost=true;setCircleLabel(false);if(frame)cancelAnimationFrame(frame);scene.classList.remove('sculpture-ready');});
     canvas.addEventListener('webglcontextrestored',()=>{scene.classList.remove('sculpture-ready');},{once:true});
     document.addEventListener('visibilitychange',refresh);
     scene.classList.add('sculpture-ready');refresh();return{refresh};

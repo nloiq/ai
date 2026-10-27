@@ -594,4 +594,5 @@
 <data name="MotionPause" xml:space="preserve"><value>Pause motion</value></data>
 <data name="MotionResume" xml:space="preserve"><value>Resume motion</value></data>
 <data name="MotionReduced" xml:space="preserve"><value>Motion reduced</value></data>
+<data name="MotionClosedLoop" xml:space="preserve"><value>Close Loop System</value></data>
 </root>

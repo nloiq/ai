@@ -594,4 +594,5 @@
 <data name="MotionPause" xml:space="preserve"><value>إيقاف الحركة</value></data>
 <data name="MotionResume" xml:space="preserve"><value>استئناف الحركة</value></data>
 <data name="MotionReduced" xml:space="preserve"><value>حركة مخفّضة</value></data>
+<data name="MotionClosedLoop" xml:space="preserve"><value>نظام الحلقة المغلقة</value></data>
 </root>
