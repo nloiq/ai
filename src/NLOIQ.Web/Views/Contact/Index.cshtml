@@ -1,4 +1,5 @@
 @model NLOIQ.Web.ViewModels.ContactInquiryModel
 @inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> L
-@{Layout="_PublicFormLayout";ViewData["Title"]=L["InquiryContactUs"];}
-<h1 class="mb-8 font-editorial text-4xl">@L["InquiryContactUs"]</h1><div class="inquiry-card rounded-2xl p-6 md:p-8"><partial name="_InquiryForm" model="Model" /></div>
+@inject NLOIQ.Application.Content.IPublicSiteReader Reader
+@{Layout="_DirectoryLayout";var c=Context.Request.RouteValues["culture"]?.ToString()=="ar"?"ar":"en";var contact=await Reader.ReadContactAsync(c);ViewData["Title"]=contact?.Title??L["InquiryContactUs"].Value;ViewData["Description"]=contact?.Summary??L["StudioContactIntro"].Value;}
+<header class="public-directory-heading"><div><p class="public-kicker">@L["StudioConversation"]</p><h1>@ViewData["Title"]</h1><p>@ViewData["Description"]</p>@if(!string.IsNullOrWhiteSpace(contact?.Body)){<div class="cms-body">@Html.Raw(NLOIQ.Application.Content.ContentMarkup.Render(contact.Body))</div>}</div></header><div class="public-contact-grid"><div class="inquiry-card rounded-2xl p-6 md:p-8"><h2 class="text-2xl font-semibold">@L["InquiryTitle"]</h2><p class="mb-6 mt-3 text-sm leading-7 text-muted">@L["InquiryIntro"]</p><partial name="_InquiryForm" model="Model" /></div>@if(contact is not null){<partial name="_ContactDetails" model="contact" />}</div>

@@ -70,3 +70,7 @@ Project details now show a framed cover, clickable thumbnails and a full-size im
 ## Projects and Services directories
 
 The homepage links to compact category directories. Manage project categories through published Category records, and service categories through the new Category dropdown on each Service. See [directory management](PROJECTS_SERVICES_DIRECTORIES.md) for publication and grouping details.
+
+## Redesigned public site
+
+See [public design and editing controls](PUBLIC_REDESIGN.md). The full form and business hours are on Contact; the homepage uses a compact invitation. Appearance still controls the palette, logo settings and theme selector.

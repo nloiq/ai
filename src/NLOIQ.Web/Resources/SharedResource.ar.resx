@@ -557,4 +557,34 @@
 <data name="ServiceCategory_software" xml:space="preserve"><value>الحلول البرمجية</value></data>
 <data name="ServiceCategory_scada" xml:space="preserve"><value>تكامل أنظمة SCADA</value></data>
 <data name="ServiceCategory_automation" xml:space="preserve"><value>أتمتة الأنظمة</value></data>
+<data name="StudioPositioning" xml:space="preserve"><value>البرمجيات والتحكم والبنية التحتية. نربطها بالهندسة.</value></data>
+<data name="StudioDisciplines" xml:space="preserve"><value>البرمجيات / التحكم / البنية التحتية</value></data>
+<data name="StudioArchitecture" xml:space="preserve"><value>معمارية الأنظمة المتكاملة</value></data>
+<data name="StudioArchitectureAlt" xml:space="preserve"><value>مخطط توضيحي يربط البنية التحتية والتحكم والبرمجيات بتكامل الأنظمة والتشغيل والتحليل.</value></data>
+<data name="StudioInfrastructure" xml:space="preserve"><value>البنية التحتية</value></data>
+<data name="StudioField" xml:space="preserve"><value>الأجهزة / الشبكات</value></data>
+<data name="StudioControl" xml:space="preserve"><value>التحكم</value></data>
+<data name="StudioSoftware" xml:space="preserve"><value>البرمجيات</value></data>
+<data name="StudioApplications" xml:space="preserve"><value>التطبيقات / البيانات</value></data>
+<data name="StudioIntegration" xml:space="preserve"><value>تكامل الأنظمة</value></data>
+<data name="StudioConnect" xml:space="preserve"><value>ربط / تنسيق / عرض</value></data>
+<data name="StudioOperations" xml:space="preserve"><value>التشغيل</value></data>
+<data name="StudioInsight" xml:space="preserve"><value>التحليل</value></data>
+<data name="StudioIllustration" xml:space="preserve"><value>مخطط توضيحي</value></data>
+<data name="StudioConversation" xml:space="preserve"><value>لنبدأ الحوار</value></data>
+<data name="StudioDiscuss" xml:space="preserve"><value>ناقش مشروعك</value></data>
+<data name="StudioEyebrow" xml:space="preserve"><value>البرمجيات × هندسة الأنظمة المتكاملة</value></data>
+<data name="StudioHeroTitle" xml:space="preserve"><value>برمجيات ذكية. أنظمة متصلة. هندسة متكاملة.</value></data>
+<data name="StudioHeroSummary" xml:space="preserve"><value>حلول برمجية وتكامل أنظمة SCADA وأتمتة وهندسة التيار الخفيف — نربط المعلومات والتحكم بالعالم المادي.</value></data>
+<data name="StudioApproach" xml:space="preserve"><value>منهجنا الهندسي</value></data>
+<data name="StudioApproachTitle" xml:space="preserve"><value>وضوح في كل طبقة.</value></data>
+<data name="StudioDefine" xml:space="preserve"><value>فهم النظام</value></data>
+<data name="StudioDefineNote" xml:space="preserve"><value>المتطلبات والواجهات وقيود المشروع.</value></data>
+<data name="StudioBuild" xml:space="preserve"><value>هندسة الحل</value></data>
+<data name="StudioBuildNote" xml:space="preserve"><value>البرمجيات والبنية التحتية والتحكم كمنظومة متكاملة.</value></data>
+<data name="StudioValidate" xml:space="preserve"><value>التحقق من التكامل</value></data>
+<data name="StudioValidateNote" xml:space="preserve"><value>الاختبار والتشغيل والتوثيق الواضح.</value></data>
+<data name="StudioServiceScope" xml:space="preserve"><value>النطاق والمنهج التقني</value></data>
+<data name="StudioContactIntro" xml:space="preserve"><value>حدثنا عن متطلباتك أو نظامك أو مشروعك القادم.</value></data>
+<data name="StudioSupportingMedia" xml:space="preserve"><value>وسائط إضافية</value></data>
 </root>

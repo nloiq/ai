@@ -12,6 +12,6 @@ public sealed class HomeController(NLOIQ.Infrastructure.Data.NloDbContext databa
         if (!environment.IsDevelopment() || await database.ContentItems.AnyAsync(x => x.Kind == NLOIQ.Domain.Content.ContentKind.Page && x.Key == "home" && !x.IsDemo, cancellationToken)) return NotFound();
         if (culture is not ("en" or "ar")) return NotFound();
         var services = Array.Empty<ServicePreviewDto>();
-        return View(new NLOIQ.Web.ViewModels.HomeViewModel(culture, services, previewOptions.Value.VideoIds) { Contact=await siteReader.ReadContactAsync(culture,cancellationToken), Hero=await siteReader.ReadHeroAsync(culture,cancellationToken), ProjectsSection=await siteReader.ReadProjectsSectionAsync(culture,cancellationToken), ServicesSection=await siteReader.ReadServicesSectionAsync(culture,cancellationToken) });
+        return View(new NLOIQ.Web.ViewModels.HomeViewModel(culture, services, previewOptions.Value.VideoIds) { AboutSection=await siteReader.ReadAboutSectionAsync(culture,cancellationToken), Contact=await siteReader.ReadContactAsync(culture,cancellationToken), Hero=await siteReader.ReadHeroAsync(culture,cancellationToken), ProjectsSection=await siteReader.ReadProjectsSectionAsync(culture,cancellationToken), ServicesSection=await siteReader.ReadServicesSectionAsync(culture,cancellationToken) });
     }
 }

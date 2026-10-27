@@ -57,19 +57,16 @@ test('responsive layouts avoid horizontal overflow and produce review screenshot
         if (width===390 && culture==='ar') { await chooseTheme(page,'dark'); await page.screenshot({path:'artifacts/phase4/arabic-mobile-dark.png',fullPage:true}); }
     }
 });
-test('desktop parallax is bounded and resets when reduced motion changes', async ({ page }) => {
+test('architecture remains legible and static with reduced motion', async ({ page }) => {
     await page.setViewportSize({width:1440,height:900});
-    await page.emulateMedia({reducedMotion:'no-preference'});
-    await page.goto('/en/');
-    await page.evaluate(()=>document.fonts.ready);
-    // The homepage is compact; exercise the remaining About illustration motion.
-    const layer=page.locator('#about [data-parallax]');
-    await layer.evaluate(node=>{const rect=node.getBoundingClientRect();scrollTo(0,Math.max(0,scrollY+rect.top+rect.height/2-innerHeight/2+120));});
-    await expect.poll(async()=>layer.evaluate(node=>node.style.transform)).not.toBe('');
-    const offset=await layer.evaluate(node=>new DOMMatrix(getComputedStyle(node).transform).m42);
-    expect(Math.abs(offset)).toBeLessThanOrEqual(16);
     await page.emulateMedia({reducedMotion:'reduce'});
-    await expect.poll(async()=>layer.evaluate(node=>getComputedStyle(node).transform)).toBe('none');
+    await page.goto('/en/');
+    const visual=page.locator('.architecture-visual svg');
+    await expect(visual).toBeVisible();
+    await expect(visual).toHaveAttribute('aria-label',/infrastructure/);
+    expect(await visual.evaluate(node=>getComputedStyle(node).animationName)).toBe('none');
+    await page.evaluate(()=>scrollTo(0,500));
+    expect(await visual.evaluate(node=>getComputedStyle(node).transform)).toBe('none');
     await expect(page.locator('.reveal-pending')).toHaveCount(0);
 });
 test('scroll work is coalesced and the scheduler rests when idle', async ({ page }) => {

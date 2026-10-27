@@ -18,8 +18,8 @@
   --color-gold: var(--gold);
   --font-editorial: Georgia, 'Times New Roman', serif;
 }
-:root { --evergreen:#14271f; --ivory:#f3efe5; --copper:#a65e40; --gold:#d8ad64; color-scheme: light; --signal:#17665f; --paper:#f3efe5; --ink:#14271f; --muted:#53644f; --line:#687c50; --panel:#e6e6d9; --accent:#884125; --on-accent:#f3efe5; }
-:root[data-theme=dark] { color-scheme:dark; --signal:#82c6b8; --paper:#14271f; --ink:#f3efe5; --muted:#bdc8b0; --line:#687c50; --panel:#222722; --accent:#d8ad64; --on-accent:#14271f; }
+:root { --evergreen:#080f1d; --ivory:#f5f7fc; --copper:#2259d2; --gold:#477fff; --moss:#708098; color-scheme:light; --signal:#08756a; --paper:#f5f7fc; --ink:#080f1d; --muted:#4d5d75; --line:#708098; --panel:#ffffff; --accent:#2259d2; --on-accent:#f5f7fc; }
+:root[data-theme=dark] { color-scheme:dark; --signal:#59e0d1; --paper:#080f1d; --ink:#f5f7fc; --muted:#bdc8da; --line:#708098; --panel:#111d30; --accent:#477fff; --on-accent:#080f1d; }
 html { scroll-behavior:smooth; scrollbar-gutter:stable; }
 :lang(ar) { font-family: "Cairo", Tahoma, Arial, sans-serif; }
 :lang(ar) .font-editorial { font-family: "Cairo", Tahoma, Arial, sans-serif; line-height:1.5; letter-spacing:0; }

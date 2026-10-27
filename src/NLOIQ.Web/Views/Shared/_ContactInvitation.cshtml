@@ -1,0 +1,4 @@
+@model NLOIQ.Application.Content.PublicNode
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> L
+@{var c=Context.Request.RouteValues["culture"]?.ToString()=="ar"?"ar":"en";}
+@if(Model.Visible){<section id="contact" class="public-contact-invitation public-container" data-contact-revision="@Model.RevisionId"><div><p class="public-kicker">@L["StudioConversation"]</p><h2>@Model.Title</h2><p>@Model.Summary</p></div><a class="public-button" href="/@c/contact">@L["StudioDiscuss"] <span aria-hidden="true">↗</span></a></section>}

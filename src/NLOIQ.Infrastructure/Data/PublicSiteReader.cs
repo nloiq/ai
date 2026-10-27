@@ -55,6 +55,12 @@ public sealed class PublicSiteReader(NloDbContext db,IPublishedContentReader pub
         }
         return node;
     }
+    public async Task<PublicNode?> ReadAboutSectionAsync(string culture,CancellationToken ct=default)
+    {
+        assets.Clear();if(!ContentRules.IsCulture(culture))return null;
+        var node=await Named(ContentKind.Section,"about",culture,ct);
+        return node?.SectionKind==SectionKind.About?node:null;
+    }
     public async Task<PublicNode?> ReadServicesSectionAsync(string culture,CancellationToken ct=default)
     {
         assets.Clear();if(!ContentRules.IsCulture(culture))return null;var node=await Named(ContentKind.Section,"services",culture,ct);return node?.SectionKind==SectionKind.Services?node:null;

@@ -557,4 +557,34 @@
 <data name="ServiceCategory_software" xml:space="preserve"><value>Software solutions</value></data>
 <data name="ServiceCategory_scada" xml:space="preserve"><value>SCADA integration</value></data>
 <data name="ServiceCategory_automation" xml:space="preserve"><value>System automation</value></data>
+<data name="StudioPositioning" xml:space="preserve"><value>Software, control and infrastructure. Connected through engineering.</value></data>
+<data name="StudioDisciplines" xml:space="preserve"><value>SOFTWARE / CONTROL / INFRASTRUCTURE</value></data>
+<data name="StudioArchitecture" xml:space="preserve"><value>Connected system architecture</value></data>
+<data name="StudioArchitectureAlt" xml:space="preserve"><value>Illustrative connections from infrastructure, control and software to system integration, operations and insight.</value></data>
+<data name="StudioInfrastructure" xml:space="preserve"><value>Infrastructure</value></data>
+<data name="StudioField" xml:space="preserve"><value>FIELD / NETWORKS</value></data>
+<data name="StudioControl" xml:space="preserve"><value>Control</value></data>
+<data name="StudioSoftware" xml:space="preserve"><value>Software</value></data>
+<data name="StudioApplications" xml:space="preserve"><value>APPLICATIONS / DATA</value></data>
+<data name="StudioIntegration" xml:space="preserve"><value>System integration</value></data>
+<data name="StudioConnect" xml:space="preserve"><value>CONNECT / ORCHESTRATE / VISUALIZE</value></data>
+<data name="StudioOperations" xml:space="preserve"><value>Operations</value></data>
+<data name="StudioInsight" xml:space="preserve"><value>Insight</value></data>
+<data name="StudioIllustration" xml:space="preserve"><value>Illustrative schematic</value></data>
+<data name="StudioConversation" xml:space="preserve"><value>Start a conversation</value></data>
+<data name="StudioDiscuss" xml:space="preserve"><value>Discuss your project</value></data>
+<data name="StudioEyebrow" xml:space="preserve"><value>Software × Connected engineering</value></data>
+<data name="StudioHeroTitle" xml:space="preserve"><value>Intelligent software. Connected systems. Engineered together.</value></data>
+<data name="StudioHeroSummary" xml:space="preserve"><value>Software solutions, SCADA integration, automation and low-current engineering — connecting information, control and the physical world.</value></data>
+<data name="StudioApproach" xml:space="preserve"><value>Our engineering approach</value></data>
+<data name="StudioApproachTitle" xml:space="preserve"><value>Clarity at every layer.</value></data>
+<data name="StudioDefine" xml:space="preserve"><value>Understand the system</value></data>
+<data name="StudioDefineNote" xml:space="preserve"><value>Requirements, interfaces and project constraints.</value></data>
+<data name="StudioBuild" xml:space="preserve"><value>Engineer the solution</value></data>
+<data name="StudioBuildNote" xml:space="preserve"><value>Software, infrastructure and control as a connected whole.</value></data>
+<data name="StudioValidate" xml:space="preserve"><value>Validate the integration</value></data>
+<data name="StudioValidateNote" xml:space="preserve"><value>Testing, commissioning and clear documentation.</value></data>
+<data name="StudioServiceScope" xml:space="preserve"><value>Scope &amp; technical approach</value></data>
+<data name="StudioContactIntro" xml:space="preserve"><value>Tell us about your requirements, system or next project.</value></data>
+<data name="StudioSupportingMedia" xml:space="preserve"><value>Supporting media</value></data>
 </root>
