@@ -1,4 +1,4 @@
-// Original parametric tube, rendered locally with WebGL. No external models or runtime.
+// Closed parametric infinity loop, rendered locally with WebGL. No external models or runtime.
 export function createSculpture(canvas, isPaused) {
     const scene=canvas.closest('.hero-scene');
     let gl;
@@ -7,10 +7,10 @@ export function createSculpture(canvas, isPaused) {
     const vertex=`precision mediump float;attribute vec3 position;attribute vec3 normal;attribute vec2 uv;
     uniform float aspect;uniform float time;uniform vec2 pointer;
     varying vec3 vNormal;varying vec3 vPosition;varying vec2 vUv;
-    void main(){float ay=.32+sin(time*.22)*.18+pointer.x*.16;float az=-.15+sin(time*.16)*.055+pointer.y*.07;
+    void main(){float ay=.14+sin(time*.22)*.1+pointer.x*.12;float az=-.1+sin(time*.16)*.025+pointer.y*.04;
     mat3 ry=mat3(cos(ay),0.,-sin(ay),0.,1.,0.,sin(ay),0.,cos(ay));
     mat3 rz=mat3(cos(az),sin(az),0.,-sin(az),cos(az),0.,0.,0.,1.);
-    vec3 p=rz*ry*position;p.y+=sin(time*.52)*.045;
+    vec3 p=rz*ry*position;p*=min(1.,aspect/.92);p.y+=sin(time*.52)*.035;
     vPosition=p;vNormal=rz*ry*normal;vUv=uv;
     float z=p.z-6.;gl_Position=vec4(p.x*2.65/aspect,p.y*2.65,-1.002*z-.2002,-z);}`;
     const fragment=`precision mediump float;uniform float time;uniform float dark;
@@ -20,12 +20,11 @@ export function createSculpture(canvas, isPaused) {
     float diffuse=max(dot(n,key),0.);float rim=pow(1.-max(dot(n,view),0.),2.8);
     float spec=pow(max(dot(n,normalize(key+view)),0.),65.);
     float sheen=pow(max(dot(n,normalize(fill+view)),0.),22.);
-    vec3 pearl=mix(vec3(.68,.74,.88),vec3(.46,.58,.79),dark*.38);
-    vec3 color=pearl*(.28+.76*diffuse)+vec3(.68,.85,1.)*spec*1.3+vec3(.08,.4,.8)*sheen*.32;
+    vec3 pearl=mix(vec3(.8,.86,.98),vec3(.58,.72,.91),dark*.32);
+    vec3 color=pearl*(.38+.66*diffuse)+vec3(.68,.85,1.)*spec*1.3+vec3(.08,.4,.8)*sheen*.32;
     color+=vec3(.13,.55,.88)*rim*.38;
-    float band=1.-smoothstep(.018,.032,abs(vUv.x-.49));
-    vec3 metal=vec3(.035,.22,.68)*(.45+diffuse)+vec3(.4,.9,1.)*(spec+rim*.3);
-    color=mix(color,metal,band);
+    // A continuous cool-metal finish keeps the loop visually unbroken.
+    color*=mix(vec3(1.),vec3(.55,.76,1.),.13+.1*sin(vUv.x*6.28318));
     float wave=abs(fract(vUv.x-time*.065+.5)-.5);
     float pulse=1.-smoothstep(.002,.014,wave);
     color+=vec3(.22,.86,.96)*pulse*.5;
@@ -33,12 +32,13 @@ export function createSculpture(canvas, isPaused) {
     function compile(type,source){const shader=gl.createShader(type);gl.shaderSource(shader,source);gl.compileShader(shader);if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)){gl.deleteShader(shader);throw Error(gl.getShaderInfoLog(shader)||'Sculpture shader unavailable');}return shader;}
     let program;
     try{program=gl.createProgram();const vs=compile(gl.VERTEX_SHADER,vertex),fs=compile(gl.FRAGMENT_SHADER,fragment);gl.attachShader(program,vs);gl.attachShader(program,fs);gl.linkProgram(program);gl.deleteShader(vs);gl.deleteShader(fs);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program)||'Sculpture program unavailable');}catch(error){console.warn('Hero renderer fallback:',error.message);if(program)gl.deleteProgram(program);return null;}
-    const positions=[],normals=[],uvs=[],indices=[];const segments=150,sides=40;
-    const center=s=>[Math.sin((s-.5)*Math.PI*2)*.72,(s-.5)*4.3,Math.cos(s*Math.PI*2)*.36];
+    const positions=[],normals=[],uvs=[],indices=[];const segments=200,sides=40;
+    // Periodic centerline and tangent close the seam. Depth separates the crossing.
+    const center=s=>{const t=s*Math.PI*2;return[1.65*Math.cos(t),.82*Math.sin(2*t),.34*Math.sin(t)];};
     const normalize=v=>{const l=Math.hypot(...v)||1;return v.map(n=>n/l)};
     const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
     for(let i=0;i<=segments;i++){const s=i/segments,c=center(s),a=center(s-.001),b=center(s+.001),t=normalize(b.map((v,k)=>v-a[k]));const n=normalize(cross(t,[0,0,1])),bin=normalize(cross(t,n));
-        for(let j=0;j<=sides;j++){const angle=j/sides*Math.PI*2;const normal=n.map((v,k)=>v*Math.cos(angle)+bin[k]*Math.sin(angle));const radius=.285;positions.push(...c.map((v,k)=>v+normal[k]*radius));normals.push(...normal);uvs.push(s,j/sides);
+        for(let j=0;j<=sides;j++){const angle=j/sides*Math.PI*2;const normal=n.map((v,k)=>v*Math.cos(angle)+bin[k]*Math.sin(angle));const radius=.175;positions.push(...c.map((v,k)=>v+normal[k]*radius));normals.push(...normal);uvs.push(s,j/sides);
             if(i<segments&&j<sides){const q=i*(sides+1)+j;indices.push(q,q+1,q+sides+1,q+1,q+sides+2,q+sides+1);}}
     }
     gl.useProgram(program);

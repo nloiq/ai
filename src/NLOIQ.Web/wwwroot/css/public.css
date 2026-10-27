@@ -275,3 +275,14 @@ html[data-motion=paused] .public-site *,html[data-motion=paused] .public-site *:
 @media(prefers-reduced-motion:reduce){.hero-scene *, .section-arriving{animation:none!important;transition:none!important}.public-site .public-button:hover{transform:none;box-shadow:none}.public-site .public-button:hover span,.public-site .public-text-link:hover span{transform:none}}
 
 .public-site main section[id]{scroll-margin-top:var(--public-header-offset,120px)}
+
+/* Closed infinity composition: keep both lobes visible at every viewport. */
+.public-hero-immersive{min-height:580px}
+.hero-scene{height:540px}
+.hero-scene-tag-top{top:22%;inset-inline-start:5%}
+.hero-scene-tag-middle{top:62%;inset-inline-end:2%}
+.hero-scene-tag-bottom{bottom:15%;inset-inline-start:12%}
+.hero-scene-floor{bottom:23%;left:12%;right:10%;height:25px;transform:rotate(-6deg)}
+.infinity-fallback{width:100%;height:auto;filter:drop-shadow(0 18px 13px rgb(30 60 110 / .14))}
+@media(max-width:1023px){.hero-scene{height:480px}}
+@media(max-width:700px){.public-hero-immersive{min-height:0}.hero-scene{height:330px;margin-top:10px}.hero-scene-tag-top{top:9%;inset-inline-start:2%}.hero-scene-tag-middle{top:66%;inset-inline-end:0}.hero-scene-tag-bottom{bottom:13%;inset-inline-start:5%}.hero-scene-floor{bottom:24%}.hero-scene-fallback{inset:25px 0 35px}}
