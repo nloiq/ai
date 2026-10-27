@@ -17,6 +17,15 @@ async function reviewLocale(browser, culture, expectedLabel) {
   await page.waitForFunction(() => document.querySelector('[data-hero-sculpture]')?.dataset.phase === 'circle', null, { timeout: 15000 });
   await expectVisibleText(circleLabel, expectedLabel);
   await page.waitForTimeout(350);
+  const typeStyles = await page.locator('.hero-scene-tag-top').evaluate((tag, circle) => {
+    const keys = ['fontFamily', 'fontSize', 'fontWeight', 'letterSpacing', 'textShadow'];
+    const tagStyle = getComputedStyle(tag);
+    const circleStyle = getComputedStyle(circle);
+    return Object.fromEntries(keys.map(key => [key, [tagStyle[key], circleStyle[key]]]));
+  }, await circleLabel.elementHandle());
+  for (const [property, values] of Object.entries(typeStyles)) {
+    assert.equal(values[0], values[1], `The circle label must share ${property} with the infinity labels.`);
+  }
   assert.equal(await outsideLabels.count(), 3);
   for (let index = 0; index < 3; index += 1) {
     assert.equal(await outsideLabels.nth(index).evaluate(element => getComputedStyle(element).visibility), 'hidden');
