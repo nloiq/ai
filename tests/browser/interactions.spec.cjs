@@ -57,16 +57,14 @@ test('responsive layouts avoid horizontal overflow and produce review screenshot
         if (width===390 && culture==='ar') { await chooseTheme(page,'dark'); await page.screenshot({path:'artifacts/phase4/arabic-mobile-dark.png',fullPage:true}); }
     }
 });
-test('architecture remains legible and static with reduced motion', async ({ page }) => {
+test('hero remains readable and motion stops with reduced motion', async ({ page }) => {
     await page.setViewportSize({width:1440,height:900});
     await page.emulateMedia({reducedMotion:'reduce'});
     await page.goto('/en/');
-    const visual=page.locator('.architecture-visual svg');
-    await expect(visual).toBeVisible();
-    await expect(visual).toHaveAttribute('aria-label',/infrastructure/);
-    expect(await visual.evaluate(node=>getComputedStyle(node).animationName)).toBe('none');
-    await page.evaluate(()=>scrollTo(0,500));
-    expect(await visual.evaluate(node=>getComputedStyle(node).transform)).toBe('none');
+    await expect(page.locator('.hero-scene')).toBeVisible();
+    await expect(page.locator('#motion-toggle')).toBeDisabled();
+    await expect(page.locator('html')).toHaveAttribute('data-motion','paused');
+    expect(await page.evaluate(()=>document.getAnimations().filter(a=>a.playState==='running').length)).toBe(0);
     await expect(page.locator('.reveal-pending')).toHaveCount(0);
 });
 test('scroll work is coalesced and the scheduler rests when idle', async ({ page }) => {
@@ -76,6 +74,8 @@ test('scroll work is coalesced and the scheduler rests when idle', async ({ page
         window.requestAnimationFrame=callback=>{window.__previewRafCount++;return original(callback)};
     });
     await page.goto('/en/');
+    await page.locator('#motion-toggle').click();
+    await expect(page.locator('html')).toHaveAttribute('data-motion','paused');
     await page.waitForTimeout(300);
     const before=await page.evaluate(()=>window.__previewRafCount);
     await page.waitForTimeout(200);

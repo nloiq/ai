@@ -1,0 +1,2 @@
+@inject Microsoft.Extensions.Localization.IStringLocalizer<NLOIQ.Web.SharedResource> L
+<nav class="home-section-nav" aria-label="@L["MotionExplore"]" data-section-navigation>@foreach(var link in new[]{("expertise","DirectoryServices"),("projects","DirectoryProjects"),("about","About"),("contact","InquiryContactUs")}){<a href="#@link.Item1"><span class="section-nav-dot" aria-hidden="true"></span>@L[link.Item2]</a>}<span class="section-nav-caption" aria-hidden="true">@L["MotionScroll"] ↓</span></nav>

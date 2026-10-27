@@ -587,4 +587,11 @@
 <data name="StudioServiceScope" xml:space="preserve"><value>النطاق والمنهج التقني</value></data>
 <data name="StudioContactIntro" xml:space="preserve"><value>حدثنا عن متطلباتك أو نظامك أو مشروعك القادم.</value></data>
 <data name="StudioSupportingMedia" xml:space="preserve"><value>وسائط إضافية</value></data>
+<data name="MotionSceneAlt" xml:space="preserve"><value>مجسم هندسي متحرك يمثل الاتصال المستمر بين البنية التحتية والتكامل والبرمجيات.</value></data>
+<data name="MotionSculpture" xml:space="preserve"><value>الهندسة في حركة</value></data>
+<data name="MotionExplore" xml:space="preserve"><value>استكشف أقسام الصفحة الرئيسية</value></data>
+<data name="MotionScroll" xml:space="preserve"><value>مرّر للاستكشاف</value></data>
+<data name="MotionPause" xml:space="preserve"><value>إيقاف الحركة</value></data>
+<data name="MotionResume" xml:space="preserve"><value>استئناف الحركة</value></data>
+<data name="MotionReduced" xml:space="preserve"><value>حركة مخفّضة</value></data>
 </root>

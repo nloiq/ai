@@ -67,3 +67,5 @@ Contact inquiries: [Form and inbox guide](docs/CONTACT_FORM.md). The bilingual f
 Projects and Services: compact homepage links now lead to bilingual category directories. See [directory management](docs/PROJECTS_SERVICES_DIRECTORIES.md).
 
 Public redesign: [design and editing guide](docs/PUBLIC_REDESIGN.md). The homepage now links to the full Contact page, which includes business hours.
+
+Homepage motion: [animated 3D hero, section transitions and pause controls](docs/HOMEPAGE_MOTION.md).

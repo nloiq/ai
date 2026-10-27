@@ -21,6 +21,6 @@
 <body class="public-site bg-paper text-ink antialiased">
 <a href="#main" class="sr-only focus:not-sr-only focus:block focus:p-4">@Localizer["Skip"]</a>
 <partial name="_PublicHeader" model='new NLOIQ.Web.ViewModels.PublicShellModel(Model.Culture,brand,$"/{alternateCulture}/")' />
-<main id="main" tabindex="-1"><div class="public-container"><partial name="Sections/_Hero" model="Model" /><partial name="Sections/_Services" model="Model" /><partial name="Sections/_Projects" model="Model" /><partial name="Sections/_About" model="Model" /></div><partial name="Sections/_Contact" model="Model" /></main>
+<main id="main" tabindex="-1"><div class="public-container"><partial name="Sections/_Hero" model="Model" /><partial name="_HomeSectionNav" /><partial name="Sections/_Services" model="Model" /><partial name="Sections/_Projects" model="Model" /><partial name="Sections/_About" model="Model" /></div><partial name="Sections/_Contact" model="Model" /></main>
 <partial name="_PublicFooter" model='new NLOIQ.Web.ViewModels.PublicShellModel(Model.Culture,brand,$"/{alternateCulture}/")' />
 </body></html>
